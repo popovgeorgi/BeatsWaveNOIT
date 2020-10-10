@@ -1,0 +1,44 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-radio"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <div class="heading">
+            <div class="d-flex flex-wrap align-items-end">
+                <div class="flex-grow-1">
+                    <h4>{{liveRadio?.title}}</h4>
+                    <p>{{liveRadio?.subTitle}}</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="row custom-card-list">
+            <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let radio of liveRadio.items">
+                <app-image-card [item]="radio" [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
+            </div>
+        </div>
+    </div>
+    <!-- End | Section -->
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <div class="heading">
+            <div class="d-flex flex-wrap align-items-end">
+                <div class="flex-grow-1">
+                    <h4>{{radio?.title}}</h4>
+                    <p>{{radio?.subTitle}}</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="row custom-card-list">
+            <div class="col-xl-2 col-lg-3 col-sm-4 col-6" *ngFor="let radio of radio.items">
+                <app-image-card [item]="radio" [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
+            </div>
+        </div>
+    </div>
+    <!-- End | Section -->
+</div>
+<!-- End | Main Container -->

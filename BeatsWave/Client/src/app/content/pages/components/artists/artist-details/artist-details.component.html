@@ -1,0 +1,99 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-artists"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="row section text-center text-md-left">
+        <div class="col-xl-3 col-lg-4 col-sm-5">
+            <img [src]="artistDetails.cover_url" alt="{{artistDetails.name}}" class="card-img--radius-lg">
+        </div>
+        <div class="col-xl-9 col-lg-8 col-sm-7">
+            <div class="row pt-4">
+                <div class="col-xl-8 col-lg-6">
+                    <h5>{{artistDetails.name}}</h5>
+                    <p>DOB: {{artistDetails.dob}}</p>
+                    <div class="text-warning stars">
+                        <i class="la {{rating}}" *ngFor="let rating of artistDetails.ratingsView"></i>
+                    </div>
+                    <div class="mt-4">
+                      <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
+                              (click)="playAllSongs()">Play All</button>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
+                        <button class="btn btn-pill btn-air btn-danger btn-icon-only"><i class="la la-heart-o"></i></button>
+                        <button class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End | Section -->
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
+        <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="artistDetails" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="song-tab" data-toggle="tab" href="#song" role="tab"
+                   aria-controls="song" aria-selected="true">Top Songs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="album-tab" data-toggle="tab" href="#album" role="tab"
+                   aria-controls="album" aria-selected="false">Top Albums</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab"
+                   aria-controls="bio" aria-selected="false">Biography</a>
+            </li>
+        </ul>
+        <!-- End | Line Tabs -->
+
+        <!-- Begin | Tab Content -->
+        <div class="tab-content" id="artistDetailsContent">
+            <div class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
+                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                <div class="container-header">
+                    <span class="title">{{artistDetails.record}} Results</span>
+                    <select class="select ml-auto" name="sort-1" id="sort-1">
+                        <option value="0">Popular</option>
+                        <option value="1">A-Z</option>
+                        <option value="2">Z-A</option>
+                    </select>
+                </div>
+                <!-- End | Container header -->
+                <div class="row custom-card-list">
+                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.songs; let i = index">
+                        <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
+                <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+                <div class="container-header">
+                    <span class="title">{{artistDetails.record}} Results</span>
+                    <select class="select ml-auto" name="sort-2" id="sort-2">
+                        <option value="0">Popular</option>
+                        <option value="1">A-Z</option>
+                        <option value="2">Z-A</option>
+                    </select>
+                </div>
+                <!-- End | Container header -->
+                <div class="row custom-card-list">
+                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.songs; let i = index">
+                        <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
+                <div class="bio-content" [innerHTML]="artistDetails.bio"></div>
+            </div>
+        </div>
+        <!-- Begin | Tab Content -->
+    </div>
+    <!-- End | Section -->
+
+    <app-comment></app-comment>
+</div>

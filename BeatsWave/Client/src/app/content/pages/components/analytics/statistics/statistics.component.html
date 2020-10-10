@@ -1,0 +1,24 @@
+<div class="card" *ngIf="chartData && chartLabels">
+    <div class="card-header">
+        <h6 class="mb-0">User Statistics</h6>
+    </div>
+    <div class="card-body">
+        <div style="height: 240px">
+            <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+                    [colors]="chartColors" [legend]="chartLegend" [chartType]="chartType"></canvas>
+        </div>
+        <div class="text-center">
+            <span class="font-weight-bold d-block mt-3">Top Countries</span>
+            <div class="row">
+                <div class="col-4" [ngClass]="!isLast ? 'border-right' : ''"
+                     *ngFor="let country of topCountries; let isLast = last;">
+                    <div class="py-2 px-sm-3">
+                        <span class="d-block">{{country.name}}</span>
+                        <p class="font-weight-bold">{{country.data}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

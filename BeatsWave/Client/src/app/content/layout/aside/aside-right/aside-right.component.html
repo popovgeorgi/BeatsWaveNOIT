@@ -1,0 +1,12 @@
+<div class="right-sidebar-header">{{playlist.name ? playlist.name : 'Playlist Name'}}</div>
+<perfect-scrollbar class="right-sidebar-body">
+    <ul class="list-group list-group-flush song-list" *ngIf="playlist.songs; else noDataFound">
+        <!-- Begin | Custom List Item -->
+        <li class="custom-list--item list-group-item" *ngFor="let song of playlist.songs; let i = index">
+            <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'" [playlist]="playlist" [songIndex]="i">
+            </app-song-list-view>
+        </li>
+        <!-- End | Custom List Item -->
+    </ul>
+    <ng-template #noDataFound></ng-template>
+</perfect-scrollbar>

@@ -1,0 +1,55 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-analytics"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="section">
+        <div class="mb-5">
+            <h5><ng-container *ngIf="currentUser">Hi <span class="text-brand">{{currentUser.name}}</span>,</ng-container>
+              Welcome to the Listen App</h5>
+            <p>Select your music to listen & download free and premium music.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-5">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <h6 class="text-white mb-0">Total Earnings</h6>
+                            <button type="button" class="btn btn-icon-only text-white ml-auto">
+                                <i class="ion-md-settings"></i>
+                            </button>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam.</p>
+                        <span class="display-4 d-block mb-3">$126,457</span>
+                        <button type="button" class="btn btn-pill btn-air btn-warning">Get Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-7">
+                <div class="row h-100">
+                    <div class="col-sm-4">
+                        <app-total-user></app-total-user>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-total-songs></app-total-songs>
+                    </div>
+                    <div class="col-sm-4">
+                        <app-purchases></app-purchases>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <app-statistics></app-statistics>
+            </div>
+            <div class="col-md-4">
+                <app-referrals></app-referrals>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End | Main Container -->

@@ -1,0 +1,28 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-artists"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+    <div class="container-header">
+        <span class="title">{{artists.record}} Results</span>
+        <select class="select ml-auto" name="sort" id="sort">
+            <option value="0">Popular</option>
+            <option value="1">A-Z</option>
+            <option value="2">Z-A</option>
+        </select>
+    </div>
+    <!-- End | Container header -->
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <div class="row custom-card-list">
+            <div class="col-xl-custom col-lg-4 col-sm-6" *ngFor="let artist of artists.list">
+                <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'"
+                                [routeLink]="'/artist/' + artist.id + '/details'"></app-image-card>
+            </div>
+        </div>
+    </div>
+    <!-- End | Section -->
+</div>
+<!-- End | Main Container -->

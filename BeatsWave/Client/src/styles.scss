@@ -1,0 +1,25 @@
+/*!
+ *
+ * Listen App: (http://kri8thm.com/html/listen/theme)
+ * Author: Kri8thm (kri8thm.com) <kri8thm@gmail.com>
+ * Version: 1.0.0
+ * Written by: Kri8thm
+ * ---------------------------------------------------------------- */
+
+/*-----------------------------------------------------------------
+ * THIS IS DEFAULT STYLE SHEET
+ * DO NOT MODIFY BELOW INCLUDES
+ *-----------------------------------------------------------------*/
+
+//== 1: Bootstrap file
+@import "vendors/bootstrap/bootstrap";
+
+//== 2: Theme base file
+@import "assets/scss/base/includes";
+
+/*-----------------------------------------------------------------
+ * DO NOT MODIFY ABOVE INCLUDES
+ *-----------------------------------------------------------------*/
+
+//== 3: Theme framework
+@import "assets/scss/framework/includes";

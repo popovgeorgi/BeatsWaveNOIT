@@ -1,0 +1,13 @@
+<div class="card" *ngIf="chartData && chartLabels">
+    <div class="card-body">
+        <h6>Total Songs</h6>
+        <div class="d-flex align-items-center">
+            <i class="ion-md-musical-note text-dark font-lg"></i>
+            <p class="font-weight-bold pl-2">58,415</p>
+        </div>
+    </div>
+    <div style="height: 150px">
+        <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+                [colors]="chartColors" [legend]="chartLegend" [chartType]="chartType"></canvas>
+    </div>
+</div>

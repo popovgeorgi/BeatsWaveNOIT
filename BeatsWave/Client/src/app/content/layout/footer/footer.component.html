@@ -1,0 +1,16 @@
+<!-- Begin | Footer [[ Find at scss/framework/base/footer/footer.scss ]] -->
+<footer id="footer" class="bg-img">
+    <div class="footer-content">
+        <a class="email">info@listenapp.com</a>
+        <div class="platform-btn-inline">
+            <button *ngFor="let button of footerButtons" [class]="button.classes">
+                <i [class]="button.icon"></i>
+                <span class="platform-btn-info">
+                    <span class="platform-desc">Available on</span>
+                    <span class="platform-name">{{button.subtitle}}</span>
+                </span>
+            </button>
+        </div>
+    </div>
+</footer>
+<!-- End | Footer -->

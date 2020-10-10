@@ -1,0 +1,10 @@
+<div [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + musicEvent.image + ')'}">
+    <div class="event-content p-4">
+        <a [routerLink]="'/event/' + musicEvent.id + '/details'"><h6>{{musicEvent.name}}</h6></a>
+        <div class="mb-3">
+            <app-countdown [text]="countText" [showZero]="'0'" units="Days | Hours | Minutes | Seconds"
+                       [end]="musicEvent.date"></app-countdown>
+        </div>
+        <button type="button" class="btn btn-bold btn-pill btn-air btn-warning btn-sm">Buy Ticket</button>
+    </div>
+</div>

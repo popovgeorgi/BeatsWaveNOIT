@@ -1,0 +1,31 @@
+<div id="wrapper">
+
+    <!-- Aside left -->
+    <app-aside-left></app-aside-left>
+
+    <!-- App header -->
+    <app-header></app-header>
+
+    <perfect-scrollbar class="main-ps vh-100" (psScrollY)="psBodyScroll($event)" #perfectScroll>
+
+        <!-- Begin | Page Wrapper [[ Find at scss/framework/base/wrapper/wrapper.scss ]] -->
+        <main id="pageWrapper">
+            <!-- Display app routes -->
+            <router-outlet></router-outlet>
+
+            <!-- App footer -->
+            <app-footer></app-footer>
+
+            <!-- App audio player -->
+            <app-player></app-player>
+        </main>
+        <!-- End | Page Wrapper -->
+
+        <app-theme-settings></app-theme-settings>
+
+    </perfect-scrollbar>
+
+    <!-- Aside right -->
+    <app-aside-right></app-aside-right>
+
+</div>

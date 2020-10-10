@@ -1,0 +1,30 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-song"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+    <div class="container-header">
+        <span class="title">{{albums.record}} Results</span>
+        <div class="ml-auto d-flex align-items-center">
+            <select class="select" name="sort" id="sort">
+                <option selected="">Popular</option>
+                <option value="0">A-Z</option>
+                <option value="1">Z-A</option>
+            </select>
+        </div>
+    </div>
+    <!-- End | Container header -->
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <div class="row custom-card-list">
+            <div class="col-xl-2 col-lg-4 col-sm-6" *ngFor="let album of albums.list">
+                <app-image-card [item]="album" [routerLink]="'/album/' + album.id + '/details'"
+                                [imageBorderRadiusClass]="'card-img--radius-md'"></app-image-card>
+            </div>
+        </div>
+    </div>
+    <!-- End | Section -->
+</div>
+<!-- End | Main Container -->

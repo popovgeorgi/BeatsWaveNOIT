@@ -1,0 +1,33 @@
+<!-- Begin | Header [[ Find at scss/framework/base/header/header.scss ]] -->
+<header id="header" class="d-flex align-items-center {{headerClasses}}">
+    <div class="position-relative d-flex align-items-center flex-grow-1">
+        <button type="button" class="btn toggle-menu mr-3" id="openSidebar" (click)="openSidebar()">
+            <span *ngFor="let number of [0,1,2]"></span>
+        </button>
+
+        <div id="searchForm">
+            <div class="position-relative">
+                <button type="button" class="btn ion-ios-search"></button>
+                <input type="text" placeholder="Search..." id="searchInput" class="form-control" (focus)="showSearchResults()">
+            </div>
+            <app-search></app-search>
+        </div>
+
+        <!-- Begin | Header Options -->
+        <ul class="header-options d-flex align-items-center">
+            <li>
+                <a href="javascript:;" class="language" (click)="openLanguagesModal()">
+                    <span>{{language.title}}</span>
+                    <img [src]="language.image" alt="">
+                </a>
+            </li>
+            <li>
+                <app-profile [user]="currentUser"></app-profile>
+            </li>
+        </ul>
+        <!-- End | Header Options -->
+    </div>
+</header>
+<!-- End | Header -->
+
+<div class="backdrop header-backdrop" (click)="hideSearchResults()" #headerBackdrop></div>

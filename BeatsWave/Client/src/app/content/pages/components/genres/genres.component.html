@@ -1,0 +1,12 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-home"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="section row custom-card-list">
+        <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let genre of genres">
+            <app-secondary-card [item]="genre"></app-secondary-card>
+        </div>
+    </div>
+</div>
+<!-- End | Main Container -->

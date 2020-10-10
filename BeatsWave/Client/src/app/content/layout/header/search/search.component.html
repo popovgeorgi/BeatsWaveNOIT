@@ -1,0 +1,49 @@
+<!-- Begin | Search Card [[ Find at scss/framework/base/search/search.scss ]] -->
+<div class="search-card">
+    <perfect-scrollbar>
+        <!-- Begin | Search Result List -->
+        <div class="search-item">
+            <div class="search-item-header">
+                <span class="search-item-title">Artists</span>
+                <a class="search-item-link ml-auto" (click)="goToPage('artists')">View All</a>
+            </div>
+            <div class="search-item-body row">
+                <div class="col-xl-2 col-md-4 col-6" *ngFor="let artist of artistsList">
+                    <app-image-card [item]="artist" [imageBorderRadiusClass]="'card-img--radius-md'"
+                                    [routeLink]="'/artist/' + artist.id + '/details'"></app-image-card>
+                </div>
+            </div>
+        </div>
+        <!-- End | Search Result List -->
+
+        <!-- Begin | Search Result List -->
+        <div class="search-item">
+            <div class="search-item-header">
+                <span class="search-item-title">Track</span>
+                <a class="search-item-link ml-auto" (click)="goToPage('songs')">View All</a>
+            </div>
+            <div class="search-item-body row">
+                <div class="col-xl-4 col-sm-6 col-12" *ngFor="let song of songsList">
+                    <app-song-horizontal [song]="song" class="song-h song-h--sm"></app-song-horizontal>
+                </div>
+            </div>
+        </div>
+        <!-- End | Search Result List -->
+
+        <!-- Begin | Search Result List -->
+        <div class="search-item">
+            <div class="search-item-header">
+                <span class="search-item-title">Albums</span>
+                <a class="search-item-link ml-auto" (click)="goToPage('albums')">View All</a>
+            </div>
+            <div class="search-item-body row">
+                <div class="col-xl-4 col-sm-6 col-12" *ngFor="let album of albumsList">
+                    <app-song-horizontal [song]="album" class="song-h song-h--sm"
+                                         [routeLink]="'/album/' + album.id + '/details'"></app-song-horizontal>
+                </div>
+            </div>
+        </div>
+        <!-- End | Search Result List -->
+    </perfect-scrollbar>
+</div>
+<!-- End | Search Card -->

@@ -1,0 +1,34 @@
+<!-- Begin | Sidebar [[ Find at scss/framework/base/sidebar/left/sidebar.scss ]] -->
+<aside id="sidebar" [class]="sidebarClass">
+    <app-aside-left-header></app-aside-left-header>
+
+    <!-- Begin | Navbar [[ Find at scss/framework/components/navbar/navbar.scss ]] -->
+    <nav class="navbar">
+        <perfect-scrollbar class="navbar-nav">
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngFor="let item of menuItems" [ngClass]="item.section ? 'nav-header' : ''"
+                    (click)="hideSidebar()">
+                    <!-- Menu section heading-->
+                    <ng-container *ngIf="item.section; else menuSection">{{item.section}}</ng-container>
+
+                    <!-- Menu section-->
+                    <ng-template #menuSection>
+                        <app-menu-section [menuItem]="item"></app-menu-section>
+                    </ng-template>
+                </li>
+            </ul>
+        </perfect-scrollbar>
+    </nav>
+    <!-- End | Navbar -->
+
+    <!-- Begin | Sidebar Footer -->
+    <div class="sidebar-footer">
+        <button type="button" routerLink="/add-music" class="btn btn-block btn-danger btn-air btn-bold"
+                (click)="hideSidebar()">
+            <i [class]="asideFooterButton.icon"></i>
+            <span>{{asideFooterButton.title}}</span>
+        </button>
+    </div>
+    <!-- End | Sidebar Footer -->
+</aside>
+<!-- End | Sidebar -->

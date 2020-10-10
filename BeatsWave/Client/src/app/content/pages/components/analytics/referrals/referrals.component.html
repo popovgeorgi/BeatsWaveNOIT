@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        <h6 class="mb-0">Referrals</h6>
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item border-0" [ngClass]="isFirst ? 'p-0' : 'px-0 pb-0'"
+                *ngFor="let ref of referrals; let isFirst = first;">
+                <p class="font-lg mb-2">{{ref.data}}</p>
+                <p>Visits from {{ref.name}}</p>
+                <div class="progress mb-2" style="height: .25rem">
+                    <div class="progress-bar" [ngClass]="ref.barColorClass" role="progressbar"
+                         [style.width]="ref.barWidth + '%'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

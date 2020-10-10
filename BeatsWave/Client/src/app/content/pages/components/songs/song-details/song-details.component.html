@@ -1,0 +1,73 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-song"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="row section text-center text-md-left">
+        <div class="col-xl-3 col-lg-4 col-sm-5">
+            <img [src]="songDetails.cover_url" alt="{{songDetails.name}}" class="card-img--radius-lg">
+        </div>
+        <div class="col-xl-9 col-lg-8 col-sm-7">
+            <div class="row pt-4">
+                <div class="col-xl-8 col-lg-6">
+                    <h5>{{songDetails.name}}</h5>
+                    <p>{{songDetails.artist}}</p>
+                    <div class="text-warning stars">
+                        <i class="la {{rating}}" *ngFor="let rating of songDetails.ratingsView"></i>
+                    </div>
+                    <span class="badge badge-pill badge-warning mt-3" *ngIf="songDetails.premium">Premium</span>
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
+                                (click)="addInPlayer()">Play</button>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6">
+                    <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
+                        <button type="button" class="btn btn-pill btn-air btn-danger btn-icon-only"><i class="la la-heart-o"></i></button>
+                        <button type="button" class="btn btn-pill btn-air btn-warning btn-icon-only"><i class="la la-plus"></i></button>
+                        <button type="button" class="btn btn-pill btn-air btn-success btn-icon-only"><i class="la la-download"></i></button>
+                        <button type="button" class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
+        <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="songDetails" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
+                   aria-controls="overview" aria-selected="true">Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="lyrics-tab" data-toggle="tab" href="#lyrics" role="tab"
+                   aria-controls="lyrics" aria-selected="false">Lyrics</a>
+            </li>
+        </ul>
+        <!-- End | Line Tabs -->
+        <!-- Begin | Tab Content -->
+        <div class="tab-content" id="songDetailsContent">
+            <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item pl-0 border-0"
+                        *ngIf="songDetails.composer">Compose by: <span class="font-weight-bold">{{songDetails.composer}}</span></li>
+                    <li class="list-group-item pl-0 border-0"
+                        *ngIf="songDetails.lyricist">Lyrics by: <span class="font-weight-bold">{{songDetails.lyricist}}</span></li>
+                    <li class="list-group-item pl-0 border-0"
+                        *ngIf="songDetails.director">Music Director: <span class="font-weight-bold">{{songDetails.director}}</span></li>
+                    <li class="list-group-item pl-0 border-0"
+                        *ngIf="songDetails.downloads">Downloads: <span class="font-weight-bold">{{songDetails.downloads}}</span></li>
+                </ul>
+            </div>
+            <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab"
+                 [innerHTML]="songDetails.lyrics"></div>
+        </div>
+        <!-- End | Tab Content -->
+    </div>
+    <!-- End | Section -->
+
+    <app-comment></app-comment>
+</div>
+<!-- End | Main Container -->

@@ -1,0 +1,17 @@
+<!-- Begin | Sidebar Header -->
+<div class="sidebar-header d-flex align-items-center">
+    <a routerLink="/home" class="brand" (click)="hideSidebar()">
+        <img [src]="brand.logo" alt="{{brand.name}}">
+    </a>
+
+    <!-- Back sidebar arrow -->
+    <button type="button" class="btn p-0 ml-auto" id="hideSidebar" (click)="hideSidebar()">
+        <i class="ion-md-arrow-back h3"></i>
+    </button>
+
+  <!-- Sidebar hamburger -->
+    <button type="button" class="btn toggle-menu" (click)="toggleIconicSidebar()">
+        <span *ngFor="let number of [0,1,2]"></span>
+    </button>
+</div>
+<!-- End | Sidebar Header -->

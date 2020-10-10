@@ -1,0 +1,109 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-home"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+
+    <!-- Top Charts -->
+    <app-section *ngIf="topCharts" [section]="topCharts" [carouselButtonPositionClass]="carouselArrowPosClass3"
+                 [primaryCard]="true" [showImageOptions]="true">
+    </app-section>
+
+    <div class="row">
+        <!-- Begin | Events -->
+        <div class="section col-12 col-xl-7">
+            <div class="row h-100">
+                <div class="col-sm-5 pb-4">
+                    <app-event-countdown-card *ngIf="mainEvent" [musicEvent]="mainEvent"></app-event-countdown-card>
+                </div>
+                <div class="col-sm-7" *ngIf="secondaryEvents.length > 0">
+                    <div class="h-50 pb-4" *ngFor="let event of secondaryEvents">
+                        <app-event-card [musicEvent]="event"></app-event-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End | Events -->
+
+        <!-- Begin | Songs tabs -->
+        <div class="section col-12 col-xl-5">
+            <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
+            <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="songsList" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="recent-tab" data-toggle="tab" href="#recent" role="tab"
+                       aria-controls="recent" aria-selected="true">Recent</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="trending-tab" data-toggle="tab" href="#trending" role="tab"
+                       aria-controls="trending" aria-selected="false">Trending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="international-tab" data-toggle="tab" href="#international" role="tab"
+                       aria-controls="international" aria-selected="false">International</a>
+                </li>
+            </ul>
+            <!-- End | Line Tabs -->
+
+            <!-- Begin | Tab Content -->
+            <div class="tab-content" id="songsListContent">
+                <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
+                    <!-- Begin | Custom List [[ Find at scss/framework/components/songs-list/songs-list.scss ]] -->
+                    <perfect-scrollbar style="height: 370px" class="song-list">
+                        <app-song-list-view *ngFor="let song of songsList; let i = index"
+                                            [songNumber]="i+1" [song]="song"></app-song-list-view>
+                    </perfect-scrollbar>
+                    <!-- End | Custom List -->
+                </div>
+                <div class="tab-pane fade" id="trending" role="tabpanel" aria-labelledby="trending-tab">
+                    <!-- Begin | Custom List [[ Find at scss/framework/components/songs-list/songs-list.scss ]] -->
+                    <perfect-scrollbar style="height: 370px" class="song-list">
+                        <app-song-list-view *ngFor="let song of songsList; let i = index"
+                                            [songNumber]="i+1" [song]="song"></app-song-list-view>
+                    </perfect-scrollbar>
+                    <!-- End | Custom List -->
+                </div>
+                <div class="tab-pane fade" id="international" role="tabpanel" aria-labelledby="international-tab">
+                    <!-- Begin | Custom List [[ Find at scss/framework/components/songs-list/songs-list.scss ]] -->
+                    <perfect-scrollbar style="height: 370px" class="song-list">
+                        <app-song-list-view *ngFor="let song of songsList; let i = index"
+                                            [songNumber]="i+1" [song]="song"></app-song-list-view>
+                    </perfect-scrollbar>
+                    <!-- End | Custom List -->
+                </div>
+            </div>
+            <!-- End | Tab Content -->
+        </div>
+        <!-- End | Songs tabs -->
+    </div>
+
+    <!-- New Release -->
+    <app-section *ngIf="newRelease" [section]="newRelease" [carouselButtonPositionClass]="carouselArrowPosClass3"
+                 [primaryCard]="true" [showImageOptions]="true">
+    </app-section>
+
+    <!-- Artists -->
+    <app-section *ngIf="artists" [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
+                 [imageCard]="true" [artistRouteLink]="true">
+    </app-section>
+
+    <!-- Playlist -->
+    <app-section *ngIf="playlist" [section]="playlist" [carouselButtonPositionClass]="carouselArrowPosClass1"
+                 [secondaryCard]="true" [fourSlideCarousel]="true">
+    </app-section>
+
+    <!-- Retro -->
+    <app-section *ngIf="retro" [section]="retro" [carouselButtonPositionClass]="carouselArrowPosClass3"
+                 [primaryCard]="true" [showImageOptions]="true">
+    </app-section>
+
+    <!-- Radio -->
+    <app-section *ngIf="radio" [section]="radio" [carouselButtonPositionClass]="carouselArrowPosClass2"
+                 [imageCard]="true">
+    </app-section>
+
+    <!-- Genres -->
+    <app-section *ngIf="genres" [section]="genres" [carouselButtonPositionClass]="carouselArrowPosClass1"
+                 [secondaryCard]="true">
+    </app-section>
+</div>
+<!-- End | Main Container -->

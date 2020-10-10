@@ -1,0 +1,37 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-event"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="section">
+        <div class="heading">
+            <div class="d-flex flex-wrap align-items-end">
+                <div class="flex-grow-1">
+                    <h4>{{eventDetails.name}}</h4>
+                    <p>{{eventDetails.price ? '$' + eventDetails.price : 'Free Event'}}</p>
+                </div>
+                <button type="button" class="btn btn-bold btn-pill btn-air btn-warning">Buy now</button>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="event-h bg-img bg-img-radius-lg mb-4" [ngStyle]="{'background-image': 'url(' + eventDetails.image + ')'}"></div>
+                <div class="mb-3" *ngIf="eventDetails.address">
+                    <b>Venue At</b>
+                    <div [innerHTML]="eventDetails.address"></div>
+                </div>
+                <div class="mb-3" *ngIf="eventDetails.phone">
+                    <b>Phone Number</b>
+                    <p>{{eventDetails.phone}}</p>
+                </div>
+                <div class="mb-3" *ngIf="eventDetails.email">
+                    <b>Email ID</b>
+                    <p>{{eventDetails.email}}</p>
+                </div>
+            </div>
+            <div class="col-sm-7" [innerHTML]="eventDetails.description"></div>
+        </div>
+    </div>
+</div>
+<!-- End | Main Container -->

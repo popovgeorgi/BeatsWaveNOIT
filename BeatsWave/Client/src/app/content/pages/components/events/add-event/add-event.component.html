@@ -1,0 +1,88 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-event"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="row section">
+        <div class="col-xl-8 col-md-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Add Event</h6>
+                </div>
+                <div class="card-body">
+                    <form action="#">
+                        <div class="form-row form-group">
+                            <label for="eventName" class="col-md-4 text-md-right col-form-label">Event Name</label>
+                            <div class="col-md-7">
+                                <input type="text" id="eventName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="eventImage" class="col-md-4 text-md-right col-form-label">Event Cover Image</label>
+                            <div class="col-md-7">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="eventImage">
+                                    <label class="custom-file-label" for="eventImage">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="eventAddress" class="col-md-4 text-md-right col-form-label">Venue</label>
+                            <div class="col-md-7">
+                                <textarea name="eventAddress" id="eventAddress" cols="10" rows="4" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="phoneNo" class="col-md-4 text-md-right col-form-label">Phone Number</label>
+                            <div class="col-md-7">
+                                <input type="text" id="phoneNo" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="emailId" class="col-md-4 text-md-right col-form-label">Email ID</label>
+                            <div class="col-md-7">
+                                <input type="text" id="emailId" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="desc" class="col-md-4 text-md-right col-form-label">Description</label>
+                            <div class="col-md-7">
+                                <textarea name="eventAddress" id="desc" cols="10" rows="6" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="free" name="eventType" class="custom-control-input">
+                                    <label class="custom-control-label" for="free">Free Event</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="paid" name="eventType" class="custom-control-input">
+                                    <label class="custom-control-label" for="paid">Paid Event</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="eventPrice" class="col-md-4 text-md-right col-form-label">Event Price</label>
+                            <div class="col-md-7">
+                                <input type="text" id="eventPrice" class="form-control">
+                                <span class="form-text text-muted">Please add Event Price if Event is paid</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7 btn-inline">
+                            <button type="button" class="btn btn-brand btn-air">Save Event</button>
+                            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End | Main Container -->

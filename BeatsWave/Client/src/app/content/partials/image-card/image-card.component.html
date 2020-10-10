@@ -1,0 +1,15 @@
+<div class="custom-card" *ngIf="routeLink; else withoutLink">
+    <a class="custom-card--link" routerLink="{{routeLink}}">
+        <img [src]="item.cover_url" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
+        <h6 class="mb-0 mt-2">{{item?.name}}</h6>
+    </a>
+</div>
+
+<ng-template #withoutLink>
+    <div class="custom-card">
+        <a class="custom-card--link">
+            <img [src]="item.cover_url" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
+            <h6 class="mb-0 mt-2">{{item?.name}}</h6>
+        </a>
+    </div>
+</ng-template>

@@ -1,0 +1,20 @@
+<div class="dropdown fade-in">
+    <a class="d-flex align-items-center py-2 text-white" role="button" (click)="closeSearchResult()"
+       id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="user?.name; else loginLink">
+        <div class="avatar avatar-sm avatar-circle"><img [src]="user.image" alt="user"></div>
+        <span class="pl-2">{{user.name}}</span>
+    </a>
+    <ng-template #loginLink>
+        <a class="py-2 text-white" (click)="openLoginModal()">Sign In</a>
+    </ng-template>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+        <a class="dropdown-item" *ngFor="let item of userMenu" [routerLink]="item.page">
+            <i [class]="item.icon"></i>
+            <span>{{item.title}}</span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <div class="px-4 py-2">
+            <button type="button" class="btn btn-sm btn-air btn-pill btn-danger">Logout</button>
+        </div>
+    </div>
+</div>

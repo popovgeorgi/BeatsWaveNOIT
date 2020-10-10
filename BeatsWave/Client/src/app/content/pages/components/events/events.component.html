@@ -1,0 +1,12 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-event"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="row section" *ngIf="events.length > 0">
+        <div class="col-xl-4 col-12 pb-4" *ngFor="let event of events">
+            <app-event-card [musicEvent]="event"></app-event-card>
+        </div>
+    </div>
+</div>
+<!-- End | Main Container -->

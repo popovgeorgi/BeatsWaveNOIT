@@ -1,0 +1,85 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-song"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <div class="row section">
+        <div class="col-xl-8 col-md-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Add Music</h6>
+                </div>
+                <div class="card-body">
+                    <form action="#">
+                        <div class="form-row form-group">
+                            <label for="songName" class="col-md-4 text-md-right col-form-label">Song Name</label>
+                            <div class="col-md-7">
+                                <input type="text" id="songName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="songImage" class="col-md-4 text-md-right col-form-label">Song Cover Image</label>
+                            <div class="col-md-7">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="songImage">
+                                    <label class="custom-file-label" for="songImage">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="songFile" class="col-md-4 text-md-right col-form-label">Song File</label>
+                            <div class="col-md-7">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="songFile">
+                                    <label class="custom-file-label" for="songImage">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="artistName" class="col-md-4 text-md-right col-form-label">Artist Name</label>
+                            <div class="col-md-7">
+                                <input type="text" id="artistName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="composerName" class="col-md-4 text-md-right col-form-label">Composer Name</label>
+                            <div class="col-md-7">
+                                <input type="text" id="composerName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-7">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="free" name="eventType" class="custom-control-input">
+                                    <label class="custom-control-label" for="free">Free Song</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="paid" name="eventType" class="custom-control-input">
+                                    <label class="custom-control-label" for="paid">Paid Song</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="songPrice" class="col-md-4 text-md-right col-form-label">Song Price</label>
+                            <div class="col-md-7">
+                                <input type="text" id="songPrice" class="form-control">
+                                <span class="form-text text-muted">Please add Song Price if Song is paid</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7 btn-inline">
+                            <button type="button" class="btn btn-brand btn-air">Save Song</button>
+                            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End | Main Container -->

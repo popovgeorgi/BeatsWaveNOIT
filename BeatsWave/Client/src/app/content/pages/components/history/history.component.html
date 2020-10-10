@@ -1,0 +1,26 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-home"></div>
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+    <div class="section">
+        <div class="heading">
+            <div class="d-flex flex-wrap align-items-end">
+                <div class="flex-grow-1">
+                    <h4>{{songs?.title}}</h4>
+                    <p>{{songs?.subTitle}}</p>
+                </div>
+                <button class="btn btn-sm btn-pill btn-air btn-primary">Clear All</button>
+            </div>
+            <hr>
+        </div>
+        <div class="row custom-card-list">
+            <div class="col-xl-6 col-lg-12" *ngFor="let song of songs.list; let i = index">
+                <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
+            </div>
+        </div>
+    </div>
+    <!-- End | Section -->
+</div>
+<!-- End | Main Container -->

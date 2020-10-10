@@ -1,0 +1,35 @@
+<a class="btn btn-icon-only w-auto h-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i [class]="icon"></i>
+</a>
+<ul class="dropdown-menu">
+    <li class="dropdown-item">
+        <a class="dropdown-link" (click)="addFavorite()">
+            <i class="la la-heart-o"></i>
+            <span>Favorite</span>
+        </a>
+    </li>
+    <li class="dropdown-item">
+        <a class="dropdown-link" (click)="addToPlayList()">
+            <i class="la la-plus"></i>
+            <span>Add to Playlist</span>
+        </a>
+    </li>
+    <li class="dropdown-item">
+        <a [href]="song?.url" class="dropdown-link" download>
+            <i class="la la-download"></i>
+            <span>Download</span>
+        </a>
+    </li>
+    <li class="dropdown-item">
+        <a class="dropdown-link" (click)="shareSong()">
+            <i class="la la-share-alt"></i>
+            <span>Share</span>
+        </a>
+    </li>
+    <li class="dropdown-item">
+        <a class="dropdown-link" [routerLink]="'/song/' + song.id + '/details'">
+            <i class="la la-info-circle"></i>
+            <span>Song Info</span>
+        </a>
+    </li>
+</ul>

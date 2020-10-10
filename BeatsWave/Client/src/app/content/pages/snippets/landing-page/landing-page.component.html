@@ -1,0 +1,114 @@
+<div id="wrapper">
+    <perfect-scrollbar class="vh-100">
+        <!-- Begin | Landing Page Banner [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
+        <div class="banner landing-banner bg-landing">
+            <header id="landing-header">
+            <div class="container d-flex align-items-center py-3">
+              <a routerLink="/home" class="brand">
+                <img [src]="brand.logo" alt="{{brand.name}}">
+              </a>
+
+              <ul class="header-auto-options ml-auto d-flex align-items-center">
+                <li><a class="link" (click)="openLoginModal()">Sign in</a></li>
+                <li><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
+                            (click)="openLoginModal()">Sign up</button></li>
+              </ul>
+            </div>
+          </header>
+            <div class="banner-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-10 mx-auto text-center">
+                            <h1>World's best music app</h1>
+                            <p class="font-lg">More than 10 millions free music & 15 millions paid music track. Listen now!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End | Landing Page Banner -->
+
+        <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
+        <div class="landing-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
+                        <h3>Features of Listen App</h3>
+                        <p class="font-md">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 mx-auto">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 text-center feature">
+                                <img src="../../../../../assets/images/svg/music.svg" alt="">
+                                <h5 class="mt-3">Songs</h5>
+                                <p>Millions of free and paid track available in this app.</p>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 text-center feature">
+                                <img src="../../../../../assets/images/svg/comment.svg" alt="">
+                                <h5 class="mt-3">Comments</h5>
+                                <p>You can share your thought on your favorite.</p>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 text-center feature">
+                                <img src="../../../../../assets/images/svg/event.svg" alt="">
+                                <h5 class="mt-3">Events</h5>
+                                <p>Create free and paid event in a few minutes</p>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 text-center feature">
+                                <img src="../../../../../assets/images/svg/other.svg" alt="">
+                                <h5 class="mt-3">Other</h5>
+                                <p>You can also like, dislike, share, add favorite and many more.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End | Landing Section -->
+
+        <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
+        <div class="landing-section light-section" *ngIf="events.length > 0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto mb-5 text-center">
+                        <h3>Upcoming Events</h3>
+                        <p class="font-md">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-12 pb-4" *ngFor="let event of events">
+                        <app-event-card [musicEvent]="event"></app-event-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End | Landing Section -->
+
+        <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
+        <div class="landing-section" *ngIf="trendingArtists.length > 0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
+                        <h3>Trending Artist</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10 mx-auto">
+                        <ngx-slick-carousel class="carousel" [config]="sliderConfig">
+                            <div ngxSlickItem *ngFor="let artist of trendingArtists" class="slide text-center">
+                                <div class="avatar avatar-xl avatar-circle mx-auto">
+                                    <img [src]="artist.cover_url" alt="{{artist.name}}">
+                                </div>
+                                <h6 class="mb-0 mt-2">{{artist.name}}</h6>
+                            </div>
+                        </ngx-slick-carousel>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End | Landing Section -->
+
+        <app-footer></app-footer>
+    </perfect-scrollbar>
+</div>
