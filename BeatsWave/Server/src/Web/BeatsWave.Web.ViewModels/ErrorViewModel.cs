@@ -1,4 +1,4 @@
-﻿namespace BeatsWave.Web.ViewModels
+﻿namespace BeatsWave.Web.Models
 {
     public class ErrorViewModel
     {
