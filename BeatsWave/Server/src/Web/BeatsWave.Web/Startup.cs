@@ -10,6 +10,7 @@
     using BeatsWave.Services.Data;
     using BeatsWave.Services.Messaging;
     using BeatsWave.Web.Infrastructure.Extensions;
+    using BeatsWave.Web.Infrastructure.Services;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -55,6 +56,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IProfileService, ProfileService>();
+            services.AddTransient<ICurrentUserService, CurrentUserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,24 +1,11 @@
-﻿namespace BeatsWave.Data.Models
+﻿namespace BeatsWave.Web.Models.Profile
 {
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using BeatsWave.Data.Common.Models;
 
-    using static Validation.User;
+    using static BeatsWave.Data.Models.Validation.User;
 
-    public class Profile : BaseModel<int>
+    public class UpdateProfileRequestModel
     {
-        public Profile(string displayName)
-        {
-            this.DisplayName = displayName;
-        }
-
-        [Required]
-        public string UserId { get; set; }
-
-        [NotMapped]
-        public ApplicationUser User { get; set; }
-
         [MaxLength(MaxNameLength)]
         public string FirstName { get; set; }
 
@@ -27,7 +14,6 @@
 
         public string MainPhotoUrl { get; set; }
 
-        [Required]
         [MaxLength(MaxDisplayNameLength)]
         public string DisplayName { get; set; }
 
