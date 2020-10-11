@@ -4,6 +4,7 @@ import { LoadingService } from '../../../../../core/services/loading.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { Profile } from 'src/app/core/models/Profile';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-user-profile',
@@ -11,8 +12,11 @@ import { Profile } from 'src/app/core/models/Profile';
 })
 export class UserProfileComponent implements OnInit, AfterViewInit {
 
-    userProfileForm: FormGroup;
-    profile: Profile;
+    public userProfileForm: FormGroup;
+    public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveFile';
+    public userPic: string;
+
+    private profile: Profile;
 
     constructor(
         private loadingService: LoadingService,
@@ -26,7 +30,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
             'location': [''],
             'biography': ['']
         })
-     }
+    }
 
     ngOnInit() {
         this.profileService.getProfile().subscribe(res => {
@@ -39,6 +43,12 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
                 'location': [this.profile.location],
                 'biography': [this.profile.biography]
             })
+        })
+    }
+
+    editProfile() {
+        this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
+            console.log(this.userProfileForm)
         })
     }
 

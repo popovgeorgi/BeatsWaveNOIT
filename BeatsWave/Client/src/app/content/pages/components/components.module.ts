@@ -40,6 +40,7 @@ import { ReferralsComponent } from './analytics/referrals/referrals.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from 'src/app/core/services/token-interceptor.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { FileUploadModule } from 'primeng/fileupload';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -176,7 +177,8 @@ const routes: Routes = [
         CoreModule,
         LayoutModule,
         ChartsModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        FileUploadModule
     ],
     providers: [
         {

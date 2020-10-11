@@ -14,4 +14,8 @@ export class ProfileService {
   getProfile(): Observable<Profile> {
     return this.http.get<Profile>(this.profilePath);
   }
+
+  editProfile(data) {
+    return this.http.put(this.profilePath, data);
+  }
 }

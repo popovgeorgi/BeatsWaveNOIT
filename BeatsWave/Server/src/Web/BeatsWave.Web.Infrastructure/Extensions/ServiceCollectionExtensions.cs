@@ -1,8 +1,8 @@
 ﻿namespace BeatsWave.Web.Infrastructure.Extensions
 {
     using System.Text;
-
     using BeatsWave.Web.Infrastructure.Filters;
+
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

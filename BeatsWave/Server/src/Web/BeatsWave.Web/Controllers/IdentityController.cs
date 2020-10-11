@@ -17,7 +17,6 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IIdentityService identityService;
         private readonly AppSettings appSettings;
-        private readonly IConfiguration configuration;
 
         public IdentityController(
             UserManager<ApplicationUser> userManager,
