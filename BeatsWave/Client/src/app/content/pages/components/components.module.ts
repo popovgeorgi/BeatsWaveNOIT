@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -37,6 +37,9 @@ import { TotalSongsComponent } from './analytics/total-songs/total-songs.compone
 import { PurchasesComponent } from './analytics/purchases/purchases.component';
 import { StatisticsComponent } from './analytics/statistics/statistics.component';
 import { ReferralsComponent } from './analytics/referrals/referrals.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from 'src/app/core/services/token-interceptor.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -165,6 +168,7 @@ const routes: Routes = [
         ReferralsComponent
     ],
     imports: [
+        ReactiveFormsModule,
         CommonModule,
         FormsModule,
         PerfectScrollbarModule,

@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../../core/services/loading.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ProfileService } from 'src/app/core/services/profile.service';
+import { Profile } from 'src/app/core/models/Profile';
 
 @Component({
     selector: 'app-user-profile',
@@ -8,21 +11,35 @@ import { LoadingService } from '../../../../../core/services/loading.service';
 })
 export class UserProfileComponent implements OnInit, AfterViewInit {
 
-    userProfile: any;
+    userProfileForm: FormGroup;
+    profile: Profile;
 
-    constructor(private loadingService: LoadingService) { }
+    constructor(
+        private loadingService: LoadingService,
+        private fb: FormBuilder,
+        private profileService: ProfileService) {
+        this.userProfileForm = this.fb.group({
+            'firstName': [''],
+            'lastName': [''],
+            'mainPhotoUrl': [''],
+            'displayName': [''],
+            'location': [''],
+            'biography': ['']
+        })
+     }
 
     ngOnInit() {
-        // This is static data just to display replace with your data
-        this.userProfile = {
-            image: './assets/images/users/thumb.jpg',
-            name: 'Halo Admin',
-            firstName: 'Halo',
-            lastName: 'Admin',
-            userRole: 'Admin',
-            location: 'USA',
-            description: ''
-        };
+        this.profileService.getProfile().subscribe(res => {
+            this.profile = res;
+            this.userProfileForm = this.fb.group({
+                'firstName': [this.profile.firstName],
+                'lastName': [this.profile.lastName],
+                'mainPhotoUrl': [this.profile.mainPhotoUrl],
+                'displayName': [this.profile.displayName, [Validators.required]],
+                'location': [this.profile.location],
+                'biography': [this.profile.biography]
+            })
+        })
     }
 
     ngAfterViewInit() {
