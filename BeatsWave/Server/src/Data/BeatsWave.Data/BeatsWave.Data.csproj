@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201011092624_ProfileTable.cs" />
+    <Compile Remove="Migrations\20201011092624_ProfileTable.Designer.cs" />
+    <Compile Remove="Migrations\20201011093136_ProfileTable.cs" />
+    <Compile Remove="Migrations\20201011093136_ProfileTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 

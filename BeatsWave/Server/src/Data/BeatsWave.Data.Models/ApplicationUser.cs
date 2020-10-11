@@ -18,6 +18,8 @@ namespace BeatsWave.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
+        public Profile Profile { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 
