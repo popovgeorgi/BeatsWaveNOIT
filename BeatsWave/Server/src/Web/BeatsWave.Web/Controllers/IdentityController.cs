@@ -46,6 +46,8 @@
                 return this.BadRequest(result.Errors);
             }
 
+            await this.userManager.AddToRoleAsync(user, model.Role);
+
             return this.Ok();
         }
 
