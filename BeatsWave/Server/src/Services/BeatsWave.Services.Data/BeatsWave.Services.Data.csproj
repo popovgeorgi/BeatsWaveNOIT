@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BeatsWave.Common\BeatsWave.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeatsWave.Data.Common\BeatsWave.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeatsWave.Data.Models\BeatsWave.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\BeatsWave.Web.ViewModels\BeatsWave.Web.Models.csproj" />

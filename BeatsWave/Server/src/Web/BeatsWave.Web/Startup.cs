@@ -59,6 +59,7 @@
             services.AddTransient<IProfileService, ProfileService>();
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IPictureService, PictureService>();
+            services.AddTransient<IArtistService, ArtistService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
