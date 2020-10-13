@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { Profile } from 'src/app/core/models/Profile';
 import { environment } from 'src/environments/environment';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
     selector: 'app-user-profile',

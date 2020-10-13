@@ -1,31 +1,33 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../core/services/loading.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
+import { Artist } from 'src/app/core/models/Artist';
+import { ArtistService } from 'src/app/core/services/artist.service';
 
 @Component({
     selector: 'app-artists',
     templateUrl: './artists.component.html'
 })
 export class ArtistsComponent implements OnInit, AfterViewInit {
-
-    artists: any = {};
+    artists: Array<Artist>;
+    record: number;
 
     constructor(private loadingService: LoadingService,
-                private artistsConfigService: ArtistsConfigService) { }
+                private artistService: ArtistService) { }
 
     ngOnInit() {
-        this.initArtists();
+        this.fetchArtists();
+    }
+
+    private fetchArtists() {
+        this.artistService.getArtists().subscribe(artists => {
+            console.log(artists);
+            this.artists = artists;
+            this.record = artists.length;
+        })
     }
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
-
-    // Initialize songs
-    initArtists() {
-        this.artists.list = this.artistsConfigService.artistsList;
-        this.artists.record = 5124;
-    }
-
 }

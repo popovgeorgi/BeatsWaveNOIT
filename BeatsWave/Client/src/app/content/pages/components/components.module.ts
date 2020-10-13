@@ -41,6 +41,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from 'src/app/core/services/token-interceptor.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ArtistService } from 'src/app/core/services/artist.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -184,7 +185,8 @@ const routes: Routes = [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-        }
+        },
+        ArtistService
     ]
 })
 export class ComponentsModule { }
