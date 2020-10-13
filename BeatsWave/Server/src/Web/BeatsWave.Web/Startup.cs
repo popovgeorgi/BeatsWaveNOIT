@@ -8,9 +8,11 @@
     using BeatsWave.Data.Repositories;
     using BeatsWave.Data.Seeding;
     using BeatsWave.Services.Data;
+    using BeatsWave.Services.Mapping;
     using BeatsWave.Services.Messaging;
     using BeatsWave.Web.Infrastructure.Extensions;
     using BeatsWave.Web.Infrastructure.Services;
+    using BeatsWave.Web.Models;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -18,6 +20,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using System.Reflection;
 
     public class Startup
     {
@@ -65,6 +68,8 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {

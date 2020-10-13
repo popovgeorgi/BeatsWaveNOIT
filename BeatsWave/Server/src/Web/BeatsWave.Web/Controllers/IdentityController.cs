@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using AutoMapper.Configuration;
+    using BeatsWave.Common;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure;
@@ -45,6 +46,9 @@
             {
                 return this.BadRequest(result.Errors);
             }
+
+            user.Profile = new Profile(model.UserName);
+            user.Profile.MainPhotoUrl = GlobalConstants.DefaultMainPhotoUrl;
 
             await this.userManager.AddToRoleAsync(user, model.Role);
 

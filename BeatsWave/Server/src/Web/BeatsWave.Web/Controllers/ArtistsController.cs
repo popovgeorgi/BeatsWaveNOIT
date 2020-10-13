@@ -20,7 +20,14 @@
         [HttpGet]
         [AllowAnonymous]
 
-        public Task<IEnumerable<ArtistListingServiceModel>> All()
-            => this.artistService.All();
+        public async Task<IEnumerable<ArtistListingServiceModel>> All()
+            => await this.artistService.AllAsync<ArtistListingServiceModel>(15);
+
+        [HttpGet]
+        [Route("{id}")]
+        [AllowAnonymous]
+
+        public async Task<ArtistDetailsServiceModel> Details(string id)
+            => await this.artistService.DetailsAsync<ArtistDetailsServiceModel>(id);
     }
 }

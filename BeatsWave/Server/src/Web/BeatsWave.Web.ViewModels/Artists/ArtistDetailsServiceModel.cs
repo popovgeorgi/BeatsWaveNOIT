@@ -1,10 +1,9 @@
 ﻿namespace BeatsWave.Web.Models.Artists
 {
-    using AutoMapper;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
 
-    public class ArtistListingServiceModel : IMapFrom<ApplicationUser>
+    public class ArtistDetailsServiceModel : IMapFrom<ApplicationUser>
     {
         public string Id { get; set; }
 
