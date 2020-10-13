@@ -1,12 +1,15 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 
 import { LoadingService } from '../../../../../core/services/loading.service';
 import { ArtistsConfigService } from '../../../../../core/services/artists-config.service';
 import { SongsConfigService } from '../../../../../core/services/songs-config.service';
 import { AudioPlayerService } from '../../../../../core/services/audio-player.service';
 import { Config } from '../../../../../config/config';
+import { ArtistService } from 'src/app/core/services/artist.service';
+import { Artist } from 'src/app/core/models/Artist';
 
 @Component({
     selector: 'app-artist-details',
@@ -15,21 +18,27 @@ import { Config } from '../../../../../config/config';
 export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     artistId: number;
-    artistDetails: any;
+    artistDetails: Artist;
 
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
-                private loadingService: LoadingService,
-                private artistsConfigService: ArtistsConfigService,
-                private songsConfigService: SongsConfigService,
-                private audioPlayerService: AudioPlayerService) {
-        this.routeSubscription = this.route.params.subscribe(param => {
-            if (param.id) {
-                this.artistId = parseInt(param.id, 10);
-                this.getArtistDetails();
-            }
-        });
+        private loadingService: LoadingService,
+        private artistsConfigService: ArtistsConfigService,
+        private songsConfigService: SongsConfigService,
+        private audioPlayerService: AudioPlayerService,
+        private artistService: ArtistService) {
+        this.fetchData();
+    }
+
+    fetchData() {
+        this.route.params.pipe(map(params => {
+            const id = params['id'];
+            this.artistId = id
+            return id;
+        }), mergeMap(id => this.artistService.getArtist(id))).subscribe(res => {
+            this.artistDetails = res;
+        })
     }
 
     ngOnInit() {
@@ -63,9 +72,4 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
     playAllSongs() {
         this.audioPlayerService.playNowPlaylist(this.artistDetails);
     }
-
-    ngOnDestroy() {
-        this.routeSubscription.unsubscribe();
-    }
-
 }

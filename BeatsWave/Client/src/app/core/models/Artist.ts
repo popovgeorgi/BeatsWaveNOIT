@@ -1,6 +1,6 @@
 export interface Artist {
     id: string,
-    firstName: string,
-    lastName: string,
-    mainPhotoUrl: string
+    profileFirstName: string,
+    profileLastName: string,
+    profileMainPhotoUrl: string
 }

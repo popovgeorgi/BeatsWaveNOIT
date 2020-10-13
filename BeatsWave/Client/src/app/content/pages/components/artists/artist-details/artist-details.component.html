@@ -6,16 +6,16 @@
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="artistDetails.cover_url" alt="{{artistDetails.name}}" class="card-img--radius-lg">
+            <img [src]="artistDetails.profileMainPhotoUrl" alt="{{artistDetails.profileFirstName}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
-                    <h5>{{artistDetails.name}}</h5>
-                    <p>DOB: {{artistDetails.dob}}</p>
-                    <div class="text-warning stars">
+                    <h5>{{artistDetails.profileFirstName}}{{' ' + artistDetails.profileLastName}}</h5>
+                    <!-- <p>DOB: {{artistDetails.dob}}</p> -->
+                    <!-- <div class="text-warning stars">
                         <i class="la {{rating}}" *ngFor="let rating of artistDetails.ratingsView"></i>
-                    </div>
+                    </div> -->
                     <div class="mt-4">
                       <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
                               (click)="playAllSongs()">Play All</button>
