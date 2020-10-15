@@ -10,15 +10,18 @@ import { AudioPlayerService } from '../../../../../core/services/audio-player.se
 import { Config } from '../../../../../config/config';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Artist } from 'src/app/core/models/Artist';
+import { FollowService } from 'src/app/core/services/follow.service';
 
 @Component({
     selector: 'app-artist-details',
     templateUrl: './artist-details.component.html'
 })
-export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ArtistDetailsComponent implements OnInit, AfterViewInit {
 
-    artistId: number;
-    artistDetails: Artist;
+    public followers: number;
+    public isFollowing: boolean;
+    public artistDetails: Artist;
+    private artistId: number;
 
     routeSubscription: Subscription;
 
@@ -27,47 +30,67 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit, OnDestroy 
         private artistsConfigService: ArtistsConfigService,
         private songsConfigService: SongsConfigService,
         private audioPlayerService: AudioPlayerService,
-        private artistService: ArtistService) {
+        private artistService: ArtistService,
+        private followService: FollowService) {
         this.fetchData();
     }
 
-    fetchData() {
+    public fetchData() {
         this.route.params.pipe(map(params => {
             const id = params['id'];
             this.artistId = id
             return id;
         }), mergeMap(id => this.artistService.getArtist(id))).subscribe(res => {
             this.artistDetails = res;
+            this.followers = this.artistDetails.followersCount;
         })
     }
 
     ngOnInit() {
+        this.followService.isArtistFollowedByCurrentUser(this.artistId).subscribe(res => {
+            this.isFollowing = res;
+        })
+    }
+
+    public OnFollowButtonClicked() {
+        if (!this.isFollowing) {
+            this.followService.follow(this.artistId).subscribe(res => {
+                this.isFollowing = true;
+                this.followers = this.followers + 1;
+            });
+        }
+        else {
+            this.followService.unFollow(this.artistId).subscribe(res => {
+                this.isFollowing = false;
+                this.followers = this.followers - 1;
+            })
+        }
     }
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
 
-    getArtistDetails() {
-        this.artistDetails = this.artistsConfigService.getArtistByIb(this.artistId);
-        this.artistDetails.songs = this.songsConfigService.songsList;
-        this.artistDetails.record = 124;
-        this.setRatingsView();
-    }
+    // getArtistDetails() {
+    //     this.artistDetails = this.artistsConfigService.getArtistByIb(this.artistId);
+    //     this.artistDetails.songs = this.songsConfigService.songsList;
+    //     this.artistDetails.record = 124;
+    //     this.setRatingsView();
+    // }
 
-    // Set an array for ratings stars.
-    setRatingsView() {
-        this.artistDetails.ratingsView = [];
-        const ratings = Math.trunc(this.artistDetails.ratings);
-        for (let i = 0; i < ratings; i++) {
-            this.artistDetails.ratingsView.push(Config.STAR);
-        }
+    // // Set an array for ratings stars.
+    // setRatingsView() {
+    //     this.artistDetails.ratingsView = [];
+    //     const ratings = Math.trunc(this.artistDetails.ratings);
+    //     for (let i = 0; i < ratings; i++) {
+    //         this.artistDetails.ratingsView.push(Config.STAR);
+    //     }
 
-        // Push half star in array
-        if (this.artistDetails.ratings % 1) {
-            this.artistDetails.ratingsView.push(Config.HALF_STAR);
-        }
-    }
+    //     // Push half star in array
+    //     if (this.artistDetails.ratings % 1) {
+    //         this.artistDetails.ratingsView.push(Config.HALF_STAR);
+    //     }
+    // }
 
     playAllSongs() {
         this.audioPlayerService.playNowPlaylist(this.artistDetails);
