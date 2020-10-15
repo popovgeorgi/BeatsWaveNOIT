@@ -2,8 +2,6 @@
 {
     using System.Threading.Tasks;
 
-    using BeatsWave.Data.Common.Repositories;
-    using BeatsWave.Data.Models;
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Follows;
@@ -21,9 +19,26 @@
         }
 
         [HttpPost]
+        [Route(nameof(Follow))]
         public async Task<ActionResult> Follow(FollowRequestModel model)
         {
             var result = await this.followService.Follow(
+                model.UserId,
+                this.currentUser.GetId());
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return this.Ok();
+        }
+
+        [HttpPost]
+        [Route(nameof(UnFollow))]
+        public async Task<ActionResult> UnFollow(FollowRequestModel model)
+        {
+            var result = await this.followService.UnFollow(
                 model.UserId,
                 this.currentUser.GetId());
 

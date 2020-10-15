@@ -1,9 +1,5 @@
 ﻿namespace BeatsWave.Services.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Text;
     using System.Threading.Tasks;
 
     using BeatsWave.Data.Common.Repositories;
@@ -40,6 +36,33 @@
                 UserId = userId,
                 FollowerId = followerId,
             });
+
+            await this.followRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<Result> UnFollow(string userId, string followerId)
+        {
+            if (userId == followerId)
+            {
+                return "You cannot unfollow yourself!";
+            }
+
+            var userAlreadyFollowed = await this.followRepository
+                .All()
+                .AnyAsync(x => x.UserId == userId && x.FollowerId == followerId);
+
+            if (!userAlreadyFollowed)
+            {
+                return "You must follow the user in order to unfollow him!";
+            }
+
+            var follow = await this.followRepository
+                .All()
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.FollowerId == followerId);
+
+            this.followRepository.Delete(follow);
 
             await this.followRepository.SaveChangesAsync();
 

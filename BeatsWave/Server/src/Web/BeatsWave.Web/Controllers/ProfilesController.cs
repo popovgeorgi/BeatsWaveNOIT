@@ -3,9 +3,8 @@
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
-    using BeatsWave.Web.Models.Profile;
     using BeatsWave.Web.Infrastructure.Services;
-    using Microsoft.AspNetCore.Authorization;
+    using BeatsWave.Web.Models.Profile;
     using Microsoft.AspNetCore.Mvc;
 
     public class ProfilesController : ApiController
@@ -22,12 +21,10 @@
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<ProfileServiceModel>> Mine()
             => await this.profileService.ByUser(this.currentUser.GetId());
 
         [HttpPut]
-        [Authorize]
         public async Task<ActionResult> Update(UpdateProfileRequestModel model)
         {
             var userId = this.currentUser.GetId();

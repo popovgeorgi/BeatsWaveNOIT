@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
 
-    using AutoMapper.Configuration;
     using BeatsWave.Common;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Data;
