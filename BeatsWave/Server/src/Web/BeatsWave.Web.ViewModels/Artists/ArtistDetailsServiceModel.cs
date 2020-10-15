@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web.Models.Artists
 {
+    using AutoMapper;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
 
@@ -12,5 +13,7 @@
         public string ProfileLastName { get; set; }
 
         public string ProfileMainPhotoUrl { get; set; }
+
+        public int FollowersCount { get; set; }
     }
 }

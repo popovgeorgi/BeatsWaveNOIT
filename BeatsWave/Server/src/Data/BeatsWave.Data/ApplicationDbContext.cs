@@ -59,7 +59,7 @@
             builder
                 .Entity<Follow>()
                 .HasOne(f => f.User)
-                .WithMany()
+                .WithMany(u => u.Followers)
                 .HasForeignKey(f => f.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 

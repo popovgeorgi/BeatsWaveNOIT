@@ -49,5 +49,11 @@
 
             return this.Ok();
         }
+
+        [HttpGet]
+        [Route("{userId}")]
+
+        public async Task<bool> IsAFollower(string userId)
+            => await this.followService.IsAFollower(this.currentUser.GetId(), userId);
     }
 }

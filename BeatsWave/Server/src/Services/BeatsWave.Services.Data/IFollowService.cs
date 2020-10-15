@@ -7,5 +7,7 @@
         Task<Result> Follow(string userId, string followerId);
 
         Task<Result> UnFollow(string userId, string followerId);
+
+        Task<bool> IsAFollower(string followerId, string userId);
     }
 }

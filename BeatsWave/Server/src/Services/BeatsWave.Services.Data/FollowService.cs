@@ -42,6 +42,9 @@
             return true;
         }
 
+        public async Task<bool> IsAFollower(string followerId, string userId)
+            => await this.followRepository.All().AnyAsync(f => f.FollowerId == followerId && f.UserId == userId);
+
         public async Task<Result> UnFollow(string userId, string followerId)
         {
             if (userId == followerId)
