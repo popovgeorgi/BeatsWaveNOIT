@@ -10,19 +10,23 @@
                     <h6 class="card-title mb-0">Add Music</h6>
                 </div>
                 <div class="card-body">
-                    <form action="#">
+                    <form [formGroup]="beatForm" (ngSubmit)="uploadBeat()">
                         <div class="form-row form-group">
                             <label for="songName" class="col-md-4 text-md-right col-form-label">Song Name</label>
                             <div class="col-md-7">
-                                <input type="text" id="songName" class="form-control">
+                                <input type="text" id="songName" class="form-control" formControlName="name">
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="songImage" class="col-md-4 text-md-right col-form-label">Song Cover Image</label>
+                            <label for="songImage" class="col-md-4 text-md-right col-form-label">Song Cover
+                                Image</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="songImage">
-                                    <label class="custom-file-label" for="songImage">Choose file</label>
+                                    <!-- <input type="file" class="custom-file-input" id="songImage"> -->
+                                    <!-- <label class="custom-file-label" for="songImage">Choose file</label> -->
+                                    <p-fileUpload name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
+                                        class="custom-file-input" id="songImage" (onSend)="onPhotoUploading()"
+                                        (onUpload)="onPhotoUploaded($event)"></p-fileUpload>
                                 </div>
                             </div>
                         </div>
@@ -30,41 +34,42 @@
                             <label for="songFile" class="col-md-4 text-md-right col-form-label">Song File</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="songFile">
-                                    <label class="custom-file-label" for="songImage">Choose file</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row form-group">
-                            <label for="artistName" class="col-md-4 text-md-right col-form-label">Artist Name</label>
-                            <div class="col-md-7">
-                                <input type="text" id="artistName" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-row form-group">
-                            <label for="composerName" class="col-md-4 text-md-right col-form-label">Composer Name</label>
-                            <div class="col-md-7">
-                                <input type="text" id="composerName" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-row form-group">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-7">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="free" name="eventType" class="custom-control-input">
-                                    <label class="custom-control-label" for="free">Free Song</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="paid" name="eventType" class="custom-control-input">
-                                    <label class="custom-control-label" for="paid">Paid Song</label>
+                                    <p-fileUpload name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
+                                        (onSend)="onBeatUploading()" (onUpload)="onBeatUploaded($event)"></p-fileUpload>
+                                    <!-- <label class="custom-file-label" for="songImage">Choose file</label> -->
                                 </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="songPrice" class="col-md-4 text-md-right col-form-label">Song Price</label>
                             <div class="col-md-7">
-                                <input type="text" id="songPrice" class="form-control">
+                                <input type="number" id="songPrice" class="form-control" formControlName="price">
                                 <span class="form-text text-muted">Please add Song Price if Song is paid</span>
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="genre" class="col-md-4 text-md-right col-form-label">Genre</label>
+                            <select class="col-md-7 form-control" formControlName="genre">
+                                <option value="HipHop">Hip-Hop</option>
+                                <option value="Pop">Pop</option>
+                                <option value="RB">R&B</option>
+                                <option value="Rock">Rock</option>
+                                <option value="Electronic">Electronic</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Reggaeton">Reggaeton</option>
+                            </select>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="songPrice" class="col-md-4 text-md-right col-form-label">Bpm</label>
+                            <div class="col-md-7">
+                                <input type="number" id="songPrice" class="form-control" formControlName="bpm">
+                            </div>
+                        </div>
+                        <div class="form-row form-group">
+                            <label for="about" class="col-md-4 text-md-right col-form-label">Description</label>
+                            <div class="col-md-7">
+                                <textarea name="about" id="about" cols="30" rows="5" class="form-control"
+                                    formControlName="description"></textarea>
                             </div>
                         </div>
                     </form>
@@ -73,7 +78,7 @@
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-7 btn-inline">
-                            <button type="button" class="btn btn-brand btn-air">Save Song</button>
+                            <button type="button" class="btn btn-brand btn-air" [disabled]="!beatForm.valid">Save Song</button>
                             <button type="button" class="btn btn-outline-secondary">Cancel</button>
                         </div>
                     </div>

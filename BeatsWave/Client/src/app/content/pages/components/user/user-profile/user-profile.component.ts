@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class UserProfileComponent implements OnInit, AfterViewInit {
 
     public userProfileForm: FormGroup;
-    public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveFile';
+    public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveProfilePhoto';
     public userPic: string;
 
     private profile: Profile;

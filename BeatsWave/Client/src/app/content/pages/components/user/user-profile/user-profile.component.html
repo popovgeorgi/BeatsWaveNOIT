@@ -23,7 +23,7 @@
                 <div class="col-xl-8 col-md-7">
                     <div class="card h-auto">
                         <div class="card-body">
-                            <form [formGroup]="userProfileForm" class="row">
+                            <form [formGroup]="userProfileForm" (ngSubmit)="editProfile()" class="row">
                                 <div class="col-xl-6 form-group">
                                     <label for="firstName" class="form-label">First Name</label>
                                     <input type="text" id="firstName" name="firstName" class="form-control"
@@ -50,8 +50,7 @@
                                         formControlName="biography"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-primary btn-air" (click)="editProfile()">Save
-                                        Changes</button>
+                                    <button type="button" class="btn btn-primary btn-air" [disabled]="!userProfileForm.valid">Save Changes</button>
                                 </div>
                             </form>
                         </div>
