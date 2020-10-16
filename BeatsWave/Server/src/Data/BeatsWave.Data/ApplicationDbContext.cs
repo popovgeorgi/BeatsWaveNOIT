@@ -28,6 +28,8 @@
 
         public DbSet<Follow> Follows { get; set; }
 
+        public DbSet<Beat> Beats { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -68,6 +70,13 @@
                 .HasOne(f => f.Follower)
                 .WithMany()
                 .HasForeignKey(f => f.FollowerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Beat>()
+                .HasOne(p => p.Producer)
+                .WithMany(b => b.Beats)
+                .HasForeignKey(p => p.ProducerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Needed for Identity models configuration

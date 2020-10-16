@@ -30,7 +30,9 @@ namespace BeatsWave.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
-        public virtual ICollection<Follow> Followers { get; set; }
+        public virtual ICollection<Follow> Followers { get; }
+
+        public virtual ICollection<Beat> Beats { get; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

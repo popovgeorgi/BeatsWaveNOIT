@@ -51,9 +51,9 @@
         }
 
         [HttpGet]
-        [Route("{userId}")]
+        [Route("{id}")]
 
-        public async Task<bool> IsAFollower(string userId)
-            => await this.followService.IsAFollower(this.currentUser.GetId(), userId);
+        public async Task<bool> IsAFollower(string id)
+            => await this.followService.IsAFollower(this.currentUser.GetId(), id);
     }
 }

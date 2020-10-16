@@ -15,6 +15,8 @@
     <Compile Remove="Migrations\20201011092624_ProfileTable.Designer.cs" />
     <Compile Remove="Migrations\20201011093136_ProfileTable.cs" />
     <Compile Remove="Migrations\20201011093136_ProfileTable.Designer.cs" />
+    <Compile Remove="Migrations\20201016084238_CreateBeatsTable.cs" />
+    <Compile Remove="Migrations\20201016084238_CreateBeatsTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

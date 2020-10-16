@@ -9,5 +9,11 @@
             public const int MaxNameLength = 40;
             public const int MaxBiographyLength = 200;
         }
+
+        public class Beat
+        {
+            public const int MaxNameLength = 50;
+            public const int MaxDescriptionLength = 200;
+        }
     }
 }
