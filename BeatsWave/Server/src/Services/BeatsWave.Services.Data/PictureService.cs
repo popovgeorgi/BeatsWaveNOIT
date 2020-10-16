@@ -22,6 +22,11 @@
                 .Include(u => u.Profile)
                 .FirstOrDefaultAsync(x => x.Id == userId);
 
+            if (user.Profile.MainPhotoUrl != null)
+            {
+                // трябва да се изтрива снимката от storage-a
+            }
+
             user.Profile.MainPhotoUrl = imageUrl;
 
             await this.userRepository.SaveChangesAsync();

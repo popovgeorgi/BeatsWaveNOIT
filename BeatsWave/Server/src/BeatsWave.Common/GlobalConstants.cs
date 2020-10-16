@@ -9,5 +9,8 @@
         public const string ArtistRoleName = "Artist";
 
         public const string DefaultMainPhotoUrl = "https://beatswave.blob.core.windows.net/photos/default.jpg";
+
+        public const string BlobImageContainer = "photos";
+        public const string BlobBeatContainer = "beats";
     }
 }
