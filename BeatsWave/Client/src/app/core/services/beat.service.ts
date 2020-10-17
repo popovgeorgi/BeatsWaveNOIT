@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Beat } from '../models/Beat';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,9 @@ export class BeatService {
 
   uploadBeat(data) {
     return this.http.post(this.beatPath, data);
+  }
+
+  getBeats(count): Observable<Array<Beat>> {
+    return this.http.get<Array<Beat>>(this.beatPath + '?take=' + count)
   }
 }

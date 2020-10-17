@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { AudioPlayerService } from '../../../../core/services/audio-player.service';
+import { Beat } from 'src/app/core/models/Beat';
 
 @Component({
     selector: 'app-primary-card',
@@ -8,7 +9,7 @@ import { AudioPlayerService } from '../../../../core/services/audio-player.servi
 })
 export class PrimaryCardComponent implements OnInit {
 
-    @Input() song: any = {};
+    @Input() song: Beat;
     @Input() showOptions = false;
     @Input() imageBorderRadiusClass = 'card-img--radius-lg';
 
@@ -32,7 +33,8 @@ export class PrimaryCardComponent implements OnInit {
     }
 
     addInPlayer() {
-        this.audioPlayerService.playSong(this.song);
+        debugger;
+        this.audioPlayerService.playSong(this.song.beatUrl);
     }
 
 }

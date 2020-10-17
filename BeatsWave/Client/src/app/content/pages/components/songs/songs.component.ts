@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../core/services/loading.service';
 import { SongsConfigService } from '../../../../core/services/songs-config.service';
+import { Beat } from 'src/app/core/models/Beat';
+import { BeatService } from 'src/app/core/services/beat.service';
 
 @Component({
     selector: 'app-songs',
@@ -9,24 +11,26 @@ import { SongsConfigService } from '../../../../core/services/songs-config.servi
 })
 export class SongsComponent implements OnInit, AfterViewInit {
 
-    songs: any = {};
-    gridView = false;
+    public beats: Beat[];
+    public beatsCount: number;
+    public gridView = false;
+    private takeBeatsCount: number = 8;
 
     constructor(private loadingService: LoadingService,
-                private songsConfigService: SongsConfigService) { }
+                private beatService: BeatService) { }
 
     ngOnInit() {
-        this.initSongs();
+        this.fetchBeats();
+    }
+
+    private fetchBeats() {
+        this.beatService.getBeats(this.takeBeatsCount).subscribe(beats => {
+            this.beats = beats;
+            this.beatsCount = beats.length;
+        })
     }
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
     }
-
-    // Initialize songs
-    initSongs() {
-        this.songs.list = this.songsConfigService.songsList;
-        this.songs.record = 5124;
-    }
-
 }

@@ -38,14 +38,14 @@
         </div>
         <!-- End | Custom Card Info -->
         <a (click)="addInPlayer()">
-            <img [src]="song?.cover_url" alt="{{song?.name}}">
+            <img [src]="song?.imageUrl" alt="{{song?.producerUserName}}">
         </a>
     </div>
 
     <!-- Custom Card Options Dropdown -->
     <a class="custom-card--link mt-2" [routerLink]="'/song/' + song.id + '/details'">
         <h6 class="text-truncate" title="{{song?.name}}">{{song?.name}}</h6>
-        <p class="text-truncate" title="{{song?.artist}}" *ngIf="song?.artist">{{song?.artist}}</p>
+        <p class="text-truncate" title="{{song?.producerUserName}}" *ngIf="song?.producerUserName">{{song?.producerUserName}}</p>
     </a>
 </div>
 <!-- Begin | Custom Card [[ Find at scss/framework/components/custom-card/custom-card.scss ]] -->
