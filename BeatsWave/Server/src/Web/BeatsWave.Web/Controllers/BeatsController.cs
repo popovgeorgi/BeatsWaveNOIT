@@ -1,10 +1,13 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Beats;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class BeatsController : ApiController
@@ -19,6 +22,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "Beatmaker, Administrator")]
         public async Task<IActionResult> Create(CreateBeatRequestModel model)
         {
             var producerId = this.currentUser.GetId();
@@ -35,5 +39,10 @@
 
             return this.Created(nameof(this.Create), id);
         }
+
+        [HttpGet]
+
+        public async Task<IEnumerable<BeatListingServiceModel>> All(int take)
+            => await this.beatService.AllAsync<BeatListingServiceModel>(take);
     }
 }

@@ -2,16 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
-    using BeatsWave.Common;
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
-    using BeatsWave.Web.Models.Artists;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
     public class ArtistService : IArtistService
     {

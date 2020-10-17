@@ -62,8 +62,6 @@
         {
             var blockBlob = await this.UploadFileToStorage(file, GlobalConstants.BlobBeatContainer);
 
-            //await this.pictureService.SetMainPhotoToUser(this.currentUser.GetId(), blockBlob.Uri.ToString());
-
             return this.Ok(new
             {
                 name = blockBlob.Name,
