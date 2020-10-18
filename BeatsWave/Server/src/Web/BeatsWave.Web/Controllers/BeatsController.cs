@@ -41,7 +41,6 @@
         }
 
         [HttpGet]
-
         public async Task<IEnumerable<BeatListingServiceModel>> All(int take)
             => await this.beatService.AllAsync<BeatListingServiceModel>(take);
     }

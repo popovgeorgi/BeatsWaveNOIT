@@ -65,6 +65,7 @@
             services.AddTransient<IArtistService, ArtistService>();
             services.AddTransient<IFollowService, FollowService>();
             services.AddTransient<IBeatService, BeatService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
