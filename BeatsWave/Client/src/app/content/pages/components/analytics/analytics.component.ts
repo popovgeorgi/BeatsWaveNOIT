@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../core/services/loading.service';
-import { LocalStorageService } from '../../../../core/services/local-storage.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { User } from 'src/app/core/models/User';
 
 @Component({
     selector: 'app-analytics',
@@ -9,13 +10,19 @@ import { LocalStorageService } from '../../../../core/services/local-storage.ser
 })
 export class AnalyticsComponent implements OnInit, AfterViewInit {
 
-    currentUser: any;
+    currentUser: User;
 
     constructor(private loadingService: LoadingService,
-                private localStorageService: LocalStorageService) { }
+                private userService: UserService) { }
 
     ngOnInit() {
-        this.currentUser = this.localStorageService.getCurrentUser();
+        this.fetchUser();
+    }
+
+    private fetchUser() {
+        this.userService.getInfo().subscribe(user => {
+            this.currentUser = user;
+        })
     }
 
     ngAfterViewInit() {

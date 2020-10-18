@@ -54,17 +54,8 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
             this.authService.saveToken(data['token']);
             this.loadingService.stopLoading();
             this.router.navigate(['/home']);
-        }) 
-
-        // You can replace this object with your user object
-        const user = {
-            id: 1,
-            role: 'ADMIN',
-            userName: this.login.controls.userName.value,
-            image: './assets/images/users/thumb.jpg',
-            name: this.login.controls.userName.value
-        };
-        this.localStorageService.setLocalStorage(Config.CURRENT_USER, user);
+        })
+        
         this.close();
     }
 

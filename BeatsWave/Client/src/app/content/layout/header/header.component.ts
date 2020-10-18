@@ -8,6 +8,8 @@ import { SearchService } from '../../../core/services/search.service';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { SkinService } from '../../../core/services/skin.service';
 import { Config } from '../../../config/config';
+import { UserService } from 'src/app/core/services/user.service';
+import { User } from 'src/app/core/models/User';
 
 @Component({
     selector: 'app-header',
@@ -19,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     headerClasses = 'bg-primary';
 
     language: any = {};
-    currentUser: any = {};
+    currentUser: User;
 
     searchSubscription: Subscription;
     skinSubscription: Subscription;
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private searchService: SearchService,
                 private simpleModalService: SimpleModalService,
                 private localStorageService: LocalStorageService,
+                private userService: UserService,
                 private skinService: SkinService) {
         this.language = {
             title: 'Language',
@@ -36,7 +39,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.currentUser = this.localStorageService.getCurrentUser();
+        this.userService.getInfo().subscribe(user => {
+            this.currentUser = user;
+        })
         const themeSkin = this.localStorageService.getThemeSkin();
         if (themeSkin) {
             this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
