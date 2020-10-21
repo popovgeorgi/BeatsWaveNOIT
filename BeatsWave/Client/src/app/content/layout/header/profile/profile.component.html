@@ -1,8 +1,8 @@
 <div class="dropdown fade-in">
     <a class="d-flex align-items-center py-2 text-white" role="button" (click)="closeSearchResult()"
-       id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="user?.userName; else loginLink">
+       id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="user?.profileDisplayName; else loginLink">
         <div class="avatar avatar-sm avatar-circle"><img [src]="user.profileMainPhotoUrl" alt="user"></div>
-        <span class="pl-2">{{user.userName}}</span>
+        <span class="pl-2">{{user.profileDisplayName}}</span>
     </a>
     <ng-template #loginLink>
         <a class="py-2 text-white" (click)="openLoginModal()">Sign In</a>

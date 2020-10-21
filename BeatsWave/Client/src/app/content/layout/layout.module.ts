@@ -27,6 +27,7 @@ import { LoginComponent } from './header/login/login.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { RegisterComponent } from './header/register/register.component';
 import { UserService } from 'src/app/core/services/user.service';
+import { LoaderComponent } from './loader/loader.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -43,6 +44,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PlayerComponent,
         SectionComponent,
         ProfileComponent,
+        LoaderComponent,
         LanguageComponent,
         SearchComponent,
         LoginComponent,
@@ -56,6 +58,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HeaderComponent,
         FooterComponent,
         PlayerComponent,
+        LoaderComponent,
         SectionComponent,
         ProfileComponent,
         SearchComponent,

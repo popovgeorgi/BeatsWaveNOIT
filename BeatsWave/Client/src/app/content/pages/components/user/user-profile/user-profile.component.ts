@@ -14,7 +14,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 
     public userProfileForm: FormGroup;
     public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveProfilePhoto';
-    public userPic: string;
+    public isPhotoUploading: boolean = false;
+    public userPicture: string;
 
     private profile: Profile;
 
@@ -35,10 +36,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.profileService.getProfile().subscribe(res => {
             this.profile = res;
+            this.userPicture = this.profile.mainPhotoUrl;
             this.userProfileForm = this.fb.group({
                 'firstName': [this.profile.firstName],
                 'lastName': [this.profile.lastName],
-                'mainPhotoUrl': [this.profile.mainPhotoUrl],
                 'displayName': [this.profile.displayName, [Validators.required]],
                 'location': [this.profile.location],
                 'biography': [this.profile.biography]
@@ -46,18 +47,26 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
         })
     }
 
-    onPhotoUploaded(e) {
-        this.userProfileForm.value.mainPhotoUrl = e.originalEvent.body.uri;
-    }
-
-    editProfile() {
-        this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
-            console.log(this.userProfileForm)
-        })
-    }
-
     ngAfterViewInit() {
+        debugger;
         this.loadingService.stopLoading();
     }
 
+    onPhotoUploading() {
+        this.isPhotoUploading = true;
+        this.loadingService.startLoading();
+    }
+
+    onPhotoUploaded(e) {
+        this.userPicture = e.originalEvent.body.uri;
+        this.loadingService.stopLoading();
+        this.isPhotoUploading = false;
+    }
+
+    public editProfile() {
+        this.loadingService.startLoading();
+        this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
+            this.loadingService.stopLoading();
+        })
+    }
 }

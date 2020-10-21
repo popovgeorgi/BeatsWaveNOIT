@@ -37,13 +37,13 @@ import { TotalSongsComponent } from './analytics/total-songs/total-songs.compone
 import { PurchasesComponent } from './analytics/purchases/purchases.component';
 import { StatisticsComponent } from './analytics/statistics/statistics.component';
 import { ReferralsComponent } from './analytics/referrals/referrals.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptorService } from 'src/app/core/services/token-interceptor.service';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { FollowService } from 'src/app/core/services/follow.service';
 import { BeatService } from 'src/app/core/services/beat.service';
+import { LoadingService } from 'src/app/core/services/loading.service';
+import { LoaderComponent } from '../../layout/loader/loader.component';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

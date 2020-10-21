@@ -9,7 +9,13 @@ import { PagesComponent } from './pages.component';
 const routes: Routes = [
     {
         path: '',
-        component: LandingPageComponent
+        component: PagesComponent,
+        children: [
+            {
+                path: '',
+                loadChildren: './components/components.module#ComponentsModule'
+            }
+        ]
     },
     {
         path: 'landing',

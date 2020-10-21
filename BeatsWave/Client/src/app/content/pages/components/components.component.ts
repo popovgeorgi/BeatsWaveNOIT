@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { SkinService } from '../../../core/services/skin.service';
+import { LoadingService } from 'src/app/core/services/loading.service';
 
 @Component({
     selector: 'app-components',
@@ -23,7 +24,8 @@ export class ComponentsComponent implements OnInit, OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 private router: Router,
                 private localStorageService: LocalStorageService,
-                private skinService: SkinService) { }
+                private skinService: SkinService) { 
+                }
 
     ngOnInit() {
         const themeSkin = this.localStorageService.getThemeSkin();

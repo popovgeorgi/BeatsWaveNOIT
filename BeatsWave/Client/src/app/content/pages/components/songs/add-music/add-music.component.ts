@@ -18,7 +18,8 @@ export class AddMusicComponent implements OnInit, AfterViewInit {
 
     constructor(private loadingService: LoadingService,
         private fb: FormBuilder,
-        private beatService: BeatService) {
+        private beatService: BeatService,
+        private loaderService: LoadingService) {
         this.beatForm = this.fb.group({
             "name": ['', [Validators.required]],
             "beatUrl": ['', [Validators.required]],
@@ -31,25 +32,29 @@ export class AddMusicComponent implements OnInit, AfterViewInit {
     }
 
     public uploadBeat() {
-        debugger;
+        this.loadingService.startLoading();
         this.beatService.uploadBeat(this.beatForm.value).subscribe(res => {
-            debugger;
             console.log(this.beatForm.value);
+            this.loadingService.stopLoading();
         })
     }
 
     public onPhotoUploading() {
+        this.loadingService.startLoading();
     }
 
     public onPhotoUploaded(e) {
         this.beatForm.value.imageUrl = e.originalEvent.body.uri;
+        this.loadingService.stopLoading();
     }
 
     public onBeatUploading() {
+        this.loadingService.startLoading();
     }
 
     public onBeatUploaded(e) {
         this.beatForm.value.beatUrl = e.originalEvent.body.uri;
+        this.loadingService.stopLoading();
     }
 
     ngOnInit() {

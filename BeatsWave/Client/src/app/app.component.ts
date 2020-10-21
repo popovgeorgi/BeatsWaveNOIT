@@ -9,6 +9,7 @@ export class AppComponent implements OnInit {
     title = 'listen';
 
     constructor(private loadingService: LoadingService) {
+        debugger;
         this.loadingService.startLoading();
     }
 

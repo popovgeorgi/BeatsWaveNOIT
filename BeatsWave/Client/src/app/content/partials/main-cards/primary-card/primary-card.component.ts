@@ -22,9 +22,9 @@ export class PrimaryCardComponent implements OnInit {
         this.classes = 'custom-card--img ' + this.imageBorderRadiusClass;
     }
 
-    addFavorite() {
-        this.song.favorite = true;
-    }
+    // addFavorite() {
+    //     this.song.favorite = true;
+    // }
 
     addInQueue() {
     }

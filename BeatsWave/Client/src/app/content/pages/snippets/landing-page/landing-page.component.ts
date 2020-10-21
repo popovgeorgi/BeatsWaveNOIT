@@ -67,6 +67,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.loadingService.stopLoading();
+        debugger;
     }
 
     initEvents() {
