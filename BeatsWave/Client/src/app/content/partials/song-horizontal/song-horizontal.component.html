@@ -2,6 +2,6 @@
     <img [src]="song?.imageUrl" alt="{{song?.name}}" [class]="imageBorderRadiusClass">
 </div>
 <div class="song-h--desc">
-    <span class="text-truncate song-h--name" title="{{song?.name}}">{{song?.name}}</span>
-    <p class="text-truncate song-h--artist" title="{{song?.producerUserName}}" *ngIf="song?.producerUserName">{{song?.producerUserName}}</p>
+    <span class="song-h--name" title="{{song?.name}}">{{song?.name}}</span>
+    <p class="song-h--artist" title="{{song?.producerUserName}}" *ngIf="song?.producerUserName">{{song?.producerUserName}}</p>
 </div>

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../core/services/loading.service';
 import { AlbumsConfigService } from '../../../../core/services/albums-config.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-albums',
@@ -11,7 +12,7 @@ export class AlbumsComponent implements OnInit, AfterViewInit {
 
     albums: any = {};
 
-    constructor(private loadingService: LoadingService,
+    constructor(private spinner: NgxSpinnerService,
                 private albumsConfigService: AlbumsConfigService) { }
 
     ngOnInit() {
@@ -19,7 +20,7 @@ export class AlbumsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 
     // Initialize albums

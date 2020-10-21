@@ -4,6 +4,7 @@ import { LoadingService } from '../../../../../core/services/loading.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { BeatService } from 'src/app/core/services/beat.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-add-music',
@@ -16,10 +17,9 @@ export class AddMusicComponent implements OnInit, AfterViewInit {
     public uploadSaveBeatUrl: string = environment.apiUrl + '/FileUpload/SaveBeat';
 
 
-    constructor(private loadingService: LoadingService,
+    constructor(private spinner: NgxSpinnerService,
         private fb: FormBuilder,
-        private beatService: BeatService,
-        private loaderService: LoadingService) {
+        private beatService: BeatService) {
         this.beatForm = this.fb.group({
             "name": ['', [Validators.required]],
             "beatUrl": ['', [Validators.required]],
@@ -32,36 +32,38 @@ export class AddMusicComponent implements OnInit, AfterViewInit {
     }
 
     public uploadBeat() {
-        this.loadingService.startLoading();
+        this.spinner.show('beatUploader');
         this.beatService.uploadBeat(this.beatForm.value).subscribe(res => {
             console.log(this.beatForm.value);
-            this.loadingService.stopLoading();
+            this.spinner.hide();
         })
     }
 
     public onPhotoUploading() {
-        this.loadingService.startLoading();
+        this.spinner.show('beatUploader');
     }
 
     public onPhotoUploaded(e) {
         this.beatForm.value.imageUrl = e.originalEvent.body.uri;
-        this.loadingService.stopLoading();
+        console.log(this.beatForm.value);
+        this.spinner.hide('beatUploader');
     }
 
     public onBeatUploading() {
-        this.loadingService.startLoading();
+        this.spinner.show('beatUploader');
     }
 
     public onBeatUploaded(e) {
         this.beatForm.value.beatUrl = e.originalEvent.body.uri;
-        this.loadingService.stopLoading();
+        console.log(this.beatForm.value);
+        this.spinner.hide('beatUploader');
     }
 
     ngOnInit() {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 
 }

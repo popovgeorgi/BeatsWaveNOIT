@@ -7,6 +7,7 @@ import { PlaylistConfigService } from '../../../../core/services/playlist-config
 import { RadioConfigService } from '../../../../core/services/radio-config.service';
 import { GenresConfigService } from '../../../../core/services/genres-config.service';
 import { EventsConfigService } from '../../../../core/services/events-config.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     mainEvent: any = {};
     secondaryEvents: any = [];
 
-    constructor(private loadingService: LoadingService,
+    constructor(private spinner: NgxSpinnerService,
                 private artistsConfigService: ArtistsConfigService,
                 private songsConfigService: SongsConfigService,
                 private playlistConfigService: PlaylistConfigService,
@@ -55,7 +56,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 
     // Initialize top charts object for section

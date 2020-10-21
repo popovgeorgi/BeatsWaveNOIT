@@ -7,6 +7,7 @@ import { AlbumsConfigService } from '../../../../../core/services/albums-config.
 import { SongsConfigService } from '../../../../../core/services/songs-config.service';
 import { AudioPlayerService } from '../../../../../core/services/audio-player.service';
 import { Config } from '../../../../../config/config';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-album-details',
@@ -20,10 +21,10 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
-                private loadingService: LoadingService,
-                private albumsConfigService: AlbumsConfigService,
-                private songsConfigService: SongsConfigService,
-                private audioPlayerService: AudioPlayerService) {
+        private spinner: NgxSpinnerService,
+        private albumsConfigService: AlbumsConfigService,
+        private songsConfigService: SongsConfigService,
+        private audioPlayerService: AudioPlayerService) {
         this.routeSubscription = this.route.params.subscribe(param => {
             if (param.id) {
                 this.albumId = parseInt(param.id, 10);
@@ -36,7 +37,7 @@ export class AlbumDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 
     // Initialize static data for display

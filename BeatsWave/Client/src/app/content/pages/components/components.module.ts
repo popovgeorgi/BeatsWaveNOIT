@@ -43,6 +43,7 @@ import { FollowService } from 'src/app/core/services/follow.service';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { LoaderComponent } from '../../layout/loader/loader.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -181,7 +182,8 @@ const routes: Routes = [
         LayoutModule,
         ChartsModule,
         RouterModule.forChild(routes),
-        FileUploadModule
+        FileUploadModule,
+        NgxSpinnerModule
     ],
     providers: [
         {

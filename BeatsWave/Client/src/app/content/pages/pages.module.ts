@@ -15,7 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { CoreModule } from '../../core/core.module';
 import { LandingPageComponent } from './snippets/landing-page/landing-page.component';
 import { DemoPageComponent } from './snippets/demo-page/demo-page.component';
-import { LoadingService } from 'src/app/core/services/loading.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -36,7 +36,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LayoutModule,
         PartialsModule,
         ComponentsModule,
-        CoreModule
+        CoreModule,
+        NgxSpinnerModule
     ],
     providers: [
         {

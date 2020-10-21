@@ -9,7 +9,7 @@
                 <div class="col-xl-4 col-md-5">
                     <div class="card h-auto">
                         <div class="card-body text-center">
-                            <app-loader *ngIf="isPhotoUploading"></app-loader>
+                            <ngx-spinner name="photoUploader" [fullScreen]="false" ></ngx-spinner>
                             <div class="avatar avatar-xl avatar-circle mx-auto mb-4">
                                 <img [src]="userPicture" alt="user">
                             </div>
@@ -25,7 +25,9 @@
                     <div class="card h-auto">
                         <div class="card-body">
                             <form [formGroup]="userProfileForm" (ngSubmit)="editProfile()" class="row">
-                                <app-loader *ngIf="!isPhotoUploading"></app-loader>
+                                <ngx-spinner name="editProfile" [fullScreen]="false">
+                                    <p class="loading">Loading Awesomeness...</p>
+                                </ngx-spinner>
                                 <div class="col-xl-6 form-group">
                                     <label for="firstName" class="form-label">First Name</label>
                                     <input type="text" id="firstName" name="firstName" class="form-control"

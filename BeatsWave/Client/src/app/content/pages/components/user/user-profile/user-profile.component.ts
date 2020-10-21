@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { Profile } from 'src/app/core/models/Profile';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-user-profile',
@@ -14,7 +15,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 
     public userProfileForm: FormGroup;
     public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveProfilePhoto';
-    public isPhotoUploading: boolean = false;
     public userPicture: string;
 
     private profile: Profile;
@@ -22,7 +22,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     constructor(
         private loadingService: LoadingService,
         private fb: FormBuilder,
-        private profileService: ProfileService) {
+        private profileService: ProfileService,
+        private spinner: NgxSpinnerService) {
         this.userProfileForm = this.fb.group({
             'firstName': [''],
             'lastName': [''],
@@ -48,25 +49,22 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        debugger;
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 
     onPhotoUploading() {
-        this.isPhotoUploading = true;
-        this.loadingService.startLoading();
+        this.spinner.show("photoUploader");
     }
 
     onPhotoUploaded(e) {
         this.userPicture = e.originalEvent.body.uri;
-        this.loadingService.stopLoading();
-        this.isPhotoUploading = false;
+        this.spinner.hide("photoUploader");
     }
 
     public editProfile() {
-        this.loadingService.startLoading();
+        this.spinner.show("editProfile");
         this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
-            this.loadingService.stopLoading();
+            this.spinner.hide("editProfile");
         })
     }
 }

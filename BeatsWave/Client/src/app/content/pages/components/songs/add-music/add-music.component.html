@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
                     <form [formGroup]="beatForm" (ngSubmit)="uploadBeat()">
-                        <app-loader></app-loader>
+                        <ngx-spinner name="beatUploader" [fullScreen]="false"></ngx-spinner>
                         <div class="form-row form-group">
                             <label for="songName" class="col-md-4 text-md-right col-form-label">Song Name</label>
                             <div class="col-md-7">
