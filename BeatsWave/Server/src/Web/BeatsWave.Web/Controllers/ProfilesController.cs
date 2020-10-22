@@ -35,8 +35,7 @@
                 model.LastName,
                 model.DisplayName,
                 model.Location,
-                model.Biography,
-                model.MainPhotoUrl);
+                model.Biography);
 
             if (result.Failure)
             {

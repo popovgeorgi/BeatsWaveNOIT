@@ -15,7 +15,7 @@ namespace BeatsWave.Web.Models.Users
 
         public string Name { get; set; }
 
-        public string UserName { get; set; }
+        public string ProfileDisplayName { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

@@ -52,8 +52,7 @@
             string lastName,
             string displayName,
             string location,
-            string biography,
-            string mainPhotoUrl)
+            string biography)
         {
             var user = await this.userRepository
                 .All()
@@ -76,8 +75,7 @@
                 lastName,
                 displayName,
                 location,
-                biography,
-                mainPhotoUrl);
+                biography);
 
             await this.userRepository.SaveChangesAsync();
 
@@ -90,8 +88,7 @@
             string lastName,
             string displayName,
             string location,
-            string biography,
-            string mainPhotoUrl)
+            string biography)
         {
             if (profile.FirstName != firstName)
             {
@@ -106,11 +103,6 @@
             if (profile.LastName != lastName)
             {
                 profile.LastName = lastName;
-            }
-
-            if (profile.MainPhotoUrl != mainPhotoUrl)
-            {
-                profile.MainPhotoUrl = mainPhotoUrl;
             }
 
             if (profile.DisplayName != displayName)

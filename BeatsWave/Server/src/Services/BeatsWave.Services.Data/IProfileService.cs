@@ -15,8 +15,6 @@
             string lastName,
             string displayName,
             string location,
-            string biography,
-            string mainPhotoUrl
-            );
+            string biography);
     }
 }

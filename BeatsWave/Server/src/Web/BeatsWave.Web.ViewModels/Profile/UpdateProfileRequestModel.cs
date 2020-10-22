@@ -12,7 +12,6 @@
         [MaxLength(MaxNameLength)]
         public string LastName { get; set; }
 
-        public string MainPhotoUrl { get; set; }
 
         [MaxLength(MaxDisplayNameLength)]
         public string DisplayName { get; set; }

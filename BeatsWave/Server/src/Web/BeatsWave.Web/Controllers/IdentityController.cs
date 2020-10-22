@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeatsWave.Common;
@@ -71,7 +72,9 @@
                 return this.Unauthorized();
             }
 
-            var token = this.identityService.GenerateJwtToken(user.Id, user.UserName, this.appSettings.Secret);
+            var userRole = await this.userManager.GetRolesAsync(user);
+
+            var token = this.identityService.GenerateJwtToken(user.Id, user.UserName, userRole.FirstOrDefault(), this.appSettings.Secret);
 
             return new LoginResponseModel
             {
