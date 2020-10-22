@@ -4,6 +4,7 @@ import { SongsConfigService } from '../../../../core/services/songs-config.servi
 import { LoadingService } from '../../../../core/services/loading.service';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { Beat } from 'src/app/core/models/Beat';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-music',
@@ -16,7 +17,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
     public gridView = false;
     private takeBeatsCount: number = 8;
 
-    constructor(private loadingService: LoadingService,
+    constructor(private spinner: NgxSpinnerService,
                 private beatService: BeatService) { }
 
     ngOnInit() {
@@ -31,6 +32,6 @@ export class MusicComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 }

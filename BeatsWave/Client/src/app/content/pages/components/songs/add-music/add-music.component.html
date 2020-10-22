@@ -6,11 +6,11 @@
     <div class="row section">
         <div class="col-xl-8 col-md-10 mx-auto">
             <div class="card">
-                <div class="card-header">
-                    <h6 class="card-title mb-0">Add Music</h6>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="beatForm" (ngSubmit)="uploadBeat()">
+                <form [formGroup]="beatForm" (ngSubmit)="uploadBeat()">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0">Add Music</h6>
+                    </div>
+                    <div class="card-body">
                         <ngx-spinner name="beatUploader" [fullScreen]="false"></ngx-spinner>
                         <div class="form-row form-group">
                             <label for="songName" class="col-md-4 text-md-right col-form-label">Song Name</label>
@@ -63,7 +63,7 @@
                         <div class="form-row form-group">
                             <label for="songPrice" class="col-md-4 text-md-right col-form-label">Bpm</label>
                             <div class="col-md-7">
-                                <input type="number" id="songPrice" class="form-control" formControlName="bpm">
+                                <input type="number" id="bpm" class="form-control" formControlName="bpm">
                             </div>
                         </div>
                         <div class="form-row form-group">
@@ -73,17 +73,16 @@
                                     formControlName="description"></textarea>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-7 btn-inline">
-                            <button type="button" class="btn btn-brand btn-air" [disabled]="!beatForm.valid">Save Song</button>
-                            <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-7 btn-inline">
+                                <button type="submit" class="btn btn-brand btn-air" [disabled]="!beatForm.valid">Save Song</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

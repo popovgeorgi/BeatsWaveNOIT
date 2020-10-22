@@ -5,6 +5,7 @@
         <span class="pl-2">{{user.profileDisplayName}}</span>
     </a>
     <ng-template #loginLink>
+        <a class="py-2 text-white mr15" (click)="openRegisterModal()">Sign Up</a>
         <a class="py-2 text-white" (click)="openLoginModal()">Sign In</a>
     </ng-template>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">

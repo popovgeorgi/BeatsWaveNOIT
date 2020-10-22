@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Beat } from 'src/app/core/models/Beat';
 
 @Component({
     selector: 'app-song-list-view',
@@ -8,7 +9,7 @@ export class SongListViewComponent implements OnInit {
 
     @HostBinding('class') classes = 'song-list--item';
 
-    @Input() song: any = {};
+    @Input() song: Beat;
     @Input() songNumber: number;
     @Input() imageBorderRadiusClass = 'card-img--radius-sm';
     @Input() icon = 'la-ellipsis-v';

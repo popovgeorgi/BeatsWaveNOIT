@@ -4,14 +4,17 @@ import { MenuConfigService } from '../../../../core/services/menu-config.service
 import { SearchService } from '../../../../core/services/search.service';
 import { LoginComponent } from '../login/login.component';
 import {SimpleModalService} from 'ngx-simple-modal';
+import { User } from 'src/app/core/models/User';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
     selector: 'app-profile',
-    templateUrl: './profile.component.html'
+    templateUrl: './profile.component.html',
+    styles: ['.mr15 { margin-right: 15px }']
 })
 export class ProfileComponent implements OnInit {
 
-    @Input() user: any = {};
+    @Input() user: User;
 
     userMenu: any = [];
 
@@ -24,13 +27,23 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
     }
 
-    closeSearchResult() {
+    public closeSearchResult() {
         this.searchService.hideSearchResult();
     }
 
-    openLoginModal() {
+    public openLoginModal() {
         this.closeSearchResult();
         const modal = this.simpleModalService.addModal(LoginComponent, {})
+        .subscribe((isConfirmed) => {
+            if (isConfirmed) {
+            } else {
+            }
+        });
+    }
+
+    public openRegisterModal() {
+        this.closeSearchResult();
+        const modal = this.simpleModalService.addModal(RegisterComponent, {})
         .subscribe((isConfirmed) => {
             if (isConfirmed) {
             } else {

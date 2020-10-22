@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { SearchService } from '../../../core/services/search.service';
 import { AudioPlayerService } from '../../../core/services/audio-player.service';
+import { Beat } from 'src/app/core/models/Beat';
 
 @Component({
     selector: 'app-song-horizontal',
@@ -12,7 +13,7 @@ export class SongHorizontalComponent implements OnInit {
 
     @HostBinding('class') classes = 'song-h';
 
-    @Input() song: any = {};
+    @Input() song: Beat;
     @Input() largeImage = false;
     @Input() imageBorderRadiusClass = 'card-img--radius-sm';
     @Input() playlist: any;
@@ -32,7 +33,7 @@ export class SongHorizontalComponent implements OnInit {
             this.router.navigate([this.routeLink]);
         } else {
             // Play selected song
-            this.audioPlayerService.playSong(this.song);
+            this.audioPlayerService.playSong(this.song.beatUrl);
         }
     }
 

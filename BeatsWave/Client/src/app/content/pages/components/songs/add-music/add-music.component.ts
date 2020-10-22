@@ -31,21 +31,12 @@ export class AddMusicComponent implements OnInit, AfterViewInit {
         })
     }
 
-    public uploadBeat() {
-        this.spinner.show('beatUploader');
-        this.beatService.uploadBeat(this.beatForm.value).subscribe(res => {
-            console.log(this.beatForm.value);
-            this.spinner.hide();
-        })
-    }
-
     public onPhotoUploading() {
         this.spinner.show('beatUploader');
     }
 
     public onPhotoUploaded(e) {
-        this.beatForm.value.imageUrl = e.originalEvent.body.uri;
-        console.log(this.beatForm.value);
+        this.beatForm.controls['imageUrl'].setValue(e.originalEvent.body.uri)
         this.spinner.hide('beatUploader');
     }
 
@@ -54,9 +45,15 @@ export class AddMusicComponent implements OnInit, AfterViewInit {
     }
 
     public onBeatUploaded(e) {
-        this.beatForm.value.beatUrl = e.originalEvent.body.uri;
-        console.log(this.beatForm.value);
+        this.beatForm.controls['beatUrl'].setValue(e.originalEvent.body.uri)
         this.spinner.hide('beatUploader');
+    }
+
+    public uploadBeat() {
+        this.spinner.show('beatUploader');
+        this.beatService.uploadBeat(this.beatForm.value).subscribe(res => {
+            this.spinner.hide('beatUploader');
+        })
     }
 
     ngOnInit() {

@@ -28,6 +28,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { RegisterComponent } from './header/register/register.component';
 import { UserService } from 'src/app/core/services/user.service';
 import { LoaderComponent } from './loader/loader.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -67,6 +68,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     imports: [
         CommonModule,
+        NgxSpinnerModule,
         PerfectScrollbarModule,
         SlickCarouselModule,
         PartialsModule,
@@ -76,7 +78,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ],
     entryComponents: [
         LanguageComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     providers: [
         {
