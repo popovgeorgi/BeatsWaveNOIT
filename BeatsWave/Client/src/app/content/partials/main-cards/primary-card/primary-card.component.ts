@@ -34,7 +34,7 @@ export class PrimaryCardComponent implements OnInit {
 
     addInPlayer() {
         debugger;
-        this.audioPlayerService.playSong(this.song.beatUrl);
+        this.audioPlayerService.playSong(this.song);
     }
 
 }

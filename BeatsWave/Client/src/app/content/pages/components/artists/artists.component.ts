@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { Artist } from 'src/app/core/models/Artist';
 import { ArtistService } from 'src/app/core/services/artist.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-artists',
@@ -12,7 +13,7 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
     artists: Array<Artist>;
     record: number;
 
-    constructor(private loadingService: LoadingService,
+    constructor(private spinner: NgxSpinnerService,
                 private artistService: ArtistService) { }
 
     ngOnInit() {
@@ -28,6 +29,6 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 }

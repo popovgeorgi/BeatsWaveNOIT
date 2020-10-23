@@ -47,9 +47,6 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     submitLogin() {
         this.loadingService.startLoading();
         this.formSubmitted = true;
-        if (this.login.invalid) {
-            return false;
-        }
         this.authService.login(this.login.value).subscribe(data => {
             this.authService.saveToken(data['token']);
             this.loadingService.stopLoading();

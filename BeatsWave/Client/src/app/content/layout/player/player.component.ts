@@ -7,6 +7,8 @@ import { LocalStorageService } from '../../../core/services/local-storage.servic
 import { SkinService } from '../../../core/services/skin.service';
 import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
+import { Beat } from 'src/app/core/models/Beat';
+import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
 
 @Component({
     selector: 'app-player',
@@ -14,7 +16,7 @@ import * as Amplitude from 'amplitudejs';
 })
 export class PlayerComponent implements OnInit, OnDestroy {
 
-    song: any = {};
+    song: Beat;
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'open-right-sidebar';
     playerClass = 'player-primary';
@@ -24,10 +26,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 private localStorageService: LocalStorageService,
                 private songsConfigService: SongsConfigService,
-                private skinService: SkinService) { }
+                private skinService: SkinService,
+                private audioPlayerService: AudioPlayerService) { }
 
     ngOnInit() {
-        // this.song = this.songsConfigService.defaultSong;
+        this.audioPlayerService.songPlayed.subscribe(beat => {
+            this.song = beat;
+        })
+        // this.song = this.songsConfigService.defaultSong;\
         Amplitude.init({
             songs: [ this.song ]
         });

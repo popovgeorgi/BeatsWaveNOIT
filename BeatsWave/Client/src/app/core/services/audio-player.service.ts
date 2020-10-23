@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
+import { EventEmitter } from 'protractor';
+import { BehaviorSubject } from 'rxjs';
+import { Beat } from '../models/Beat';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AudioPlayerService {
 
+    private beat: Beat = {} as Beat;
+    private songPlayedSource = new BehaviorSubject<Beat>(this.beat);
+    public songPlayed = this.songPlayedSource.asObservable();
+
     constructor() { }
 
-    playSong(song) {
+    playSong(song: Beat) {
         Amplitude.removeSong(0);
         Amplitude.playNow(song);
+        this.songPlayedSource.next(song);
     }
 
     playlistKayName(playlistName) {
