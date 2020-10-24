@@ -6,6 +6,7 @@ import { LoginComponent } from '../login/login.component';
 import {SimpleModalService} from 'ngx-simple-modal';
 import { User } from 'src/app/core/models/User';
 import { RegisterComponent } from '../register/register.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-profile',
@@ -20,7 +21,8 @@ export class ProfileComponent implements OnInit {
 
     constructor(private searchService: SearchService,
                 private menuConfigService: MenuConfigService,
-                private simpleModalService: SimpleModalService) {
+                private simpleModalService: SimpleModalService,
+                private authService: AuthService) {
         this.userMenu = this.menuConfigService.userMenuItems;
     }
 
@@ -51,4 +53,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    public Logout() {
+        this.authService.deleteToken();
+    }
 }
