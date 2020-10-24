@@ -24,6 +24,7 @@
     "chart.js": "^2.9.2",
     "ionicons": "^4.6.3",
     "jquery": "^3.4.1",
+    "ng-snotify": "^9.0.1",
     "ng2-charts": "^2.3.0",
     "ngx-perfect-scrollbar": "^8.0.0",
     "ngx-simple-modal": "^1.4.14",

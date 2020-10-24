@@ -7,6 +7,7 @@ import { Config } from '../../../../config/config';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/core/services/loading.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         private localStorageService: LocalStorageService,
         private authService: AuthService,
         private router: Router,
-        private loadingService: LoadingService) {
+        private loadingService: LoadingService,
+        private snotifyService: SnotifyService) {
         super();
     }
 
@@ -50,8 +52,10 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         this.authService.login(this.login.value).subscribe(data => {
             this.authService.saveToken(data['token']);
             this.loadingService.stopLoading();
-            this.router.navigate(['/home']);
-        })
+            this.snotifyService.success('You are successfully logged in!');
+        }, error => {
+            this.snotifyService.error("You asda");
+        });
         
         this.close();
     }

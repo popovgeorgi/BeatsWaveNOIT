@@ -10,6 +10,8 @@ import { MenuConfigService } from './core/services/menu-config.service';
 import { SongsConfigService } from './core/services/songs-config.service';
 import { TokenInterceptorService } from './core/services/token-interceptor.service';
 import { NgxSpinnerModule, NgxSpinnerService } from '../../node_modules/ngx-spinner';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -21,17 +23,25 @@ import { NgxSpinnerModule, NgxSpinnerService } from '../../node_modules/ngx-spin
         LayoutModule,
         HttpClientModule,
         NgxSpinnerModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        SnotifyModule
     ],
     providers: [
         NgxSpinnerService,
         MenuConfigService,
         SongsConfigService,
+        { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+        SnotifyService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptorService,
             multi: true
-        }
+        },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: ErrorInterceptorService,
+          multi: true
+      }
     ],
     bootstrap: [AppComponent]
 })

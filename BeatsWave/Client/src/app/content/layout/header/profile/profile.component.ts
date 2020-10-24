@@ -7,6 +7,7 @@ import {SimpleModalService} from 'ngx-simple-modal';
 import { User } from 'src/app/core/models/User';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-profile',
@@ -22,7 +23,8 @@ export class ProfileComponent implements OnInit {
     constructor(private searchService: SearchService,
                 private menuConfigService: MenuConfigService,
                 private simpleModalService: SimpleModalService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private snotifyService: SnotifyService) {
         this.userMenu = this.menuConfigService.userMenuItems;
     }
 
@@ -55,5 +57,6 @@ export class ProfileComponent implements OnInit {
 
     public Logout() {
         this.authService.deleteToken();
+        this.snotifyService.success('You successfully logged out!');
     }
 }
