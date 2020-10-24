@@ -41,7 +41,14 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IEnumerable<BeatListingServiceModel>> All(int take)
             => await this.beatService.AllAsync<BeatListingServiceModel>(take);
+
+        [HttpGet]
+        [Route("{id}")]
+        [AllowAnonymous]
+        public async Task<BeatDetailsServiceModel> Details(int id)
+            => await this.beatService.DetailsAsync<BeatDetailsServiceModel>(id);
     }
 }

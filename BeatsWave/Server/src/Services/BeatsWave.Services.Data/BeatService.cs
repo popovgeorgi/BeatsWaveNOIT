@@ -20,17 +20,13 @@
         }
 
         public async Task<IEnumerable<T>> AllAsync<T>(int? take = null, int skip = 0)
-        {
-            var beats = await this.beatsRepository
+            => await this.beatsRepository
                 .All()
                 .OrderByDescending(b => b.CreatedOn)
                 .Skip(skip)
                 .Take((int)take)
                 .To<T>()
                 .ToListAsync();
-
-            return beats;
-        }
 
         public async Task<int> CreateAsync(string name, string beatUrl, string imageUrl, int price, string genre, int? bpm, string description, string producerId)
         {
@@ -52,5 +48,12 @@
 
             return beat.Id;
         }
+
+        public async Task<T> DetailsAsync<T>(int id)
+            => await this.beatsRepository
+                .All()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
     }
 }
