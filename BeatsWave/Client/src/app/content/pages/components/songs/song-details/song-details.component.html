@@ -5,17 +5,17 @@
 <div class="main-container">
     <div class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
-            <img [src]="songDetails.cover_url" alt="{{songDetails.name}}" class="card-img--radius-lg">
+            <img [src]="beatDetails.imageUrl" alt="{{beatDetails.name}}" class="card-img--radius-lg">
         </div>
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
-                    <h5>{{songDetails.name}}</h5>
-                    <p>{{songDetails.artist}}</p>
-                    <div class="text-warning stars">
+                    <h5>{{beatDetails.name}}</h5>
+                    <p>{{beatDetails.producerUserName}}</p>
+                    <!-- <div class="text-warning stars">
                         <i class="la {{rating}}" *ngFor="let rating of songDetails.ratingsView"></i>
                     </div>
-                    <span class="badge badge-pill badge-warning mt-3" *ngIf="songDetails.premium">Premium</span>
+                    <span class="badge badge-pill badge-warning mt-3" *ngIf="songDetails.premium">Premium</span> -->
                     <div class="mt-4">
                         <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
                                 (click)="addInPlayer()">Play</button>
@@ -51,18 +51,12 @@
         <div class="tab-content" id="songDetailsContent">
             <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item pl-0 border-0"
-                        *ngIf="songDetails.composer">Compose by: <span class="font-weight-bold">{{songDetails.composer}}</span></li>
-                    <li class="list-group-item pl-0 border-0"
-                        *ngIf="songDetails.lyricist">Lyrics by: <span class="font-weight-bold">{{songDetails.lyricist}}</span></li>
-                    <li class="list-group-item pl-0 border-0"
-                        *ngIf="songDetails.director">Music Director: <span class="font-weight-bold">{{songDetails.director}}</span></li>
-                    <li class="list-group-item pl-0 border-0"
-                        *ngIf="songDetails.downloads">Downloads: <span class="font-weight-bold">{{songDetails.downloads}}</span></li>
+                    <li class="list-group-item pl-0 border-0">Compose by: <span class="font-weight-bold">{{beatDetails.producerUserName}}</span></li>
+                    <!-- <li class="list-group-item pl-0 border-0" *ngIf="songDetails.downloads">Downloads: <span class="font-weight-bold">{{songDetails.downloads}}</span></li> -->
                 </ul>
             </div>
-            <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab"
-                 [innerHTML]="songDetails.lyrics"></div>
+            <!-- <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab"
+                 [innerHTML]="songDetails.lyrics"></div> -->
         </div>
         <!-- End | Tab Content -->
     </div>

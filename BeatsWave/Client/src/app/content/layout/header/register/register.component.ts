@@ -36,9 +36,9 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
       this.loader.hide('register');
       const modal = this.simpleModalService.addModal(LoginComponent, {})
         .subscribe((isConfirmed) => {
-            if (isConfirmed) {
-            } else {
-            }
+          if (isConfirmed) {
+          } else {
+          }
         });
     })
   }

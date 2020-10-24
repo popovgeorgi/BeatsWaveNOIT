@@ -25,6 +25,7 @@ export class SongHorizontalComponent implements OnInit {
                 private audioPlayerService: AudioPlayerService) { }
 
     @HostListener('click') onClick() {
+      debugger;
         this.searchService.hideSearchResult();
         if (this.playlist) {
             // Add playlist in audio play and play selected song
@@ -33,7 +34,7 @@ export class SongHorizontalComponent implements OnInit {
             this.router.navigate([this.routeLink]);
         } else {
             // Play selected song
-            this.audioPlayerService.playSong(this.song.beatUrl);
+            this.audioPlayerService.playSong(this.song);
         }
     }
 
