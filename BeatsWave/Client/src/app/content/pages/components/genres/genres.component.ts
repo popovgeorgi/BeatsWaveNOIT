@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { GenresConfigService } from '../../../../core/services/genres-config.service';
 import { SongsConfigService } from '../../../../core/services/songs-config.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-genres',
@@ -12,7 +13,7 @@ export class GenresComponent implements OnInit, AfterViewInit {
 
     genres: any = [];
 
-    constructor(private loadingService: LoadingService,
+    constructor(private spinner: NgxSpinnerService,
                 private songsConfigService: SongsConfigService,
                 private genresConfigService: GenresConfigService) { }
 
@@ -21,7 +22,7 @@ export class GenresComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 
     // Initialize music genres

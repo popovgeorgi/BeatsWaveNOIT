@@ -75,6 +75,11 @@ export class MenuConfig {
                         page: '/profile'
                     },
                     {
+                      title: 'My Beats',
+                      icon: 'ion-md-contact',
+                      page: '/profile'
+                    },
+                    {
                         title: 'Your Plan',
                         icon: 'ion-md-radio-button-off',
                         page: '/plan'

@@ -7,34 +7,39 @@ export class GenresConfig {
             items: [
                 {
                     id: 1,
-                    name: 'Remix Songs',
+                    name: 'Hip-Hop',
                     cover_url: './assets/images/background/horizontal/1.jpg'
                 },
                 {
                     id: 2,
-                    name: 'Rock Songs',
+                    name: 'Pop',
                     cover_url: './assets/images/background/horizontal/2.jpg'
                 },
                 {
                     id: 3,
-                    name: 'Sufi Songs',
+                    name: 'R&B',
                     cover_url: './assets/images/background/horizontal/3.jpg'
                 },
                 {
                     id: 4,
-                    name: 'Romantic Songs',
+                    name: 'Rock',
                     cover_url: './assets/images/background/horizontal/4.jpg'
                 },
                 {
                     id: 5,
-                    name: 'Sports Songs',
+                    name: 'Electronic',
                     cover_url: './assets/images/background/horizontal/5.jpg'
                 },
                 {
                     id: 6,
-                    name: 'Old Songs',
+                    name: 'Jazz',
                     cover_url: './assets/images/background/horizontal/6.jpg'
-                }
+                },
+                {
+                  id: 7,
+                  name: 'Reggaeton',
+                  cover_url: './assets/images/background/horizontal/7.jpg'
+              }
             ]
         };
     }
