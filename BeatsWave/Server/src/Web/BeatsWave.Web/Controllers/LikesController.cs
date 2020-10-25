@@ -18,14 +18,12 @@
         }
 
         [HttpPost]
+        public async Task<ActionResult<bool>> Beat(LikeRequestModel model)
+            => await this.likeService.VoteAsync(model.BeatId, this.currentUser.GetId());
 
-        public async Task<ActionResult<LikeResponseModel>> Beat(LikeRequestModel model)
-        {
-            var userId = this.currentUser.GetId();
-
-            var isLiked = await this.likeService.VoteAsync(model.BeatId, userId);
-
-            return new LikeResponseModel { IsLiked = isLiked };
-        }
+        [HttpGet]
+        [Route("{beatId}")]
+        public async Task<bool> IsALiker(int beatId)
+            => await this.likeService.DoesUserLikeAsync(beatId, this.currentUser.GetId());
     }
 }

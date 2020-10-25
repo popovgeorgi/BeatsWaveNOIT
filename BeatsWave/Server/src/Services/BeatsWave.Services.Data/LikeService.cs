@@ -21,6 +21,10 @@
             this.beatRepository = beatRepository;
         }
 
+        public async Task<bool> DoesUserLikeAsync(int beatId, string userId)
+            => await this.likeRepository.All()
+                .AnyAsync(l => l.BeatId == beatId && l.UserId == userId);
+
         public async Task<bool> VoteAsync(int beatId, string userId)
         {
             bool isLiked = true;

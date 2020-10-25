@@ -5,5 +5,7 @@
     public interface ILikeService
     {
         Task<bool> VoteAsync(int beatId, string userId);
+
+        Task<bool> DoesUserLikeAsync(int beatId, string userId);
     }
 }
