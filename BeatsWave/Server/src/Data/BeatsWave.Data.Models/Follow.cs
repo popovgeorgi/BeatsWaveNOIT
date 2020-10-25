@@ -9,11 +9,11 @@
         [Required]
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
         public string FollowerId { get; set; }
 
-        public ApplicationUser Follower { get; set; }
+        public virtual ApplicationUser Follower { get; set; }
     }
 }

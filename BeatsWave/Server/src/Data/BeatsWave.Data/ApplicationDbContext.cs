@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -29,6 +30,8 @@
         public DbSet<Follow> Follows { get; set; }
 
         public DbSet<Beat> Beats { get; set; }
+
+        public DbSet<Like> Likes { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -77,6 +80,20 @@
                 .HasOne(p => p.Producer)
                 .WithMany(b => b.Beats)
                 .HasForeignKey(p => p.ProducerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Like>()
+                .HasOne(l => l.Beat)
+                .WithMany(b => b.Likes)
+                .HasForeignKey(l => l.BeatId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Like>()
+                .HasOne(l => l.User)
+                .WithMany(u => u.Likes)
+                .HasForeignKey(l => l.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Needed for Identity models configuration

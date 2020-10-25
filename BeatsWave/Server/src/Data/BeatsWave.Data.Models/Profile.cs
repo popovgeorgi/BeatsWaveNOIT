@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+
     using BeatsWave.Data.Common.Models;
 
     using static Validation.User;
@@ -17,7 +18,7 @@
         public string UserId { get; set; }
 
         [NotMapped]
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [MaxLength(MaxNameLength)]
         public string FirstName { get; set; }

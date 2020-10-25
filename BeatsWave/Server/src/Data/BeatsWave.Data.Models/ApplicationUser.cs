@@ -34,6 +34,8 @@ namespace BeatsWave.Data.Models
 
         public virtual ICollection<Beat> Beats { get; }
 
+        public virtual ICollection<Like> Likes { get; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
