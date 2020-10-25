@@ -52,7 +52,6 @@
 
         [HttpGet]
         [Route("{id}")]
-
         public async Task<bool> IsAFollower(string id)
             => await this.followService.IsAFollower(this.currentUser.GetId(), id);
     }
