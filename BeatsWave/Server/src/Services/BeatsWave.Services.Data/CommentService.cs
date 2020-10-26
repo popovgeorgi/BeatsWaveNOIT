@@ -1,10 +1,14 @@
 ﻿namespace BeatsWave.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
+    using BeatsWave.Services.Mapping;
+    using BeatsWave.Web.Models.Comments;
     using Microsoft.EntityFrameworkCore;
 
     public class CommentService : ICommentService
@@ -14,6 +18,33 @@
         public CommentService(IDeletableEntityRepository<BeatComment> beatCommentsRepository)
         {
             this.beatCommentsRepository = beatCommentsRepository;
+        }
+
+        public async Task<IEnumerable<BeatCommentsServiceModel>> CommentsForBeat(int beatId)
+        {
+            return await this.beatCommentsRepository
+                .All()
+                .Where(x => x.BeatId == beatId && x.ParentId == null)
+                .Select(x => new BeatCommentsServiceModel
+                {
+                    UserUserName = x.User.UserName,
+                    UserId = x.UserId,
+                    ImageUrl = x.User.Profile.MainPhotoUrl,
+                    Content = x.Content,
+                    Id = x.Id,
+                    Children = this.beatCommentsRepository.All()
+                        .Where(c => c.ParentId == x.Id)
+                        .Select(c => new BeatCommentChildrenResponseModel
+                        {
+                            Id = c.Id,
+                            Content = c.Content,
+                            ImageUrl = c.User.Profile.MainPhotoUrl,
+                            UserUserName = c.User.UserName,
+                            UserId = c.UserId,
+                        })
+                        .ToList(),
+                })
+                .ToListAsync();
         }
 
         public async Task Create(int beatId, string userId, string content, int? parentId = null)
@@ -30,11 +61,11 @@
             await this.beatCommentsRepository.SaveChangesAsync();
         }
 
-        public async Task<bool> IsInBeatId(int commentId, int beatId)
+        public async Task<bool> IsInPostId(int commentId, int beatId)
         {
-            var commentPostId = await this.beatCommentsRepository.All().Where(x => x.Id == commentId)
+            var commentBeatId = await this.beatCommentsRepository.All().Where(x => x.Id == commentId)
                 .Select(x => x.BeatId).FirstOrDefaultAsync();
-            return commentPostId == beatId;
+            return commentBeatId == beatId;
         }
     }
 }
