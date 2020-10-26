@@ -11,6 +11,9 @@ import { Config } from '../../../../../config/config';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Artist } from 'src/app/core/models/Artist';
 import { FollowService } from 'src/app/core/services/follow.service';
+import { SnotifyService } from 'ng-snotify';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-artist-details',
@@ -21,17 +24,19 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
     public followers: number;
     public isFollowing: boolean;
     public artistDetails: Artist;
+    public artistBeats: number;
     private artistId: number;
 
     routeSubscription: Subscription;
 
     constructor(private route: ActivatedRoute,
-        private loadingService: LoadingService,
+        private spinner: NgxSpinnerService,
         private artistsConfigService: ArtistsConfigService,
         private songsConfigService: SongsConfigService,
         private audioPlayerService: AudioPlayerService,
         private artistService: ArtistService,
-        private followService: FollowService) {
+        private followService: FollowService,
+        private snotifyService: SnotifyService) {
         this.fetchData();
     }
 
@@ -43,6 +48,7 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
         }), mergeMap(id => this.artistService.getArtist(id))).subscribe(res => {
             this.artistDetails = res;
             this.followers = this.artistDetails.followersCount;
+            this.artistBeats = this.artistDetails.beats.length;
         })
     }
 
@@ -57,18 +63,20 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
             this.followService.follow(this.artistId).subscribe(res => {
                 this.isFollowing = true;
                 this.followers = this.followers + 1;
+                this.snotifyService.info('Followed');
             });
         }
         else {
             this.followService.unFollow(this.artistId).subscribe(res => {
                 this.isFollowing = false;
                 this.followers = this.followers - 1;
+                this.snotifyService.info('Unfollowed');
             })
         }
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
     }
 
     // getArtistDetails() {

@@ -57,7 +57,7 @@
             <div class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header">
-                    <span class="title">{{artistDetails.record}} Results</span>
+                    <span class="title">{{artistBeats}} Results</span>
                     <select class="select ml-auto" name="sort-1" id="sort-1">
                         <option value="0">Popular</option>
                         <option value="1">A-Z</option>
@@ -66,7 +66,7 @@
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
-                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.songs; let i = index">
+                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.beats; let i = index">
                         <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
             <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header">
-                    <span class="title">{{artistDetails.record}} Results</span>
+                    <span class="title">{{artistBeats}} Results</span>
                     <select class="select ml-auto" name="sort-2" id="sort-2">
                         <option value="0">Popular</option>
                         <option value="1">A-Z</option>
@@ -83,13 +83,13 @@
                 </div>
                 <!-- End | Container header -->
                 <div class="row custom-card-list">
-                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.songs; let i = index">
+                    <div class="col-xl-6 col-lg-12" *ngFor="let song of artistDetails.beats; let i = index">
                         <app-song-list-view [songNumber]="i+1" [song]="song" [icon]="'la-ellipsis-h'"></app-song-list-view>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
-                <div class="bio-content" [innerHTML]="artistDetails.bio"></div>
+                <div class="bio-content" [innerHTML]="artistDetails.profileBiography"></div>
             </div>
         </div>
         <!-- Begin | Tab Content -->

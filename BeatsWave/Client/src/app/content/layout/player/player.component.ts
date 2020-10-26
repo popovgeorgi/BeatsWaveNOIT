@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
@@ -9,6 +9,7 @@ import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
 import { Beat } from 'src/app/core/models/Beat';
 import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
+import { EventEmitter } from 'protractor';
 
 @Component({
     selector: 'app-player',
@@ -31,12 +32,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
                 private audioPlayerService: AudioPlayerService) { }
 
     ngOnInit() {
-        this.songSubscribtion = this.audioPlayerService.songPlayed.subscribe(beat => {
-            this.song = beat;
-        })
-        // this.song = this.songsConfigService.defaultSong;\
+        this.song = this.songsConfigService.defaultSong;
+
         Amplitude.init({
-            songs: [ this.song ]
+          songs: [ this.song ],
+          debug: true
         });
 
         const themeSkin = this.localStorageService.getThemeSkin();
