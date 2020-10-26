@@ -41,5 +41,7 @@
         public virtual ApplicationUser Producer { get; set; }
 
         public virtual ICollection<Like> Likes { get; }
+
+        public virtual ICollection<BeatComment> Comments { get; set; }
     }
 }

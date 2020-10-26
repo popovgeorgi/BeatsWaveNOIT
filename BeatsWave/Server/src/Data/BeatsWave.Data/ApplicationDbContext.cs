@@ -33,6 +33,8 @@
 
         public DbSet<Like> Likes { get; set; }
 
+        public DbSet<BeatComment> BeatComments { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -94,6 +96,20 @@
                 .HasOne(l => l.User)
                 .WithMany(u => u.Likes)
                 .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<BeatComment>()
+                .HasOne(c => c.Beat)
+                .WithMany(b => b.Comments)
+                .HasForeignKey(c => c.BeatId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<BeatComment>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Needed for Identity models configuration

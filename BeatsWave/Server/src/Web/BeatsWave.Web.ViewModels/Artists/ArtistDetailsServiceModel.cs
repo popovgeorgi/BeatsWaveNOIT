@@ -1,6 +1,7 @@
 ﻿namespace BeatsWave.Web.Models.Artists
 {
-    using AutoMapper;
+    using System.Collections.Generic;
+
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
 
@@ -15,5 +16,9 @@
         public string ProfileMainPhotoUrl { get; set; }
 
         public int FollowersCount { get; set; }
+
+        public string ProfileBiography { get; set; }
+
+        public virtual ICollection<ArtistBeatResponseModel> Beats { get; set; }
     }
 }
