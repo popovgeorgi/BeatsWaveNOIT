@@ -22,7 +22,7 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateCommentRequestModel model)
+        public async Task<ActionResult<BeatCommentResponseModel>> Create(CreateCommentRequestModel model)
         {
             var parentId =
                 model.ParentId == 0 ?
@@ -37,9 +37,7 @@
                 }
             }
 
-            await this.commentService.Create(model.BeatId, this.currentUser.GetId(), model.Content, parentId);
-
-            return this.Ok();
+            return await this.commentService.CreateAsync<BeatCommentResponseModel>(model.BeatId, this.currentUser.GetId(), model.Content, parentId);
         }
 
         [HttpGet]

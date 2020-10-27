@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using BeatsWave.Data.Common.Repositories;
@@ -47,7 +46,7 @@
                 .ToListAsync();
         }
 
-        public async Task Create(int beatId, string userId, string content, int? parentId = null)
+        public async Task<T> CreateAsync<T>(int beatId, string userId, string content, int? parentId = null)
         {
             var comment = new BeatComment
             {
@@ -59,6 +58,12 @@
 
             await this.beatCommentsRepository.AddAsync(comment);
             await this.beatCommentsRepository.SaveChangesAsync();
+
+            return await this.beatCommentsRepository
+                .All()
+                .Where(x => x.Content == content && x.BeatId == beatId && x.UserId == userId)
+                .To<T>()
+                .FirstOrDefaultAsync();
         }
 
         public async Task<bool> IsInPostId(int commentId, int beatId)
