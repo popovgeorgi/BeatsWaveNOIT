@@ -1,5 +1,6 @@
 <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
 <div class="section">
+  <ngx-spinner name="comment" [fullScreen]="false"></ngx-spinner>
     <div class="mb-4">
         <!-- <div class="d-flex mb-3">
             <span>Rate:</span>
@@ -12,9 +13,6 @@
           </div>
         </div> -->
         <form [formGroup]="commentForm" (ngSubmit)="onComment()">
-          <ngx-spinner name="comment" [fullScreen]="false">
-            <p class="loading">Loading Awesomeness...</p>
-          </ngx-spinner>
           <textarea formControlName="content" name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
           <div class="text-right mt-2">
               <button type="submit" class="btn btn-info" [disabled]="!commentForm.valid">Comment</button>

@@ -40,7 +40,7 @@ export class CommentComponent implements OnInit {
       this.spinner.show('comment');
       this.commentForm.value.beatId = this.beatId;
       this.commentService.comment(this.commentForm.value).subscribe(res => {
-        //we have to push the new comment into the array
+        this.comments.push(res)
         this.snotifyService.info('Successfully comented');
         this.spinner.hide('comment');
       })
