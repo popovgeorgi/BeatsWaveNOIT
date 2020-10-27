@@ -18,7 +18,7 @@ import { SnotifyService } from 'ng-snotify';
 export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   public isLiked: boolean;
   public beatDetails: Beat;
-  private beatId: number;
+  public beatId: number;
 
   routeSubscription: Subscription;
 

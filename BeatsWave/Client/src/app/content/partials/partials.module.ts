@@ -14,6 +14,8 @@ import { ImageCardComponent } from './image-card/image-card.component';
 import { CommentComponent } from './comment/comment.component';
 import { ThemeSettingsComponent } from './theme-settings/theme-settings.component';
 import { CountdownComponent } from './countdown/countdown.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     declarations: [
@@ -44,7 +46,9 @@ import { CountdownComponent } from './countdown/countdown.component';
     ],
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        ReactiveFormsModule,
+        NgxSpinnerModule
     ]
 })
 export class PartialsModule { }

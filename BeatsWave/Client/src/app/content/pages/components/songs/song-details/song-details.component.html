@@ -43,7 +43,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="lyrics-tab" data-toggle="tab" href="#lyrics" role="tab"
-                   aria-controls="lyrics" aria-selected="false">Lyrics</a>
+                   aria-controls="lyrics" aria-selected="false">Comments</a>
             </li>
         </ul>
         <!-- End | Line Tabs -->
@@ -58,13 +58,14 @@
                     <!-- <li class="list-group-item pl-0 border-0" *ngIf="songDetails.downloads">Downloads: <span class="font-weight-bold">{{songDetails.downloads}}</span></li> -->
                 </ul>
             </div>
-            <!-- <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab"
-                 [innerHTML]="songDetails.lyrics"></div> -->
+            <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab">
+              <app-comment [beatId]="this.beatDetails.id"></app-comment>
+            </div>
         </div>
         <!-- End | Tab Content -->
     </div>
     <!-- End | Section -->
 
-    <app-comment></app-comment>
+
 </div>
 <!-- End | Main Container -->
