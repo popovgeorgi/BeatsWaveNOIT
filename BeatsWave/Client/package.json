@@ -33,7 +33,9 @@
     "primeicons": "^4.0.0",
     "primeng": "^8.1.1",
     "rxjs": "~6.4.0",
+    "sharp-collections": "^1.5.1",
     "slick-carousel": "^1.8.1",
+    "ts-generic-collections-linq": "0.0.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

@@ -1,5 +1,5 @@
 export interface Comment {
-  id: string,
+  id: number,
   userId: string,
   userUserName: string,
   imageUrl: string,

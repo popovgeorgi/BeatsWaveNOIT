@@ -30,7 +30,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         ImageCardComponent,
         CommentComponent,
         ThemeSettingsComponent,
-        CountdownComponent
+        CountdownComponent,
     ],
     exports: [
         PrimaryCardComponent,
@@ -48,7 +48,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         CommonModule,
         RouterModule,
         ReactiveFormsModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
     ]
 })
 export class PartialsModule { }

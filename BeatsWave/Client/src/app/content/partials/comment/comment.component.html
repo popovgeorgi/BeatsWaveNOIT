@@ -2,16 +2,6 @@
 <div class="section">
   <ngx-spinner name="comment" [fullScreen]="false"></ngx-spinner>
     <div class="mb-4">
-        <!-- <div class="d-flex mb-3">
-            <span>Rate:</span>
-            <div class="text-warning stars pl-2">
-                <i class="la la-star"></i>
-                <i class="la la-star"></i>
-                <i class="la la-star"></i>
-                <i class="la la-star"></i>
-                <i class="la la-star"></i>
-          </div>
-        </div> -->
         <form [formGroup]="commentForm" (ngSubmit)="onComment()">
           <textarea formControlName="content" name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
           <div class="text-right mt-2">
@@ -27,7 +17,15 @@
         <div class="pl-3 flex-grow-1 flex-basis-0">
             <span class="d-block font-weight-bold mb-1">{{comment.userUserName}}</span>
             <p class="mb-2">{{comment.content}}</p>
-            <a href="#" class="btn p-0"><i class="la la-reply"></i> Reply</a>
+            <a (click)="onOpenReply(comment.id)" class="btn p-0"><i class="la la-reply"></i> Reply</a>
+            <div *ngIf="replyClicked && parentId == comment.id">
+              <form [formGroup]="replyForm" (ngSubmit)="onReply()">
+                <textarea style="margin-top: 15px;" formControlName="content" name="comment" id={{comment.id}} cols="30" rows="5" class="form-control"></textarea>
+                <div class="text-right mt-2">
+                  <button type="submit" class="btn btn-info" [disabled]="!replyForm.valid">Reply</button>
+                </div>
+              </form>
+            </div>
         </div>
       </div>
       <div *ngIf="comment.children != []">
