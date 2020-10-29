@@ -4,8 +4,6 @@ import { SnotifyService } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Comment } from 'src/app/core/models/Comment';
 import { CommentService } from 'src/app/core/services/comment.service';
-import { Enumerable } from 'sharp-collections';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-comment',
@@ -71,10 +69,6 @@ export class CommentComponent implements OnInit {
       this.replyForm.value.beatId = this.beatId;
       this.replyForm.value.parentId = this.parentId;
       this.commentService.comment(this.replyForm.value).subscribe(res => {
-        const enumerable = Enumerable.from(this.comments);
-        const children = enumerable.where(x => x.id == this.replyForm.value.parentId);
-        children.append(res)
-        this.comments.slice();
         this.snotifyService.info('Successfully replied');
       })
   }

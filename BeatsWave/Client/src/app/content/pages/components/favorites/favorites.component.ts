@@ -1,4 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Beat } from 'src/app/core/models/Beat';
+import { UserService } from 'src/app/core/services/user.service';
 
 import { LoadingService } from '../../../../core/services/loading.service';
 import { SongsConfigService } from '../../../../core/services/songs-config.service';
@@ -9,26 +12,27 @@ import { SongsConfigService } from '../../../../core/services/songs-config.servi
 })
 export class FavoritesComponent implements OnInit, AfterViewInit {
 
-    favoriteSongs: any = {};
+    favoriteSongs: Beat[];
     songs: any = {};
     gridView = false;
 
-    constructor(private loadingService: LoadingService,
-                private songsConfigService: SongsConfigService) { }
+    constructor(private spinner: NgxSpinnerService,
+                private songsConfigService: SongsConfigService,
+                private userService: UserService) { }
 
     ngOnInit() {
         this.initSongs();
-        this.initFavoriteSongs();
+        this.fetchData();
+    }
+
+    private fetchData() {
+      this.userService.getFavourites().subscribe(res => {
+        this.favoriteSongs = res;
+      })
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
-    }
-
-    // Initialize favorite songs
-    initFavoriteSongs() {
-        this.favoriteSongs.list = this.songsConfigService.songsList;
-        this.favoriteSongs.record = 5124;
+        this.spinner.hide('primary');
     }
 
     // Initialize song object for section
