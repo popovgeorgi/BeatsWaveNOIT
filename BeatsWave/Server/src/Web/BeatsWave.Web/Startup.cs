@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web
 {
+    using System.Reflection;
 
     using BeatsWave.Data;
     using BeatsWave.Data.Common;
@@ -7,11 +8,8 @@
     using BeatsWave.Data.Models;
     using BeatsWave.Data.Repositories;
     using BeatsWave.Data.Seeding;
-    using BeatsWave.Services.Data;
     using BeatsWave.Services.Mapping;
-    using BeatsWave.Services.Messaging;
     using BeatsWave.Web.Infrastructure.Extensions;
-    using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -20,7 +18,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using System.Reflection;
 
     public class Startup
     {
@@ -57,17 +54,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<IIdentityService, IdentityService>();
-            services.AddTransient<IProfileService, ProfileService>();
-            services.AddTransient<ICurrentUserService, CurrentUserService>();
-            services.AddTransient<IPictureService, PictureService>();
-            services.AddTransient<IArtistService, ArtistService>();
-            services.AddTransient<IFollowService, FollowService>();
-            services.AddTransient<IBeatService, BeatService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ILikeService, LikeService>();
-            services.AddTransient<ICommentService, CommentService>();
+            services.AddApplicationServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20201016084238_CreateBeatsTable.Designer.cs" />
     <Compile Remove="Migrations\20201029132244_AddEventTable.cs" />
     <Compile Remove="Migrations\20201029132244_AddEventTable.Designer.cs" />
+    <Compile Remove="Migrations\20201029132525_AddEventsTable.cs" />
+    <Compile Remove="Migrations\20201029132525_AddEventsTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

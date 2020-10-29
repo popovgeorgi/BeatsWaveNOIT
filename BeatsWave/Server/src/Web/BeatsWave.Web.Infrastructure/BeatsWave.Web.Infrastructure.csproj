@@ -27,6 +27,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BeatsWave.Data\BeatsWave.Data.csproj" />
+    <ProjectReference Include="..\..\Services\BeatsWave.Services.Data\BeatsWave.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\BeatsWave.Services.Messaging\BeatsWave.Services.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

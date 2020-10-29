@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeatsWave.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201029132525_AddEventsTable")]
+    [Migration("20201029133803_AddEventsTable")]
     partial class AddEventsTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -252,6 +252,9 @@ namespace BeatsWave.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ConductDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");

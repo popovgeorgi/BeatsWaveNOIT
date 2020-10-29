@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using BeatsWave.Data.Common.Models;
@@ -25,6 +26,9 @@
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        [Required]
+        public DateTime ConductDate { get; set; }
 
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }

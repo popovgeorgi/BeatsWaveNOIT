@@ -1,31 +1,44 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using BeatsWave.Services.Data;
+    using BeatsWave.Web.Infrastructure.Services;
+    using BeatsWave.Web.Models.Events;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     public class EventsController : ApiController
     {
-        //[HttpPost]
-        //[Authorize(Roles = "Manager")]
-        //public async Task<IActionResult> Create(CreateEventRequestModel model)
-        //{
-        //    var producerId = this.currentUser.GetId();
+        private readonly ICurrentUserService currentUser;
+        private readonly IEventService eventService;
 
-        //    var id = await this.beatService.CreateAsync(
-        //        model.Name,
-        //        model.BeatUrl,
-        //        model.ImageUrl,
-        //        model.Price,
-        //        model.Genre,
-        //        model.Bpm,
-        //        model.Description,
-        //        producerId);
+        public EventsController(ICurrentUserService currentUser, IEventService eventService)
+        {
+            this.currentUser = currentUser;
+            this.eventService = eventService;
+        }
 
-        //    return this.Created(nameof(this.Create), id);
-        //}
+        [HttpPost]
+        [Authorize(Roles = "Manager")]
+        public async Task<IActionResult> Create(CreateEventRequestModel model)
+        {
+            var managerId = this.currentUser.GetId();
+
+            var id = await this.eventService.CreateAsync(
+                model.Name,
+                model.ImageUrl,
+                model.Venue,
+                model.PhoneNumber,
+                model.Email,
+                model.ConductDate,
+                model.Description,
+                model.Price,
+                managerId);
+
+            return this.Created(nameof(this.Create), id);
+        }
     }
 }

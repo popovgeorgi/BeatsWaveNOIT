@@ -1,8 +1,10 @@
 ﻿namespace BeatsWave.Web.Infrastructure.Extensions
 {
     using System.Text;
+    using BeatsWave.Services.Data;
+    using BeatsWave.Services.Messaging;
     using BeatsWave.Web.Infrastructure.Filters;
-
+    using BeatsWave.Web.Infrastructure.Services;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -43,6 +45,21 @@
 
             return services;
         }
+
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+            => services
+            .AddTransient<IEmailSender, NullMessageSender>()
+            .AddTransient<IIdentityService, IdentityService>()
+            .AddTransient<IProfileService, ProfileService>()
+            .AddTransient<ICurrentUserService, CurrentUserService>()
+            .AddTransient<IPictureService, PictureService>()
+            .AddTransient<IArtistService, ArtistService>()
+            .AddTransient<IFollowService, FollowService>()
+            .AddTransient<IBeatService, BeatService>()
+            .AddTransient<IUserService, UserService>()
+            .AddTransient<ILikeService, LikeService>()
+            .AddTransient<ICommentService, CommentService>()
+            .AddTransient<IEventService, EventService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(c =>

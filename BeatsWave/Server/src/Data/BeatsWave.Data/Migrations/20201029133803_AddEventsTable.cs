@@ -18,6 +18,7 @@ namespace BeatsWave.Data.Migrations
                     Venue = table.Column<string>(maxLength: 50, nullable: false),
                     PhoneNumber = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: false),
+                    ConductDate = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(maxLength: 500, nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,4)", nullable: true),
                     ManagerId = table.Column<string>(nullable: false),
