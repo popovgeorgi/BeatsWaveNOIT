@@ -35,6 +35,8 @@
 
         public DbSet<BeatComment> BeatComments { get; set; }
 
+        public DbSet<Event> Events { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -111,6 +113,18 @@
                 .WithMany()
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Event>()
+                .HasOne(e => e.Manager)
+                .WithMany()
+                .HasForeignKey(e => e.ManagerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Event>()
+                .Property(e => e.Price)
+                .HasColumnType("decimal(18,4)");
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

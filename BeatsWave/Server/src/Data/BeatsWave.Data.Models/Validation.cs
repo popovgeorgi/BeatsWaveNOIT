@@ -20,5 +20,12 @@
         {
             public const int MaxContentLength = 240;
         }
+
+        public class Event
+        {
+            public const int MaxNameLength = 60;
+            public const int MaxDescriptionLength = 500;
+            public const int MaxVenueLength = 50;
+        }
     }
 }

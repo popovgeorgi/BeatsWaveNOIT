@@ -19,6 +19,7 @@
             await SeedRoleAsync(roleManager, GlobalConstants.AdministratorRoleName);
             await SeedRoleAsync(roleManager, GlobalConstants.BeatmakerRoleName);
             await SeedRoleAsync(roleManager, GlobalConstants.ArtistRoleName);
+            await SeedRoleAsync(roleManager, GlobalConstants.ManagerRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<ApplicationRole> roleManager, string roleName)
