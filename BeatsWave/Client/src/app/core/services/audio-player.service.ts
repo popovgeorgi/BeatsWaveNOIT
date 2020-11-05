@@ -17,6 +17,7 @@ export class AudioPlayerService {
     constructor(private songsConfigService: SongsConfigService) { }
 
     playSong(song: Beat) {
+      debugger;
         Amplitude.removeSong(0);
         Amplitude.playNow(song);
         this.songPlayedSource.next(song);

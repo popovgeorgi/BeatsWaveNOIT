@@ -8,6 +8,8 @@ import { RadioConfigService } from '../../../../core/services/radio-config.servi
 import { GenresConfigService } from '../../../../core/services/genres-config.service';
 import { EventsConfigService } from '../../../../core/services/events-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Beat } from 'src/app/core/models/Beat';
+import { BeatService } from 'src/app/core/services/beat.service';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     songsList: any = [];
     topCharts: any = {};
     newRelease: any = {};
+    private newReleasesItems: Beat[];
     artists: any = {};
     retro: any = {};
     playlist: any = {};
@@ -38,7 +41,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 private playlistConfigService: PlaylistConfigService,
                 private radioConfigService: RadioConfigService,
                 private genresConfigService: GenresConfigService,
-                private eventsConfigService: EventsConfigService) { }
+                private eventsConfigService: EventsConfigService,
+                private beatService: BeatService) { }
 
     ngOnInit() {
         this.songsList = this.songsConfigService.songsList;
@@ -70,13 +74,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     // Initialize new release music object for section
-    initNewRelease() {
+    async initNewRelease() {
+       this.newReleasesItems = await this.beatService.getBeats(20).toPromise();
         this.newRelease = {
-            title: 'New Releases',
-            subTitle: 'Listen recently release music',
-            page: '/songs',
-            items: this.songsConfigService.songsList
-        };
+          title: 'New Releases',
+          subTitle: 'Listen recently release music',
+          page: '/songs',
+          items: this.newReleasesItems
+        }
+
     }
 
     // Initialize music events object for section
