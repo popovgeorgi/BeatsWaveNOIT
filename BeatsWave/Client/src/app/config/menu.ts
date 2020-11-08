@@ -75,9 +75,9 @@ export class MenuConfig {
                         page: '/profile'
                     },
                     {
-                      title: 'My Beats',
-                      icon: 'ion-md-contact',
-                      page: '/profile'
+                        title: 'My Beats',
+                        icon: 'fa-solid:music',
+                        page: '/my-beats'
                     },
                     {
                         title: 'Your Plan',

@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ɵConsole } from '@angular/core';
 
-import { LoadingService } from '../../../../../core/services/loading.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/core/services/profile.service';
 import { Profile } from 'src/app/core/models/Profile';
@@ -20,7 +19,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     private profile: Profile;
 
     constructor(
-        private loadingService: LoadingService,
         private fb: FormBuilder,
         private profileService: ProfileService,
         private spinner: NgxSpinnerService) {

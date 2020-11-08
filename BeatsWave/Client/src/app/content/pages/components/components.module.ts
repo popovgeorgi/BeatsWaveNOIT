@@ -44,7 +44,9 @@ import { BeatService } from 'src/app/core/services/beat.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { LoaderComponent } from '../../layout/loader/loader.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { EventService } from 'src/app/core/services/event.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { UserMyBeatsComponent } from './user/user-my-beats/user-my-beats.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -138,6 +140,10 @@ const routes: Routes = [
             {
                 path: 'settings',
                 component: SettingsComponent
+            },
+            {
+                path: 'my-beats',
+                component: UserMyBeatsComponent
             }
         ]
     },
@@ -170,7 +176,8 @@ const routes: Routes = [
         TotalSongsComponent,
         PurchasesComponent,
         StatisticsComponent,
-        ReferralsComponent
+        ReferralsComponent,
+        UserMyBeatsComponent
     ],
     imports: [
         ReactiveFormsModule,
@@ -183,7 +190,8 @@ const routes: Routes = [
         ChartsModule,
         RouterModule.forChild(routes),
         FileUploadModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        InfiniteScrollModule
     ],
     providers: [
         {
@@ -192,7 +200,8 @@ const routes: Routes = [
         },
         ArtistService,
         FollowService,
-        BeatService
+        BeatService,
+        EventService
     ]
 })
 export class ComponentsModule { }

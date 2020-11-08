@@ -19,18 +19,8 @@
                         </a>
                     </li>
                     <li class="dropdown-item">
-                        <a href="javascript:;" class="dropdown-link" (click)="addInQueue()">
-                            <i class="la la-plus"></i>
-                        </a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a [href]="song?.url" class="dropdown-link" download>
-                            <i class="la la-download"></i>
-                        </a>
-                    </li>
-                    <li class="dropdown-item">
-                        <a href="javascript:;" class="dropdown-link" (click)="shareSong()">
-                            <i class="la la-share-alt"></i>
+                        <a class="dropdown-link" [routerLink]="'/song/' + song.id + '/details'">
+                            <i class="la la-info-circle"></i>
                         </a>
                     </li>
                 </ul>

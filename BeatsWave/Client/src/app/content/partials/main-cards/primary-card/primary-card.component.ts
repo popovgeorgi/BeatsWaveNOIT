@@ -26,11 +26,7 @@ export class PrimaryCardComponent implements OnInit {
     //     this.song.favorite = true;
     // }
 
-    addInQueue() {
-    }
-
-    shareSong() {
-    }
+    getSongInfo() {}
 
     addInPlayer() {
       debugger;

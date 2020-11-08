@@ -1,18 +1,15 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { LoadingService } from '../../../../core/services/loading.service';
-import { BeatService } from 'src/app/core/services/beat.service';
-import { Beat } from 'src/app/core/models/Beat';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Beat } from 'src/app/core/models/Beat';
+import { BeatService } from 'src/app/core/services/beat.service';
 
 @Component({
-    selector: 'app-music',
-    templateUrl: './music.component.html'
+  selector: 'app-user-my-beats',
+  templateUrl: './user-my-beats.component.html',
 })
-export class MusicComponent implements OnInit, AfterViewInit {
+export class UserMyBeatsComponent implements OnInit, AfterViewInit {
 
-    public selector: string = '#pageWrapper'
+  public selector: string = '#pageWrapper'
     public beats: Beat[];
     public beatsCount: number;
     public gridView = false;
@@ -26,7 +23,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
     }
 
     private fetchBeats() {
-        this.beatService.getBeats(this.takeBeatsCount).subscribe(beats => {
+        this.beatService.getCurrentUserBeats().subscribe(beats => {
             this.beats = beats;
             this.beatsCount = beats.length;
         })

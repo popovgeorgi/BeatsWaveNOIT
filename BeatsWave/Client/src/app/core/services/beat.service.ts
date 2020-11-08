@@ -15,11 +15,15 @@ export class BeatService {
     return this.http.post(this.beatPath, data);
   }
 
-  getBeats(count = null): Observable<Array<Beat>> {
+  getBeats(count): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.beatPath + '?take=' + count);
   }
 
   getBeat(id): Observable<Beat> {
     return this.http.get<Beat>(this.beatPath + '/' + id);
+  }
+
+  getCurrentUserBeats(): Observable<Array<Beat>> {
+    return this.http.get<Array<Beat>>(this.beatPath + '/mine');
   }
 }

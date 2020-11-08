@@ -12,6 +12,7 @@ import { TokenInterceptorService } from './core/services/token-interceptor.servi
 import { NgxSpinnerModule, NgxSpinnerService } from '../../node_modules/ngx-spinner';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
     declarations: [

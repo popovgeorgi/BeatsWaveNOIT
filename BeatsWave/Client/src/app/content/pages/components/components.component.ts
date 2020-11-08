@@ -24,7 +24,7 @@ export class ComponentsComponent implements OnInit, OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 private router: Router,
                 private localStorageService: LocalStorageService,
-                private skinService: SkinService) { 
+                private skinService: SkinService) {
                 }
 
     ngOnInit() {
@@ -68,6 +68,10 @@ export class ComponentsComponent implements OnInit, OnDestroy {
         if (this.routerSubscription) {
             this.routerSubscription.unsubscribe();
         }
+    }
+
+    onScroll() {
+      console.log('scrolled')
     }
 
 }
