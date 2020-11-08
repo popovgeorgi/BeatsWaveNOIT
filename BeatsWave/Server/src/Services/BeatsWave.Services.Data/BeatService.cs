@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using BeatsWave.Data.Common.Repositories;
@@ -26,6 +25,13 @@
                 .OrderByDescending(b => b.CreatedOn)
                 .Skip(skip)
                 .Take((int)take)
+                .To<T>()
+                .ToListAsync();
+
+        public async Task<IEnumerable<T>> ByUser<T>(string userId)
+            => await this.beatsRepository
+                .All()
+                .Where(x => x.ProducerId == userId)
                 .To<T>()
                 .ToListAsync();
 

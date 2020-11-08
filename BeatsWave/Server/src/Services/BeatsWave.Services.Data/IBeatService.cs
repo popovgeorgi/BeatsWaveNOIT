@@ -10,5 +10,7 @@
         Task<IEnumerable<T>> AllAsync<T>(int? count = null, int skip = 0);
 
         Task<T> DetailsAsync<T>(int id);
+
+        Task<IEnumerable<T>> ByUser<T>(string userId);
     }
 }
