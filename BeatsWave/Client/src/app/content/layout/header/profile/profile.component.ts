@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
     }
 
     public Logout() {
-        this.authService.deleteToken();
+        this.authService.logout();
         this.snotifyService.success('You successfully logged out!');
     }
 }

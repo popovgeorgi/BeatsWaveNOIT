@@ -24,13 +24,6 @@
                 .Include(u => u.Profile)
                 .FirstOrDefaultAsync(p => p.Id == userId);
 
-            if (user.Profile == null)
-            {
-                user.Profile = new Profile(user.UserName);
-
-                await this.userRepository.SaveChangesAsync();
-            }
-
             return await this.userRepository
               .All()
               .Where(x => x.Id == userId)
@@ -62,11 +55,6 @@
             if (user == null)
             {
                 return "User does not exist";
-            }
-
-            if (user.Profile == null)
-            {
-                user.Profile = new Profile(user.UserName);
             }
 
             this.ChangeProfile(

@@ -8,5 +8,7 @@
         Task<T> GetInfo<T>(string id);
 
         Task<IEnumerable<T>> GetLikedBeatsAsync<T>(string userId);
+
+        Task SetInitialValues(string id, string displayName, string profilePicture);
     }
 }

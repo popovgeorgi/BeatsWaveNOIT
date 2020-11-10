@@ -15,12 +15,10 @@ import { SnotifyService } from 'ng-snotify';
   selector: "app-song-details",
   templateUrl: "./song-details.component.html",
 })
-export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SongDetailsComponent implements OnInit, AfterViewInit {
   public isLiked: boolean;
   public beatDetails: Beat;
   public beatId: number;
-
-  routeSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,9 +65,5 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   addInPlayer() {
     this.audioPlayerService.playSong(this.beatDetails);
-  }
-
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
   }
 }

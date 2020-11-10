@@ -7,21 +7,16 @@ using System.Text;
 
 namespace BeatsWave.Web.Models.Users
 {
-    public class UserInfoServiceModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
+    public class UserInfoServiceModel : IMapFrom<ApplicationUser>
     {
         public string Id { get; set; }
 
         public string ProfileMainPhotoUrl { get; set; }
 
-        public string Name { get; set; }
+        public string ProfileFirstName { get; set; }
+
+        public string ProfileLastName { get; set; }
 
         public string ProfileDisplayName { get; set; }
-
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration
-                .CreateMap<ApplicationUser, UserInfoServiceModel>()
-                .ForMember(u => u.Name, m => m.MapFrom(u => u.Profile.FirstName + " " + u.Profile.LastName));
-        }
     }
 }

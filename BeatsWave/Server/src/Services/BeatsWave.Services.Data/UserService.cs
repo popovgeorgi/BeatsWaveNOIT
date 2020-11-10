@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BeatsWave.Common;
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
@@ -35,6 +35,19 @@
                .Include(l => l.Beat)
                .To<T>()
                .ToListAsync();
+        }
+
+        public async Task SetInitialValues(string id, string displayName, string profilePicture)
+        {
+            var user = await this.userRepository
+                .All()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            user.Profile = new Profile(displayName);
+            user.Profile.MainPhotoUrl = GlobalConstants.DefaultMainPhotoUrl;
+
+            await this.userRepository.SaveChangesAsync();
         }
     }
 }

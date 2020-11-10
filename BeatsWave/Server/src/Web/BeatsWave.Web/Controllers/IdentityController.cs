@@ -8,6 +8,7 @@
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure;
     using BeatsWave.Web.Models.Identity;
+    using BeatsWave.Web.Models.Users;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -17,15 +18,18 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IIdentityService identityService;
+        private readonly IUserService userService;
         private readonly AppSettings appSettings;
 
         public IdentityController(
             UserManager<ApplicationUser> userManager,
             IIdentityService identityService,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            IUserService userService)
         {
             this.userManager = userManager;
             this.identityService = identityService;
+            this.userService = userService;
             this.appSettings = appSettings.Value;
         }
 
@@ -47,8 +51,7 @@
                 return this.BadRequest(result.Errors);
             }
 
-            user.Profile = new Profile(model.UserName);
-            user.Profile.MainPhotoUrl = GlobalConstants.DefaultMainPhotoUrl;
+            await this.userService.SetInitialValues(user.Id, model.UserName, GlobalConstants.DefaultMainPhotoUrl);
 
             await this.userManager.AddToRoleAsync(user, model.Role);
 
@@ -76,8 +79,15 @@
 
             var token = this.identityService.GenerateJwtToken(user.Id, user.UserName, userRole.FirstOrDefault(), this.appSettings.Secret);
 
+            var userFromDb = await this.userService.GetInfo<UserInfoServiceModel>(user.Id);
+
             return new LoginResponseModel
             {
+                Id = user.Id,
+                MainPhotoUrl = userFromDb.ProfileMainPhotoUrl,
+                DisplayName = userFromDb.ProfileDisplayName,
+                FirstName = userFromDb.ProfileFirstName,
+                LastName = userFromDb.ProfileLastName,
                 Token = token,
             };
         }

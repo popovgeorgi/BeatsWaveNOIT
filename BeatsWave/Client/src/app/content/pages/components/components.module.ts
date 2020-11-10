@@ -75,7 +75,7 @@ const routes: Routes = [
             },
             {
                 path: 'artists',
-                component: ArtistsComponent
+                component: ArtistsComponent,
             },
             {
                 path: 'artist/:id/details',

@@ -10,6 +10,7 @@ import { SkinService } from '../../../core/services/skin.service';
 import { Config } from '../../../config/config';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/core/models/User';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -31,7 +32,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 private simpleModalService: SimpleModalService,
                 private localStorageService: LocalStorageService,
                 private userService: UserService,
-                private skinService: SkinService) {
+                private skinService: SkinService,
+                private authService: AuthService) {
         this.language = {
             title: 'Language',
             image: './assets/images/svg/translate.svg'
@@ -39,9 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.userService.getInfo().subscribe(user => {
-            this.currentUser = user;
-        })
+        this.currentUser = this.authService.currentUserValue;
         const themeSkin = this.localStorageService.getThemeSkin();
         if (themeSkin) {
             this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
