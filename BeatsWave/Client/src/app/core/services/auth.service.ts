@@ -26,7 +26,6 @@ export class AuthService {
   }
 
   login(data): Observable<any> {
-    debugger;
     return this.http.post<any>(this.loginPath, data)
       .pipe(map(user => {
         if (user && user.token) {

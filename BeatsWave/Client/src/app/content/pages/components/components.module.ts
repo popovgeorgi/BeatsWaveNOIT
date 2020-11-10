@@ -47,6 +47,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventService } from 'src/app/core/services/event.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UserMyBeatsComponent } from './user/user-my-beats/user-my-beats.component';
+import { AuthGuardService } from 'src/app/core/services/auth-guard.service';
+import { Role } from 'src/app/core/models/Role';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -99,7 +101,9 @@ const routes: Routes = [
             },
             {
                 path: 'add-music',
-                component: AddMusicComponent
+                component: AddMusicComponent,
+                canActivate: [AuthGuardService],
+                data: {roles: [Role.Beatmaker, Role.Admin]}
             },
             {
                 path: 'stations',
@@ -111,7 +115,8 @@ const routes: Routes = [
             },
             {
                 path: 'favorites',
-                component: FavoritesComponent
+                component: FavoritesComponent,
+                canActivate: [AuthGuardService]
             },
             {
                 path: 'history',
@@ -127,15 +132,19 @@ const routes: Routes = [
             },
             {
                 path: 'add-event',
-                component: AddEventComponent
+                component: AddEventComponent,
+                canActivate: [AuthGuardService],
+                data: {roles: [Role.Manager, Role.Admin]}
             },
             {
                 path: 'profile',
-                component: UserProfileComponent
+                component: UserProfileComponent,
+                canActivate: [AuthGuardService]
             },
             {
                 path: 'plan',
-                component: UserPlanComponent
+                component: UserPlanComponent,
+                canActivate: [AuthGuardService]
             },
             {
                 path: 'settings',
@@ -143,7 +152,8 @@ const routes: Routes = [
             },
             {
                 path: 'my-beats',
-                component: UserMyBeatsComponent
+                component: UserMyBeatsComponent,
+                canActivate: [AuthGuardService]
             }
         ]
     },

@@ -13,6 +13,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from '../../node_modules/ngx-spin
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AuthGuardService } from './core/services/auth-guard.service';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
         SongsConfigService,
         { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
         SnotifyService,
+        AuthGuardService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptorService,
