@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
     @Input() user: User;
 
     userMenu: any = [];
+    userRole: string;
 
     constructor(private searchService: SearchService,
                 private menuConfigService: MenuConfigService,
@@ -29,6 +30,11 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.userRole = this.authService.currentUserValue.role;
+
+      if (this.userRole == 'Beatmaker') {
+        this.userMenu = this.menuConfigService.beatmakerUserMenuItems;
+      }
     }
 
     public closeSearchResult() {

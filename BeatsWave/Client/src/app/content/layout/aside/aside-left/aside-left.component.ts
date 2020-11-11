@@ -6,6 +6,8 @@ import { SkinService } from '../../../../core/services/skin.service';
 import { LocalStorageService } from '../../../../core/services/local-storage.service';
 import { Config } from '../../../../config/config';
 import {DOCUMENT} from '@angular/common';
+import { User } from 'src/app/core/models/User';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-aside-left',
@@ -16,13 +18,15 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
     menuItems: any = [];
     asideFooterButton: any = {};
     sidebarClass = 'sidebar-primary';
+    userRole: string;
 
     skinSubscription: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 public menuConfigService: MenuConfigService,
                 private localStorageService: LocalStorageService,
-                private skinService: SkinService) {
+                private skinService: SkinService,
+                private authService: AuthService) {
         this.menuItems = this.menuConfigService.menuItems;
 
         this.asideFooterButton = {
@@ -42,6 +46,20 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
                 this.sidebarClass = 'sidebar-' + Config.THEME_CLASSES[skin.sidebar];
             }
         });
+        this.userRole = this.authService.currentUserValue.role;
+
+        if (this.userRole == 'Beatmaker' || this.userRole == 'Artist') {
+          this.menuItems = this.menuConfigService.beatmakerMenuItems;
+        }
+        else if (this.userRole == 'Manager') {
+          this.menuItems = this.menuConfigService.managerMenuItems;
+        }
+        if (this.userRole == 'Manager' || this.userRole == 'Artist') {
+            this.asideFooterButton = {
+              icon: 'ion-md-musical-note',
+              title: 'Start uploading'
+            };
+        }
     }
 
     hideSidebar() {

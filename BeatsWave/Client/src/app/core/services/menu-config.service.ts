@@ -18,4 +18,16 @@ export class MenuConfigService {
     get userMenuItems() {
         return this.menuConfig.config.userMenu.items;
     }
+
+    get beatmakerUserMenuItems() {
+        return this.menuConfig.config.beatmakerUserMenu.items;
+    }
+
+    get beatmakerMenuItems() {
+        return this.menuConfig.config.aside.beatmakerItems;
+    }
+
+    get managerMenuItems() {
+        return this.menuConfig.config.aside.managerItems;
+    }
 }
