@@ -8,6 +8,7 @@
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
+    using BeatsWave.Web.Models.FeedHub;
     using Microsoft.EntityFrameworkCore;
 
     public class BeatService : IBeatService
@@ -68,5 +69,29 @@
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefaultAsync();
+
+        public async Task<CheckResult> GetUpdate(int firstBeatId)
+        {
+            var currentFirstBeatId = await this.beatsRepository
+                .All()
+                .OrderByDescending(b => b.CreatedOn)
+                .Select(b => b.Id)
+                .FirstOrDefaultAsync();
+
+            if (currentFirstBeatId != firstBeatId)
+            {
+                var result = new CheckResult
+                {
+                    New = true,
+                    Update = "Yes",
+                };
+                return result;
+            }
+
+            return new CheckResult
+            {
+                New = false,
+            };
+        }
     }
 }

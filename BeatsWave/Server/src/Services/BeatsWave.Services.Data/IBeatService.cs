@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using BeatsWave.Web.Models.FeedHub;
+
     public interface IBeatService
     {
         Task<int> CreateAsync(string name, string beatUrl, string imageUrl, int price, string genre, int? bpm, string description, string producerId);
@@ -12,5 +14,7 @@
         Task<T> DetailsAsync<T>(int id);
 
         Task<IEnumerable<T>> ByUser<T>(string userId);
+
+        Task<CheckResult> GetUpdate(int firstBeatId);
     }
 }

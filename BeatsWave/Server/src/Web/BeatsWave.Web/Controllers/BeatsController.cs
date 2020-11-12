@@ -1,23 +1,28 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
+    using BeatsWave.Web.Hubs;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Beats;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
 
     public class BeatsController : ApiController
     {
         private readonly IBeatService beatService;
         private readonly ICurrentUserService currentUser;
+        private readonly IHubContext<FeedHub> feedHub;
 
-        public BeatsController(IBeatService beatService, ICurrentUserService currentUser)
+        public BeatsController(IBeatService beatService, ICurrentUserService currentUser, IHubContext<FeedHub> feedHub)
         {
             this.beatService = beatService;
             this.currentUser = currentUser;
+            this.feedHub = feedHub;
         }
 
         [HttpPost]
@@ -35,6 +40,8 @@
                 model.Bpm,
                 model.Description,
                 producerId);
+
+            await this.feedHub.Clients.All.SendAsync("NewBeatReceived", id);
 
             return this.Created(nameof(this.Create), id);
         }

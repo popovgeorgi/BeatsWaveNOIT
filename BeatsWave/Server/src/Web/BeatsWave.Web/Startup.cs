@@ -9,6 +9,7 @@
     using BeatsWave.Data.Repositories;
     using BeatsWave.Data.Seeding;
     using BeatsWave.Services.Mapping;
+    using BeatsWave.Web.Hubs;
     using BeatsWave.Web.Infrastructure.Extensions;
     using BeatsWave.Web.Models;
     using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,15 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => builder
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            });
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -45,6 +55,7 @@
 
             services.AddSwagger();
             services.AddApiControllers();
+            services.AddSignalR();
 
             services.AddSingleton(this.Configuration);
 
@@ -89,10 +100,7 @@
 
             app.UseRouting();
 
-            app.UseCors(options => options
-                .AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod());
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -100,6 +108,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<FeedHub>("/feed");
                         endpoints.MapControllers();
                     });
         }
