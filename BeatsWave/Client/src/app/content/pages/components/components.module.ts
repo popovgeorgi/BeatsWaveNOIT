@@ -49,6 +49,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UserMyBeatsComponent } from './user/user-my-beats/user-my-beats.component';
 import { AuthGuardService } from 'src/app/core/services/auth-guard.service';
 import { Role } from 'src/app/core/models/Role';
+import { FeedHubService } from 'src/app/core/services/feed-hub.service';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
