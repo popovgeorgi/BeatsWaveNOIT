@@ -41,8 +41,8 @@
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IEnumerable<BeatListingServiceModel>> All(int take)
-            => await this.beatService.AllAsync<BeatListingServiceModel>(take);
+        public async Task<IEnumerable<BeatListingServiceModel>> All(int take, int skip)
+            => await this.beatService.AllAsync<BeatListingServiceModel>(take, skip);
 
         [HttpGet]
         [Route("{id}")]

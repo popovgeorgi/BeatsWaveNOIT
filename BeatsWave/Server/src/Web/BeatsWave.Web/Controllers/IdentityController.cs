@@ -88,6 +88,7 @@
                 DisplayName = userFromDb.ProfileDisplayName,
                 FirstName = userFromDb.ProfileFirstName,
                 LastName = userFromDb.ProfileLastName,
+                Role = userRole[0].ToString(),
                 Token = token,
             };
         }

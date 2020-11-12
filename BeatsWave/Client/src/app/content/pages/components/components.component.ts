@@ -70,8 +70,4 @@ export class ComponentsComponent implements OnInit, OnDestroy {
         }
     }
 
-    onScroll() {
-      console.log('scrolled')
-    }
-
 }

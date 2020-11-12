@@ -20,13 +20,19 @@
         }
 
         public async Task<IEnumerable<T>> AllAsync<T>(int? take = null, int skip = 0)
-            => await this.beatsRepository
+        {
+            var query = this.beatsRepository
                 .All()
                 .OrderByDescending(b => b.CreatedOn)
-                .Skip(skip)
-                .Take((int)take)
-                .To<T>()
-                .ToListAsync();
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return await query.To<T>().ToListAsync();
+        }
 
         public async Task<IEnumerable<T>> ByUser<T>(string userId)
             => await this.beatsRepository

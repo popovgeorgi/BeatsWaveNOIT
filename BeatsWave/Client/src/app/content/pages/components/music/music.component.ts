@@ -12,21 +12,26 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class MusicComponent implements OnInit, AfterViewInit {
 
-    public selector: string = '#pageWrapper'
     public beats: Beat[];
+    public hasMoreBeatsToInclude: boolean = true;
     public beatsCount: number;
     public gridView = false;
-    private takeBeatsCount: number = 20;
+    private itemsPerPage: number = 20;
+    private page = 1;
+
 
     constructor(private spinner: NgxSpinnerService,
                 private beatService: BeatService) { }
 
     ngOnInit() {
-        this.fetchBeats();
+        this.fetchInitialBeats();
     }
 
-    private fetchBeats() {
-        this.beatService.getBeats(this.takeBeatsCount).subscribe(beats => {
+    private fetchInitialBeats() {
+        this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(beats => {
+            if(beats.length < this.itemsPerPage) {
+              this.hasMoreBeatsToInclude = false;
+            }
             this.beats = beats;
             this.beatsCount = beats.length;
         })
@@ -36,8 +41,13 @@ export class MusicComponent implements OnInit, AfterViewInit {
         this.spinner.hide('primary');
     }
 
-    public onScroll() {
-      debugger;
-      console.log('scrolling');
+    showMore() {
+        this.page++;
+        this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(beats => {
+          if(beats.length < this.itemsPerPage) {
+            this.hasMoreBeatsToInclude = false;
+          }
+          this.beats = this.beats.concat(beats);
+        })
     }
 }

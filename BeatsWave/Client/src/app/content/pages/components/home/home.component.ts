@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     // Initialize new release music object for section
     async initNewRelease() {
-       this.newReleasesItems = await this.beatService.getBeats(20).toPromise();
+       this.newReleasesItems = await this.beatService.getBeats(20, 0).toPromise();
         this.newRelease = {
           title: 'New Releases',
           subTitle: 'Listen recently release music',

@@ -1,6 +1,8 @@
 <!-- Page Banner [[ Find at scss/base/core.scss ]] -->
 <div class="banner bg-song"></div>
 
+
+
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
@@ -23,14 +25,7 @@
     <!-- End | Container header -->
 
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
-    <div
-      infinite-scroll
-      [infiniteScrollDistance]="5"
-      [infiniteScrollThrottle]="50"
-      [infiniteScrollContainer]="'.ps-content'"
-      [fromRoot]="true"
-      (scrolled)="onScroll()"
-    >
+
     <div class="section">
         <div class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
@@ -45,8 +40,20 @@
             </ng-template>
         </div>
     </div>
-  </div>
+
+    <div *ngIf="hasMoreBeatsToInclude" class="sidebar-footer" style="margin-top: -50px;">
+      <button type="button" class="btn btn-block btn-danger btn-air btn-bold"
+              (click)="showMore()">
+          <span>Show more</span>
+      </button>
+    </div>
+    <div *ngIf="!hasMoreBeatsToInclude" class="sidebar-footer" style="margin-top: -50px;">
+      <div class="btn btn-block btn-danger btn-air btn-bold">
+          <span>There is no more to show :)</span>
+      </div>
+    </div>
     <!-- End | Section -->
   </div>
+
     <!--spinner-->
 <!-- End | Main Container -->

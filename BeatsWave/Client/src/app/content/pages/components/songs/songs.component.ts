@@ -23,7 +23,7 @@ export class SongsComponent implements OnInit, AfterViewInit {
     }
 
     private fetchBeats() {
-        this.beatService.getBeats(this.takeBeatsCount).subscribe(beats => {
+        this.beatService.getBeats(this.takeBeatsCount, 0).subscribe(beats => {
             this.beats = beats;
             this.beatsCount = beats.length;
         })

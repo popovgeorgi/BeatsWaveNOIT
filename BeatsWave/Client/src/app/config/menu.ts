@@ -18,7 +18,7 @@ export class MenuConfig {
                         page: '/genres'
                     },
                     {
-                        title: 'Free Music',
+                        title: 'Feed',
                         icon: 'la la-music',
                         page: '/music'
                     },
@@ -79,7 +79,7 @@ export class MenuConfig {
                       page: '/genres'
                   },
                   {
-                      title: 'Free Music',
+                      title: 'Feed',
                       icon: 'la la-music',
                       page: '/music'
                   },
@@ -135,7 +135,7 @@ export class MenuConfig {
                     page: '/genres'
                 },
                 {
-                    title: 'Free Music',
+                    title: 'Feed',
                     icon: 'la la-music',
                     page: '/music'
                 },
