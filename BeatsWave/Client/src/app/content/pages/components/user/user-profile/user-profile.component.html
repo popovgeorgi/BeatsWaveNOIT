@@ -14,10 +14,7 @@
                                 <img [src]="userPicture" alt="user">
                             </div>
                             <h6 class="mb-3">{{userProfileForm.value.displayName}}</h6>
-                            <!-- <p class="mb-1">Preferred by: 420x420(px)</p>
-                            <p>Minimum: 128x128(px)</p> -->
-                            <p-fileUpload name="file" [url]="uploadSaveUrl" accept="image/*"
-                                [auto]="true" (onSend)="onPhotoUploading()" (onUpload)="onPhotoUploaded($event)"></p-fileUpload>
+                            <button type="button" class="btn btn-danger btn-air" (click)="openImageResizeModal()">Change Image</button>
                         </div>
                     </div>
                 </div>

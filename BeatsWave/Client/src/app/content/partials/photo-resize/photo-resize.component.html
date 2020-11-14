@@ -1,0 +1,37 @@
+<div class="modal-dialog theme-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header border-bottom-0 pb-0">
+      <button type="button" class="close" (click)="close()">&times;</button>
+    </div>
+    <h6 class="modal-title text-center mb-3">
+      Crop your photo on your premises
+    </h6>
+    <div class="modal-body">
+      <div class="col-md-7" style="margin-bottom: 15px;">
+        <div class="custom-file">
+            <input type="file" accept="image/*" (change)="fileChangeEvent($event)" (click)="onClicked()" class="custom-file-input" id="eventImage">
+            <label class="custom-file-label" for="eventImage">Choose file</label>
+        </div>
+      </div>
+      <div>
+        <ngx-spinner name="profilePhoto-upload" [fullScreen]="false"></ngx-spinner>
+        <image-cropper
+        *ngIf="isBrowseClicked"
+          [imageChangedEvent]="imageChangedEvent"
+          [resizeToWidth]="420"
+          [resizeToHeight]="420"
+          [cropperMinWidth]="128"
+          [cropperMinHeight]="128"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 3"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+          (imageLoaded)="imageLoaded()"
+          (cropperReady)="cropperReady()"
+          (loadImageFailed)="loadImageFailed()"
+        ></image-cropper>
+      </div>
+      <button style="margin-top: 15px;" *ngIf="croppedImage" type="button" class="btn btn-danger btn-air" (click)="getImageData()">Save</button>
+    </div>
+  </div>
+</div>

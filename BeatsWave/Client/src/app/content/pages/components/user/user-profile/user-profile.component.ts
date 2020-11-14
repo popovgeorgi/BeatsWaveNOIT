@@ -5,6 +5,8 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { Profile } from 'src/app/core/models/Profile';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SimpleModalService } from 'ngx-simple-modal';
+import { PhotoResizeComponent } from 'src/app/content/partials/photo-resize/photo-resize.component';
 
 @Component({
     selector: 'app-user-profile',
@@ -21,7 +23,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     constructor(
         private fb: FormBuilder,
         private profileService: ProfileService,
-        private spinner: NgxSpinnerService) {
+        private spinner: NgxSpinnerService,
+        private simpleModalService: SimpleModalService) {
         this.userProfileForm = this.fb.group({
             'firstName': [''],
             'lastName': [''],
@@ -64,5 +67,16 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
         this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
             this.spinner.hide("editProfile");
         })
+    }
+
+    public openImageResizeModal() {
+      const modal = this.simpleModalService.addModal(PhotoResizeComponent, {})
+        .subscribe((isConfirmed) => {
+            if (isConfirmed) {
+              debugger;
+              modal.remove;
+            } else {
+            }
+        });
     }
 }

@@ -7,6 +7,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { ChartsModule } from 'ng2-charts';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { ComponentsComponent } from './components.component';
 import { HomeComponent } from './home/home.component';
@@ -41,15 +42,13 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { FollowService } from 'src/app/core/services/follow.service';
 import { BeatService } from 'src/app/core/services/beat.service';
-import { LoadingService } from 'src/app/core/services/loading.service';
-import { LoaderComponent } from '../../layout/loader/loader.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EventService } from 'src/app/core/services/event.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UserMyBeatsComponent } from './user/user-my-beats/user-my-beats.component';
 import { AuthGuardService } from 'src/app/core/services/auth-guard.service';
 import { Role } from 'src/app/core/models/Role';
-import { FeedHubService } from 'src/app/core/services/feed-hub.service';
+import { PhotoResizeComponent } from '../../partials/photo-resize/photo-resize.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -190,6 +189,7 @@ const routes: Routes = [
         ReferralsComponent,
         UserMyBeatsComponent
     ],
+    entryComponents: [PhotoResizeComponent],
     imports: [
         ReactiveFormsModule,
         CommonModule,

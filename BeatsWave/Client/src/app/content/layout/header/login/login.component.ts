@@ -19,9 +19,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     formSubmitted = false;
 
     constructor(
-        private localStorageService: LocalStorageService,
         private authService: AuthService,
-        private router: Router,
         private loadingService: LoadingService,
         private snotifyService: SnotifyService) {
         super();
@@ -56,7 +54,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         }, error => {
             this.snotifyService.error("You asda");
         });
-        
+
         this.close();
     }
 

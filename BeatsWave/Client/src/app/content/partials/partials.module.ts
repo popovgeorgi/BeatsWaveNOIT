@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { PrimaryCardComponent } from './main-cards/primary-card/primary-card.component';
 import { SecondaryCardComponent } from './main-cards/secondary-card/secondary-card.component';
@@ -16,6 +17,8 @@ import { ThemeSettingsComponent } from './theme-settings/theme-settings.componen
 import { CountdownComponent } from './countdown/countdown.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PhotoResizeComponent } from './photo-resize/photo-resize.component';
+import { FileUploadService } from 'src/app/core/services/file-upload.service';
 
 @NgModule({
     declarations: [
@@ -31,6 +34,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         CommentComponent,
         ThemeSettingsComponent,
         CountdownComponent,
+        PhotoResizeComponent,
     ],
     exports: [
         PrimaryCardComponent,
@@ -42,13 +46,15 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         SongHorizontalComponent,
         ImageCardComponent,
         CommentComponent,
-        ThemeSettingsComponent
+        ThemeSettingsComponent,
+        PhotoResizeComponent
     ],
     imports: [
         CommonModule,
         RouterModule,
         ReactiveFormsModule,
         NgxSpinnerModule,
+        ImageCropperModule
     ]
 })
 export class PartialsModule { }
