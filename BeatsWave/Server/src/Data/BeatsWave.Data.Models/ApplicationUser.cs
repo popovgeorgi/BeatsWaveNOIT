@@ -16,9 +16,12 @@ namespace BeatsWave.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Subscription = Subscription.Basic;
         }
 
         public Profile Profile { get; set; }
+
+        public Subscription Subscription { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

@@ -61,5 +61,12 @@
         [Route(nameof(Mine))]
         public async Task<IEnumerable<BeatListingServiceModel>> Mine()
             => await this.beatService.ByUser<BeatListingServiceModel>(this.currentUser.GetId());
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(MostlyLiked))]
+
+        public async Task<IEnumerable<BeatListingServiceModel>> MostlyLiked()
+            => await this.beatService.ByLikes<BeatListingServiceModel>();
     }
 }

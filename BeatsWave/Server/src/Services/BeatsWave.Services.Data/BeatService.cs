@@ -8,7 +8,6 @@
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
-    using BeatsWave.Web.Models.FeedHub;
     using Microsoft.EntityFrameworkCore;
 
     public class BeatService : IBeatService
@@ -33,6 +32,16 @@
             }
 
             return await query.To<T>().ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> ByLikes<T>()
+        {
+            return await this.beatsRepository
+                .All()
+                .OrderByDescending(x => x.Likes.Count)
+                .Take(50)
+                .To<T>()
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<T>> ByUser<T>(string userId)
@@ -69,29 +78,5 @@
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefaultAsync();
-
-        public async Task<CheckResult> GetUpdate(int firstBeatId)
-        {
-            var currentFirstBeatId = await this.beatsRepository
-                .All()
-                .OrderByDescending(b => b.CreatedOn)
-                .Select(b => b.Id)
-                .FirstOrDefaultAsync();
-
-            if (currentFirstBeatId != firstBeatId)
-            {
-                var result = new CheckResult
-                {
-                    New = true,
-                    Update = "Yes",
-                };
-                return result;
-            }
-
-            return new CheckResult
-            {
-                New = false,
-            };
-        }
     }
 }
