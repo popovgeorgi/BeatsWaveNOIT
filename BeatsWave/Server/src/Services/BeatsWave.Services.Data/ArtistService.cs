@@ -39,5 +39,16 @@
 
             return artist;
         }
+
+        public async Task<IEnumerable<T>> FeaturedAsync<T>()
+        {
+            var featuredArtists = await this.userRepository
+                .All()
+                .Where(x => x.Subscription == Subscription.Featured || x.Subscription == Subscription.Premium)
+                .To<T>()
+                .ToListAsync();
+
+            return featuredArtists;
+        }
     }
 }

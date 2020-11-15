@@ -8,5 +8,7 @@
         Task<IEnumerable<T>> AllAsync<T>(int? count = null, int skip = 0);
 
         Task<T> DetailsAsync<T>(string userId);
+
+        Task<IEnumerable<T>> FeaturedAsync<T>();
     }
 }

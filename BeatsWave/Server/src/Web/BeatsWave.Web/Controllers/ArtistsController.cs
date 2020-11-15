@@ -29,5 +29,12 @@
 
         public async Task<ArtistDetailsServiceModel> Details(string id)
             => await this.artistService.DetailsAsync<ArtistDetailsServiceModel>(id);
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(Featured))]
+
+        public async Task<IEnumerable<ArtistListingServiceModel>> Featured()
+            => await this.artistService.FeaturedAsync<ArtistListingServiceModel>();
     }
 }
