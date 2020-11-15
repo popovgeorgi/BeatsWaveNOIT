@@ -90,6 +90,7 @@
                 LastName = userFromDb.ProfileLastName,
                 Role = userRole[0].ToString(),
                 Token = token,
+                Subscription = user.Subscription.ToString(),
             };
         }
     }
