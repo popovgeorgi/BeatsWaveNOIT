@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-
-import { LoadingService } from '../../../../../core/services/loading.service';
+import { SnotifyService } from 'ng-snotify';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { SubscriptionService } from 'src/app/core/services/subscription.service';
 
 @Component({
     selector: 'app-user-plan',
@@ -8,13 +10,40 @@ import { LoadingService } from '../../../../../core/services/loading.service';
 })
 export class UserPlanComponent implements OnInit, AfterViewInit {
 
-    constructor(private loadingService: LoadingService) { }
+    constructor(private spinner: NgxSpinnerService,
+      private authService: AuthService,
+      private subscriptionService: SubscriptionService,
+      private snotifyService: SnotifyService) { }
+
+    userSubscription: string;
 
     ngOnInit() {
+      this.userSubscription = this.authService.currentUserValue.subscription;
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('primary');
+    }
+
+    onBasicClicked() {
+      return this.subscriptionService.changeSubscription('Basic').subscribe(res => {
+        this.userSubscription = 'Basic';
+        this.snotifyService.success('You have successfully changed your plan!');
+      });
+    }
+
+    onFeaturedClicked() {
+      return this.subscriptionService.changeSubscription('Featured').subscribe(res => {
+        this.userSubscription = 'Featured';
+        this.snotifyService.success('You have successfully changed your plan!');
+      });
+    }
+
+    onPremiumClicked() {
+      return this.subscriptionService.changeSubscription('Premium').subscribe(res => {
+        this.userSubscription = 'Premium';
+        this.snotifyService.success('You have successfully changed your plan!');
+      });
     }
 
 }

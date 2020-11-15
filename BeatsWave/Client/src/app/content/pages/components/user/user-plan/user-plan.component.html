@@ -10,31 +10,29 @@
                     <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
                         <h5 class="text-success">Basic</h5>
                         <p>Your <span class="font-weight-bold text-success">Basic</span> subscription plan is going to expired within 10 days please select or change you plan.</p>
-                        <button type="button" class="btn btn-pill btn-air btn-primary">Change your Plan</button>
+                        <button *ngIf="userSubscription != 'Basic'" type="button" class="btn btn-pill btn-air btn-primary" (click)="onBasicClicked()">Select Now</button>
+                        <button *ngIf="userSubscription == 'Basic'" type="button" class="btn btn-pill btn-air btn-primary">You are Basic</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6 mb-4 mb-md-0">
                     <div class="plan-card text-center px-sm-5 py-sm-4 p-3">
-                        <h5 class="text-warning mb-4">Prime</h5>
+                        <h5 class="text-warning mb-4">Premium</h5>
                         <ul class="list-group list-group-flush mb-5">
-                            <li class="list-group-item">Unlimited free music</li>
-                            <li class="list-group-item">Like, Follow, Share etc...</li>
-                            <li class="list-group-item">Create playlist</li>
-                            <li class="list-group-item">Listen paid track once</li>
-                            <li class="list-group-item">Purchase track</li>
+                            <li class="list-group-item">Have your profile listed on the feed</li>
+                            <li class="list-group-item">Have your music listed on the feed</li>
                         </ul>
-                        <button type="button" class="btn btn-pill btn-air btn-warning">Select Now</button>
+                        <button *ngIf="userSubscription != 'Premium'" type="button" class="btn btn-pill btn-air btn-warning" (click)="onPremiumClicked()">Select Now</button>
+                        <button *ngIf="userSubscription == 'Premium'" type="button" class="btn btn-pill btn-air btn-warning">You are Premium</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
                     <div class="plan-card text-center px-sm-5 py-sm-4 p-3">
-                        <h5 class="text-success mb-4">Basic</h5>
+                        <h5 class="text-success mb-4">Featured</h5>
                         <ul class="list-group list-group-flush mb-5">
-                            <li class="list-group-item">Unlimited free music</li>
-                            <li class="list-group-item">Like, Follow, Share etc...</li>
-                            <li class="list-group-item">Create playlist</li>
+                            <li class="list-group-item">Have your profile listed on the feed</li>
                         </ul>
-                        <button type="button" class="btn btn-pill btn-air btn-success">Select Now</button>
+                        <button *ngIf="userSubscription != 'Featured'" type="button" class="btn btn-pill btn-air btn-success" (click)="onFeaturedClicked()">Select Now</button>
+                        <button *ngIf="userSubscription == 'Featured'" type="button" class="btn btn-pill btn-air btn-success">You are Featured</button>
                     </div>
                 </div>
             </div>

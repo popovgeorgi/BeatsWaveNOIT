@@ -1,15 +1,16 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { LoadingService } from '../../../../core/services/loading.service';
 import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
 import { PlaylistConfigService } from '../../../../core/services/playlist-config.service';
 import { RadioConfigService } from '../../../../core/services/radio-config.service';
 import { GenresConfigService } from '../../../../core/services/genres-config.service';
 import { EventsConfigService } from '../../../../core/services/events-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Beat } from 'src/app/core/models/Beat';
 import { BeatService } from 'src/app/core/services/beat.service';
+import { ArtistService } from 'src/app/core/services/artist.service';
+import { Beat } from 'src/app/core/models/Beat';
+import { LoadingService } from 'src/app/core/services/loading.service';
 
 
 @Component({
@@ -25,24 +26,28 @@ export class HomeComponent implements OnInit, AfterViewInit {
     songsList: any = [];
     topCharts: any = {};
     newRelease: any = {};
-    private newReleasesItems: Beat[];
     artists: any = {};
     retro: any = {};
     playlist: any = {};
     radio: any = {};
     genres: any = {};
 
+    public newReleases: Beat[];
+
     mainEvent: any = {};
     secondaryEvents: any = [];
 
     constructor(private spinner: NgxSpinnerService,
-                private artistsConfigService: ArtistsConfigService,
                 private songsConfigService: SongsConfigService,
                 private playlistConfigService: PlaylistConfigService,
                 private radioConfigService: RadioConfigService,
                 private genresConfigService: GenresConfigService,
                 private eventsConfigService: EventsConfigService,
-                private beatService: BeatService) { }
+                private beatService: BeatService,
+                private aritstService: ArtistService,
+                private loadingService: LoadingService) {
+                  this.spinner.show('home');
+                 }
 
     ngOnInit() {
         this.songsList = this.songsConfigService.songsList;
@@ -57,10 +62,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.initPlaylist();
         this.initRadio();
         this.initGenres();
+
+        this.spinner.hide('home');
     }
 
     ngAfterViewInit() {
-        this.spinner.hide('primary');
+        this.loadingService.stopLoading();
     }
 
     // Initialize top charts object for section
@@ -75,12 +82,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     // Initialize new release music object for section
     async initNewRelease() {
-       this.newReleasesItems = await this.beatService.getBeats(20, 0).toPromise();
+      this.newReleases = await this.beatService.getBeats(20, 0).toPromise()
         this.newRelease = {
           title: 'New Releases',
           subTitle: 'Listen recently release music',
           page: '/songs',
-          items: this.newReleasesItems
+          items: this.newReleases
         }
 
     }
@@ -92,12 +99,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     // Initialize music artists object for section
-    initArtists() {
+    async initArtists() {
         this.artists = {
             title: 'Featured Artists',
             subTitle: 'Select you best to listen',
             page: '/artists',
-            items: this.artistsConfigService.artistsList
+            items: await this.aritstService.getFeaturedArtists().toPromise()
         };
     }
 

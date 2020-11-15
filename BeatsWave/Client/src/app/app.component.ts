@@ -9,8 +9,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class AppComponent implements OnInit {
     title = 'listen';
 
-    constructor(private spinner: NgxSpinnerService) {
-        this.spinner.show('primary');
+    constructor(private loadingService: LoadingService) {
+        this.loadingService.startLoading();
     }
 
     ngOnInit() {

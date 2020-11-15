@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SimpleModalService } from 'ngx-simple-modal';
 import { PhotoResizeComponent } from 'src/app/content/partials/photo-resize/photo-resize.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -17,6 +18,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     public userProfileForm: FormGroup;
     public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveProfilePhoto';
     public userPicture: string;
+    public userSubscription: string;
 
     private profile: Profile;
 
@@ -24,7 +26,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
         private fb: FormBuilder,
         private profileService: ProfileService,
         private spinner: NgxSpinnerService,
-        private simpleModalService: SimpleModalService) {
+        private simpleModalService: SimpleModalService,
+        private authService: AuthService) {
         this.userProfileForm = this.fb.group({
             'firstName': [''],
             'lastName': [''],
@@ -47,6 +50,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
                 'biography': [this.profile.biography]
             })
         })
+        this.userSubscription = this.authService.currentUserValue.subscription;
     }
 
     ngAfterViewInit() {

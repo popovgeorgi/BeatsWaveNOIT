@@ -26,7 +26,8 @@ export class MusicComponent implements OnInit, AfterViewInit {
     constructor(private spinner: NgxSpinnerService,
                 private beatService: BeatService,
                 private feedHubService: FeedHubService,
-                private snotifyService: SnotifyService) { }
+                private snotifyService: SnotifyService,
+                private loadingService: LoadingService) { }
 
     ngOnInit() {
         this.fetchInitialBeats();
@@ -56,7 +57,7 @@ export class MusicComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.spinner.hide('primary');
+        this.loadingService.stopLoading();
     }
 
     showMore() {

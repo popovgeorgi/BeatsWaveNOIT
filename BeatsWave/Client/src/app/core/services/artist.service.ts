@@ -18,4 +18,8 @@ export class ArtistService {
   getArtist(id): Observable<Artist> {
     return this.http.get<Artist>(this.artistPath + '/' + id);
   }
+
+  getFeaturedArtists(): Observable<Array<Artist>> {
+    return this.http.get<Array<Artist>>(this.artistPath + '/Featured');
+  }
 }

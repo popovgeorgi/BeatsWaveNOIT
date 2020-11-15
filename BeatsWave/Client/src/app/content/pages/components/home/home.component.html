@@ -1,9 +1,9 @@
 <!-- Page Banner [[ Find at scss/base/core.scss ]] -->
 <div class="banner bg-home"></div>
 
+<ngx-spinner name="home" [fullScreen]="false"></ngx-spinner>
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
-
     <!-- Top Charts -->
     <app-section *ngIf="topCharts" [section]="topCharts" [carouselButtonPositionClass]="carouselArrowPosClass3"
                  [primaryCard]="true" [showImageOptions]="true">
@@ -49,7 +49,7 @@
                 <div class="tab-pane fade show active" id="recent" role="tabpanel" aria-labelledby="recent-tab">
                     <!-- Begin | Custom List [[ Find at scss/framework/components/songs-list/songs-list.scss ]] -->
                     <perfect-scrollbar style="height: 370px" class="song-list">
-                        <app-song-list-view *ngFor="let song of songsList; let i = index"
+                        <app-song-list-view *ngFor="let song of newReleases; let i = index"
                                             [songNumber]="i+1" [song]="song"></app-song-list-view>
                     </perfect-scrollbar>
                     <!-- End | Custom List -->
@@ -84,21 +84,6 @@
     <!-- Artists -->
     <app-section *ngIf="artists" [section]="artists" [carouselButtonPositionClass]="carouselArrowPosClass2"
                  [imageCard]="true" [artistRouteLink]="true">
-    </app-section>
-
-    <!-- Playlist -->
-    <app-section *ngIf="playlist" [section]="playlist" [carouselButtonPositionClass]="carouselArrowPosClass1"
-                 [secondaryCard]="true" [fourSlideCarousel]="true">
-    </app-section>
-
-    <!-- Retro -->
-    <app-section *ngIf="retro" [section]="retro" [carouselButtonPositionClass]="carouselArrowPosClass3"
-                 [primaryCard]="true" [showImageOptions]="true">
-    </app-section>
-
-    <!-- Radio -->
-    <app-section *ngIf="radio" [section]="radio" [carouselButtonPositionClass]="carouselArrowPosClass2"
-                 [imageCard]="true">
     </app-section>
 
     <!-- Genres -->
