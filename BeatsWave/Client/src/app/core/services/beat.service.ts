@@ -26,4 +26,8 @@ export class BeatService {
   getCurrentUserBeats(): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.beatPath + '/mine');
   }
+
+  getMostlyLikedBeats(): Observable<Array<Beat>> {
+    return this.http.get<Array<Beat>>(this.beatPath + '/MostlyLiked');
+  }
 }

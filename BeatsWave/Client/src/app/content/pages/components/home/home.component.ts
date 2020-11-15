@@ -64,12 +64,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     // Initialize top charts object for section
-    initTopCharts() {
+    async initTopCharts() {
         this.topCharts = {
             title: 'Top Charts',
             subTitle: 'Listen top chart',
             page: '/songs',
-            items: this.songsConfigService.songsList
+            items: await this.beatService.getMostlyLikedBeats().toPromise()
         };
     }
 
