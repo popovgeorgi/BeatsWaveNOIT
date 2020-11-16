@@ -27,11 +27,6 @@ export class MenuConfig {
                         icon: 'la la-microphone',
                         page: '/artists'
                     },
-                    {
-                        title: 'Stations',
-                        icon: 'la la-bullseye',
-                        page: '/stations'
-                    },
                     { section: 'Your Music' },
                     {
                         title: 'Analytics',
@@ -88,11 +83,6 @@ export class MenuConfig {
                       icon: 'la la-microphone',
                       page: '/artists'
                   },
-                  {
-                      title: 'Stations',
-                      icon: 'la la-bullseye',
-                      page: '/stations'
-                  },
                   { section: 'Your Music' },
                   {
                       title: 'Analytics',
@@ -143,11 +133,6 @@ export class MenuConfig {
                     title: 'Artists',
                     icon: 'la la-microphone',
                     page: '/artists'
-                },
-                {
-                    title: 'Stations',
-                    icon: 'la la-bullseye',
-                    page: '/stations'
                 },
                 { section: 'Your Music' },
                 {

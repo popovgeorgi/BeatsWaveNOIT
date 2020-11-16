@@ -13,7 +13,7 @@ export class GenresComponent implements OnInit, AfterViewInit {
 
     genres: any = [];
 
-    constructor(private spinner: NgxSpinnerService,
+    constructor(private loadingService: LoadingService,
                 private songsConfigService: SongsConfigService,
                 private genresConfigService: GenresConfigService) { }
 
@@ -22,7 +22,7 @@ export class GenresComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.spinner.hide('primary');
+        this.loadingService.stopLoading();
     }
 
     // Initialize music genres

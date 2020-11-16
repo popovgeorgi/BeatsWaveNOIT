@@ -1,0 +1,59 @@
+<!-- Page Banner [[ Find at scss/base/core.scss ]] -->
+<div class="banner bg-song"></div>
+
+
+
+<!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
+<div class="main-container">
+    <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+    <div class="container-header">
+        <span class="title">{{beatsCount}} Results</span>
+        <div class="ml-auto d-flex align-items-center">
+            <select class="select" name="sort" id="sort">
+                <option selected="">Popular</option>
+                <option value="0">A-Z</option>
+                <option value="1">Z-A</option>
+            </select>
+            <a class="icon" (click)="gridView = !gridView">
+                <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
+                <ng-template #gridViewButton>
+                    <i class="ion-md-apps"></i>
+                </ng-template>
+            </a>
+        </div>
+    </div>
+    <!-- End | Container header -->
+
+    <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+
+    <div class="section">
+        <div class="row custom-card-list">
+            <ng-container *ngIf="gridView; else listView">
+                <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let beat of beats">
+                    <app-primary-card [song]="beat" [showOptions]="true"></app-primary-card>
+                </div>
+            </ng-container>
+            <ng-template #listView>
+                <div class="col-xl-6 col-lg-12" *ngFor="let beat of beats; let i = index">
+                    <app-song-list-view [songNumber]="i+1" [song]="beat" [icon]="'la-ellipsis-h'"></app-song-list-view>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+    <div *ngIf="hasMoreBeatsToInclude" class="sidebar-footer" style="margin-top: -50px;">
+      <button type="button" class="btn btn-block btn-danger btn-air btn-bold"
+              (click)="showMore()">
+          <span>Show more</span>
+      </button>
+    </div>
+    <div *ngIf="!hasMoreBeatsToInclude" class="sidebar-footer" style="margin-top: -50px;">
+      <div class="btn btn-block btn-danger btn-air btn-bold">
+          <span>There is no more to show :)</span>
+      </div>
+    </div>
+    <!-- End | Section -->
+  </div>
+
+    <!--spinner-->
+<!-- End | Main Container -->

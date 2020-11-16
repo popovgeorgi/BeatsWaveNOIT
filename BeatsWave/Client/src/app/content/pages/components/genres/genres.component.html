@@ -5,7 +5,7 @@
 <div class="main-container">
     <div class="section row custom-card-list">
         <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let genre of genres">
-            <app-secondary-card [item]="genre" [routerLink]=""></app-secondary-card>
+            <app-secondary-card [item]="genre" [routerLink]="'/genre/' + genre.name"></app-secondary-card>
         </div>
     </div>
 </div>

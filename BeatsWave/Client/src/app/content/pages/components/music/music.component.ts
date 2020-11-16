@@ -37,11 +37,10 @@ export class MusicComponent implements OnInit, AfterViewInit {
             title: 'New Content',
             body: 'New beat available. Check it out!',
             config: {
-              position: SnotifyPosition.centerBottom,
+              position: SnotifyPosition.centerTop,
               type: SnotifyStyle.info
             }
           })
-          console.log(id);
         })
     }
 
@@ -50,9 +49,9 @@ export class MusicComponent implements OnInit, AfterViewInit {
             if(beats.length < this.itemsPerPage) {
               this.hasMoreBeatsToInclude = false;
             }
-
             this.beats = beats;
             this.beatsCount = beats.length;
+            this.spinner.hide('routing');
         })
     }
 

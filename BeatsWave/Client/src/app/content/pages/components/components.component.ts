@@ -1,12 +1,13 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { PerfectScrollbarComponent } from 'ngx-perfect-scrollbar';
 import { Subscription } from 'rxjs';
 
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { SkinService } from '../../../core/services/skin.service';
 import { LoadingService } from 'src/app/core/services/loading.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-components',
@@ -24,7 +25,23 @@ export class ComponentsComponent implements OnInit, OnDestroy {
     constructor(@Inject(DOCUMENT) private document: Document,
                 private router: Router,
                 private localStorageService: LocalStorageService,
-                private skinService: SkinService) {
+                private skinService: SkinService,
+                private ngxSpinnerService: NgxSpinnerService) {
+                  this.router.events.subscribe((event) => {
+                    switch (true) {
+                      case event instanceof NavigationStart: {
+                        this.ngxSpinnerService.show('routing');
+                        break;
+                      }
+                      case event instanceof NavigationError: {
+                        this.ngxSpinnerService.hide('routing');
+                        break;
+                      }
+                      default: {
+                        break;
+                      }
+                    }
+                  })
                 }
 
     ngOnInit() {

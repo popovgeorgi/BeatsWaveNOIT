@@ -46,24 +46,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 private beatService: BeatService,
                 private aritstService: ArtistService,
                 private loadingService: LoadingService) {
-                  this.spinner.show('home');
                  }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.songsList = this.songsConfigService.songsList;
         // Just takes first 6 index of array for ui
         this.songsList = this.songsList.slice(0, 6);
 
-        this.initTopCharts();
-        this.initNewRelease();
-        this.initEvents();
-        this.initArtists();
-        this.initRetro();
-        this.initPlaylist();
-        this.initRadio();
-        this.initGenres();
+        await this.initTopCharts();
+        await this.initNewRelease();
+        await this.initEvents();
+        await this.initArtists();
+        await this.initGenres();
 
-        this.spinner.hide('home');
+        await this.spinner.hide('routing');
     }
 
     ngAfterViewInit() {

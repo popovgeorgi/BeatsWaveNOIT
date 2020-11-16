@@ -30,4 +30,10 @@ export class BeatService {
   getMostlyLikedBeats(): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.beatPath + '/MostlyLiked');
   }
+
+  getBeatsByGenre(genre: string): Observable<Array<Beat>> {
+    return this.http.get<Array<Beat>>(this.beatPath + '/ByGenre' + '/' + genre);
+  }
 }
+
+
