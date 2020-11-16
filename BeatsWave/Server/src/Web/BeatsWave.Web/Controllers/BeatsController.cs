@@ -65,8 +65,13 @@
         [HttpGet]
         [AllowAnonymous]
         [Route(nameof(MostlyLiked))]
-
         public async Task<IEnumerable<BeatListingServiceModel>> MostlyLiked()
             => await this.beatService.ByLikes<BeatListingServiceModel>();
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("ByGenre/{genre}")]
+        public async Task<IEnumerable<BeatListingServiceModel>> ByGenre(string genre)
+            => await this.beatService.ByGenre<BeatListingServiceModel>(genre);
     }
 }

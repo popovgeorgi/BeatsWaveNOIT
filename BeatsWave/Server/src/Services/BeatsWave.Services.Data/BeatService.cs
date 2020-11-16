@@ -34,6 +34,24 @@
             return await query.To<T>().ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> ByGenre<T>(string genre, int? take = null, int skip = 0)
+        {
+            var genreAsEnum = (Genre)Enum.Parse(typeof(Genre), genre);
+
+            var query = this.beatsRepository
+                .All()
+                .OrderByDescending(b => b.CreatedOn)
+                .Where(b => b.Genre == genreAsEnum)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return await query.To<T>().ToListAsync();
+        }
+
         public async Task<IEnumerable<T>> ByLikes<T>()
         {
             return await this.beatsRepository
