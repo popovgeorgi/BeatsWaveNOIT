@@ -15,10 +15,12 @@ export class GenresComponent implements OnInit, AfterViewInit {
 
     constructor(private loadingService: LoadingService,
                 private songsConfigService: SongsConfigService,
-                private genresConfigService: GenresConfigService) { }
+                private genresConfigService: GenresConfigService,
+                private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         this.initGenres();
+        this.spinner.hide('routing');
     }
 
     ngAfterViewInit() {

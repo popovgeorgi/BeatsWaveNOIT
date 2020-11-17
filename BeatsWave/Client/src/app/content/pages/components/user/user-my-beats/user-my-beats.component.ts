@@ -26,6 +26,7 @@ export class UserMyBeatsComponent implements OnInit, AfterViewInit {
         this.beatService.getCurrentUserBeats().subscribe(beats => {
             this.beats = beats;
             this.beatsCount = beats.length;
+            this.spinner.hide('routing')
         })
     }
 

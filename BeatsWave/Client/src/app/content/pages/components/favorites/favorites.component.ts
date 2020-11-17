@@ -23,6 +23,7 @@ export class FavoritesComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.initSongs();
         this.fetchData();
+        this.spinner.hide('routing')
     }
 
     private fetchData() {

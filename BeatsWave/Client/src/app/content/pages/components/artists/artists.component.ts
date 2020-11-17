@@ -22,9 +22,9 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
 
     private fetchArtists() {
         this.artistService.getArtists().subscribe(artists => {
-            console.log(artists);
             this.artists = artists;
             this.record = artists.length;
+            this.spinner.hide('routing');
         })
     }
 

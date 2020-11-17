@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { SnotifyService } from 'ng-snotify';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'app-login',
@@ -20,8 +22,9 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
 
     constructor(
         private authService: AuthService,
-        private loadingService: LoadingService,
-        private snotifyService: SnotifyService) {
+        private spinner: NgxSpinnerService,
+        private snotifyService: SnotifyService,
+        private localStorageService: LocalStorageService) {
         super();
     }
 
@@ -45,13 +48,15 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     }
 
     submitLogin() {
-        this.loadingService.startLoading();
+        this.spinner.show('loginModal');
         this.formSubmitted = true;
         this.authService.login(this.login.value).subscribe(data => {
             this.authService.saveToken(data['token']);
-            this.loadingService.stopLoading();
+            this.localStorageService.setLocalStorage('currentUser', data);
+            this.spinner.hide('loginModal');
             this.snotifyService.success('You are successfully logged in!');
         }, error => {
+            this.spinner.hide('loginModal');
             this.snotifyService.error("You asda");
         });
 

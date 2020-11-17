@@ -49,6 +49,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
                 'location': [this.profile.location],
                 'biography': [this.profile.biography]
             })
+            this.spinner.hide('routing');
         })
         this.userSubscription = this.authService.currentUserValue.subscription;
     }

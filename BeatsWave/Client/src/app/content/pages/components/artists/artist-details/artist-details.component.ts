@@ -31,8 +31,6 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
 
     constructor(private route: ActivatedRoute,
         private spinner: NgxSpinnerService,
-        private artistsConfigService: ArtistsConfigService,
-        private songsConfigService: SongsConfigService,
         private audioPlayerService: AudioPlayerService,
         private artistService: ArtistService,
         private followService: FollowService,
@@ -49,6 +47,7 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
             this.artistDetails = res;
             this.followers = this.artistDetails.followersCount;
             this.artistBeats = this.artistDetails.beats.length;
+            this.spinner.hide('routing')
         })
     }
 

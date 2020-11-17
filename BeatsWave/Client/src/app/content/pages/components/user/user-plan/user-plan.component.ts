@@ -22,7 +22,7 @@ export class UserPlanComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.spinner.hide('primary');
+        this.spinner.hide('routing');
     }
 
     onBasicClicked() {

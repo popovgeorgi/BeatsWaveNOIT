@@ -8,6 +8,7 @@ import { User } from 'src/app/core/models/User';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnotifyService } from 'ng-snotify';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Component({
     selector: 'app-profile',
@@ -25,7 +26,8 @@ export class ProfileComponent implements OnInit {
                 private menuConfigService: MenuConfigService,
                 private simpleModalService: SimpleModalService,
                 private authService: AuthService,
-                private snotifyService: SnotifyService) {
+                private snotifyService: SnotifyService,
+                private localStorageService: LocalStorageService) {
         this.userMenu = this.menuConfigService.userMenuItems;
     }
 

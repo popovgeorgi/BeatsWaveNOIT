@@ -17,6 +17,7 @@
         <ngx-spinner name="profilePhoto-upload" [fullScreen]="false"></ngx-spinner>
         <image-cropper
         *ngIf="isBrowseClicked"
+          [roundCropper]="true"
           [imageChangedEvent]="imageChangedEvent"
           [resizeToWidth]="420"
           [resizeToHeight]="420"

@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
 import { PlaylistConfigService } from '../../../../core/services/playlist-config.service';
 import { RadioConfigService } from '../../../../core/services/radio-config.service';
 import { GenresConfigService } from '../../../../core/services/genres-config.service';
@@ -11,6 +10,7 @@ import { BeatService } from 'src/app/core/services/beat.service';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { LoadingService } from 'src/app/core/services/loading.service';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     playlist: any = {};
     radio: any = {};
     genres: any = {};
+    tasks = [];
 
     public newReleases: Beat[];
 
@@ -53,13 +54,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
         // Just takes first 6 index of array for ui
         this.songsList = this.songsList.slice(0, 6);
 
-        await this.initTopCharts();
-        await this.initNewRelease();
-        await this.initEvents();
-        await this.initArtists();
-        await this.initGenres();
-
-        await this.spinner.hide('routing');
+         Promise.all([
+           this.initTopCharts(),
+           this.initNewRelease(),
+           this.initEvents(),
+           this.initArtists(),
+           this.initGenres()
+         ]).then(res => {
+           this.spinner.hide('routing');
+         })
     }
 
     ngAfterViewInit() {
@@ -102,32 +105,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
             page: '/artists',
             items: await this.aritstService.getFeaturedArtists().toPromise()
         };
-    }
-
-    // Initialize retro music object for section
-    initRetro() {
-        this.retro = {
-            title: 'Retro Classic',
-            subTitle: 'Old is gold',
-            page: '/songs',
-            items: this.songsConfigService.songsList
-        };
-    }
-
-    // Initialize music playlist object for section
-    initPlaylist() {
-        this.playlist = {
-          title: 'Your Playlist',
-          subTitle: 'You best to listen',
-          page: '/playlist',
-          items: this.playlistConfigService.playlist
-        };
-
-        // Add songs in playlist
-        const playlistItems = this.playlist.items;
-        for (const playlistItem of playlistItems) {
-            playlistItem.songs = this.songsConfigService.songsList;
-        }
     }
 
     // Initialize radio object for section
