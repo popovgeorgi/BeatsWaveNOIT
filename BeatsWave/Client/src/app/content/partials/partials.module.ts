@@ -18,7 +18,6 @@ import { CountdownComponent } from './countdown/countdown.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PhotoResizeComponent } from './photo-resize/photo-resize.component';
-import { FileUploadService } from 'src/app/core/services/file-upload.service';
 
 @NgModule({
     declarations: [

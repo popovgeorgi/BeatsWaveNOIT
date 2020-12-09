@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../core/services/loading.service';
 import { EventsConfigService } from '../../../../core/services/events-config.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { EventService } from 'src/app/core/services/event.service';
 
 @Component({
     selector: 'app-events',
@@ -9,21 +11,23 @@ import { EventsConfigService } from '../../../../core/services/events-config.ser
 })
 export class EventsComponent implements OnInit, AfterViewInit {
 
-    events: any = [];
+    events: Event[] = [];
 
-    constructor(private loadingService: LoadingService,
-                private eventsConfigService: EventsConfigService) { }
+    constructor(private spinner: NgxSpinnerService,
+                private eventService: EventService) { }
 
     ngOnInit() {
-        this.initEvents();
+        this.fetchEvents();
+    }
+
+    fetchEvents() {
+        this.eventService.getEvents().subscribe(events => {
+          this.events = events;
+        })
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
-    }
-
-    initEvents() {
-        this.events = this.eventsConfigService.eventsList;
+        this.spinner.hide('routing');
     }
 
 }

@@ -10,6 +10,7 @@
                     <h6 class="card-title mb-0">Add Event</h6>
                 </div>
                 <div class="card-body">
+                    <ngx-spinner name="eventPhotoUploaded" [fullScreen]="false"></ngx-spinner>
                     <form [formGroup]="eventForm" (ngSubmit)="uploadEvent()">
                         <div class="form-row form-group">
                             <label for="eventName" class="col-md-4 text-md-right col-form-label">Event Name</label>
@@ -24,7 +25,6 @@
                                   <p-fileUpload name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
                                   class="custom-file-input" id="songImage" (onSend)="onPhotoUploading()"
                                   (onUpload)="onPhotoUploaded($event)"></p-fileUpload>
-                                    <label class="custom-file-label" for="eventImage">Choose file</label>
                                 </div>
                             </div>
                         </div>
@@ -45,6 +45,12 @@
                             <div class="col-md-7">
                                 <input type="text" id="emailId" class="form-control" formControlName="email">
                             </div>
+                        </div>
+                        <div class="form-row form-group">
+                          <label for="emailId" class="col-md-4 text-md-right col-form-label">Conduct Date</label>
+                          <div class="col-md-7">
+                              <input placeholder="YYYY/MM/DD" type="text" id="emailId" class="form-control" formControlName="conductDate">
+                          </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="desc" class="col-md-4 text-md-right col-form-label">Description</label>

@@ -1,4 +1,4 @@
-<div [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + musicEvent.image + ')'}">
+<div [class]="eventBorderRadiusClass" [ngStyle]="{'background-image': 'url(' + musicEvent.imageUrl + ')'}">
     <div class="event-content p-4">
         <a [routerLink]="'/event/' + musicEvent.id + '/details'"><h6>{{musicEvent.name}}</h6></a>
         <div [innerHTML]="musicEvent.description | truncate"></div>

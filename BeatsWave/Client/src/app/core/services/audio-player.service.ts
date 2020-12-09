@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
-import { EventEmitter } from 'protractor';
 import { BehaviorSubject } from 'rxjs';
 import { Beat } from '../models/Beat';
 import { SongsConfigService } from './songs-config.service';
@@ -17,7 +16,6 @@ export class AudioPlayerService {
     constructor(private songsConfigService: SongsConfigService) { }
 
     playSong(song: Beat) {
-      debugger;
         Amplitude.removeSong(0);
         Amplitude.playNow(song);
         this.songPlayedSource.next(song);

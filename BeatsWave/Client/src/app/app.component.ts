@@ -10,8 +10,7 @@ import { NavigationError, NavigationStart, Router } from '@angular/router';
 export class AppComponent implements OnInit {
     title = 'listen';
 
-    constructor(private loadingService: LoadingService, private router: Router, private ngxSpinnerService: NgxSpinnerService) {
-        //this.loadingService.startLoading();
+    constructor(private ngxSpinnerService: NgxSpinnerService) {
         this.ngxSpinnerService.show('routing')
     }
 

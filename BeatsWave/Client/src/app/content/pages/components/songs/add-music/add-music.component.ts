@@ -60,7 +60,7 @@ export class AddMusicComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.spinner.hide('primary');
+        this.spinner.hide('routing');
     }
 
 }

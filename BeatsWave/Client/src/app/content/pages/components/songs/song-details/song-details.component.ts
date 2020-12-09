@@ -10,6 +10,7 @@ import { Beat } from "src/app/core/models/Beat";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LikeService } from 'src/app/core/services/like.service';
 import { SnotifyService } from 'ng-snotify';
+import { LoadingService } from 'src/app/core/services/loading.service';
 
 @Component({
   selector: "app-song-details",
@@ -23,6 +24,7 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
+    private loadingService: LoadingService,
     private audioPlayerService: AudioPlayerService,
     private beatService: BeatService,
     private likeService: LikeService,
@@ -60,7 +62,8 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.spinner.hide('primary');
+    this.loadingService.stopLoading();
+    this.spinner.hide('routing');
   }
 
   addInPlayer() {

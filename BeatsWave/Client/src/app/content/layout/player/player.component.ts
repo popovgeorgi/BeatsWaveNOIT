@@ -9,7 +9,6 @@ import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
 import { Beat } from 'src/app/core/models/Beat';
 import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
-import { EventEmitter } from 'protractor';
 
 @Component({
     selector: 'app-player',
@@ -35,8 +34,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.song = this.songsConfigService.defaultSong;
 
         Amplitude.init({
-          songs: [ this.song ],
-          debug: true
+          //songs: [ this.song ]
         });
 
         const themeSkin = this.localStorageService.getThemeSkin();
