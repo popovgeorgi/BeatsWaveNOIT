@@ -40,5 +40,11 @@
 
             return this.Created(nameof(this.Create), id);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+
+        public async Task<IEnumerable<EventListingServiceModel>> All()
+            => await this.eventService.AllAsync<EventListingServiceModel>();
     }
 }

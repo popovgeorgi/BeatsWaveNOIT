@@ -1,10 +1,14 @@
 ﻿namespace BeatsWave.Services.Data
 {
-    using BeatsWave.Data.Common.Repositories;
-    using BeatsWave.Data.Models;
-
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
+
+    using BeatsWave.Data.Common.Repositories;
+    using BeatsWave.Services.Mapping;
+    using BeatsWave.Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     public class EventService : IEventService
     {
@@ -13,6 +17,15 @@
         public EventService(IDeletableEntityRepository<Event> eventRepository)
         {
             this.eventRepository = eventRepository;
+        }
+
+        public async Task<IEnumerable<T>> AllAsync<T>()
+        {
+            return await this.eventRepository
+                .All()
+                .OrderByDescending(x => x.ConductDate)
+                .To<T>()
+                .ToListAsync();
         }
 
         public async Task<int> CreateAsync(string name, string imageUrl, string venue, string phoneNumber, string email, string conductDate, string description, decimal? price, string managerId)
