@@ -1,14 +1,15 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Events;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    using static BeatsWave.Common.GlobalConstants;
 
     public class EventsController : ApiController
     {
@@ -43,8 +44,13 @@
 
         [HttpGet]
         [AllowAnonymous]
-
         public async Task<IEnumerable<EventListingServiceModel>> All()
             => await this.eventService.AllAsync<EventListingServiceModel>();
+
+        [HttpGet]
+        [Route(Id)]
+        [AllowAnonymous]
+        public async Task<EventDetailsServiceModel> Details(int id)
+            => await this.eventService.DetailsAsync<EventDetailsServiceModel>(id);
     }
 }

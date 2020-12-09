@@ -13,5 +13,7 @@
 
         public const string BlobImageContainer = "photos";
         public const string BlobBeatContainer = "beats";
+
+        public const string Id = "{id}";
     }
 }

@@ -49,5 +49,14 @@
 
             return newEvent.Id;
         }
+
+        public async Task<T> DetailsAsync<T>(int id)
+        {
+            return await this.eventRepository
+                .All()
+                .Where(e => e.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+        }
     }
 }

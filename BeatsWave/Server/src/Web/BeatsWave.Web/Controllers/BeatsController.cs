@@ -1,7 +1,6 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
@@ -11,6 +10,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
+
+    using static BeatsWave.Common.GlobalConstants;
 
     public class BeatsController : ApiController
     {
@@ -52,7 +53,7 @@
             => await this.beatService.AllAsync<BeatListingServiceModel>(take, skip);
 
         [HttpGet]
-        [Route("{id}")]
+        [Route(Id)]
         [AllowAnonymous]
         public async Task<BeatDetailsServiceModel> Details(int id)
             => await this.beatService.DetailsAsync<BeatDetailsServiceModel>(id);
