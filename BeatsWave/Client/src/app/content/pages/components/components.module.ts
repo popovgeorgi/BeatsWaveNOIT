@@ -214,11 +214,7 @@ const routes: Routes = [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-        },
-        ArtistService,
-        FollowService,
-        BeatService,
-        EventService
+        }
     ]
 })
 export class ComponentsModule { }

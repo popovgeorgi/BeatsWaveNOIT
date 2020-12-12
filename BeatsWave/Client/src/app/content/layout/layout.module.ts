@@ -95,9 +95,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
                 closeOnClickOutside: true,
                 animationDuration: 1000,
             }}
-        },
-        AuthService,
-        UserService
+        }
     ]
 })
 export class LayoutModule { }
