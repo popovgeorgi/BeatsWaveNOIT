@@ -28,5 +28,15 @@
 
             dbContext.Database.Migrate();
         }
+
+        public static IApplicationBuilder UserCors(this IApplicationBuilder app)
+            => app
+                .UseCors(policy =>
+                {
+                    policy
+                    .WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
     }
 }
