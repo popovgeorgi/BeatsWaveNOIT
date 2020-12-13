@@ -11,35 +11,35 @@ import { User } from '../models/User';
 })
 export class AuthService {
 
-  public currentUser: Observable<User>;
-  private currentUserSubject: BehaviorSubject<User>;
+  public user = new BehaviorSubject<User>(null);
+
   private loginPath = environment.apiUrl + '/identity/login';
   private registerPath = environment.apiUrl + '/identity/register';
 
-  constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
-  }
+  constructor(private http: HttpClient) { }
 
   login(data): Observable<any> {
     return this.http.post<any>(this.loginPath, data)
       .pipe(map(user => {
         if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
+          localStorage.setItem('userData', JSON.stringify(user));
+          this.user.next(user);
         }
-
         return user;
       }));
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+    localStorage.removeItem('userData');
+    this.user.next(null);
+  }
+
+  autoLogin() {
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    this.user.next(userData);
   }
 
   register(data): Observable<any> {

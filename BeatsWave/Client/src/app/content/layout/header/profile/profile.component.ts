@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.userRole = this.authService.currentUserValue.role;
+      this.userRole = this.authService.user.value.role;
 
       if (this.userRole == 'Beatmaker') {
         this.userMenu = this.menuConfigService.beatmakerUserMenuItems;

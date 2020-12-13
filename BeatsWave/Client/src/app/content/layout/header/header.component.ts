@@ -13,79 +13,82 @@ import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html'
+  selector: 'app-header',
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-    @ViewChild('headerBackdrop', {static: false}) backdrop: ElementRef;
-    headerClasses = 'bg-primary';
+  @ViewChild('headerBackdrop', { static: false }) backdrop: ElementRef;
+  headerClasses = 'bg-primary';
 
-    language: any = {};
-    currentUser: User;
+  private userSub: Subscription;
+  language: any = {};
+  currentUser: User;
 
-    searchSubscription: Subscription;
-    skinSubscription: Subscription;
+  searchSubscription: Subscription;
+  skinSubscription: Subscription;
 
-    constructor(@Inject(DOCUMENT) private document: Document,
-                private searchService: SearchService,
-                private simpleModalService: SimpleModalService,
-                private localStorageService: LocalStorageService,
-                private userService: UserService,
-                private skinService: SkinService,
-                private authService: AuthService) {
-        this.language = {
-            title: 'Language',
-            image: './assets/images/svg/translate.svg'
-        };
+  constructor(@Inject(DOCUMENT) private document: Document,
+    private searchService: SearchService,
+    private simpleModalService: SimpleModalService,
+    private localStorageService: LocalStorageService,
+    private skinService: SkinService,
+    private authService: AuthService) {
+    this.language = {
+      title: 'Language',
+      image: './assets/images/svg/translate.svg'
+    };
+  }
+
+  ngOnInit() {
+    this.userSub = this.authService.user.subscribe(user => {
+      this.currentUser = user;
+    });
+    const themeSkin = this.localStorageService.getThemeSkin();
+    if (themeSkin) {
+      this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
     }
 
-    ngOnInit() {
-        this.currentUser = this.authService.currentUserValue;
-        const themeSkin = this.localStorageService.getThemeSkin();
-        if (themeSkin) {
-            this.headerClasses = 'bg-' + Config.THEME_CLASSES[themeSkin.header];
-        }
-
-        this.searchSubscription = this.searchService.searchStatus.subscribe((value) => {
-            if (value) {
-                this.hideSearchResults();
-            }
-        });
-        this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
-            if (skin) {
-                this.headerClasses = 'bg-' + Config.THEME_CLASSES[skin.header];
-            }
-        });
-    }
-
-    showSearchResults() {
-        this.document.body.classList.add(Config.classes.openSearch);
-        this.backdrop.nativeElement.classList.add(Config.classes.show);
-    }
-
-    hideSearchResults() {
-        this.document.body.classList.remove(Config.classes.openSearch);
-        this.backdrop.nativeElement.classList.remove(Config.classes.show);
-    }
-
-    openLanguagesModal() {
+    this.searchSubscription = this.searchService.searchStatus.subscribe((value) => {
+      if (value) {
         this.hideSearchResults();
-        const modal = this.simpleModalService.addModal(LanguageComponent, {})
-            .subscribe((isConfirmed) => {
-                if (isConfirmed) {
-                } else {
-                }
-            });
-    }
+      }
+    });
+    this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
+      if (skin) {
+        this.headerClasses = 'bg-' + Config.THEME_CLASSES[skin.header];
+      }
+    });
+  }
 
-    openSidebar() {
-        this.document.body.classList.add(Config.classes.openSidebar);
-    }
+  showSearchResults() {
+    this.document.body.classList.add(Config.classes.openSearch);
+    this.backdrop.nativeElement.classList.add(Config.classes.show);
+  }
 
-    ngOnDestroy() {
-        this.searchSubscription.unsubscribe();
-        this.skinSubscription.unsubscribe();
-    }
+  hideSearchResults() {
+    this.document.body.classList.remove(Config.classes.openSearch);
+    this.backdrop.nativeElement.classList.remove(Config.classes.show);
+  }
+
+  openLanguagesModal() {
+    this.hideSearchResults();
+    const modal = this.simpleModalService.addModal(LanguageComponent, {})
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+        } else {
+        }
+      });
+  }
+
+  openSidebar() {
+    this.document.body.classList.add(Config.classes.openSidebar);
+  }
+
+  ngOnDestroy() {
+    this.searchSubscription.unsubscribe();
+    this.skinSubscription.unsubscribe();
+    this.userSub.unsubscribe();
+  }
 
 }

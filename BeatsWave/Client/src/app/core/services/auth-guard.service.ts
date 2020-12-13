@@ -13,7 +13,7 @@ export class AuthGuardService implements CanActivate {
     private snotifyService: SnotifyService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      const currentUser = this.authService.currentUserValue;
+      const currentUser = this.authService.user.value;
       if (currentUser) {
         if(route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {
           this.snotifyService.info('You are not permitted to access this page!');

@@ -6,5 +6,6 @@ export interface User {
     displayName: string,
     role: string,
     token: string,
+    tokenExpirationDate: string,
     subscription: string
 }

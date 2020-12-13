@@ -18,7 +18,7 @@ export class UserPlanComponent implements OnInit, AfterViewInit {
     userSubscription: string;
 
     ngOnInit() {
-      this.userSubscription = this.authService.currentUserValue.subscription;
+      this.userSubscription = this.authService.user.value.subscription;
     }
 
     ngAfterViewInit() {

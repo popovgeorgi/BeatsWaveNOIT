@@ -46,7 +46,7 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
                 this.sidebarClass = 'sidebar-' + Config.THEME_CLASSES[skin.sidebar];
             }
         });
-        this.userRole = this.authService.currentUserValue.role;
+        this.userRole = this.authService.user.value.role;
 
         if (this.userRole == 'Beatmaker' || this.userRole == 'Artist') {
           this.menuItems = this.menuConfigService.beatmakerMenuItems;

@@ -51,7 +51,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
             })
             this.spinner.hide('routing');
         })
-        this.userSubscription = this.authService.currentUserValue.subscription;
+        this.userSubscription = this.authService.user.value.subscription;
     }
 
     ngAfterViewInit() {
