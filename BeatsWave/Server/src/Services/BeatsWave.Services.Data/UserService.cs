@@ -2,12 +2,16 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
+
     using BeatsWave.Common;
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
+    using BeatsWave.Web.Models.Users;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.VisualBasic;
 
     public class UserService : IUserService
     {
@@ -35,6 +39,22 @@
                .Include(l => l.Beat)
                .To<T>()
                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<UsersCountByMonthServiceModel>> GetUserCountByMonthInfo()
+        {
+            var information = await this.userRepository
+                .All()
+                .GroupBy(x => new { x.CreatedOn.Month, x.CreatedOn.Year })
+                .Select(u => new UsersCountByMonthServiceModel
+                {
+                    Year = u.Key.Year.ToString(), 
+                    Month = u.Key.Month.ToString(),
+                    UsersCount = u.Count(),
+                })
+                .ToListAsync();
+
+            return information;
         }
 
         public async Task SetInitialValues(string id, string displayName, string profilePicture)

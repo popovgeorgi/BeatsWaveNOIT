@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { map, mergeMap } from 'rxjs/operators';
 import { Beat } from 'src/app/core/models/Beat';
 import { BeatService } from 'src/app/core/services/beat.service';
@@ -19,40 +20,40 @@ export class GenreListingComponent implements OnInit, AfterViewInit {
   private page = 1;
 
   constructor(private beatService: BeatService,
-     private route: ActivatedRoute,
-     private loadingService: LoadingService) { }
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.fetchInitialBeats();
   }
 
-private fetchInitialBeats() {
+  private fetchInitialBeats() {
     this.route.params.pipe(map(params => {
       let genre = params['name'];
-      if(genre == 'Hip-Hop') {
+      if (genre == 'Hip-Hop') {
         genre = 'HipHop';
       }
-      else if(genre == 'R&B') {
+      else if (genre == 'R&B') {
         genre = 'RB';
       }
       return genre
-    }), mergeMap(genre => this.beatService.getBeatsByGenre(genre))).subscribe(beats => {
-      this.beats = beats;
-      this.beatsCount = beats.length;
-    })
-}
+    }),
+      mergeMap(genre => this.beatService.getBeatsByGenre(genre))).subscribe(beats => {
+        this.beats = beats;
+        this.beatsCount = beats.length;
+      })
+  }
 
   showMore() {
     this.page++;
     this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(beats => {
-      if(beats.length < this.itemsPerPage) {
+      if (beats.length < this.itemsPerPage) {
         this.hasMoreBeatsToInclude = false;
       }
       this.beats = this.beats.concat(beats);
     })
-}
-ngAfterViewInit() {
-  this.loadingService.stopLoading();
-}
-
+  }
+  ngAfterViewInit() {
+    this.spinner.hide('routing');
+  }
 }

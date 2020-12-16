@@ -6,8 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { ChartsModule } from 'ng2-charts';
-import { ImageCropperModule } from 'ngx-image-cropper';
+import { ChartsModule, ThemeService } from 'ng2-charts';
 
 import { ComponentsComponent } from './components.component';
 import { HomeComponent } from './home/home.component';
@@ -39,11 +38,7 @@ import { PurchasesComponent } from './analytics/purchases/purchases.component';
 import { StatisticsComponent } from './analytics/statistics/statistics.component';
 import { ReferralsComponent } from './analytics/referrals/referrals.component';
 import { FileUploadModule } from 'primeng/fileupload';
-import { ArtistService } from 'src/app/core/services/artist.service';
-import { FollowService } from 'src/app/core/services/follow.service';
-import { BeatService } from 'src/app/core/services/beat.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { EventService } from 'src/app/core/services/event.service';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UserMyBeatsComponent } from './user/user-my-beats/user-my-beats.component';
 import { AuthGuardService } from 'src/app/core/services/auth-guard.service';
@@ -108,7 +103,7 @@ const routes: Routes = [
                 path: 'add-music',
                 component: AddMusicComponent,
                 canActivate: [AuthGuardService],
-                data: {roles: [Role.Beatmaker, Role.Admin]}
+                data: {roles: [Role.Beatmaker, Role.Administrator]}
             },
             {
                 path: 'stations',
@@ -116,7 +111,9 @@ const routes: Routes = [
             },
             {
                 path: 'analytics',
-                component: AnalyticsComponent
+                component: AnalyticsComponent,
+                canActivate: [AuthGuardService],
+                data: {roles: [Role.Administrator]}
             },
             {
                 path: 'favorites',
@@ -139,7 +136,7 @@ const routes: Routes = [
                 path: 'add-event',
                 component: AddEventComponent,
                 canActivate: [AuthGuardService],
-                data: {roles: [Role.Manager, Role.Admin]}
+                data: {roles: [Role.Manager, Role.Administrator]}
             },
             {
                 path: 'profile',
@@ -211,6 +208,7 @@ const routes: Routes = [
         InfiniteScrollModule
     ],
     providers: [
+        ThemeService,
         {
             provide: PERFECT_SCROLLBAR_CONFIG,
             useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

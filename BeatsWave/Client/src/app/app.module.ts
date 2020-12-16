@@ -12,40 +12,39 @@ import { TokenInterceptorService } from './core/services/token-interceptor.servi
 import { NgxSpinnerModule, NgxSpinnerService } from '../../node_modules/ngx-spinner';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AuthGuardService } from './core/services/auth-guard.service';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        LayoutModule,
-        HttpClientModule,
-        NgxSpinnerModule,
-        BrowserAnimationsModule,
-        SnotifyModule
-    ],
-    providers: [
-        NgxSpinnerService,
-        MenuConfigService,
-        SongsConfigService,
-        { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-        SnotifyService,
-        AuthGuardService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TokenInterceptorService,
-            multi: true
-        },
-        {
-          provide: HTTP_INTERCEPTORS,
-          useClass: ErrorInterceptorService,
-          multi: true
-      }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    LayoutModule,
+    HttpClientModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
+    SnotifyModule
+  ],
+  providers: [
+    NgxSpinnerService,
+    MenuConfigService,
+    SongsConfigService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
+    SnotifyService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

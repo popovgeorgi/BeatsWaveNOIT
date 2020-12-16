@@ -29,7 +29,7 @@
             dbContext.Database.Migrate();
         }
 
-        public static IApplicationBuilder UserCors(this IApplicationBuilder app)
+        public static IApplicationBuilder UseCorsPolicy(this IApplicationBuilder app)
             => app
                 .UseCors(policy =>
                 {

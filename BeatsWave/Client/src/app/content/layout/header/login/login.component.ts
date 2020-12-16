@@ -48,10 +48,11 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
       this.authService.saveToken(data['token']);
       this.spinner.hide('loginModal');
       this.snotifyService.success('You are successfully logged in!');
-    }, error => {
-      this.spinner.hide('loginModal');
-      this.snotifyService.error("You asda");
-    });
+    },
+      error => {
+        this.spinner.hide('loginModal');
+        this.snotifyService.error("You asda");
+      });
 
     this.close();
   }

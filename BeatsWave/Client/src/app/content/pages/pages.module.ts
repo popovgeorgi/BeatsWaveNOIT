@@ -16,6 +16,7 @@ import { CoreModule } from '../../core/core.module';
 import { LandingPageComponent } from './snippets/landing-page/landing-page.component';
 import { DemoPageComponent } from './snippets/demo-page/demo-page.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BaseChartDirective } from 'ng2-charts';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true

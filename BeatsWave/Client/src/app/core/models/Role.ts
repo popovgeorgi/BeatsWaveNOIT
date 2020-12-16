@@ -1,6 +1,6 @@
 export enum Role {
   Beatmaker = 'Beatmaker',
   Artist = 'Artist',
-  Admin = 'Admin',
+  Administrator = 'Administrator',
   Manager = 'Manager'
 }

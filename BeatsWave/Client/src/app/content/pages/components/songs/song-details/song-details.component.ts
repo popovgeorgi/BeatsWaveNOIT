@@ -41,7 +41,7 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
       if (this.isLiked == true) {
         this.snotifyService.info('Liked' + ' ' + this.beatDetails.name);
       }
-      else if(this.isLiked == false) {
+      else if (this.isLiked == false) {
         this.snotifyService.info('Unliked' + ' ' + this.beatDetails.name);
       }
     })
@@ -53,12 +53,13 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
         const id = params["id"];
         this.beatId = id;
         return id;
-      }), mergeMap((id) => this.beatService.getBeat(id))).subscribe((beat) => {
-        this.beatDetails = beat;
-      });
-      this.likeService.doesUserLike(this.beatId).subscribe(res => {
-        this.isLiked = res;
-      });
+      }),
+        mergeMap((id) => this.beatService.getBeat(id))).subscribe((beat) => {
+          this.beatDetails = beat;
+        });
+    this.likeService.doesUserLike(this.beatId).subscribe(res => {
+      this.isLiked = res;
+    });
   }
 
   ngAfterViewInit() {

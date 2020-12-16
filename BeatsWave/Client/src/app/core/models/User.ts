@@ -1,11 +1,11 @@
 export interface User {
-    id: string,
-    mainPhotoUrl: string,
-    firstName: string,
-    lastName: string,
-    displayName: string,
-    role: string,
-    token: string,
-    tokenExpirationDate: string,
-    subscription: string
+  id: string,
+  mainPhotoUrl: string,
+  firstName: string,
+  lastName: string,
+  displayName: string,
+  role: string,
+  token: string,
+  tokenExpirationDate: string,
+  subscription: string
 }

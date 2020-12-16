@@ -1,32 +1,35 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LoadingService } from '../../../../core/services/loading.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/core/models/User';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-    selector: 'app-analytics',
-    templateUrl: './analytics.component.html'
+  selector: 'app-analytics',
+  templateUrl: './analytics.component.html'
 })
-export class AnalyticsComponent implements OnInit, AfterViewInit {
+export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    currentUser: User;
+  private userSub: Subscription;
+  public currentUser: User;
 
-    constructor(private loadingService: LoadingService,
-                private userService: UserService) { }
+  constructor(private spinner: NgxSpinnerService,
+    private authService: AuthService) { }
 
-    ngOnInit() {
-        this.fetchUser();
-    }
+  ngOnInit() {
+    var userSub = this.authService.user.subscribe(user => {
+      this.currentUser = user;
+    })
+  }
 
-    private fetchUser() {
-        this.userService.getInfo().subscribe(user => {
-            this.currentUser = user;
-        })
-    }
+  ngAfterViewInit() {
+    this.spinner.hide('routing');
+  }
 
-    ngAfterViewInit() {
-        this.loadingService.stopLoading();
-    }
-
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
 }

@@ -14,7 +14,6 @@ export class GenresComponent implements OnInit, AfterViewInit {
     genres: any = [];
 
     constructor(private loadingService: LoadingService,
-                private songsConfigService: SongsConfigService,
                 private genresConfigService: GenresConfigService,
                 private spinner: NgxSpinnerService) { }
 

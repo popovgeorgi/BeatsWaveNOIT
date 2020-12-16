@@ -78,7 +78,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       const modal = this.simpleModalService.addModal(PhotoResizeComponent, {})
         .subscribe((isConfirmed) => {
             if (isConfirmed) {
-              debugger;
               modal.remove;
             } else {
             }
