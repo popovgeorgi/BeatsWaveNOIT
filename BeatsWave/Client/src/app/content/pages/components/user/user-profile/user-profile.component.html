@@ -11,7 +11,7 @@
                         <div class="card-body text-center">
                             <ngx-spinner name="photoUploader" [fullScreen]="false" ></ngx-spinner>
                             <div class="avatar avatar-xl avatar-circle mx-auto mb-4">
-                                <img [src]="userPicture" alt="user">
+                                <img class="mainPhotoHeight" [src]="userPicture" alt="user">
                             </div>
                             <h6 class="mb-3">{{userProfileForm.value.displayName}}</h6>
                             <button type="button" class="btn btn-danger btn-air" (click)="openImageResizeModal()">Change Image</button>
