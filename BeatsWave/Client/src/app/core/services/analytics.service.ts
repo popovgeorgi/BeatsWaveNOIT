@@ -8,7 +8,7 @@ import { UsersPerMonth } from '../models/UsersPerMonth';
   providedIn: 'root'
 })
 export class AnalyticsService {
-  private usersPath = environment.apiUrl + '/users';
+  private usersPath = environment.apiUrl + '/analytics';
   constructor(private http: HttpClient) { }
 
   getUsersPerMonth(): Observable<Array<UsersPerMonth>> {

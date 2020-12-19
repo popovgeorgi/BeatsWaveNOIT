@@ -30,11 +30,5 @@
         [Route(nameof(Favourites))]
         public async Task<IEnumerable<UserFavouritesServiceModel>> Favourites()
             => await this.userService.GetLikedBeatsAsync<UserFavouritesServiceModel>(this.currentUser.GetId());
-
-        [HttpGet]
-        [AllowAnonymous]
-        [Route(nameof(UsersCountByMonths))]
-        public async Task<IEnumerable<UsersCountByMonthServiceModel>> UsersCountByMonths()
-            => await this.userService.GetUserCountByMonthInfo();
     }
 }
