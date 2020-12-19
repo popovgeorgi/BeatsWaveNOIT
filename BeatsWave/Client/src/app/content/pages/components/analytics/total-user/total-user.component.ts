@@ -24,13 +24,14 @@ export class TotalUserComponent implements OnInit {
     this.chartOptionsConfig();
   }
 
- ngOnInit() {
-
+  ngOnInit() {
     this.fetchData()
-    .pipe(tap((res: UsersPerMonth[])=>{
+      .pipe(
+        tap((res: UsersPerMonth[]) => {
           this.usersPerMonth = res;
           this.chartDataConfig();
-    })).subscribe();
+        }))
+      .subscribe();
   }
 
   private fetchData(): Observable<Array<UsersPerMonth>> {
