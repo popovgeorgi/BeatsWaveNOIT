@@ -20,7 +20,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     private authService: AuthService) { }
 
   ngOnInit() {
-    var userSub = this.authService.user.subscribe(user => {
+    this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
     })
   }

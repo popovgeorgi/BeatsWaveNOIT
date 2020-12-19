@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { UsersPerMonth } from 'src/app/core/models/UsersPerMonth';
 import { AnalyticsService } from 'src/app/core/services/analytics.service';
 
@@ -9,7 +10,7 @@ import { AnalyticsService } from 'src/app/core/services/analytics.service';
   selector: 'app-total-user',
   templateUrl: './total-user.component.html'
 })
-export class TotalUserComponent implements OnInit, AfterViewInit {
+export class TotalUserComponent implements OnInit {
 
   usersPerMonth: UsersPerMonth[]
   chartData: ChartDataSets[] = [];
@@ -23,19 +24,17 @@ export class TotalUserComponent implements OnInit, AfterViewInit {
     this.chartOptionsConfig();
   }
 
-  async ngOnInit() {
-    this.fetchData();
+ ngOnInit() {
+
+    this.fetchData()
+    .pipe(tap((res: UsersPerMonth[])=>{
+          this.usersPerMonth = res;
+          this.chartDataConfig();
+    })).subscribe();
   }
 
-  ngAfterViewInit() {
-    this.chartDataConfig();
-  }
-
-  private fetchData() {
-    this.analyticsService.getUsersPerMonth()
-      .subscribe(res => {
-        this.usersPerMonth = res;
-      })
+  private fetchData(): Observable<Array<UsersPerMonth>> {
+    return this.analyticsService.getUsersPerMonth();
   }
 
   chartOptionsConfig() {
@@ -66,7 +65,7 @@ export class TotalUserComponent implements OnInit, AfterViewInit {
     let data = this.fillMonthArray(this.usersPerMonth);
     this.chartData = [{
       label: 'Users',
-      data: [data],
+      data: data,
       backgroundColor: '#f11717',
       borderColor: '#f11717',
       borderWidth: 3,
@@ -74,7 +73,7 @@ export class TotalUserComponent implements OnInit, AfterViewInit {
       pointRadius: 0
     }];
 
-    this.chartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.chartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   }
 
   private fillMonthArray(usersPerMonth: Array<UsersPerMonth>) {

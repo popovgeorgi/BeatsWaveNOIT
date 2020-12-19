@@ -106,10 +106,6 @@ const routes: Routes = [
                 data: {roles: [Role.Beatmaker, Role.Administrator]}
             },
             {
-                path: 'stations',
-                component: StationsComponent
-            },
-            {
                 path: 'analytics',
                 component: AnalyticsComponent,
                 canActivate: [AuthGuardService],
