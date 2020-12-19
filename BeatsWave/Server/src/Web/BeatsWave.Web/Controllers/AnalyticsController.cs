@@ -4,23 +4,29 @@
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
-    using BeatsWave.Web.Models.Users;
+    using BeatsWave.Web.Models.Analytics;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class AnalyticsController : ApiController
     {
-        private readonly IUserService userService;
+        private readonly IAnalyticsService analyticsService;
 
-        public AnalyticsController(IUserService userService)
+        public AnalyticsController(IAnalyticsService analyticsService)
         {
-            this.userService = userService;
+            this.analyticsService = analyticsService;
         }
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         [Route(nameof(UsersCountByMonths))]
         public async Task<IEnumerable<UsersCountByMonthServiceModel>> UsersCountByMonths()
-            => await this.userService.GetUserCountByMonthInfo();
+            => await this.analyticsService.GetUserCountByMonthInfo();
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        [Route(nameof(BeatsCountByMonths))]
+        public async Task<IEnumerable<BeatsCountByMonthServiceModel>> BeatsCountByMonths()
+            => await this.analyticsService.GetBeatCountByMonthInfo();
     }
 }

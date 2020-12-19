@@ -1,4 +1,4 @@
-﻿namespace BeatsWave.Web.Models.Users
+﻿namespace BeatsWave.Web.Models.Analytics
 {
     public class UsersCountByMonthServiceModel
     {
