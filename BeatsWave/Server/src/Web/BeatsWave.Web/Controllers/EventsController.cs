@@ -23,7 +23,8 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = "Manager")]
+        [AllowAnonymous]
+        [Authorize(Roles = "Manager, Administrator")]
         public async Task<IActionResult> Create(CreateEventRequestModel model)
         {
             var managerId = this.currentUser.GetId();

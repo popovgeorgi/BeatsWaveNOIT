@@ -37,7 +37,7 @@
                 Venue = venue,
                 PhoneNumber = phoneNumber,
                 Email = email,
-                ConductDate = DateTime.ParseExact(conductDate, "yyyy-MM-dd HH:mm:ss,fff", System.Globalization.CultureInfo.InvariantCulture),
+                ConductDate = DateTime.ParseExact(conductDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture),
                 Description = description,
                 Price = price,
                 ManagerId = managerId,
