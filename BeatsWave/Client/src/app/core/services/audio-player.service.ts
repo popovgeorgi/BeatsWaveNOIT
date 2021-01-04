@@ -9,16 +9,11 @@ import { SongsConfigService } from './songs-config.service';
 })
 export class AudioPlayerService {
 
-    private beat: Beat = {} as Beat;
-    private songPlayedSource = new BehaviorSubject<Beat>(this.beat);
-    public songPlayed = this.songPlayedSource.asObservable();
-
-    constructor(private songsConfigService: SongsConfigService) { }
+    constructor() { }
 
     playSong(song: Beat) {
         Amplitude.removeSong(0);
         Amplitude.playNow(song);
-        this.songPlayedSource.next(song);
     }
 
     playlistKayName(playlistName) {

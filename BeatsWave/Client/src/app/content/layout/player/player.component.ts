@@ -34,7 +34,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.song = this.songsConfigService.defaultSong;
 
         Amplitude.init({
-          //songs: [ this.song ]
+          songs: [ this.song ]
         });
 
         const themeSkin = this.localStorageService.getThemeSkin();

@@ -1,9 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-
-import { LoadingService } from '../../../../core/services/loading.service';
-import { EventsConfigService } from '../../../../core/services/events-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EventService } from 'src/app/core/services/event.service';
+import { Event } from 'src/app/core/models/Event';
 
 @Component({
     selector: 'app-events',
