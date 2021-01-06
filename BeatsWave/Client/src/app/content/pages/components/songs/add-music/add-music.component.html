@@ -15,7 +15,11 @@
                         <div class="form-row form-group">
                             <label for="songName" class="col-md-4 text-md-right col-form-label">Song Name</label>
                             <div class="col-md-7">
-                                <input type="text" id="songName" class="form-control" formControlName="name">
+                                <input [ngClass]="{'red-border-solid': name.errors?.required && name.touched}"  type="text" id="songName" class="form-control" formControlName="name">
+                                <div *ngIf="name.errors?.required && name.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                <span>This field is required</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
@@ -23,11 +27,9 @@
                                 Image</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
-                                    <!-- <input type="file" class="custom-file-input" id="songImage"> -->
-                                    <!-- <label class="custom-file-label" for="songImage">Choose file</label> -->
-                                    <p-fileUpload name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
-                                        class="custom-file-input" id="songImage" (onSend)="onPhotoUploading()"
-                                        (onUpload)="onPhotoUploaded($event)"></p-fileUpload>
+                                    <p-fileUpload mode="basic" name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
+                                        (onSend)="onPhotoUploading()" (onUpload)="onPhotoUploaded($event)">
+                                    </p-fileUpload>
                                 </div>
                             </div>
                         </div>
@@ -35,22 +37,26 @@
                             <label for="songFile" class="col-md-4 text-md-right col-form-label">Song File</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
-                                    <p-fileUpload name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
-                                        (onSend)="onBeatUploading()" (onUpload)="onBeatUploaded($event)"></p-fileUpload>
-                                    <!-- <label class="custom-file-label" for="songImage">Choose file</label> -->
+                                    <p-fileUpload mode="basic" name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
+                                        (onSend)="onBeatUploading()" (onUpload)="onBeatUploaded($event)">
+                                    </p-fileUpload>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="songPrice" class="col-md-4 text-md-right col-form-label">Song Price</label>
                             <div class="col-md-7">
-                                <input type="number" id="songPrice" class="form-control" formControlName="price">
-                                <span class="form-text text-muted">Please add Song Price if Song is paid</span>
+                                <input [ngClass]="{'red-border-solid': price.errors?.required && price.touched}" type="number" id="songPrice" class="form-control" formControlName="price">
+                                <div *ngIf="price.errors?.required && price.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                <span>This field is required</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="genre" class="col-md-4 text-md-right col-form-label">Genre</label>
-                            <select class="col-md-7 form-control" formControlName="genre">
+                            <div class="col-md-7">
+                              <select [ngClass]="{'red-border-solid': genre.errors?.required && genre.touched}" class="form-control" formControlName="genre">
                                 <option value="HipHop">Hip-Hop</option>
                                 <option value="Pop">Pop</option>
                                 <option value="RB">R&B</option>
@@ -58,7 +64,12 @@
                                 <option value="Electronic">Electronic</option>
                                 <option value="Jazz">Jazz</option>
                                 <option value="Reggaeton">Reggaeton</option>
-                            </select>
+                              </select>
+                            <div *ngIf="genre.errors?.required && genre.touched" class="invalid-feedback"
+                            ngClass="d-block">
+                            <span>This field is required</span>
+                            </div>
+                            </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="songPrice" class="col-md-4 text-md-right col-form-label">Bpm</label>

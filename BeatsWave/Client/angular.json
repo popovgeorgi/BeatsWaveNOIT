@@ -35,6 +35,7 @@
               "src/vendors/line-awesome/css/line-awesome.min.css",
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/nova-dark/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
@@ -111,7 +112,7 @@
               "src/vendors/line-awesome/css/line-awesome.min.css",
               "src/styles.scss",
               "node_modules/primeicons/primeicons.css",
-              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/themes/nova-dark/theme.css",
               "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
