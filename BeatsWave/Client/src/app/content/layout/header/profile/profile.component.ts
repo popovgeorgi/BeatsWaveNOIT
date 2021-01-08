@@ -26,8 +26,7 @@ export class ProfileComponent implements OnInit {
                 private menuConfigService: MenuConfigService,
                 private simpleModalService: SimpleModalService,
                 private authService: AuthService,
-                private snotifyService: SnotifyService,
-                private localStorageService: LocalStorageService) {
+                private snotifyService: SnotifyService) {
         this.userMenu = this.menuConfigService.userMenuItems;
     }
 

@@ -10,7 +10,6 @@ import { User } from '../models/User';
   providedIn: 'root'
 })
 export class AuthService {
-
   public user = new BehaviorSubject<User>(null);
 
   private loginPath = environment.apiUrl + '/identity/login';

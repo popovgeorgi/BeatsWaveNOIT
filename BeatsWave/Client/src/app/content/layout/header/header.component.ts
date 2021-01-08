@@ -8,7 +8,6 @@ import { SearchService } from '../../../core/services/search.service';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { SkinService } from '../../../core/services/skin.service';
 import { Config } from '../../../config/config';
-import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
 

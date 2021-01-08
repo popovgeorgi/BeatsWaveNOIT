@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { LikeService } from 'src/app/core/services/like.service';
 import { SnotifyService } from 'ng-snotify';
 import { LoadingService } from 'src/app/core/services/loading.service';
+import { CartService } from "src/app/core/services/cart.service";
 
 @Component({
   selector: "app-song-details",
@@ -28,7 +29,8 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
     private audioPlayerService: AudioPlayerService,
     private beatService: BeatService,
     private likeService: LikeService,
-    private snotifyService: SnotifyService
+    private snotifyService: SnotifyService,
+    private cartService: CartService
   ) {
     this.fetchData();
   }
@@ -45,6 +47,10 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
         this.snotifyService.info('Unliked' + ' ' + this.beatDetails.name);
       }
     })
+  }
+
+  public addToCart(id: number) {
+    this.cartService.add(id);
   }
 
   private fetchData() {

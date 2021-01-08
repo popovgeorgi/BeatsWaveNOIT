@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private number = this.getCurrentNumber();
+  public count = new BehaviorSubject<number>(this.number);
+
   constructor(private localStorageService: LocalStorageService) { }
 
   add(id: number) {
@@ -14,6 +18,8 @@ export class CartService {
     }
     cart.push(id);
     this.localStorageService.setLocalStorage('cartInformation', cart);
+    this.number += 1;
+    this.count.next(this.number);
   }
 
   remove(id: number) {
