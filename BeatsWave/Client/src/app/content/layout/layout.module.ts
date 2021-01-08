@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -31,71 +31,74 @@ import { LoaderComponent } from './loader/loader.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true
+  suppressScrollX: true
 };
 
 @NgModule({
-    declarations: [
-        AsideLeftComponent,
-        AsideLeftHeaderComponent,
-        AsideRightComponent,
-        MenuSectionComponent,
-        HeaderComponent,
-        FooterComponent,
-        PlayerComponent,
-        SectionComponent,
-        ProfileComponent,
-        LoaderComponent,
-        LanguageComponent,
-        SearchComponent,
-        LoginComponent,
-        RegisterComponent
-    ],
-    exports: [
-        AsideLeftComponent,
-        AsideLeftHeaderComponent,
-        AsideRightComponent,
-        MenuSectionComponent,
-        HeaderComponent,
-        FooterComponent,
-        PlayerComponent,
-        LoaderComponent,
-        SectionComponent,
-        ProfileComponent,
-        SearchComponent,
-        LoginComponent,
-        RegisterComponent
-    ],
-    imports: [
-        CommonModule,
-        NgxSpinnerModule,
-        PerfectScrollbarModule,
-        SlickCarouselModule,
-        PartialsModule,
-        RouterModule,
-        ReactiveFormsModule,
-        SimpleModalModule.forRoot({container: document.body})
-    ],
-    entryComponents: [
-        LanguageComponent,
-        LoginComponent,
-        RegisterComponent
-    ],
-    providers: [
-        {
-            provide: PERFECT_SCROLLBAR_CONFIG,
-            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-        },
-        {
-            provide: DefaultSimpleModalOptionConfig,
-            useValue: {...defaultSimpleModalOptions, ...{
-                wrapperDefaultClasses: 'simple-modal modal fade',
-                wrapperClass: 'show',
-                closeOnEscape: true,
-                closeOnClickOutside: true,
-                animationDuration: 1000,
-            }}
+  declarations: [
+    AsideLeftComponent,
+    AsideLeftHeaderComponent,
+    AsideRightComponent,
+    MenuSectionComponent,
+    HeaderComponent,
+    FooterComponent,
+    PlayerComponent,
+    SectionComponent,
+    ProfileComponent,
+    LoaderComponent,
+    LanguageComponent,
+    SearchComponent,
+    LoginComponent,
+    RegisterComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [
+    AsideLeftComponent,
+    AsideLeftHeaderComponent,
+    AsideRightComponent,
+    MenuSectionComponent,
+    HeaderComponent,
+    FooterComponent,
+    PlayerComponent,
+    LoaderComponent,
+    SectionComponent,
+    ProfileComponent,
+    SearchComponent,
+    LoginComponent,
+    RegisterComponent
+  ],
+  imports: [
+    CommonModule,
+    NgxSpinnerModule,
+    PerfectScrollbarModule,
+    SlickCarouselModule,
+    PartialsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    SimpleModalModule.forRoot({ container: document.body })
+  ],
+  entryComponents: [
+    LanguageComponent,
+    LoginComponent,
+    RegisterComponent
+  ],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
+    {
+      provide: DefaultSimpleModalOptionConfig,
+      useValue: {
+        ...defaultSimpleModalOptions, ...{
+          wrapperDefaultClasses: 'simple-modal modal fade',
+          wrapperClass: 'show',
+          closeOnEscape: true,
+          closeOnClickOutside: true,
+          animationDuration: 1000,
         }
-    ]
+      }
+    }
+  ]
 })
 export class LayoutModule { }

@@ -13,6 +13,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from '../../node_modules/ngx-spin
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 import { AuthGuardService } from './core/services/auth-guard.service';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthGuardService } from './core/services/auth-guard.service';
     HttpClientModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    SnotifyModule
+    SnotifyModule,
+    IonicModule.forRoot()
   ],
   providers: [
     NgxSpinnerService,
