@@ -13,6 +13,7 @@
         public Beat()
         {
             this.Likes = new HashSet<Like>();
+            this.Comments = new HashSet<BeatComment>();
         }
 
         [Required]
@@ -37,6 +38,9 @@
 
         [Required]
         public string ProducerId { get; set; }
+
+        [Required]
+        public bool IsSold { get; set; }
 
         public virtual ApplicationUser Producer { get; set; }
 
