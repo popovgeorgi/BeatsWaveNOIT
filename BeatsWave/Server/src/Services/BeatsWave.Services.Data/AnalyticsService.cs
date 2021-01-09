@@ -36,6 +36,23 @@
             return beatsByMonth;
         }
 
+        public async Task<IEnumerable<PurchasesByMonthServiceModel>> GetPurchasesByMonthInfo()
+        {
+            var purchasesByMonth = await this.beatRepository
+                .All()
+                .Where(b => b.IsSold == true)
+                .GroupBy(x => new { x.CreatedOn.Month, x.CreatedOn.Year })
+                .Select(p => new PurchasesByMonthServiceModel
+                {
+                    Year = p.Key.Year.ToString(),
+                    Month = p.Key.Month.ToString(),
+                    Money = p.Sum(x => x.Price),
+                })
+                .ToListAsync();
+
+            return purchasesByMonth;
+        }
+
         public async Task<IEnumerable<UsersCountByMonthServiceModel>> GetUserCountByMonthInfo()
         {
             var usersByMonth = await this.userRepository

@@ -28,5 +28,11 @@
         [Route(nameof(BeatsCountByMonths))]
         public async Task<IEnumerable<BeatsCountByMonthServiceModel>> BeatsCountByMonths()
             => await this.analyticsService.GetBeatCountByMonthInfo();
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        [Route(nameof(PurchasesByMonths))]
+        public async Task<IEnumerable<PurchasesByMonthServiceModel>> PurchasesByMonths()
+            => await this.analyticsService.GetPurchasesByMonthInfo();
     }
 }

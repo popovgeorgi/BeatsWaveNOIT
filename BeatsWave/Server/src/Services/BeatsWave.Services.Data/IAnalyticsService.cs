@@ -10,5 +10,7 @@
         Task<IEnumerable<UsersCountByMonthServiceModel>> GetUserCountByMonthInfo();
 
         Task<IEnumerable<BeatsCountByMonthServiceModel>> GetBeatCountByMonthInfo();
+
+        Task<IEnumerable<PurchasesByMonthServiceModel>> GetPurchasesByMonthInfo();
     }
 }
