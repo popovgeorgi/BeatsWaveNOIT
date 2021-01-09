@@ -3,7 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { UsersPerMonth } from 'src/app/core/models/UsersPerMonth';
+import { UserAnalytics } from 'src/app/core/models/analytics/UserAnalytics';
 import { AnalyticsService } from 'src/app/core/services/analytics.service';
 
 @Component({
@@ -12,7 +12,8 @@ import { AnalyticsService } from 'src/app/core/services/analytics.service';
 })
 export class TotalUserComponent implements OnInit {
 
-  usersPerMonth: UsersPerMonth[]
+  totalUsers: number = 0;
+  usersPerMonth: number[]
   chartData: ChartDataSets[] = [];
   chartLabels: Label[] = [];
   chartColors: Color[] = [];
@@ -27,14 +28,15 @@ export class TotalUserComponent implements OnInit {
   ngOnInit() {
     this.fetchData()
       .pipe(
-        tap((res: UsersPerMonth[]) => {
-          this.usersPerMonth = res;
+        tap((res: UserAnalytics) => {
+          this.usersPerMonth = res.usersPerMonth;
+          this.totalUsers = res.totalCount;
           this.chartDataConfig();
         }))
       .subscribe();
   }
 
-  private fetchData(): Observable<Array<UsersPerMonth>> {
+  private fetchData(): Observable<UserAnalytics> {
     return this.analyticsService.getUsersPerMonth();
   }
 
@@ -63,10 +65,9 @@ export class TotalUserComponent implements OnInit {
 
   // This is static data replace with you data
   chartDataConfig() {
-    let data = this.fillMonthArray(this.usersPerMonth);
     this.chartData = [{
       label: 'Users',
-      data: data,
+      data: this.usersPerMonth,
       backgroundColor: '#f11717',
       borderColor: '#f11717',
       borderWidth: 3,
@@ -76,63 +77,4 @@ export class TotalUserComponent implements OnInit {
 
     this.chartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   }
-
-  private fillMonthArray(usersPerMonth: Array<UsersPerMonth>) {
-    let data: Array<number> = []
-    usersPerMonth.forEach((obj) => {
-      switch (obj.month) {
-        case '1': {
-          data[0] = obj.usersCount
-          break;
-        }
-        case '2': {
-          data[1] = obj.usersCount
-          break;
-        }
-        case '3': {
-          data[2] = obj.usersCount
-          break;
-        }
-        case '4': {
-          data[3] = obj.usersCount
-          break;
-        }
-        case '5': {
-          data[4] = obj.usersCount
-          break;
-        }
-        case '6': {
-          data[5] = obj.usersCount
-          break;
-        }
-        case '7': {
-          data[6] = obj.usersCount
-          break;
-        }
-        case '8': {
-          data[7] = obj.usersCount
-          break;
-        }
-        case '9': {
-          data[8] = obj.usersCount
-          break;
-        }
-        case '10': {
-          data[9] = obj.usersCount
-          break;
-        }
-        case '11': {
-          data[10] = obj.usersCount
-          break;
-        }
-        case '12': {
-          data[11] = obj.usersCount
-          break;
-        }
-      }
-    })
-
-    return data;
-  }
-
 }

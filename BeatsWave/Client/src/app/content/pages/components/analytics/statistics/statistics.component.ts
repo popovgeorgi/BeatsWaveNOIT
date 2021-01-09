@@ -3,7 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { UsersPerMonth } from 'src/app/core/models/UsersPerMonth';
+import { UserAnalytics } from 'src/app/core/models/analytics/UserAnalytics';
 import { AnalyticsService } from 'src/app/core/services/analytics.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { AnalyticsService } from 'src/app/core/services/analytics.service';
 })
 export class StatisticsComponent implements OnInit {
 
-  usersPerMonth: UsersPerMonth[];
+  usersPerMonth: number[];
   chartData: ChartDataSets[] = [];
   chartLabels: Label[] = [];
   chartColors: Color[] = [];
@@ -30,15 +30,15 @@ export class StatisticsComponent implements OnInit {
     this.topCountriesData();
     this.fetchData()
       .pipe(
-        tap((res: UsersPerMonth[]) => {
-          this.usersPerMonth = res;
+        tap((res: UserAnalytics) => {
+          this.usersPerMonth = res.usersPerMonth;
           this.chartDataConfig();
         })
       )
       .subscribe()
   }
 
-  private fetchData(): Observable<Array<UsersPerMonth>> {
+  private fetchData(): Observable<UserAnalytics> {
     return this.analyticsService.getUsersPerMonth();
   }
 
@@ -67,10 +67,9 @@ export class StatisticsComponent implements OnInit {
 
   // This is static data replace with you data
   chartDataConfig() {
-    let data = this.fillMonthArray(this.usersPerMonth);
     this.chartData = [{
       label: 'Statistics',
-      data: data,
+      data: this.usersPerMonth,
       backgroundColor: '#ad20d4',
       borderColor: 'transparent',
       borderWidth: 3,
@@ -97,63 +96,4 @@ export class StatisticsComponent implements OnInit {
       }
     ];
   }
-
-  private fillMonthArray(usersPerMonth: Array<UsersPerMonth>) {
-    let data: Array<number> = []
-    usersPerMonth.forEach((obj) => {
-      switch (obj.month) {
-        case '1': {
-          data[0] = obj.usersCount
-          break;
-        }
-        case '2': {
-          data[1] = obj.usersCount
-          break;
-        }
-        case '3': {
-          data[2] = obj.usersCount
-          break;
-        }
-        case '4': {
-          data[3] = obj.usersCount
-          break;
-        }
-        case '5': {
-          data[4] = obj.usersCount
-          break;
-        }
-        case '6': {
-          data[5] = obj.usersCount
-          break;
-        }
-        case '7': {
-          data[6] = obj.usersCount
-          break;
-        }
-        case '8': {
-          data[7] = obj.usersCount
-          break;
-        }
-        case '9': {
-          data[8] = obj.usersCount
-          break;
-        }
-        case '10': {
-          data[9] = obj.usersCount
-          break;
-        }
-        case '11': {
-          data[10] = obj.usersCount
-          break;
-        }
-        case '12': {
-          data[11] = obj.usersCount
-          break;
-        }
-      }
-    })
-
-    return data;
-  }
-
 }

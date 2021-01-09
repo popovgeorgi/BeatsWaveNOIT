@@ -22,13 +22,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
     playerClass = 'player-primary';
 
     skinSubscription: Subscription;
-    private songSubscribtion: Subscription;
 
     constructor(@Inject(DOCUMENT) private document: Document,
                 private localStorageService: LocalStorageService,
                 private songsConfigService: SongsConfigService,
-                private skinService: SkinService,
-                private audioPlayerService: AudioPlayerService) { }
+                private skinService: SkinService) { }
 
     ngOnInit() {
         this.song = this.songsConfigService.defaultSong;
@@ -70,7 +68,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.skinSubscription.unsubscribe();
-        this.songSubscribtion.unsubscribe();
     }
 
 }

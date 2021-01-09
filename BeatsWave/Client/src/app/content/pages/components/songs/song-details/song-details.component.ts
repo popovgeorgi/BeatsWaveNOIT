@@ -5,7 +5,7 @@ import { Subscription } from "rxjs";
 import { SongsConfigService } from "../../../../../core/services/songs-config.service";
 import { AudioPlayerService } from "../../../../../core/services/audio-player.service";
 import { BeatService } from "src/app/core/services/beat.service";
-import { map, mergeMap } from "rxjs/operators";
+import { map, mergeMap, tap } from "rxjs/operators";
 import { Beat } from "src/app/core/models/Beat";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LikeService } from 'src/app/core/services/like.service';
@@ -20,7 +20,6 @@ import { CartService } from "src/app/core/services/cart.service";
 export class SongDetailsComponent implements OnInit, AfterViewInit {
   public isLiked: boolean;
   public beatDetails: Beat;
-  public beatId: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,11 +30,13 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
     private likeService: LikeService,
     private snotifyService: SnotifyService,
     private cartService: CartService
-  ) {
-    this.fetchData();
-  }
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fetchData().subscribe(res => {
+      this.beatDetails = res;
+    })
+  }
 
   public vote() {
     this.likeService.vote(this.beatDetails.id).subscribe(res => {
@@ -54,18 +55,15 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
   }
 
   private fetchData() {
-    this.route.params
+    return this.route.params
       .pipe(map((params) => {
         const id = params["id"];
-        this.beatId = id;
         return id;
       }),
-        mergeMap((id) => this.beatService.getBeat(id))).subscribe((beat) => {
-          this.beatDetails = beat;
-        });
-    this.likeService.doesUserLike(this.beatId).subscribe(res => {
-      this.isLiked = res;
-    });
+        mergeMap((id) => this.beatService.getBeat(id)))
+    // this.likeService.doesUserLike(this.beatId).subscribe(res => {
+    //   this.isLiked = res;
+    // });
   }
 
   ngAfterViewInit() {

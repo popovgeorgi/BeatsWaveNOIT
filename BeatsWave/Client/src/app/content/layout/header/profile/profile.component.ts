@@ -9,6 +9,7 @@ import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnotifyService } from 'ng-snotify';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
     selector: 'app-profile',
@@ -26,7 +27,8 @@ export class ProfileComponent implements OnInit {
                 private menuConfigService: MenuConfigService,
                 private simpleModalService: SimpleModalService,
                 private authService: AuthService,
-                private snotifyService: SnotifyService) {
+                private snotifyService: SnotifyService,
+                private cartService: CartService) {
         this.userMenu = this.menuConfigService.userMenuItems;
     }
 
@@ -64,6 +66,7 @@ export class ProfileComponent implements OnInit {
 
     public Logout() {
         this.authService.logout();
+        this.cartService.clear();
         this.snotifyService.success('You successfully logged out!');
     }
 }

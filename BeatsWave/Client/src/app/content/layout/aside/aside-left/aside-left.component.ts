@@ -46,22 +46,24 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
         this.sidebarClass = 'sidebar-' + Config.THEME_CLASSES[skin.sidebar];
       }
     });
-    this.userRole = this.authService.user.value.role;
+    if (this.authService.user != null) {
+      this.userRole = this.authService.user.value.role;
 
-    if (this.userRole == 'Admin') {
-      this.menuItems = this.menuConfigService.adminMenuItems;
-    }
-    if (this.userRole == 'Beatmaker' || this.userRole == 'Artist') {
-      this.menuItems = this.menuConfigService.beatmakerMenuItems;
-    }
-    else if (this.userRole == 'Manager') {
-      this.menuItems = this.menuConfigService.managerMenuItems;
-    }
-    if (this.userRole == 'Manager' || this.userRole == 'Artist') {
-      this.asideFooterButton = {
-        icon: 'ion-md-musical-note',
-        title: 'Start uploading'
-      };
+      if (this.userRole == 'Admin') {
+        this.menuItems = this.menuConfigService.adminMenuItems;
+      }
+      if (this.userRole == 'Beatmaker' || this.userRole == 'Artist') {
+        this.menuItems = this.menuConfigService.beatmakerMenuItems;
+      }
+      else if (this.userRole == 'Manager') {
+        this.menuItems = this.menuConfigService.managerMenuItems;
+      }
+      if (this.userRole == 'Manager' || this.userRole == 'Artist') {
+        this.asideFooterButton = {
+          icon: 'ion-md-musical-note',
+          title: 'Start uploading'
+        };
+      }
     }
   }
 

@@ -27,8 +27,6 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
     public artistBeats: number;
     private artistId: number;
 
-    routeSubscription: Subscription;
-
     constructor(private route: ActivatedRoute,
         private spinner: NgxSpinnerService,
         private audioPlayerService: AudioPlayerService,

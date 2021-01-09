@@ -2,21 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { BeatsPerMonth } from '../models/BeatsPerMonth';
-import { UsersPerMonth } from '../models/UsersPerMonth';
+import { BeatAnalytics } from '../models/analytics/BeatAnalytics';
+import { PurchasesAnalytics } from '../models/analytics/PurchasesAnalytics';
+import { UserAnalytics } from '../models/analytics/UserAnalytics';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalyticsService {
-  private usersPath = environment.apiUrl + '/analytics';
+  private analyticsPath = environment.apiUrl + '/analytics';
   constructor(private http: HttpClient) { }
 
-  getUsersPerMonth(): Observable<Array<UsersPerMonth>> {
-    return this.http.get<Array<UsersPerMonth>>(this.usersPath + '/UsersCountByMonths');
+  getUsersPerMonth(): Observable<UserAnalytics> {
+    return this.http.get<UserAnalytics>(this.analyticsPath + '/UsersCountByMonths');
   }
 
-  getBeatsPerMonth(): Observable<Array<BeatsPerMonth>> {
-    return this.http.get<Array<BeatsPerMonth>>(this.usersPath + '/BeatsCountByMonths');
+  getBeatsPerMonth(): Observable<BeatAnalytics> {
+    return this.http.get<BeatAnalytics>(this.analyticsPath + '/BeatsCountByMonths');
+  }
+
+  getPurchasesPerMonth(): Observable<PurchasesAnalytics> {
+    return this.http.get<PurchasesAnalytics>(this.analyticsPath + '/PurchasesByMonths');
   }
 }

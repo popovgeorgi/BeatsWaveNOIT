@@ -5,7 +5,7 @@ export interface Beat {
     url: string,
     producerUserName: string,
     price: number,
-    bpm: number,
+    bpm : number,
     producerId: string,
     genre: string,
     description: string
