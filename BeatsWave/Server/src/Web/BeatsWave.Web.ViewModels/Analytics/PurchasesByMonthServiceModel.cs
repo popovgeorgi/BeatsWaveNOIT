@@ -6,6 +6,6 @@
 
         public string Month { get; set; }
 
-        public int Money { get; set; }
+        public int Purchases { get; set; }
     }
 }

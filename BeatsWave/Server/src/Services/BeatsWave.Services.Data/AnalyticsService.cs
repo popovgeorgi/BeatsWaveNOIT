@@ -1,6 +1,6 @@
 ﻿namespace BeatsWave.Services.Data
 {
-    using System.Collections.Generic;
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -20,53 +20,94 @@
             this.beatRepository = beatRepository;
         }
 
-        public async Task<IEnumerable<BeatsCountByMonthServiceModel>> GetBeatCountByMonthInfo()
+        public async Task<BeatsAnalyticsResponseModel> GetBeatCountByMonthInfo()
         {
             var beatsByMonth = await this.beatRepository
                 .All()
-                .GroupBy(x => new { x.CreatedOn.Month, x.CreatedOn.Year })
+                .Where(b => b.CreatedOn.Year == DateTime.Now.Year)
+                .GroupBy(x => new { x.CreatedOn.Month })
                 .Select(u => new BeatsCountByMonthServiceModel
                 {
-                    Year = u.Key.Year.ToString(),
                     Month = u.Key.Month.ToString(),
                     BeatsCount = u.Count(),
                 })
                 .ToListAsync();
 
-            return beatsByMonth;
+            var beatOutput = new int[12];
+            var totalBeatCount = 0;
+
+            foreach (var purchase in beatsByMonth)
+            {
+                int month = int.Parse(purchase.Month) - 1;
+                beatOutput[month] = purchase.BeatsCount;
+                totalBeatCount += purchase.BeatsCount;
+            }
+
+            return new BeatsAnalyticsResponseModel
+            {
+                BeatsPerMonth = beatOutput,
+                TotalCount = totalBeatCount,
+            };
         }
 
-        public async Task<IEnumerable<PurchasesByMonthServiceModel>> GetPurchasesByMonthInfo()
+        public async Task<PurchasesAnalyticsResponseModel> GetPurchasesByMonthInfo()
         {
             var purchasesByMonth = await this.beatRepository
                 .All()
-                .Where(b => b.IsSold == true)
-                .GroupBy(x => new { x.CreatedOn.Month, x.CreatedOn.Year })
+                .Where(b => b.IsSold == true && b.ModifiedOn.Value.Year == DateTime.Now.Year)
+                .GroupBy(x => new { x.CreatedOn.Month })
                 .Select(p => new PurchasesByMonthServiceModel
                 {
-                    Year = p.Key.Year.ToString(),
                     Month = p.Key.Month.ToString(),
-                    Money = p.Sum(x => x.Price),
+                    Purchases = p.Count(),
                 })
                 .ToListAsync();
 
-            return purchasesByMonth;
+            var purchaseOutput = new int[12];
+            var totalPurchaseCount = 0;
+
+            foreach (var purchase in purchasesByMonth)
+            {
+                int month = int.Parse(purchase.Month) - 1;
+                purchaseOutput[month] = purchase.Purchases;
+                totalPurchaseCount += purchase.Purchases;
+            }
+
+            return new PurchasesAnalyticsResponseModel
+            {
+                PurchasesPerMonth = purchaseOutput,
+                TotalPurchases = totalPurchaseCount,
+            };
         }
 
-        public async Task<IEnumerable<UsersCountByMonthServiceModel>> GetUserCountByMonthInfo()
+        public async Task<UsersAnalyticsResponseModel> GetUserCountByMonthInfo()
         {
             var usersByMonth = await this.userRepository
                 .All()
-                .GroupBy(x => new { x.CreatedOn.Month, x.CreatedOn.Year })
+                .Where(u => u.CreatedOn.Year == DateTime.Now.Year)
+                .GroupBy(x => new { x.CreatedOn.Month })
                 .Select(u => new UsersCountByMonthServiceModel
                 {
-                    Year = u.Key.Year.ToString(),
                     Month = u.Key.Month.ToString(),
                     UsersCount = u.Count(),
                 })
                 .ToListAsync();
 
-            return usersByMonth;
+            var userOutput = new int[12];
+            var totalUserCount = 0;
+
+            foreach (var purchase in usersByMonth)
+            {
+                int month = int.Parse(purchase.Month) - 1;
+                userOutput[month] = purchase.UsersCount;
+                totalUserCount += purchase.UsersCount;
+            }
+
+            return new UsersAnalyticsResponseModel
+            {
+                UsersPerMonth = userOutput,
+                TotalCount = totalUserCount,
+            };
         }
     }
 }

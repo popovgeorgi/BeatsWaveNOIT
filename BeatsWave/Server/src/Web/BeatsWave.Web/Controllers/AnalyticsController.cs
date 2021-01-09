@@ -1,6 +1,5 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
@@ -20,19 +19,19 @@
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         [Route(nameof(UsersCountByMonths))]
-        public async Task<IEnumerable<UsersCountByMonthServiceModel>> UsersCountByMonths()
+        public async Task<UsersAnalyticsResponseModel> UsersCountByMonths()
             => await this.analyticsService.GetUserCountByMonthInfo();
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         [Route(nameof(BeatsCountByMonths))]
-        public async Task<IEnumerable<BeatsCountByMonthServiceModel>> BeatsCountByMonths()
+        public async Task<BeatsAnalyticsResponseModel> BeatsCountByMonths()
             => await this.analyticsService.GetBeatCountByMonthInfo();
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
         [Route(nameof(PurchasesByMonths))]
-        public async Task<IEnumerable<PurchasesByMonthServiceModel>> PurchasesByMonths()
+        public async Task<PurchasesAnalyticsResponseModel> PurchasesByMonths()
             => await this.analyticsService.GetPurchasesByMonthInfo();
     }
 }
