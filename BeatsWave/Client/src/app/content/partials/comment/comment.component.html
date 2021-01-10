@@ -12,7 +12,7 @@
     <div *ngFor="let comment of comments">
       <div class="d-flex mb-4">
         <div class="avatar avatar-sm avatar-circle">
-            <img src={{comment.imageUrl}} alt="">
+            <img class="mainPhotoHeight" src={{comment.imageUrl}} alt="">
         </div>
         <div class="pl-3 flex-grow-1 flex-basis-0">
             <span class="d-block font-weight-bold mb-1">{{comment.userUserName}}</span>
@@ -33,7 +33,7 @@
           <div class="ml-5 mb-4">
             <div class="d-flex mb-4">
                 <div class="avatar avatar-sm avatar-circle">
-                    <img src={{child.imageUrl}} alt="">
+                    <img class="mainPhotoHeight" src={{child.imageUrl}} alt="">
                 </div>
                 <div class="pl-3 flex-grow-1 flex-basis-0">
                     <span class="d-block font-weight-bold mb-1">{{child.userUserName}}</span>
