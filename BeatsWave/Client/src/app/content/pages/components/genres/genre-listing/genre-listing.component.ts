@@ -18,6 +18,7 @@ export class GenreListingComponent implements OnInit, AfterViewInit {
   public beatsCount: number;
   private itemsPerPage: number = 20;
   private page = 1;
+  private genre: string;
 
   constructor(private beatService: BeatService,
     private route: ActivatedRoute,
@@ -36,9 +37,13 @@ export class GenreListingComponent implements OnInit, AfterViewInit {
       else if (genre == 'R&B') {
         genre = 'RB';
       }
-      return genre
+      this.genre = genre;
+      return genre;
     }),
-      mergeMap(genre => this.beatService.getBeatsByGenre(genre))).subscribe(beats => {
+      mergeMap(genre => this.beatService.getBeatsByGenre(genre, this.itemsPerPage, (this.page - 1) * this.itemsPerPage))).subscribe(beats => {
+        if (beats.length < this.itemsPerPage) {
+          this.hasMoreBeatsToInclude = false;
+        }
         this.beats = beats;
         this.beatsCount = beats.length;
       })
@@ -46,13 +51,14 @@ export class GenreListingComponent implements OnInit, AfterViewInit {
 
   showMore() {
     this.page++;
-    this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(beats => {
+    this.beatService.getBeatsByGenre(this.genre, this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(beats => {
       if (beats.length < this.itemsPerPage) {
         this.hasMoreBeatsToInclude = false;
       }
       this.beats = this.beats.concat(beats);
     })
   }
+
   ngAfterViewInit() {
     this.spinner.hide('routing');
   }

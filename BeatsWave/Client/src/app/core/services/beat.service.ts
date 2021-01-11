@@ -31,8 +31,8 @@ export class BeatService {
     return this.http.get<Array<Beat>>(this.beatPath + '/MostlyLiked');
   }
 
-  getBeatsByGenre(genre: string): Observable<Array<Beat>> {
-    return this.http.get<Array<Beat>>(this.beatPath + '/ByGenre' + '/' + genre);
+  getBeatsByGenre(genre: string, takeCount, skipCount): Observable<Array<Beat>> {
+    return this.http.get<Array<Beat>>(this.beatPath + '/ByGenre' + '/' + genre + '?take=' + takeCount + '&skip=' + skipCount);
   }
 }
 
