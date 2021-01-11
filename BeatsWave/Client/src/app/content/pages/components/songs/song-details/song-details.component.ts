@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 import { SongsConfigService } from "../../../../../core/services/songs-config.service";
@@ -23,6 +23,7 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private spinner: NgxSpinnerService,
     private loadingService: LoadingService,
     private audioPlayerService: AudioPlayerService,
@@ -53,6 +54,11 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
   public addToCart(id: number) {
     this.cartService.add(id);
   }
+
+  public onBeatmakerClicked(id: string) {
+    this.router.navigate(['artist/' + id + '/details']);
+  }
+  //'artist/:id/details'
 
   private fetchData() {
     return this.route.params
