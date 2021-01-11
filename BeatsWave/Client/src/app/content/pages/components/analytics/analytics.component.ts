@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
-import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { AnalyticsService } from 'src/app/core/services/analytics.service';
+import { TotalEarningsAnalytics } from 'src/app/core/models/analytics/TotalEarningsAnalytics';
 
 @Component({
   selector: 'app-analytics',
@@ -13,16 +13,25 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  public totalEarnings: number;
   private userSub: Subscription;
   public currentUser: User;
 
   constructor(private spinner: NgxSpinnerService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
+    this.fetchData().subscribe(res => {
+      this.totalEarnings = res.totalEarnings;
+    })
     this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
     })
+  }
+
+  private fetchData(): Observable<TotalEarningsAnalytics> {
+    return this.analyticsService.getTotalEarnings();
   }
 
   ngAfterViewInit() {

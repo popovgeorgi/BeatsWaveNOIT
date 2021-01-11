@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BeatAnalytics } from '../models/analytics/BeatAnalytics';
 import { PurchasesAnalytics } from '../models/analytics/PurchasesAnalytics';
+import { TotalEarningsAnalytics } from '../models/analytics/TotalEarningsAnalytics';
 import { UserAnalytics } from '../models/analytics/UserAnalytics';
 
 @Injectable({
@@ -23,5 +24,9 @@ export class AnalyticsService {
 
   getPurchasesPerMonth(): Observable<PurchasesAnalytics> {
     return this.http.get<PurchasesAnalytics>(this.analyticsPath + '/PurchasesByMonths');
+  }
+
+  getTotalEarnings(): Observable<TotalEarningsAnalytics> {
+    return this.http.get<TotalEarningsAnalytics>(this.analyticsPath + '/TotalEarnings')
   }
 }

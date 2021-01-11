@@ -11,5 +11,7 @@
         Task<BeatsAnalyticsResponseModel> GetBeatCountByMonthInfo();
 
         Task<PurchasesAnalyticsResponseModel> GetPurchasesByMonthInfo();
+
+        Task<TotalEarningsAnalyticsResponseModel> GetTotalEarnings();
     }
 }

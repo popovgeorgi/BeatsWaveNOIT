@@ -33,5 +33,11 @@
         [Route(nameof(PurchasesByMonths))]
         public async Task<PurchasesAnalyticsResponseModel> PurchasesByMonths()
             => await this.analyticsService.GetPurchasesByMonthInfo();
+
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        [Route(nameof(TotalEarnings))]
+        public async Task<TotalEarningsAnalyticsResponseModel> TotalEarnings()
+            => await this.analyticsService.GetTotalEarnings();
     }
 }

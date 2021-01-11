@@ -80,6 +80,19 @@
             };
         }
 
+        public async Task<TotalEarningsAnalyticsResponseModel> GetTotalEarnings()
+        {
+            var totalEarnings = await this.beatRepository
+                .All()
+                .Where(b => b.IsSold)
+                .SumAsync(b => b.Price);
+
+            return new TotalEarningsAnalyticsResponseModel
+            {
+                TotalEarnings = totalEarnings,
+            };
+        }
+
         public async Task<UsersAnalyticsResponseModel> GetUserCountByMonthInfo()
         {
             var usersByMonth = await this.userRepository
