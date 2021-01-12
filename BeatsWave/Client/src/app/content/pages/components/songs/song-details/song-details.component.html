@@ -3,7 +3,7 @@
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
-    <div class="row section text-center text-md-left">
+    <div *ngIf="beatDetails" class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
             <img [src]="beatDetails.imageUrl" alt="{{beatDetails.name}}" class="card-img--radius-lg">
         </div>
@@ -47,7 +47,7 @@
         </ul>
         <!-- End | Line Tabs -->
         <!-- Begin | Tab Content -->
-        <div class="tab-content" id="songDetailsContent">
+        <div *ngIf="beatDetails" class="tab-content" id="songDetailsContent">
             <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item pl-0 border-0">Composed by: <span class="font-weight-bold">{{beatDetails.producerUserName}}</span></li>

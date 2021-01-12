@@ -4,7 +4,7 @@
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
-    <div class="row section text-center text-md-left">
+    <div *ngIf="artistDetails" class="row section text-center text-md-left">
         <div class="col-xl-3 col-lg-4 col-sm-5">
             <img [src]="artistDetails.profileMainPhotoUrl" alt="{{artistDetails.profileFirstName}}" class="card-img--radius-lg">
         </div>
@@ -53,7 +53,7 @@
         <!-- End | Line Tabs -->
 
         <!-- Begin | Tab Content -->
-        <div class="tab-content" id="artistDetailsContent">
+        <div *ngIf="artistDetails" class="tab-content" id="artistDetailsContent">
             <div class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="container-header">
