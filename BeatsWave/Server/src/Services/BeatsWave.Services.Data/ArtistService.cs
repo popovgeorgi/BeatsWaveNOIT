@@ -18,15 +18,17 @@
 
         public async Task<IEnumerable<T>> AllAsync<T>(int? take = null, int skip = 0)
         {
-            var artists = await this.userRepository
+            var query = this.userRepository
                 .All()
                 .OrderByDescending(x => x.CreatedOn)
-                .Skip(skip)
-                .Take((int)take)
-                .To<T>()
-                .ToListAsync();
+                .Skip(skip);
 
-            return artists;
+            if (take != 0)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return await query.To<T>().ToListAsync();
         }
 
         public async Task<T> DetailsAsync<T>(string userId)

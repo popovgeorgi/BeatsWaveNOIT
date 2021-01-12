@@ -26,7 +26,7 @@
                 .OrderByDescending(b => b.CreatedOn)
                 .Skip(skip);
 
-            if (take.HasValue)
+            if (take != 0)
             {
                 query = query.Take(take.Value);
             }
@@ -44,7 +44,7 @@
                 .Where(b => b.Genre == genreAsEnum)
                 .Skip(skip);
 
-            if (take.HasValue)
+            if (take != 0)
             {
                 query = query.Take(take.Value);
             }

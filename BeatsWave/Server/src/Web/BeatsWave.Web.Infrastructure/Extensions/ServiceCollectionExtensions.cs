@@ -61,7 +61,8 @@
             .AddTransient<ICommentService, CommentService>()
             .AddTransient<IEventService, EventService>()
             .AddTransient<ISubscriptionService, SubscriptionService>()
-            .AddTransient<IAnalyticsService, AnalyticsService>();
+            .AddTransient<IAnalyticsService, AnalyticsService>()
+            .AddTransient<ISearchService, SearchService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
             => services.AddSwaggerGen(c =>

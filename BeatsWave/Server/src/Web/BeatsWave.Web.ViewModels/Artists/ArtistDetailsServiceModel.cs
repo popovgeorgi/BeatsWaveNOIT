@@ -9,6 +9,8 @@
     {
         public string Id { get; set; }
 
+        public string UserName { get; set; }
+
         public string ProfileFirstName { get; set; }
 
         public string ProfileLastName { get; set; }
