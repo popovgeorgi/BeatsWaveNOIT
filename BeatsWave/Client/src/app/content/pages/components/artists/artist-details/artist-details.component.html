@@ -11,7 +11,7 @@
         <div class="col-xl-9 col-lg-8 col-sm-7">
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
-                    <h5>{{artistDetails.profileFirstName}}{{' ' + artistDetails.profileLastName}}</h5>
+                    <h5>{{artistDetails.userName}}</h5>
                     <!-- <p>DOB: {{artistDetails.dob}}</p> -->
                     <!-- <div class="text-warning stars">
                         <i class="la {{rating}}" *ngFor="let rating of artistDetails.ratingsView"></i>
@@ -45,6 +45,10 @@
                 <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab"
                    aria-controls="bio" aria-selected="false">Biography</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab"
+                 aria-controls="bio" aria-selected="false">Comments</a>
+          </li>
         </ul>
         <!-- End | Line Tabs -->
 
@@ -84,13 +88,14 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
+            <div *ngIf="artistDetails.profileBiography != null" class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
                 <div class="bio-content" [innerHTML]="artistDetails.profileBiography"></div>
+            </div>
+            <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                <app-comment></app-comment>
             </div>
         </div>
         <!-- Begin | Tab Content -->
     </div>
     <!-- End | Section -->
-
-    <app-comment></app-comment>
 </div>

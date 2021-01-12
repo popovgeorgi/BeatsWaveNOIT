@@ -29,21 +29,6 @@
             </div>
         </div>
         <!-- End | Search Result List -->
-
-        <!-- Begin | Search Result List -->
-        <div class="search-item">
-            <div class="search-item-header">
-                <span class="search-item-title">Albums</span>
-                <a class="search-item-link ml-auto" (click)="goToPage('albums')">View All</a>
-            </div>
-            <div class="search-item-body row">
-                <div class="col-xl-4 col-sm-6 col-12" *ngFor="let album of albumsList">
-                    <app-song-horizontal [song]="album" class="song-h song-h--sm"
-                                         [routeLink]="'/album/' + album.id + '/details'"></app-song-horizontal>
-                </div>
-            </div>
-        </div>
-        <!-- End | Search Result List -->
     </perfect-scrollbar>
 </div>
 <!-- End | Search Card -->

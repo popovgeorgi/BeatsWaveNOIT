@@ -1,7 +1,7 @@
 <div class="custom-card" *ngIf="routeLink; else withoutLink">
     <a class="custom-card--link" routerLink="{{routeLink}}">
         <img [src]="item.profileMainPhotoUrl" alt="{{item?.profileFirstName}}" [class]="imageBorderRadiusClass">
-        <h6 class="mb-0 mt-2">{{item?.profileFirstName}}{{' ' + item?.profileLastName}}</h6>
+        <h6 class="mb-0 mt-2">{{item.userName}}</h6>
     </a>
 </div>
 
@@ -9,7 +9,7 @@
     <div class="custom-card">
         <a class="custom-card--link">
             <img [src]="item.profileMainPhotoUrl" alt="{{item?.profileFirstName}}" [class]="imageBorderRadiusClass">
-            <h6 class="mb-0 mt-2">{{item?.profileFirstName}}{{' ' + item?.profileLastName}}</h6>
+            <h6 class="mb-0 mt-2">{{item.userName}}</h6>
         </a>
     </div>
 </ng-template>

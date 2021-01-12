@@ -2,6 +2,7 @@ import { Beat } from './Beat';
 
 export interface Artist {
     id: string,
+    userName: string,
     profileFirstName: string,
     profileLastName: string,
     profileMainPhotoUrl: string,

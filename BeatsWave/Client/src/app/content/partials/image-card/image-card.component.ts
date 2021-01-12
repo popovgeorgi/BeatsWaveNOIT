@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Artist } from 'src/app/core/models/Artist';
 
 import { SearchService } from '../../../core/services/search.service';
 
@@ -8,7 +9,7 @@ import { SearchService } from '../../../core/services/search.service';
 })
 export class ImageCardComponent implements OnInit {
 
-    @Input() item: any;
+    @Input() item: Artist;
     @Input() routeLink: any;
     @Input() imageBorderRadiusClass = 'card-img--radius-lg';
 

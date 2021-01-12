@@ -13,21 +13,16 @@ import { SearchService } from '../../../../core/services/search.service';
 export class SearchComponent implements OnInit {
 
     songsList: any = [];
-    albumsList: any = [];
     artistsList: any = [];
 
     constructor(private router: Router,
                 private songsConfigService: SongsConfigService,
-                private albumsConfigService: AlbumsConfigService,
                 private artistsConfigService: ArtistsConfigService,
                 private searchService: SearchService) { }
 
     ngOnInit() {
         this.songsList = this.songsConfigService.songsList;
         this.songsList = this.songsList.slice(0, 3);
-
-        this.albumsList = this.albumsConfigService.albumsList;
-        this.albumsList = this.albumsList.slice(2, 5);
 
         this.artistsList = this.artistsConfigService.artistsList;
         this.artistsList = this.artistsList.slice(0, 6);
