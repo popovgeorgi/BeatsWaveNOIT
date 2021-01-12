@@ -3,9 +3,11 @@
     <div [class]="classes">
         <!-- Begin | Custom Card Info -->
         <div class="custom-card--info" *ngIf="showOptions">
-            <ul class="custom-card--labels d-flex" *ngIf="song?.premium || song?.favorite">
-                <li *ngIf="song?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
-                <li *ngIf="song?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
+            <ul class="custom-card--labels d-flex">
+                <li>{{song.likesCount}}<ion-icon name="heart-outline"></ion-icon></li>
+                <li>{{song.commentsCount}}<ion-icon name="chatbubble-outline"></ion-icon></li>
+                <!-- <li *ngIf="song?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
+                <li *ngIf="song?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li> -->
             </ul>
             <!-- Custom Card Options Dropdown -->
             <div class="dropdown dropdown-icon">

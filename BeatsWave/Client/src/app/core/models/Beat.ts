@@ -8,5 +8,7 @@ export interface Beat {
     bpm : number,
     producerId: string,
     genre: string,
-    description: string
+    description: string,
+    likesCount: number,
+    commentsCount: number
 }

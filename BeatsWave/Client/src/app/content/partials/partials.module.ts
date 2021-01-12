@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -54,6 +54,7 @@ import { PhotoResizeComponent } from './photo-resize/photo-resize.component';
         ReactiveFormsModule,
         NgxSpinnerModule,
         ImageCropperModule
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PartialsModule { }
