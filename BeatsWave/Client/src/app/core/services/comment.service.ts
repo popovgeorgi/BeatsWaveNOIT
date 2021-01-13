@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Comment } from '../models/Comment';
 
@@ -16,6 +16,9 @@ export class CommentService {
   }
 
   getBeat(id): Observable<Array<Comment>> {
-    return this.http.get<Array<Comment>>(this.commentPath + '/' + id);
+    if (id) {
+      return this.http.get<Array<Comment>>(this.commentPath + '/' + id);
+    }
+    return of(null);
   }
 }
