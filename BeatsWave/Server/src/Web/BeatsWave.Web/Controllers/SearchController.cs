@@ -17,6 +17,7 @@
         }
 
         [HttpGet]
+        [Route("{term}")]
         [AllowAnonymous]
         public async Task<SearchResponseModel> SearchByTerm(string term)
         {

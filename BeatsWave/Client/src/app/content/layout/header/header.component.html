@@ -8,7 +8,7 @@
         <div id="searchForm">
             <div class="position-relative">
                 <button type="button" class="btn ion-ios-search"></button>
-                <input type="text" placeholder="Search..." id="searchInput" class="form-control" (focus)="showSearchResults()">
+                <input #searchBox type="text" placeholder="Search..." id="searchInput" class="form-control" (focus)="showSearchResults()" (input)="search(searchBox.value)">
             </div>
             <app-search></app-search>
         </div>

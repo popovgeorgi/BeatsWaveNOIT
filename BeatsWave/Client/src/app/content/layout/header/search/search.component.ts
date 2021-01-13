@@ -1,30 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SongsConfigService } from '../../../../core/services/songs-config.service';
 import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
 import { SearchService } from '../../../../core/services/search.service';
+import { Search } from 'src/app/core/models/Search';
+import { Beat } from 'src/app/core/models/Beat';
+import { Artist } from 'src/app/core/models/Artist';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html'
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
-    songsList: any = [];
-    artistsList: any = [];
+    searchResult$: Observable<Search>;
+    searchSubscription: Subscription;
+    beats: Beat[];
+    artists: Artist[];
+    item: string;
 
     constructor(private router: Router,
-                private songsConfigService: SongsConfigService,
-                private artistsConfigService: ArtistsConfigService,
                 private searchService: SearchService) { }
+  ngOnDestroy(): void {
+    if(this.searchSubscription){
+      this.searchSubscription.unsubscribe()
+    }
+  }
 
     ngOnInit() {
-        this.songsList = this.songsConfigService.songsList;
-        this.songsList = this.songsList.slice(0, 3);
+       this.searchSubscription =  this.searchService.searchTerms.pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((term: string) => this.searchService.searchBeatsAndArtist(term).pipe(
+          tap(res => {
+            if(res){
+              this.beats = res.beats;
+              this.artists = res.artists;
+            }
+          })
+        ))).subscribe();
 
-        this.artistsList = this.artistsConfigService.artistsList;
-        this.artistsList = this.artistsList.slice(0, 6);
     }
 
     goToPage(page) {

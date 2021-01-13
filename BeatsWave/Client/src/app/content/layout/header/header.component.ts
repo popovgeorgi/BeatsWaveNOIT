@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 import { SimpleModalService } from 'ngx-simple-modal';
 import { LanguageComponent } from './language/language.component';
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   @ViewChild('headerBackdrop', { static: false }) backdrop: ElementRef;
   headerClasses = 'bg-primary';
+
 
   private userSub: Subscription;
   language: any = {};
@@ -58,6 +59,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.headerClasses = 'bg-' + Config.THEME_CLASSES[skin.header];
       }
     });
+  }
+
+  search(term: string): void {
+    this.searchService.searchTerms.next(term);
   }
 
   showSearchResults() {
