@@ -7,6 +7,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static BeatsWave.Common.GlobalConstants;
+
     public class SearchController : ApiController
     {
         private readonly ISearchService searchService;
@@ -17,7 +19,7 @@
         }
 
         [HttpGet]
-        [Route("{term}")]
+        [Route(Term)]
         [AllowAnonymous]
         public async Task<SearchResponseModel> SearchByTerm(string term)
         {

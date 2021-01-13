@@ -1,10 +1,13 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
     using System.Threading.Tasks;
+
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Likes;
     using Microsoft.AspNetCore.Mvc;
+
+    using static BeatsWave.Common.GlobalConstants;
 
     public class LikesController : ApiController
     {
@@ -22,7 +25,7 @@
             => await this.likeService.VoteAsync(model.BeatId, this.currentUser.GetId());
 
         [HttpGet]
-        [Route("{beatId}")]
+        [Route(BeatId)]
         public async Task<bool> IsALiker(int beatId)
             => await this.likeService.DoesUserLikeAsync(beatId, this.currentUser.GetId());
     }

@@ -8,6 +8,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using static BeatsWave.Common.GlobalConstants;
+
     public class ArtistsController : ApiController
     {
         private readonly IArtistService artistService;
@@ -24,7 +26,7 @@
             => await this.artistService.AllAsync<ArtistListingServiceModel>(15);
 
         [HttpGet]
-        [Route("{id}")]
+        [Route(Id)]
         [AllowAnonymous]
 
         public async Task<ArtistDetailsServiceModel> Details(string id)

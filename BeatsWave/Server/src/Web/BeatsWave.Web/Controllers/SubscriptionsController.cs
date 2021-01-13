@@ -1,14 +1,12 @@
-﻿using BeatsWave.Services.Data;
-using BeatsWave.Web.Infrastructure.Services;
-using BeatsWave.Web.Models.Subscriptions;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BeatsWave.Web.Controllers
+﻿namespace BeatsWave.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using BeatsWave.Services.Data;
+    using BeatsWave.Web.Infrastructure.Services;
+    using BeatsWave.Web.Models.Subscriptions;
+    using Microsoft.AspNetCore.Mvc;
+
     public class SubscriptionsController : ApiController
     {
         private readonly ICurrentUserService currentUser;

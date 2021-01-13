@@ -1,6 +1,5 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -9,6 +8,8 @@
     using BeatsWave.Web.Models.Comments;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
+    using static BeatsWave.Common.GlobalConstants;
 
     public class CommentsController : ApiController
     {
@@ -41,7 +42,7 @@
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route(Id)]
         [AllowAnonymous]
         public async Task<IEnumerable<BeatCommentsServiceModel>> Beat(int id)
             => await this.commentService.CommentsForBeat(id);

@@ -15,5 +15,9 @@
         public const string BlobBeatContainer = "beats";
 
         public const string Id = "{id}";
+        public const string Term = "{term}";
+
+        public const int TakeArtistsBySearch = 6;
+        public const int TakeBeatsBySearch = 3;
     }
 }

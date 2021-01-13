@@ -10,6 +10,8 @@
     using BeatsWave.Web.Models.Search;
     using Microsoft.EntityFrameworkCore;
 
+    using static BeatsWave.Common.GlobalConstants;
+
     public class SearchService : ISearchService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
@@ -26,7 +28,7 @@
             return await this.userRepository
                 .All()
                 .Where(x => x.UserName.ToLower().Contains(term.ToLower()))
-                .Take(3)
+                .Take(TakeArtistsBySearch)
                 .To<ArtistsSearchServiceModel>()
                 .ToListAsync();
         }
@@ -36,7 +38,7 @@
             return await this.beatRepository
                 .All()
                 .Where(b => b.Name.ToLower().Contains(term.ToLower()))
-                .Take(3)
+                .Take(TakeBeatsBySearch)
                 .To<BeatsSearchServiceModel>()
                 .ToListAsync();
         }
