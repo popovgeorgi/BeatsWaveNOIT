@@ -45,6 +45,7 @@ import { AuthGuardService } from 'src/app/core/services/auth-guard.service';
 import { Role } from 'src/app/core/models/Role';
 import { PhotoResizeComponent } from '../../partials/photo-resize/photo-resize.component';
 import { GenreListingComponent } from './genres/genre-listing/genre-listing.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -152,6 +153,11 @@ const routes: Routes = [
                 path: 'my-beats',
                 component: UserMyBeatsComponent,
                 canActivate: [AuthGuardService]
+            },
+            {
+                path: 'checkout',
+                component: CheckoutComponent,
+                canActivate: [AuthGuardService]
             }
         ]
     },
@@ -186,7 +192,8 @@ const routes: Routes = [
         StatisticsComponent,
         ReferralsComponent,
         UserMyBeatsComponent,
-        GenreListingComponent
+        GenreListingComponent,
+        CheckoutComponent
     ],
     entryComponents: [PhotoResizeComponent],
     imports: [

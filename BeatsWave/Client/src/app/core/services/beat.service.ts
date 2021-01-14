@@ -34,6 +34,19 @@ export class BeatService {
   getBeatsByGenre(genre: string, takeCount, skipCount): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.beatPath + '/ByGenre' + '/' + genre + '?take=' + takeCount + '&skip=' + skipCount);
   }
+
+  getBeatsByIds(ids: Array<number>): Observable<Array<Beat>> {
+    let query = '';
+    for (let i = 0; i < ids.length; i++) {
+      if (!(i = ids.length - 1)) {
+        query += 'ids=' + ids[i] + '&';
+      }
+      else {
+        query += 'ids=' + ids[i];
+      }
+    }
+    return this.http.get<Array<Beat>>(this.beatPath + '/ByIds?' + query);
+  }
 }
 
 

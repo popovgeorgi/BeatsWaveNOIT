@@ -3,7 +3,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Beat } from 'src/app/core/models/Beat';
 import { UserService } from 'src/app/core/services/user.service';
 
-import { LoadingService } from '../../../../core/services/loading.service';
 import { SongsConfigService } from '../../../../core/services/songs-config.service';
 
 @Component({

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/core/services/cart.service';
 
@@ -12,7 +13,12 @@ export class CartComponent implements OnDestroy {
     this.count = res;
   });
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,
+    private router: Router) { }
+
+  openCheckoutComponent() {
+    this.router.navigate(['/checkout']);
+  }
 
   ngOnDestroy() {
     this.cartNumber.unsubscribe();
