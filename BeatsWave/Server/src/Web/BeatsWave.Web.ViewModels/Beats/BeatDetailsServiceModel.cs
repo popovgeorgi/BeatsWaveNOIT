@@ -30,6 +30,8 @@
 
         public string ProducerId { get; set; }
 
+        public int Plays { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration

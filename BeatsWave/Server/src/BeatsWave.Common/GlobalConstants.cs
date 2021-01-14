@@ -22,5 +22,6 @@
         public const int TakeBeatsBySearch = 3;
 
         public const string ByGenreRoute = "ByGenre/{genre}";
+        public const string AddPlayRoute = "AddPlay";
     }
 }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Beat } from '../models/Beat';
+import { BeatService } from './beat.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +12,21 @@ export class AudioPlayerService {
 
   public songPlayed = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor(private beatService: BeatService) { }
 
   playSong(song: Beat) {
-    debugger;
+    this.beatService.addPlay(song.id)
+      .pipe(
+        catchError(err => {
+          debugger;
+          console.log(err);
+          if (err.error) {
+            console.log(console.log(err.error))
+          }
+          return of([]);
+        })
+      )
+      .subscribe();
     this.songPlayed.next(true);
     Amplitude.removeSong(0);
     Amplitude.playNow(song);

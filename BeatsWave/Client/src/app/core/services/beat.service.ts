@@ -47,6 +47,10 @@ export class BeatService {
     }
     return this.http.get<Array<Beat>>(this.beatPath + '/ByIds?' + query);
   }
+
+  addPlay(beatId: number) {
+    return this.http.put(this.beatPath + '/AddPlay', {'beatId': beatId});
+  }
 }
 
 

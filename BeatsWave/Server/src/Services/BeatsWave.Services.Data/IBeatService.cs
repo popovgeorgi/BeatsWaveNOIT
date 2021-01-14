@@ -18,5 +18,7 @@
         Task<IEnumerable<T>> ByGenre<T>(string genre, int? take = null, int skip = 0);
 
         Task<IEnumerable<T>> ByIds<T>(int[] ids);
+
+        Task<Result> AddPlay(int id, string userId);
     }
 }
