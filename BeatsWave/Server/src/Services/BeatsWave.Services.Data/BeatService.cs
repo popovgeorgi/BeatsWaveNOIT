@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using BeatsWave.Data.Common.Repositories;
@@ -50,6 +51,15 @@
             }
 
             return await query.To<T>().ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> ByIds<T>(int[] ids)
+        {
+            return await this.beatsRepository
+                .All()
+                .Where(b => ids.Contains(b.Id) == true)
+                .To<T>()
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<T>> ByLikes<T>()

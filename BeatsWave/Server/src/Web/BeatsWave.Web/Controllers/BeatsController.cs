@@ -71,8 +71,15 @@
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("ByGenre/{genre}")]
+        [Route(ByGenreRoute)]
         public async Task<IEnumerable<BeatListingServiceModel>> ByGenre(string genre, int take, int skip)
             => await this.beatService.ByGenre<BeatListingServiceModel>(genre, take, skip);
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(ByIds))]
+
+        public async Task<IEnumerable<BeatListingServiceModel>> ByIds([FromQuery] int[] ids)
+            => await this.beatService.ByIds<BeatListingServiceModel>(ids);
     }
 }

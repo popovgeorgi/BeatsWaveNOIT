@@ -17,6 +17,9 @@ namespace BeatsWave.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Subscription = Subscription.Basic;
+            this.Followers = new HashSet<Follow>();
+            this.Beats = new HashSet<Beat>();
+            this.Likes = new HashSet<Like>();
         }
 
         public Profile Profile { get; set; }

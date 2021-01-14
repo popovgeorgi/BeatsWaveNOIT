@@ -16,8 +16,11 @@
 
         public const string Id = "{id}";
         public const string Term = "{term}";
+        public const string BeatId = "{beatId}";
 
         public const int TakeArtistsBySearch = 6;
         public const int TakeBeatsBySearch = 3;
+
+        public const string ByGenreRoute = "ByGenre/{genre}";
     }
 }

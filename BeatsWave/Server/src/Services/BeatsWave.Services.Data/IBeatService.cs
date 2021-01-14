@@ -16,5 +16,7 @@
         Task<IEnumerable<T>> ByLikes<T>();
 
         Task<IEnumerable<T>> ByGenre<T>(string genre, int? take = null, int skip = 0);
+
+        Task<IEnumerable<T>> ByIds<T>(int[] ids);
     }
 }
