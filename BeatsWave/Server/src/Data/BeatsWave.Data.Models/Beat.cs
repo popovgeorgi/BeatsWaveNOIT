@@ -41,6 +41,9 @@
         [Required]
         public bool IsSold { get; set; }
 
+        [Required]
+        public int Plays { get; set; }
+
         public virtual ApplicationUser Producer { get; set; }
 
         public virtual ICollection<Like> Likes { get; }
