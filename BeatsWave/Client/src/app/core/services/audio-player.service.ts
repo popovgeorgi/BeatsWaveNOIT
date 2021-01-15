@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import * as Amplitude from 'amplitudejs';
 import { BehaviorSubject, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { Beat } from '../models/Beat';
 import { BeatService } from './beat.service';
 

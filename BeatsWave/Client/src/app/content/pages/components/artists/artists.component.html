@@ -23,6 +23,18 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="hasMoreArtistsToInclude" class="sidebar-footer mt-50px">
+      <button type="button" class="btn btn-block btn-danger btn-air btn-bold"
+              (click)="showMore()">
+          <span>Show more</span>
+      </button>
+    </div>
+    <div *ngIf="!hasMoreArtistsToInclude" class="sidebar-footer mt-50px">
+      <div class="btn btn-block btn-danger btn-air btn-bold">
+          <span>There is no more to show :)</span>
+      </div>
+    </div>
     <!-- End | Section -->
 </div>
 <!-- End | Main Container -->

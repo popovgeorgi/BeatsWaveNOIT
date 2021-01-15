@@ -11,8 +11,8 @@ export class ArtistService {
   private artistPath = environment.apiUrl + '/artists';
   constructor(private http: HttpClient) { }
 
-  getArtists(): Observable<Array<Artist>> {
-    return this.http.get<Array<Artist>>(this.artistPath);
+  getArtists(takeCount: number, skipCount: number): Observable<Array<Artist>> {
+    return this.http.get<Array<Artist>>(this.artistPath + '?take=' + takeCount + '&skip=' + skipCount);
   }
 
   getArtist(id): Observable<Artist> {
