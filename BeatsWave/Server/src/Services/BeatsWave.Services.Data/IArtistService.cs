@@ -5,7 +5,7 @@
 
     public interface IArtistService
     {
-        Task<IEnumerable<T>> AllAsync<T>(int? count = null, int skip = 0);
+        Task<IEnumerable<T>> AllAsync<T>(IEnumerable<string> artistsIds, int? count = null, int skip = 0);
 
         Task<T> DetailsAsync<T>(string userId);
 

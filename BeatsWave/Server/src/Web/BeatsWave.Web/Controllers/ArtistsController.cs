@@ -1,11 +1,14 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
+    using BeatsWave.Data.Models;
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Models.Artists;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using static BeatsWave.Common.GlobalConstants;
@@ -13,17 +16,24 @@
     public class ArtistsController : ApiController
     {
         private readonly IArtistService artistService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ArtistsController(IArtistService artistService)
+        public ArtistsController(IArtistService artistService, UserManager<ApplicationUser> userManager)
         {
             this.artistService = artistService;
+            this.userManager = userManager;
         }
 
         [HttpGet]
         [AllowAnonymous]
 
-        public async Task<IEnumerable<ArtistListingServiceModel>> All()
-            => await this.artistService.AllAsync<ArtistListingServiceModel>(15);
+        public async Task<IEnumerable<ArtistListingServiceModel>> All(int take, int skip)
+        {
+            var artists = await this.userManager.GetUsersInRoleAsync(BeatmakerRoleName);
+            var artistsIds = artists.Select(a => a.Id).ToList();
+
+            return await this.artistService.AllAsync<ArtistListingServiceModel>(artistsIds, take, skip);
+        }
 
         [HttpGet]
         [Route(Id)]

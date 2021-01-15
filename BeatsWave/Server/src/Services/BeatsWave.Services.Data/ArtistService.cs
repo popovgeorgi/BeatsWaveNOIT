@@ -16,10 +16,11 @@
         public ArtistService(IDeletableEntityRepository<ApplicationUser> userRepository)
             => this.userRepository = userRepository;
 
-        public async Task<IEnumerable<T>> AllAsync<T>(int? take = null, int skip = 0)
+        public async Task<IEnumerable<T>> AllAsync<T>(IEnumerable<string> artistsIds, int? take = null, int skip = 0)
         {
             var query = this.userRepository
                 .All()
+                .Where(u => artistsIds.Contains(u.Id))
                 .OrderByDescending(x => x.CreatedOn)
                 .Skip(skip);
 
