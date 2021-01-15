@@ -1,9 +1,5 @@
 ﻿namespace BeatsWave.Web.Models.Beats
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     using AutoMapper;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;

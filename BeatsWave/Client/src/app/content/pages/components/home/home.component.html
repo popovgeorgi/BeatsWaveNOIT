@@ -57,7 +57,7 @@
                 <div class="tab-pane fade" id="trending" role="tabpanel" aria-labelledby="trending-tab">
                     <!-- Begin | Custom List [[ Find at scss/framework/components/songs-list/songs-list.scss ]] -->
                     <perfect-scrollbar style="height: 370px" class="song-list">
-                        <app-song-list-view *ngFor="let song of songsList; let i = index"
+                        <app-song-list-view *ngFor="let song of trendingBeats; let i = index"
                                             [songNumber]="i+1" [song]="song"></app-song-list-view>
                     </perfect-scrollbar>
                     <!-- End | Custom List -->

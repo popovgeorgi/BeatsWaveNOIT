@@ -97,5 +97,12 @@
 
             return this.Ok();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(Trending))]
+
+        public async Task<IEnumerable<BeatListingServiceModel>> Trending()
+            => await this.beatService.MostTrending<BeatListingServiceModel>();
     }
 }

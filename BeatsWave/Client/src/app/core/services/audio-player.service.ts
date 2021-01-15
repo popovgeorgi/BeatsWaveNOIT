@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 import * as Amplitude from 'amplitudejs';
 import { BehaviorSubject, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -15,18 +16,9 @@ export class AudioPlayerService {
   constructor(private beatService: BeatService) { }
 
   playSong(song: Beat) {
-    this.beatService.addPlay(song.id)
-      .pipe(
-        catchError(err => {
-          debugger;
-          console.log(err);
-          if (err.error) {
-            console.log(console.log(err.error))
-          }
-          return of([]);
-        })
-      )
-      .subscribe();
+    this.beatService.addPlay(song.id).subscribe(() => {}, err => {
+      console.log(err.error);
+    });
     this.songPlayed.next(true);
     Amplitude.removeSong(0);
     Amplitude.playNow(song);

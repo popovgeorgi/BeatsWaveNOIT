@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using BeatsWave.Data.Common.Repositories;
@@ -123,5 +122,13 @@
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefaultAsync();
+
+        public async Task<IEnumerable<T>> MostTrending<T>()
+            => await this.beatsRepository
+                .All()
+                .OrderByDescending(b => b.Plays)
+                .To<T>()
+                .Take(20)
+                .ToListAsync();
     }
 }
