@@ -1,1 +1,20 @@
 <div class="banner bg-song"></div>
+
+<div class="main-container">
+  <div class="container-header"></div>
+  <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
+  <!-- End | Container header -->
+
+  <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
+
+  <div class="section">
+      <div class="row custom-card-list">
+          <ng-container #listView>
+              <div class="col-xl-6 col-lg-12" *ngFor="let beat of beats; let i = index">
+                  <app-song-list-checkout [songNumber]="i+1" [song]="beat" [icon]="'la-ellipsis-h'"></app-song-list-checkout>
+              </div>
+          </ng-container>
+      </div>
+  </div>
+  <!-- End | Section -->
+</div>

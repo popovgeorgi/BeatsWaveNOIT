@@ -30,13 +30,13 @@
             <div class="col-xl-7">
                 <div class="row h-100">
                     <div class="col-sm-4">
-                        <app-total-user></app-total-user>
+                        <app-total-user (isReady)="setUsers()"></app-total-user>
                     </div>
                     <div class="col-sm-4">
-                        <app-total-songs></app-total-songs>
+                        <app-total-songs (isReady)="setSongs()"></app-total-songs>
                     </div>
                     <div class="col-sm-4">
-                        <app-purchases></app-purchases>
+                        <app-purchases (isReady)="setPurchases()"></app-purchases>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <app-statistics></app-statistics>
+                <app-statistics (isReady)="setStatistics()"></app-statistics>
             </div>
             <!-- <div class="col-md-4">
                 <app-referrals></app-referrals>

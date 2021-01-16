@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
@@ -12,6 +12,7 @@ import { AnalyticsService } from 'src/app/core/services/analytics.service';
 })
 export class PurchasesComponent implements OnInit {
 
+  @Output() isReady = new EventEmitter<boolean>();
   totalPurchases: number;
   purchasesPerMonth: number[];
   chartData: ChartDataSets[] = [];
@@ -34,7 +35,9 @@ export class PurchasesComponent implements OnInit {
           this.chartDataConfig();
         })
       )
-      .subscribe();
+      .subscribe(() => {}, () => {}, () => {
+        this.isReady.emit(true);
+      });
   }
 
   private fetchData(): Observable<PurchasesAnalytics> {

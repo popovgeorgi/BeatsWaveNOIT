@@ -13,6 +13,10 @@ import { TotalEarningsAnalytics } from 'src/app/core/models/analytics/TotalEarni
 })
 export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  public isStatisticsLoaded: boolean = false;
+  public isPurchasesLoaded: boolean = false;
+  public isUsersLoaded: boolean = false;
+  public isSongsLoaded: boolean = false;
   public totalEarnings: number;
   private userSub: Subscription;
   public currentUser: User;
@@ -28,6 +32,9 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
     })
+    if (this.isStatisticsLoaded && this.isPurchasesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
+      this.spinner.hide('routing');
+    }
   }
 
   private fetchData(): Observable<TotalEarningsAnalytics> {
@@ -35,7 +42,22 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.spinner.hide('routing');
+  }
+
+  setUsers() {
+    this.isUsersLoaded = true;
+  }
+
+  setSongs() {
+    this.isSongsLoaded = true;
+  }
+
+  setPurchases() {
+    this.isPurchasesLoaded = true;
+  }
+
+  setStatistics() {
+    this.isStatisticsLoaded = true;
   }
 
   ngOnDestroy() {

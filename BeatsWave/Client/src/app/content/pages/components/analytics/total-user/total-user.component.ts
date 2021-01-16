@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { UserAnalytics } from 'src/app/core/models/analytics/UserAnalytics';
 import { AnalyticsService } from 'src/app/core/services/analytics.service';
 
@@ -12,6 +12,7 @@ import { AnalyticsService } from 'src/app/core/services/analytics.service';
 })
 export class TotalUserComponent implements OnInit {
 
+  @Output() isReady = new EventEmitter<boolean>();
   totalUsers: number = 0;
   usersPerMonth: number[]
   chartData: ChartDataSets[] = [];
@@ -33,7 +34,9 @@ export class TotalUserComponent implements OnInit {
           this.totalUsers = res.totalCount;
           this.chartDataConfig();
         }))
-      .subscribe();
+      .subscribe(() => {}, () => {}, () => {
+        this.isReady.emit(true);
+      });
   }
 
   private fetchData(): Observable<UserAnalytics> {

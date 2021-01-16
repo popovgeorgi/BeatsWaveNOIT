@@ -36,6 +36,8 @@ export class CartService {
     }
     cart = cart.filter(order => order != id);
     this.localStorageService.setLocalStorage(this.cartName, cart);
+    this.number--;
+    this.count.next(this.number);
   }
 
   clear() {

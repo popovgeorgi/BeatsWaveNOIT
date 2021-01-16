@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
@@ -12,6 +12,7 @@ import { AnalyticsService } from 'src/app/core/services/analytics.service';
 })
 export class StatisticsComponent implements OnInit {
 
+  @Output() isReady = new EventEmitter<boolean>();
   usersPerMonth: number[];
   chartData: ChartDataSets[] = [];
   chartLabels: Label[] = [];
@@ -35,7 +36,9 @@ export class StatisticsComponent implements OnInit {
           this.chartDataConfig();
         })
       )
-      .subscribe()
+      .subscribe(() => {}, () => {}, () => {
+        this.isReady.emit(true);
+      },)
   }
 
   private fetchData(): Observable<UserAnalytics> {
@@ -77,7 +80,7 @@ export class StatisticsComponent implements OnInit {
       pointRadius: 0
     }];
 
-    this.chartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.chartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   }
 
   topCountriesData() {

@@ -17,7 +17,7 @@ import { forkJoin, Observable } from 'rxjs';
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
 
   carouselArrowPosClass1 = 'arrow-pos-1';
   carouselArrowPosClass2 = 'arrow-pos-2';
@@ -45,11 +45,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private genresConfigService: GenresConfigService,
     private eventsConfigService: EventsConfigService,
     private beatService: BeatService,
-    private aritstService: ArtistService,
-    private loadingService: LoadingService) {
+    private aritstService: ArtistService) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.fetchTrendingBeats().subscribe(res => {
       this.trendingBeats = res;
     })
@@ -70,10 +69,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   private fetchTrendingBeats(): Observable<Array<Beat>> {
     return this.beatService.getTrending();
-  }
-
-  ngAfterViewInit() {
-    this.loadingService.stopLoading();
   }
 
   // Initialize top charts object for section

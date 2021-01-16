@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
 import { Artist } from 'src/app/core/models/Artist';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './artists.component.html'
 })
 export class ArtistsComponent implements OnInit, AfterViewInit {
+
   artists: Array<Artist>;
   record: number;
   hasMoreArtistsToInclude: boolean = true;
