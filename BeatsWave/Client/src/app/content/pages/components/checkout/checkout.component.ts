@@ -32,6 +32,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     return this.beatService.getBeatsByIds(ids);
   }
 
+  onRemoveSong(beatId: number) {
+    this.beats = this.beats.filter(beat => beat.id != beatId);
+  }
+
   ngAfterViewInit(): void {
     this.spinner.hide('routing');
   }

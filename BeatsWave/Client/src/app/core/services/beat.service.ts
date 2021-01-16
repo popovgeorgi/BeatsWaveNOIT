@@ -38,7 +38,7 @@ export class BeatService {
   getBeatsByIds(ids: Array<number>): Observable<Array<Beat>> {
     let query = '';
     for (let i = 0; i < ids.length; i++) {
-      if (!(i = ids.length - 1)) {
+      if (i != ids.length - 1) {
         query += 'ids=' + ids[i] + '&';
       }
       else {
