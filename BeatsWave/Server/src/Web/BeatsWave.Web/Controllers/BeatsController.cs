@@ -79,8 +79,8 @@
         [AllowAnonymous]
         [Route(nameof(ByIds))]
 
-        public async Task<IEnumerable<BeatListingServiceModel>> ByIds([FromQuery] int[] ids)
-            => await this.beatService.ByIds<BeatListingServiceModel>(ids);
+        public async Task<IEnumerable<BeatCheckoutServiceModel>> ByIds([FromQuery] int[] ids)
+            => await this.beatService.ByIds<BeatCheckoutServiceModel>(ids);
 
         [HttpPut]
         [AllowAnonymous]
