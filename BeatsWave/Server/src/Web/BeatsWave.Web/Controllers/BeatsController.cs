@@ -104,5 +104,12 @@
 
         public async Task<IEnumerable<BeatListingServiceModel>> Trending()
             => await this.beatService.MostTrending<BeatListingServiceModel>();
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(Featured))]
+
+        public async Task<IEnumerable<BeatListingServiceModel>> Featured()
+            => await this.beatService.FeaturedAsync<BeatListingServiceModel>();
     }
 }

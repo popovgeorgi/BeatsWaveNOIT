@@ -55,6 +55,10 @@ export class BeatService {
   getTrending(): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.beatPath + '/Trending');
   }
+
+  getFeatured(): Observable<Array<Beat>> {
+    return this.http.get<Array<Beat>>(this.beatPath + '/Featured');
+  }
 }
 
 

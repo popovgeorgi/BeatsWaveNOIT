@@ -123,6 +123,14 @@
                 .To<T>()
                 .FirstOrDefaultAsync();
 
+        public async Task<IEnumerable<T>> FeaturedAsync<T>()
+            => await this.beatsRepository
+                .All()
+                .Where(b => b.Producer.Subscription == Subscription.Premium)
+                .To<T>()
+                .Take(20)
+                .ToListAsync();
+
         public async Task<IEnumerable<T>> MostTrending<T>()
             => await this.beatsRepository
                 .All()

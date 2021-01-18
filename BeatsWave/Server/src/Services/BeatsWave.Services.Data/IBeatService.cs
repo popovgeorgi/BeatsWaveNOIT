@@ -22,5 +22,7 @@
         Task<Result> AddPlay(int id, string userId);
 
         Task<IEnumerable<T>> MostTrending<T>();
+
+        Task<IEnumerable<T>> FeaturedAsync<T>();
     }
 }

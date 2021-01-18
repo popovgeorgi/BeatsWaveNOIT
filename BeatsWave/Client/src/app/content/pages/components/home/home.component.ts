@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
   carouselArrowPosClass2 = 'arrow-pos-2';
   carouselArrowPosClass3 = 'arrow-pos-3';
 
-  songsList: any = [];
   topCharts: any = {};
   newRelease: any = {};
   artists: any = {};
@@ -35,6 +34,7 @@ export class HomeComponent implements OnInit {
 
   public trendingBeats: Beat[];
   public newReleases: Beat[];
+  public featuredBeats: Beat[];
 
   mainEvent: any = {};
   secondaryEvents: any = [];
@@ -52,9 +52,9 @@ export class HomeComponent implements OnInit {
     this.fetchTrendingBeats().subscribe(res => {
       this.trendingBeats = res;
     })
-    this.songsList = this.songsConfigService.songsList;
-    // Just takes first 6 index of array for ui
-    this.songsList = this.songsList.slice(0, 6);
+    this.fetchFeaturedBeats().subscribe(res => {
+      this.featuredBeats = res;
+    })
 
     Promise.all([
       this.initTopCharts(),
@@ -69,6 +69,10 @@ export class HomeComponent implements OnInit {
 
   private fetchTrendingBeats(): Observable<Array<Beat>> {
     return this.beatService.getTrending();
+  }
+
+  private fetchFeaturedBeats(): Observable<Array<Beat>> {
+    return this.beatService.getFeatured();
   }
 
   // Initialize top charts object for section
