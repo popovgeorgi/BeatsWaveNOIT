@@ -35,6 +35,8 @@
 
         public DbSet<BeatComment> BeatComments { get; set; }
 
+        public DbSet<ArtistComment> ArtistComments { get; set; }
+
         public DbSet<Event> Events { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -109,6 +111,20 @@
 
             builder
                 .Entity<BeatComment>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<ArtistComment>()
+                .HasOne(c => c.Artist)
+                .WithMany(a => a.Comments)
+                .HasForeignKey(c => c.ArtistId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<ArtistComment>()
                 .HasOne(c => c.User)
                 .WithMany()
                 .HasForeignKey(c => c.UserId)

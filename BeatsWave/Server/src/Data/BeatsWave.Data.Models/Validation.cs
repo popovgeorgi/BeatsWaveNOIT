@@ -21,6 +21,11 @@
             public const int MaxContentLength = 240;
         }
 
+        public class ArtistComment
+        {
+            public const int MaxContentLength = 240;
+        }
+
         public class Event
         {
             public const int MaxNameLength = 60;
