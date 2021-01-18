@@ -1,8 +1,8 @@
 ﻿namespace BeatsWave.Web.Models.Comments
 {
-    public class CreateCommentRequestModel
+    public class CreateArtistCommentRequestModel
     {
-        public int BeatId { get; set; }
+        public string ArtistId { get; set; }
 
         public int ParentId { get; set; }
 

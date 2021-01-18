@@ -23,7 +23,8 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult<BeatCommentResponseModel>> Create(CreateCommentRequestModel model)
+        [Route(nameof(CreateBeatComment))]
+        public async Task<ActionResult<BeatCommentResponseModel>> CreateBeatComment(CreateBeatCommentRequestModel model)
         {
             var parentId =
                 model.ParentId == 0 ?
@@ -32,19 +33,45 @@
 
             if (parentId.HasValue)
             {
-                if (!await this.commentService.IsInPostId(parentId.Value, model.BeatId))
+                if (!await this.commentService.IsInBeatPostId(parentId.Value, model.BeatId))
                 {
                     return this.BadRequest();
                 }
             }
 
-            return await this.commentService.CreateAsync<BeatCommentResponseModel>(model.BeatId, this.currentUser.GetId(), model.Content, parentId);
+            return await this.commentService.CreateBeatCommentAsync<BeatCommentResponseModel>(model.BeatId, this.currentUser.GetId(), model.Content, parentId);
+        }
+
+        [HttpPost]
+        [Route(nameof(CreateArtistComment))]
+        public async Task<ActionResult<ArtistCommentResponseModel>> CreateArtistComment(CreateArtistCommentRequestModel model)
+        {
+            var parentId =
+                model.ParentId == 0 ?
+                (int?)null :
+                model.ParentId;
+
+            if (parentId.HasValue)
+            {
+                if (!await this.commentService.IsInArtistPostId(parentId.Value, model.ArtistId))
+                {
+                    return this.BadRequest();
+                }
+            }
+
+            return await this.commentService.CreateArtistCommentAsync<ArtistCommentResponseModel>(model.ArtistId, this.currentUser.GetId(), model.Content, parentId);
         }
 
         [HttpGet]
-        [Route(Id)]
+        [Route(BeatCommentsRoute)]
         [AllowAnonymous]
         public async Task<IEnumerable<BeatCommentsServiceModel>> Beat(int id)
             => await this.commentService.CommentsForBeat(id);
+
+        [HttpGet]
+        [Route(ArtistCommentsRoute)]
+        [AllowAnonymous]
+        public async Task<IEnumerable<ArtistCommentsServiceModel>> Artist(string id)
+            => await this.commentService.CommentsForArtist(id);
     }
 }

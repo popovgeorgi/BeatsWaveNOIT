@@ -43,7 +43,7 @@ namespace BeatsWave.Data.Models
 
         public virtual ICollection<Like> Likes { get; }
 
-        //Comments from other users to this user
+        // Comments from other users to this user
         public virtual ICollection<ArtistComment> Comments { get; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }

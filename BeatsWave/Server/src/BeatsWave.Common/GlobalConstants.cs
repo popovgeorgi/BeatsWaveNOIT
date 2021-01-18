@@ -23,5 +23,8 @@
 
         public const string ByGenreRoute = "ByGenre/{genre}";
         public const string AddPlayRoute = "AddPlay";
+
+        public const string BeatCommentsRoute = "Beats/{id}";
+        public const string ArtistCommentsRoute = "Artists/{id}";
     }
 }

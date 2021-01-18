@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class BeatCommentsServiceModel
+    public class ArtistCommentsServiceModel
     {
         public int Id { get; set; }
 
@@ -14,6 +14,6 @@
 
         public string Content { get; set; }
 
-        public virtual IEnumerable<BeatCommentChildrenResponseModel> Children { get; set; }
+        public virtual IEnumerable<ArtistCommentChildrenResponseModel> Children { get; set; }
     }
 }

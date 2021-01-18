@@ -1,8 +1,5 @@
 ﻿namespace BeatsWave.Web.Models.Comments
 {
-    using AutoMapper;
-    using BeatsWave.Data.Models;
-
     public class BeatCommentChildrenResponseModel
     {
         public int Id { get; set; }

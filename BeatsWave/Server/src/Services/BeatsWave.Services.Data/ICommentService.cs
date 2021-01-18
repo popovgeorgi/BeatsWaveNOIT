@@ -7,10 +7,16 @@
 
     public interface ICommentService
     {
-        Task<T> CreateAsync<T>(int beatId, string userId, string content, int? parentId = null);
+        Task<T> CreateBeatCommentAsync<T>(int beatId, string userId, string content, int? parentId = null);
 
-        Task<bool> IsInPostId(int commentId, int beatId);
+        Task<T> CreateArtistCommentAsync<T>(string artistId, string userId, string content, int? parentId = null);
+
+        Task<bool> IsInBeatPostId(int commentId, int beatId);
+
+        Task<bool> IsInArtistPostId(int commentId, string artistId);
 
         Task<IEnumerable<BeatCommentsServiceModel>> CommentsForBeat(int beatId);
+
+        Task<IEnumerable<ArtistCommentsServiceModel>> CommentsForArtist(string artistId);
     }
 }
