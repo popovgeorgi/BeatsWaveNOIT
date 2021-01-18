@@ -7,5 +7,6 @@ export interface Event {
     email: string,
     conductDate: Date,
     description: string,
-    price: number
+    price: number,
+    isExpired: boolean
 }

@@ -3,6 +3,12 @@
 
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
+    <div class="container-header">
+        <select (change)="onSelect($event)" class="select ml-auto" name="sort" id="sort">
+          <option value="0">Upcoming</option>
+          <option value="1">All</option>
+        </select>
+    </div>
     <div class="row section" *ngIf="events.length > 0">
         <div class="col-xl-4 col-12 pb-4" *ngFor="let event of events">
             <app-event-card [musicEvent]="event"></app-event-card>
