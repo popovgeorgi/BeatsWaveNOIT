@@ -48,7 +48,7 @@ export class CommentComponent implements OnInit {
   public onComment() {
     this.spinner.show('comment');
     this.commentForm.value.beatId = this.beatId;
-    this.commentService.comment(this.commentForm.value).subscribe(res => {
+    this.commentService.commentBeat(this.commentForm.value).subscribe(res => {
       this.comments.push(res)
       this.snotifyService.info('Successfully comented');
       this.spinner.hide('comment');
@@ -68,7 +68,7 @@ export class CommentComponent implements OnInit {
   public onReply() {
       this.replyForm.value.beatId = this.beatId;
       this.replyForm.value.parentId = this.parentId;
-      this.commentService.comment(this.replyForm.value).subscribe(res => {
+      this.commentService.commentBeat(this.replyForm.value).subscribe(res => {
         this.snotifyService.info('Successfully replied');
       })
   }

@@ -11,13 +11,13 @@ export class CommentService {
   private commentPath = environment.apiUrl + '/comments';
   constructor(private http: HttpClient) { }
 
-  comment(data): Observable<any> {
-    return this.http.post(this.commentPath, data);
+  commentBeat(data): Observable<any> {
+    return this.http.post(this.commentPath + '/CreateBeatComment', data);
   }
 
   getBeat(id): Observable<Array<Comment>> {
     if (id) {
-      return this.http.get<Array<Comment>>(this.commentPath + '/' + id);
+      return this.http.get<Array<Comment>>(this.commentPath + '/Beats/' + id);
     }
     return of(null);
   }

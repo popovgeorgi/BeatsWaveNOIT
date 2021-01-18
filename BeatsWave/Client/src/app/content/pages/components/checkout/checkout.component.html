@@ -1,13 +1,14 @@
 <div class="banner bg-song"></div>
 
-<div class="main-container">
-  <div class="container-header"></div>
+<div class="main-container" style="margin-top: -40px;">
+  <div class="container-header">
+  </div>
   <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
   <!-- End | Container header -->
 
   <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
 
-  <div class="section">
+  <div class="section" style="margin-bottom: 0px !important">
       <div class="row custom-card-list">
           <ng-container #listView>
               <div class="col-xl-6 col-lg-12" *ngFor="let beat of beats; let i = index">
@@ -16,5 +17,23 @@
           </ng-container>
       </div>
   </div>
+
+  <div *ngIf="beats != undefined" style="text-align: center;
+  border: 2px solid;
+  margin: 0px 350px;">
+      <h1 style="font-weight: bold;">Cart Summary</h1>
+      <div *ngFor="let beat of beats">
+          <app-song-horizontal [song]="beat" [imageBorderRadiusClass]="imageBorderRadiusClass"
+                     [songIndex]="beat.url"></app-song-horizontal>
+      </div>
+      <div>
+          <div>
+            <h1>Total: ${{totalPrice}}</h1>
+            <h1></h1>
+          </div>
+      </div>
+  </div>
   <!-- End | Section -->
 </div>
+
+
