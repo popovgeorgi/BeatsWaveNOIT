@@ -14,6 +14,8 @@ export class AddMusicComponent implements AfterViewInit {
   public beatForm: FormGroup;
   public uploadSaveImageUrl: string = environment.apiUrl + '/FileUpload/SavePhoto';
   public uploadSaveBeatUrl: string = environment.apiUrl + '/FileUpload/SaveBeat';
+  public isImageUploaded: boolean = false;
+  public isBeatUploaded: boolean = false;
 
 
   constructor(private spinner: NgxSpinnerService,
@@ -37,6 +39,7 @@ export class AddMusicComponent implements AfterViewInit {
   public onPhotoUploaded(e) {
     this.beatForm.controls['imageUrl'].setValue(e.originalEvent.body.uri)
     this.spinner.hide('beatUploader');
+    this.isImageUploaded = true;
   }
 
   public onBeatUploading() {
@@ -46,6 +49,7 @@ export class AddMusicComponent implements AfterViewInit {
   public onBeatUploaded(e) {
     this.beatForm.controls['beatUrl'].setValue(e.originalEvent.body.uri)
     this.spinner.hide('beatUploader');
+    this.isBeatUploaded = true;
   }
 
   public uploadBeat() {

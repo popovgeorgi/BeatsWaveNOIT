@@ -9,7 +9,7 @@
           <option value="1">All</option>
         </select>
     </div>
-    <div class="row section" *ngIf="events.length > 0">
+    <div class="row section" *ngIf="events && events.length > 0">
         <div class="col-xl-4 col-12 pb-4" *ngFor="let event of events">
             <app-event-card [musicEvent]="event"></app-event-card>
         </div>
