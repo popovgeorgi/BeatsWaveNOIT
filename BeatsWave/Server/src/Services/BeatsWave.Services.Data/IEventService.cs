@@ -12,5 +12,7 @@
         Task<IEnumerable<T>> AllAsync<T>();
 
         Task<T> DetailsAsync<T>(int id);
+
+        Task<IEnumerable<T>> PremiumAsync<T>();
     }
 }

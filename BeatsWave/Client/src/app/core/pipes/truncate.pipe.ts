@@ -12,10 +12,12 @@ export class TruncatePipe implements PipeTransform {
         if (htmlTag.test(result)) {
             return this.truncateHtml(result, limit, ellipsis);
         } else {
-            if (completeWords) {
-                limit = result.substr(0, limit).lastIndexOf(' ');
+            if (value.length <= limit) {
+              return result.substr(0, limit);
             }
-            return `${result.substr(0, limit)}${ellipsis}`;
+            else {
+              return `${result.substr(0, limit)}${ellipsis}`;
+            }
         }
     }
 

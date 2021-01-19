@@ -58,5 +58,42 @@
                 .To<T>()
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<IEnumerable<T>> PremiumAsync<T>()
+        {
+            var premiumEvents = this.eventRepository
+                .All()
+                .OrderBy(e => e.ConductDate)
+                .Where(e => e.Manager.Subscription == Subscription.Premium && e.ConductDate > DateTime.Now);
+
+            if (premiumEvents.Count() < 3)
+            {
+                var remaining = 3 - premiumEvents.Count();
+
+                var remainingEvents = this.eventRepository
+                    .All()
+                    .Where(e => e.Manager.Subscription != Subscription.Premium && e.ConductDate > DateTime.Now)
+                    .OrderBy(e => e.ConductDate)
+                    .Take(remaining);
+
+                if (remainingEvents.Count() == 0)
+                {
+                    return await premiumEvents
+                        .To<T>()
+                        .ToListAsync();
+                }
+
+                return await premiumEvents.Concat(remainingEvents)
+                    .To<T>()
+                    .ToListAsync();
+            }
+            else
+            {
+                return await premiumEvents
+                    .Take(3)
+                    .To<T>()
+                    .ToListAsync();
+            }
+        }
     }
 }

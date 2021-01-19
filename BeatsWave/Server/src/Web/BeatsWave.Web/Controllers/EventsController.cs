@@ -53,5 +53,12 @@
         [AllowAnonymous]
         public async Task<EventDetailsServiceModel> Details(int id)
             => await this.eventService.DetailsAsync<EventDetailsServiceModel>(id);
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(HomepageListed))]
+
+        public async Task<IEnumerable<EventListingServiceModel>> HomepageListed()
+            => await this.eventService.PremiumAsync<EventListingServiceModel>();
     }
 }

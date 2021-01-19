@@ -22,4 +22,8 @@ export class EventService {
   getEvent(id): Observable<Event> {
     return this.http.get<Event>(this.eventPath + '/' + id);
   }
+
+  getPremium(): Observable<Array<Event>> {
+    return this.http.get<Array<Event>>(this.eventPath + '/HomepageListed');
+  }
 }

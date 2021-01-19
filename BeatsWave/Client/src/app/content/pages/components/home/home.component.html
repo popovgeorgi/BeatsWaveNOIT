@@ -12,12 +12,12 @@
     <div class="row">
         <!-- Begin | Events -->
         <div class="section col-12 col-xl-7">
-            <div class="row h-100">
-                <div class="col-sm-5 pb-4">
-                    <app-event-countdown-card *ngIf="mainEvent" [musicEvent]="mainEvent"></app-event-countdown-card>
+            <div *ngIf="premiumEvents" class="row h-100">
+                <div *ngIf="mainEvent" class="col-sm-5 pb-4">
+                    <app-event-countdown-card [musicEvent]="mainEvent"></app-event-countdown-card>
                 </div>
-                <div class="col-sm-7" *ngIf="secondaryEvents.length > 0">
-                    <div class="h-50 pb-4" *ngFor="let event of secondaryEvents">
+                <div class="col-sm-7">
+                    <div class="h-50 pb-4" *ngFor="let event of premiumEvents">
                         <app-event-card [musicEvent]="event"></app-event-card>
                     </div>
                 </div>

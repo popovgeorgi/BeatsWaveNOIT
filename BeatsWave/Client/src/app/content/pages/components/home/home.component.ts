@@ -11,6 +11,8 @@ import { ArtistService } from 'src/app/core/services/artist.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { forkJoin, Observable } from 'rxjs';
+import { Event } from 'src/app/core/models/Event';
+import { EventService } from 'src/app/core/services/event.service';
 
 
 @Component({
@@ -35,17 +37,15 @@ export class HomeComponent implements OnInit {
   public trendingBeats: Beat[];
   public newReleases: Beat[];
   public featuredBeats: Beat[];
-
-  mainEvent: any = {};
-  secondaryEvents: any = [];
+  public premiumEvents: Event[];
+  public mainEvent: Event;
 
   constructor(private spinner: NgxSpinnerService,
-    private songsConfigService: SongsConfigService,
     private radioConfigService: RadioConfigService,
     private genresConfigService: GenresConfigService,
-    private eventsConfigService: EventsConfigService,
     private beatService: BeatService,
-    private aritstService: ArtistService) {
+    private artistService: ArtistService,
+    private eventService: EventService) {
   }
 
   ngOnInit() {
@@ -55,11 +55,14 @@ export class HomeComponent implements OnInit {
     this.fetchFeaturedBeats().subscribe(res => {
       this.featuredBeats = res;
     })
+    this.fetchPremiumEvents().subscribe(res => {
+      this.mainEvent = res.shift();
+      this.premiumEvents = res;
+    })
 
     Promise.all([
       this.initTopCharts(),
       this.initNewRelease(),
-      this.initEvents(),
       this.initArtists(),
       this.initGenres()
     ]).then(res => {
@@ -73,6 +76,10 @@ export class HomeComponent implements OnInit {
 
   private fetchFeaturedBeats(): Observable<Array<Beat>> {
     return this.beatService.getFeatured();
+  }
+
+  private fetchPremiumEvents(): Observable<Array<Event>> {
+    return this.eventService.getPremium();
   }
 
   // Initialize top charts object for section
@@ -97,19 +104,13 @@ export class HomeComponent implements OnInit {
 
   }
 
-  // Initialize music events object for section
-  initEvents() {
-    this.mainEvent = this.eventsConfigService.eventsList[0];
-    this.secondaryEvents = this.eventsConfigService.eventsList.slice(1, 3);
-  }
-
   // Initialize music artists object for section
   async initArtists() {
     this.artists = {
       title: 'Featured Artists',
       subTitle: 'Select you best to listen',
       page: '/artists',
-      items: await this.aritstService.getFeaturedArtists().toPromise()
+      items: await this.artistService.getFeaturedArtists().toPromise()
     };
   }
 

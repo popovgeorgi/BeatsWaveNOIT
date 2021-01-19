@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Event } from 'src/app/core/models/Event';
 
 @Component({
     selector: 'app-event-countdown-card',
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EventCountdownCardComponent implements OnInit {
 
-    @Input() musicEvent: any = {};
+    @Input() musicEvent: Event
     @Input() eventBorderRadiusClass = 'bg-img-radius-lg';
 
     countText: any = {};
