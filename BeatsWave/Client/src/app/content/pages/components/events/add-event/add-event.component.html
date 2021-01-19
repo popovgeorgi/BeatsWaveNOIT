@@ -15,7 +15,11 @@
                         <div class="form-row form-group">
                             <label for="eventName" class="col-md-4 text-md-right col-form-label">Event Name</label>
                             <div class="col-md-7">
-                                <input type="text" id="eventName" class="form-control" formControlName="name">
+                                <input [ngClass]="{'red-border-solid': name.errors?.required && name.touched}" type="text" id="eventName" class="form-control" formControlName="name">
+                                <div *ngIf="name.errors?.required && name.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                    <span>This field is required</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
@@ -31,31 +35,53 @@
                         <div class="form-row form-group mt-35px">
                             <label for="eventAddress" class="col-md-4 text-md-right col-form-label">Venue</label>
                             <div class="col-md-7">
-                                <textarea name="eventAddress" id="eventAddress" cols="10" rows="4" class="form-control" formControlName="venue"></textarea>
+                                <textarea [ngClass]="{'red-border-solid': venue.errors?.required && venue.touched}" name="eventAddress" id="eventAddress" cols="10" rows="4" class="form-control" formControlName="venue"></textarea>
+                                <div *ngIf="venue.errors?.required && venue.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                    <span>This field is required</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="phoneNo" class="col-md-4 text-md-right col-form-label">Phone Number</label>
                             <div class="col-md-7">
-                                <input type="text" id="phoneNo" class="form-control" formControlName="phoneNumber">
+                                <input [ngClass]="{'red-border-solid': phoneNumber.errors?.required && phoneNumber.touched}" type="text" id="phoneNo" class="form-control" formControlName="phoneNumber">
+                                <div *ngIf="phoneNumber.errors?.required && phoneNumber.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                    <span>This field is required</span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="emailId" class="col-md-4 text-md-right col-form-label">Email</label>
                             <div class="col-md-7">
-                                <input type="text" id="emailId" class="form-control" formControlName="email">
+                                <input [ngClass]="{'red-border-solid': (email.errors?.required || email.errors?.email) && email.touched}" type="text" id="emailId" class="form-control" formControlName="email">
+                                <div *ngIf="(email.errors?.email || email.errors?.required) && email.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                    <span *ngIf="email.errors?.required">This field is required!</span>
+                                    <span *ngIf="email.errors?.email">This is not a valid email!</span>
+                              </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
                           <label for="emailId" class="col-md-4 text-md-right col-form-label">Conduct Date</label>
                           <div class="col-md-7">
-                              <input placeholder="YYYY-MM-DD" type="text" id="conductDate" class="form-control" formControlName="conductDate">
+                              <input [ngClass]="{'red-border-solid': (conductDate.errors?.pattern || conductDate.errors?.required) && conductDate.touched}" placeholder="YYYY-MM-DD" type="text" id="conductDate" class="form-control" formControlName="conductDate">
+                              <div *ngIf="(conductDate.errors?.pattern || conductDate.errors?.required) && conductDate.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                    <span *ngIf="conductDate.errors?.required">This field is required!</span>
+                                    <span *ngIf="conductDate.errors?.pattern">Enter your date in the correct format!</span>
+                              </div>
                           </div>
                         </div>
                         <div class="form-row form-group">
                             <label for="desc" class="col-md-4 text-md-right col-form-label">Description</label>
                             <div class="col-md-7">
-                                <textarea name="eventAddress" id="desc" cols="10" rows="6" class="form-control" formControlName="description"></textarea>
+                                <textarea [ngClass]="{'red-border-solid': description.errors?.maxlength && description.touched}" name="eventAddress" id="desc" cols="10" rows="6" class="form-control" formControlName="description"></textarea>
+                                <div *ngIf="description.errors?.maxlength && description.touched" class="invalid-feedback"
+                                ngClass="d-block">
+                                    <span>This field must be less than 500 symbols!</span>
+                                </div>
                             </div>
                         </div>
                         <!-- <div class="form-row form-group">
@@ -82,14 +108,12 @@
                           <div class="row">
                               <div class="col-md-4"></div>
                               <div class="col-md-7 btn-inline">
-                                  <button type="submit" class="btn btn-brand btn-air">Save Event</button>
-                                  <button type="button" class="btn btn-outline-secondary">Cancel</button>
+                                  <button [disabled]="!eventForm.valid" type="submit" class="btn btn-brand btn-air">Save Event</button>
                               </div>
                           </div>
                       </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>

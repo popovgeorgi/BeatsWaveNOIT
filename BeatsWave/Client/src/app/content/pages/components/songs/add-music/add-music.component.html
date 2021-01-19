@@ -49,7 +49,7 @@
                                 <input [ngClass]="{'red-border-solid': price.errors?.required && price.touched}" type="number" id="songPrice" class="form-control" formControlName="price">
                                 <div *ngIf="price.errors?.required && price.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                <span>This field is required</span>
+                                  <span>This field is required</span>
                                 </div>
                             </div>
                         </div>
