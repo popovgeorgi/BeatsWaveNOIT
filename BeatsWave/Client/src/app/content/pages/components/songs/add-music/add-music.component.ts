@@ -40,6 +40,7 @@ export class AddMusicComponent implements AfterViewInit {
     this.beatForm.controls['imageUrl'].setValue(e.originalEvent.body.uri)
     this.spinner.hide('beatUploader');
     this.isImageUploaded = true;
+
   }
 
   public onBeatUploading() {

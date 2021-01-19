@@ -25,31 +25,25 @@
                         <div class="form-row form-group">
                             <label for="songImage" class="col-md-4 text-md-right col-form-label">Song Cover
                                 Image</label>
-                            <div class="col-md-2">
+                            <div class="col-md-7">
                                 <div class="custom-file">
-                                    <p-fileUpload mode="basic" name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
+                                    <p-fileUpload name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
                                         (onSend)="onPhotoUploading()" (onUpload)="onPhotoUploaded($event)">
                                     </p-fileUpload>
                                 </div>
                             </div>
-                            <div *ngIf="isImageUploaded" class="col-md-2">
-                              <ion-icon class="icon-upload-suc" size="large" name="checkmark-outline"></ion-icon>
-                            </div>
                         </div>
-                        <div class="form-row form-group">
+                        <div class="form-row form-group mt-35px">
                             <label for="songFile" class="col-md-4 text-md-right col-form-label">Song File</label>
-                            <div class="col-md-2">
+                            <div class="col-md-7">
                                 <div class="custom-file">
-                                    <p-fileUpload mode="basic" name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
+                                    <p-fileUpload name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
                                         (onSend)="onBeatUploading()" (onUpload)="onBeatUploaded($event)">
                                     </p-fileUpload>
                                 </div>
                             </div>
-                            <div *ngIf="isBeatUploaded" class="col-md-2">
-                                <ion-icon class="icon-upload-suc" size="large" name="checkmark-outline"></ion-icon>
-                            </div>
                         </div>
-                        <div class="form-row form-group">
+                        <div class="form-row form-group mt-35px">
                             <label for="songPrice" class="col-md-4 text-md-right col-form-label">Song Price</label>
                             <div class="col-md-7">
                                 <input [ngClass]="{'red-border-solid': price.errors?.required && price.touched}" type="number" id="songPrice" class="form-control" formControlName="price">
