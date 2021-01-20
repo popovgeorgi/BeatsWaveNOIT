@@ -46,177 +46,195 @@ import { Role } from 'src/app/core/models/Role';
 import { PhotoResizeComponent } from '../../partials/photo-resize/photo-resize.component';
 import { GenreListingComponent } from './genres/genre-listing/genre-listing.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { SongEditComponent } from './songs/song-edit/song-edit.component';
+import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-    suppressScrollX: true
+  suppressScrollX: true
 };
 
 const routes: Routes = [
-    {
+  {
+    path: '',
+    component: ComponentsComponent,
+    children: [
+      {
         path: '',
-        component: ComponentsComponent,
-        children: [
-            {
-                path: '',
-                component: HomeComponent
-            },
-            {
-                path: 'home',
-                component: HomeComponent,
-            },
-            {
-                path: 'genres',
-                component: GenresComponent,
-            },
-            {
-                path: 'genre/:name',
-                component: GenreListingComponent
-            },
-            {
-                path: 'music',
-                component: MusicComponent,
-            },
-            {
-                path: 'artists',
-                component: ArtistsComponent,
-            },
-            {
-                path: 'artist/:id/details',
-                component: ArtistDetailsComponent,
-            },
-            {
-                path: 'songs',
-                component: SongsComponent
-            },
-            {
-                path: 'song/:id/details',
-                component: SongDetailsComponent
-            },
-            {
-                path: 'albums',
-                component: AlbumsComponent
-            },
-            {
-                path: 'album/:id/details',
-                component: AlbumDetailsComponent
-            },
-            {
-                path: 'add-music',
-                component: AddMusicComponent,
-                canActivate: [AuthGuardService],
-                data: {roles: [Role.Beatmaker, Role.Administrator]}
-            },
-            {
-                path: 'analytics',
-                component: AnalyticsComponent,
-                canActivate: [AuthGuardService],
-                data: {roles: [Role.Administrator]}
-            },
-            {
-                path: 'favorites',
-                component: FavoritesComponent,
-                canActivate: [AuthGuardService]
-            },
-            {
-                path: 'history',
-                component: HistoryComponent
-            },
-            {
-                path: 'events',
-                component: EventsComponent
-            },
-            {
-                path: 'event/:id/details',
-                component: EventDetailsComponent
-            },
-            {
-                path: 'add-event',
-                component: AddEventComponent,
-                canActivate: [AuthGuardService],
-                data: {roles: [Role.Manager, Role.Administrator]}
-            },
-            {
-                path: 'profile',
-                component: UserProfileComponent,
-                canActivate: [AuthGuardService]
-            },
-            {
-                path: 'plan',
-                component: UserPlanComponent,
-                canActivate: [AuthGuardService]
-            },
-            {
-                path: 'settings',
-                component: SettingsComponent
-            },
-            {
-                path: 'my-beats',
-                component: UserMyBeatsComponent,
-                canActivate: [AuthGuardService]
-            },
-            {
-                path: 'checkout',
-                component: CheckoutComponent,
-                canActivate: [AuthGuardService]
-            }
-        ]
-    },
+        component: HomeComponent
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'genres',
+        component: GenresComponent,
+      },
+      {
+        path: 'genre/:name',
+        component: GenreListingComponent
+      },
+      {
+        path: 'music',
+        component: MusicComponent,
+      },
+      {
+        path: 'artists',
+        component: ArtistsComponent,
+      },
+      {
+        path: 'artist/:id/details',
+        component: ArtistDetailsComponent,
+      },
+      {
+        path: 'songs',
+        component: SongsComponent
+      },
+      {
+        path: 'song/:id/details',
+        component: SongDetailsComponent
+      },
+      {
+        path: 'albums',
+        component: AlbumsComponent
+      },
+      {
+        path: 'album/:id/details',
+        component: AlbumDetailsComponent
+      },
+      {
+        path: 'add-music',
+        component: AddMusicComponent,
+        canActivate: [AuthGuardService],
+        data: { roles: [Role.Beatmaker, Role.Administrator] }
+      },
+      {
+        path: 'analytics',
+        component: AnalyticsComponent,
+        canActivate: [AuthGuardService],
+        data: { roles: [Role.Administrator] }
+      },
+      {
+        path: 'favorites',
+        component: FavoritesComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'history',
+        component: HistoryComponent
+      },
+      {
+        path: 'events',
+        component: EventsComponent
+      },
+      {
+        path: 'event/:id/details',
+        component: EventDetailsComponent
+      },
+      {
+        path: 'add-event',
+        component: AddEventComponent,
+        canActivate: [AuthGuardService],
+        data: { roles: [Role.Manager, Role.Administrator] }
+      },
+      {
+        path: 'profile',
+        component: UserProfileComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'plan',
+        component: UserPlanComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
+      },
+      {
+        path: 'my-beats',
+        component: UserMyBeatsComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
+        canActivate: [AuthGuardService]
+      }
+    ]
+  },
 ];
 
 @NgModule({
-    declarations: [
-        ComponentsComponent,
-        HomeComponent,
-        GenresComponent,
-        MusicComponent,
-        ArtistsComponent,
-        ArtistDetailsComponent,
-        SongsComponent,
-        SongDetailsComponent,
-        StationsComponent,
-        FavoritesComponent,
-        HistoryComponent,
-        EventsComponent,
-        EventDetailsComponent,
-        AddEventComponent,
-        AddMusicComponent,
-        UserProfileComponent,
-        UserPlanComponent,
-        SettingsComponent,
-        AlbumsComponent,
-        AlbumDetailsComponent,
-        AnalyticsComponent,
-        TotalUserComponent,
-        TotalSongsComponent,
-        PurchasesComponent,
-        StatisticsComponent,
-        ReferralsComponent,
-        UserMyBeatsComponent,
-        GenreListingComponent,
-        CheckoutComponent
-    ],
-    entryComponents: [PhotoResizeComponent],
-    imports: [
-        ReactiveFormsModule,
-        CommonModule,
-        FormsModule,
-        PerfectScrollbarModule,
-        PartialsModule,
-        CoreModule,
-        LayoutModule,
-        ChartsModule,
-        RouterModule.forChild(routes),
-        FileUploadModule,
-        NgxSpinnerModule,
-        InfiniteScrollModule
-    ],
-    providers: [
-        ThemeService,
-        {
-            provide: PERFECT_SCROLLBAR_CONFIG,
-            useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  declarations: [
+    ComponentsComponent,
+    HomeComponent,
+    GenresComponent,
+    MusicComponent,
+    ArtistsComponent,
+    ArtistDetailsComponent,
+    SongsComponent,
+    SongDetailsComponent,
+    StationsComponent,
+    FavoritesComponent,
+    HistoryComponent,
+    EventsComponent,
+    EventDetailsComponent,
+    AddEventComponent,
+    AddMusicComponent,
+    UserProfileComponent,
+    UserPlanComponent,
+    SettingsComponent,
+    AlbumsComponent,
+    AlbumDetailsComponent,
+    AnalyticsComponent,
+    TotalUserComponent,
+    TotalSongsComponent,
+    PurchasesComponent,
+    StatisticsComponent,
+    ReferralsComponent,
+    UserMyBeatsComponent,
+    GenreListingComponent,
+    CheckoutComponent,
+    SongEditComponent
+  ],
+  entryComponents: [
+    PhotoResizeComponent,
+    SongEditComponent
+  ],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    PerfectScrollbarModule,
+    PartialsModule,
+    CoreModule,
+    LayoutModule,
+    ChartsModule,
+    RouterModule.forChild(routes),
+    FileUploadModule,
+    NgxSpinnerModule,
+    InfiniteScrollModule
+  ],
+  providers: [
+    ThemeService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
+    {
+      provide: DefaultSimpleModalOptionConfig,
+      useValue: {
+        ...defaultSimpleModalOptions, ...{
+          wrapperDefaultClasses: 'simple-modal modal fade',
+          wrapperClass: 'show',
+          closeOnEscape: true,
+          closeOnClickOutside: true,
+          animationDuration: 1000,
         }
-    ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      }
+    }
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ComponentsModule { }

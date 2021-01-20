@@ -15,6 +15,14 @@ export class BeatService {
     return this.http.post(this.beatPath, data);
   }
 
+  updateBeat(beatId: number, data) {
+    return this.http.put(this.beatPath + '?beatId=' + beatId, data)
+  }
+
+  deleteBeat(beatId: number) {
+    return this.http.delete(this.beatPath + '?beatId=' + beatId);
+  }
+
   getBeats(takeCount, skipCount): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.beatPath + '?take=' + takeCount + '&skip=' + skipCount);
   }
@@ -49,7 +57,7 @@ export class BeatService {
   }
 
   addPlay(beatId: number) {
-    return this.http.put(this.beatPath + '/AddPlay', {'beatId': beatId});
+    return this.http.put(this.beatPath + '/AddPlay', { 'beatId': beatId });
   }
 
   getTrending(): Observable<Array<Beat>> {

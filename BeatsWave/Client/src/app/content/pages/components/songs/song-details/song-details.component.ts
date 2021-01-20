@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
-import { SongsConfigService } from "../../../../../core/services/songs-config.service";
 import { AudioPlayerService } from "../../../../../core/services/audio-player.service";
 import { BeatService } from "src/app/core/services/beat.service";
 import { map, mergeMap, tap } from "rxjs/operators";
@@ -12,14 +11,20 @@ import { LikeService } from 'src/app/core/services/like.service';
 import { SnotifyService } from 'ng-snotify';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { CartService } from "src/app/core/services/cart.service";
+import { AuthService } from "src/app/core/services/auth.service";
+import { SimpleModalService } from "ngx-simple-modal";
+import { SongEditComponent } from "../song-edit/song-edit.component";
 
 @Component({
   selector: "app-song-details",
   templateUrl: "./song-details.component.html",
 })
-export class SongDetailsComponent implements OnInit, AfterViewInit {
+export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private userSubscription: Subscription;
   public isLiked: boolean;
   public beatDetails: Beat;
+  public isUserOwner: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,13 +35,48 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
     private beatService: BeatService,
     private likeService: LikeService,
     private snotifyService: SnotifyService,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: AuthService,
+    private simpleModalService: SimpleModalService
   ) { }
 
   ngOnInit() {
-    this.fetchData().subscribe(res => {
-      this.beatDetails = res;
+    this.fetchData().pipe(
+      tap(beat => {
+        this.userSubscription = this.authService.user.subscribe(user => {
+          if (beat.producerId == user.id) {
+            this.isUserOwner = true;
+          }
+        })
+      })
+    ).subscribe(beat => {
+      this.beatDetails = beat;
     })
+  }
+
+  private fetchData(): Observable<Beat> {
+    return this.route.params
+      .pipe(map((params) => {
+        const id = params["id"];
+        return id;
+      }),
+        mergeMap((id) => this.beatService.getBeat(id)))
+    // this.likeService.doesUserLike(this.beatId).subscribe(res => {
+    //   this.isLiked = res;
+    // });
+  }
+
+  public edit() {
+    const modal = this.simpleModalService.addModal(SongEditComponent, {data: this.beatDetails})
+    .subscribe((isConfirmed) => {
+      if (isConfirmed) {
+      } else {
+      }
+    });
+  }
+
+  public delete() {
+
   }
 
   public vote() {
@@ -58,23 +98,14 @@ export class SongDetailsComponent implements OnInit, AfterViewInit {
   public onBeatmakerClicked(id: string) {
     this.router.navigate(['artist/' + id + '/details']);
   }
-  //'artist/:id/details'
-
-  private fetchData() {
-    return this.route.params
-      .pipe(map((params) => {
-        const id = params["id"];
-        return id;
-      }),
-        mergeMap((id) => this.beatService.getBeat(id)))
-    // this.likeService.doesUserLike(this.beatId).subscribe(res => {
-    //   this.isLiked = res;
-    // });
-  }
 
   ngAfterViewInit() {
     this.loadingService.stopLoading();
     this.spinner.hide('routing');
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
   addInPlayer() {

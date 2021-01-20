@@ -1,0 +1,62 @@
+<div class="modal-dialog theme-dialog" role="document">
+  <div class="modal-content">
+    <ngx-spinner name="beatEditter" [fullScreen]="false"></ngx-spinner>
+      <div class="modal-header border-bottom-0 pb-0">
+          <button type="button" class="close" (click)="close()">&times;</button>
+      </div>
+      <h6 class="modal-title text-center mb-3">Edit your Beat</h6>
+      <div class="modal-body">
+          <form action="#" [formGroup]="songEditForm" class="mx-4 pb-5" (ngSubmit)="edit()">
+              <div class="form-group">
+
+                <label for="genre" class="text-md-right col-form-label">Name</label>
+                  <input [ngClass]="{'red-border-solid': name.errors?.required && name.touched}" type="text" formControlName="name" id="name" class="form-control"
+                         placeholder="Name">
+                         <div *ngIf="name.errors?.required && name.touched" class="invalid-feedback"
+                         ngClass="d-block">
+                         <span>This field is required</span>
+                         </div>
+              </div>
+              <div class="form-group">
+
+                <label for="genre" class="text-md-right col-form-label">Price</label>
+                  <input [ngClass]="{'red-border-solid': name.errors?.required && name.touched}" type="number" formControlName="price" id="price" class="form-control"
+                         placeholder="Price">
+                         <div *ngIf="price.errors?.required && price.touched" class="invalid-feedback"
+                         ngClass="d-block">
+                         <span>This field is required</span>
+                         </div>
+              </div>
+              <div class="form-group">
+                <label for="genre" class="text-md-right col-form-label">Genre</label>
+                <select [ngClass]="{'red-border-solid': genre.errors?.required && genre.touched}" class="form-control" formControlName="genre">
+                  <option value="HipHop">Hip-Hop</option>
+                  <option value="Pop">Pop</option>
+                  <option value="RB">R&B</option>
+                  <option value="Rock">Rock</option>
+                  <option value="Electronic">Electronic</option>
+                  <option value="Jazz">Jazz</option>
+                  <option value="Reggaeton">Reggaeton</option>
+                </select>
+                <div *ngIf="genre.errors?.required && genre.touched" class="invalid-feedback"
+                ngClass="d-block">
+                <span>This field is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+
+              <label for="genre" class="text-md-right col-form-label">Bpm</label>
+              <input type="number" formControlName="bpm" id="bpm" class="form-control"
+                     placeholder="Bpm">
+          </div>
+          <div class="form-group">
+
+            <label for="genre" class="text-md-right col-form-label">Description</label>
+            <input type="text" formControlName="description" id="description" class="form-control"
+                   placeholder="Description">
+        </div>
+              <button type="submit" class="btn btn-block btn-bold btn-air btn-info load-page">Edit</button>
+          </form>
+      </div>
+  </div>
+</div>

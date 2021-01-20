@@ -4,6 +4,10 @@
         <!-- Begin | Custom Card Info -->
         <div class="custom-card--info" *ngIf="showOptions">
             <ul class="custom-card--labels d-flex">
+                <div>
+                    <li *ngIf="isUserOwner"><ion-icon name="create-outline"></ion-icon></li>
+                    <li *ngIf="isUserOwner"><ion-icon name="trash-outline"></ion-icon></li>
+                </div>
                 <li>{{song.likesCount}}<ion-icon name="heart-outline"></ion-icon></li>
                 <li>{{song.commentsCount}}<ion-icon name="chatbubble-outline"></ion-icon></li>
                 <!-- <li *ngIf="song?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>

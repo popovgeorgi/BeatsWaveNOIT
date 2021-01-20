@@ -94,5 +94,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.skinSubscription.unsubscribe();
     this.userSub.unsubscribe();
   }
-
 }
