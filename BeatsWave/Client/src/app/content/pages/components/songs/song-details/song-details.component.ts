@@ -67,16 +67,34 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public edit() {
-    const modal = this.simpleModalService.addModal(SongEditComponent, {data: this.beatDetails})
-    .subscribe((isConfirmed) => {
-      if (isConfirmed) {
-      } else {
-      }
-    });
+    const modal = this.simpleModalService.addModal(SongEditComponent, { data: this.beatDetails })
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+        } else {
+        }
+      });
   }
 
   public delete() {
-
+    this.snotifyService.confirm('Are you sure you want to delete ' + this.beatDetails.name + '?', 'Delete', {
+      timeout: 5000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      buttons: [
+        {
+          text: 'Yes', action: (toast) => {
+            this.beatService.deleteBeat(this.beatDetails.id).subscribe(() => {
+              this.snotifyService.remove(toast.id);
+              this.snotifyService.success('Successfully deleted ' + this.beatDetails.name);
+              this.router.navigate(['/my-beats']);
+            });
+          }
+        },
+        {
+          text: 'No', action: (toast) => { this.snotifyService.remove(toast.id); }
+        }
+      ]
+    });
   }
 
   public vote() {
