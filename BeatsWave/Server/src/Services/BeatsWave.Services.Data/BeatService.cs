@@ -51,7 +51,7 @@
             return await query.To<T>().ToListAsync();
         }
 
-        public async Task<Result> Update(string producerId, int beatId, string name, int? price, string genre, int? bpm, string description)
+        public async Task<Result> UpdateAsync(string producerId, int beatId, string name, int? price, string genre, int? bpm, string description)
         {
             var beat = await this.beatsRepository
                 .All()
@@ -69,6 +69,28 @@
 
             this.ChangeBeat(beat, name, price, genre, bpm, description);
 
+            await this.beatsRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<Result> DeleteAsync(string producerId, int beatId)
+        {
+            var beat = await this.beatsRepository
+                .All()
+                .FirstOrDefaultAsync(b => b.Id == beatId);
+
+            if (beat == null)
+            {
+                return "Beat does not exist";
+            }
+
+            if (beat.ProducerId != producerId)
+            {
+                return "You cannot delete a beat that is not yours!";
+            }
+
+            this.beatsRepository.Delete(beat);
             await this.beatsRepository.SaveChangesAsync();
 
             return true;

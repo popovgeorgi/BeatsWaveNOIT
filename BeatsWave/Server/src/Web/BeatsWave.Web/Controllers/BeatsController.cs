@@ -48,7 +48,6 @@
         }
 
         [HttpPut]
-
         public async Task<ActionResult> Update(int beatId, [FromBody]UpdateBeatRequestModel model)
         {
             var producerId = this.currentUser.GetId();
@@ -61,6 +60,21 @@
                 model.Genre,
                 model.Bpm,
                 model.Description);
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return this.Ok();
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int beatId)
+        {
+            var producerId = this.currentUser.GetId();
+
+            var result = await this.beatService.Delete(producerId, beatId);
 
             if (result.Failure)
             {

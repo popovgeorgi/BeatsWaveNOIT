@@ -7,7 +7,9 @@
     {
         Task<int> CreateAsync(string name, string beatUrl, string imageUrl, int price, string genre, int? bpm, string description, string producerId);
 
-        Task<Result> Update(string producerId, int beatId, string name, int? price, string genre, int? bpm, string description);
+        Task<Result> UpdateAsync(string producerId, int beatId, string name, int? price, string genre, int? bpm, string description);
+
+        Task<Result> DeleteAsync(string producerId, int beatId);
 
         Task<IEnumerable<T>> AllAsync<T>(int? count = null, int skip = 0);
 
