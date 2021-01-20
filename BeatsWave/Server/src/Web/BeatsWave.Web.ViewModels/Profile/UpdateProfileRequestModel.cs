@@ -12,7 +12,6 @@
         [MaxLength(MaxNameLength)]
         public string LastName { get; set; }
 
-
         [MaxLength(MaxDisplayNameLength)]
         public string DisplayName { get; set; }
 

@@ -47,6 +47,29 @@
             return this.Created(nameof(this.Create), id);
         }
 
+        [HttpPut]
+
+        public async Task<ActionResult> Update(int beatId, [FromBody]UpdateBeatRequestModel model)
+        {
+            var producerId = this.currentUser.GetId();
+
+            var result = await this.beatService.Update(
+                producerId,
+                beatId,
+                model.Name,
+                model.Price,
+                model.Genre,
+                model.Bpm,
+                model.Description);
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return this.Ok();
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IEnumerable<BeatListingServiceModel>> All(int take, int skip)

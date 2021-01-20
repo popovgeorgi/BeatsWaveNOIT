@@ -1,14 +1,14 @@
 ﻿namespace BeatsWave.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using BeatsWave.Data.Common.Repositories;
-    using BeatsWave.Services.Mapping;
     using BeatsWave.Data.Models;
+    using BeatsWave.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
-    using System.Collections.Generic;
 
     public class EventService : IEventService
     {

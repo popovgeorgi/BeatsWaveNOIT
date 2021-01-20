@@ -51,6 +51,29 @@
             return await query.To<T>().ToListAsync();
         }
 
+        public async Task<Result> Update(string producerId, int beatId, string name, int? price, string genre, int? bpm, string description)
+        {
+            var beat = await this.beatsRepository
+                .All()
+                .FirstOrDefaultAsync(b => b.Id == beatId);
+
+            if (beat == null)
+            {
+                return "Beat does not exist";
+            }
+
+            if (beat.ProducerId != producerId)
+            {
+                return "You cannot edit a beat that is not yours!";
+            }
+
+            this.ChangeBeat(beat, name, price, genre, bpm, description);
+
+            await this.beatsRepository.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<IEnumerable<T>> ByGenre<T>(string genre, int? take = null, int skip = 0)
         {
             var genreAsEnum = (Genre)Enum.Parse(typeof(Genre), genre);
@@ -138,5 +161,37 @@
                 .To<T>()
                 .Take(20)
                 .ToListAsync();
+
+        private void ChangeBeat(Beat beat, string name, int? price, string genre, int? bpm, string description)
+        {
+            if (beat.Name != name && name != null)
+            {
+                beat.Name = name;
+            }
+
+            if (beat.Price != price && price != null)
+            {
+                beat.Price = (int)price;
+            }
+
+            if (genre != null && Enum.TryParse(genre, out Genre genreEnum))
+            {
+                var modelGenre = (Genre)Enum.Parse(typeof(Genre), genre);
+                if (beat.Genre != modelGenre)
+                {
+                    beat.Genre = modelGenre;
+                }
+            }
+
+            if (beat.Bpm != bpm && bpm != null)
+            {
+                beat.Bpm = bpm;
+            }
+
+            if (beat.Description != description && description != null)
+            {
+                beat.Description = description;
+            }
+        }
     }
 }
