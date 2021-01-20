@@ -5,10 +5,10 @@
           <button type="button" class="close" (click)="close()">&times;</button>
       </div>
       <h6 class="modal-title text-center mb-3">Edit your Beat</h6>
+      <img class="img-edit-beat" src="{{data.imageUrl}}" />
       <div class="modal-body">
           <form action="#" [formGroup]="songEditForm" class="mx-4 pb-5" (ngSubmit)="edit()">
               <div class="form-group">
-
                 <label for="genre" class="text-md-right col-form-label">Name</label>
                   <input [ngClass]="{'red-border-solid': name.errors?.required && name.touched}" type="text" formControlName="name" id="name" class="form-control"
                          placeholder="Name">
