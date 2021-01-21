@@ -21,7 +21,7 @@
                     <img [src]="language.image" alt="">
                 </a>
             </li>
-            <li>
+            <li *ngIf="currentUser">
                 <app-cart></app-cart>
             </li>
             <li>
