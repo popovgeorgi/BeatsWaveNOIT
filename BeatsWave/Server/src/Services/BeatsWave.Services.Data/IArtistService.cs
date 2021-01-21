@@ -10,5 +10,7 @@
         Task<T> DetailsAsync<T>(string userId);
 
         Task<IEnumerable<T>> FeaturedAsync<T>();
+
+        Task<IEnumerable<T>> TrendingAsync<T>();
     }
 }

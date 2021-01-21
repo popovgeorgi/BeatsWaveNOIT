@@ -52,7 +52,7 @@
         {
             var producerId = this.currentUser.GetId();
 
-            var result = await this.beatService.Update(
+            var result = await this.beatService.UpdateAsync(
                 producerId,
                 beatId,
                 model.Name,
@@ -74,7 +74,7 @@
         {
             var producerId = this.currentUser.GetId();
 
-            var result = await this.beatService.Delete(producerId, beatId);
+            var result = await this.beatService.DeleteAsync(producerId, beatId);
 
             if (result.Failure)
             {

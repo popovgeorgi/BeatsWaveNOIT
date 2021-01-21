@@ -48,5 +48,12 @@
 
         public async Task<IEnumerable<ArtistListingServiceModel>> Featured()
             => await this.artistService.FeaturedAsync<ArtistListingServiceModel>();
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(Trending))]
+
+        public async Task<IEnumerable<ArtistListingServiceModel>> Trending()
+            => await this.artistService.TrendingAsync<ArtistListingServiceModel>();
     }
 }

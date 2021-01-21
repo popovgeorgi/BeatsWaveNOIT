@@ -53,5 +53,18 @@
 
             return featuredArtists;
         }
+
+        public async Task<IEnumerable<T>> TrendingAsync<T>()
+        {
+            var trendingArtists = await this.userRepository
+                .All()
+                .Where(a => a.Beats.Count > 0)
+                .OrderByDescending(a => a.Beats.Count)
+                .Take(5)
+                .To<T>()
+                .ToListAsync();
+
+            return trendingArtists;
+        }
     }
 }
