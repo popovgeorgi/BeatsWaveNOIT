@@ -19,6 +19,10 @@ export class MenuConfigService {
     return this.menuConfig.config.userMenu.items;
   }
 
+  get guestMenuItems() {
+    return this.menuConfig.config.aside.guestItems;
+  }
+
   get beatmakerUserMenuItems() {
     return this.menuConfig.config.beatmakerUserMenu.items;
   }

@@ -32,10 +32,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userRole = this.authService.user.value.role;
+    if (this.authService.user.value) {
+      this.userRole = this.authService.user.value.role;
 
-    if (this.userRole == 'Beatmaker' || this.userRole == 'Administrator') {
-      this.userMenu = this.menuConfigService.beatmakerUserMenuItems;
+      if (this.userRole == 'Beatmaker' || this.userRole == 'Administrator') {
+        this.userMenu = this.menuConfigService.beatmakerUserMenuItems;
+      }
     }
   }
 

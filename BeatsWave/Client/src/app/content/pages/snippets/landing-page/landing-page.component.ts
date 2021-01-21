@@ -1,23 +1,26 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoginComponent } from '../../../layout/header/login/login.component';
-import { EventsConfigService } from '../../../../core/services/events-config.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
 import { Config } from '../../../../config/config';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EventService } from 'src/app/core/services/event.service';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 import { Event } from 'src/app/core/models/Event';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Artist } from 'src/app/core/models/Artist';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { User } from 'src/app/core/models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html'
 })
-export class LandingPageComponent implements OnInit, AfterViewInit {
+export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  userSubscription: Subscription;
+  isUserLogged: boolean = false;
   config: Config;
   brand: any = {};
   events: Event[];
@@ -27,12 +30,23 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
   constructor(private spinner: NgxSpinnerService,
     private simpleModalService: SimpleModalService,
     private eventService: EventService,
-    private artistService: ArtistService) {
+    private artistService: ArtistService,
+    private authService: AuthService,
+    private router: Router) {
     this.config = new Config();
     this.brand = this.config.config.brand;
   }
 
   ngOnInit() {
+    this.userSubscription = this.authService.user.subscribe(user => {
+      if (user == undefined) {
+        this.isUserLogged = false;
+      }
+      else {
+        this.isUserLogged = true;
+      }
+    })
+
     forkJoin([this.fetchTrendingArtists(), this.fetchPremiumEvents()]).subscribe(results => {
       this.trendingArtists = results[0];
       this.events = results[1];
@@ -72,6 +86,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
     };
   }
 
+  public redirectToHomePage() {
+    this.router.navigate(['/home']);
+  }
+
   private fetchPremiumEvents(): Observable<Array<Event>> {
     return this.eventService.getPremium();
   }
@@ -91,5 +109,9 @@ export class LandingPageComponent implements OnInit, AfterViewInit {
         } else {
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }

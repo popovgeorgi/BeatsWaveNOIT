@@ -44,8 +44,10 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.fetchData().pipe(
       tap(beat => {
         this.userSubscription = this.authService.user.subscribe(user => {
-          if (beat.producerId == user.id) {
-            this.isUserOwner = true;
+          if (user) {
+            if (beat.producerId == user.id) {
+              this.isUserOwner = true;
+            }
           }
         })
       })

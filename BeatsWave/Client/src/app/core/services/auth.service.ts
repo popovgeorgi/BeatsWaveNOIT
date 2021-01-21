@@ -33,13 +33,12 @@ export class AuthService {
     this.user.next(null);
   }
 
-  autoLogin(): boolean {
+  autoLogin() {
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
-      return false;
+      return;
     }
     this.user.next(userData);
-    return true;
   }
 
   register(data): Observable<any> {

@@ -9,9 +9,11 @@
               </a>
 
               <ul class="header-auto-options ml-auto d-flex align-items-center">
-                <li><a class="link" (click)="openLoginModal()">Sign in</a></li>
-                <li><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
+                <li *ngIf="!isUserLogged"><a class="link" (click)="openLoginModal()">Sign in</a></li>
+                <li *ngIf="!isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
                             (click)="openLoginModal()">Sign up</button></li>
+                <li *ngIf="isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
+                  (click)="redirectToHomePage()">Back To Home</button></li>
               </ul>
             </div>
           </header>
@@ -90,7 +92,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
-                        <h3>Trending Artist</h3>
+                        <h3>Trending Artists</h3>
                     </div>
                 </div>
                 <div class="row">

@@ -15,10 +15,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class AsideLeftComponent implements OnInit, OnDestroy {
 
+  userSubscription: Subscription;
   menuItems: any = [];
   asideFooterButton: any = {};
   sidebarClass = 'sidebar-primary';
-  userRole: string;
 
   skinSubscription: Subscription;
 
@@ -46,25 +46,30 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
         this.sidebarClass = 'sidebar-' + Config.THEME_CLASSES[skin.sidebar];
       }
     });
-    if (this.authService.user != null) {
-      this.userRole = this.authService.user.value.role;
+    this.userSubscription = this.authService.user.subscribe(user => {
+      if (user) {
+        let userRole = user.role;
 
-      if (this.userRole == 'Admin') {
-        this.menuItems = this.menuConfigService.adminMenuItems;
+        if (userRole == 'Admin') {
+          this.menuItems = this.menuConfigService.adminMenuItems;
+        }
+        if (userRole == 'Beatmaker' || userRole == 'Artist') {
+          this.menuItems = this.menuConfigService.beatmakerMenuItems;
+        }
+        else if (userRole == 'Manager') {
+          this.menuItems = this.menuConfigService.managerMenuItems;
+        }
+        if (userRole == 'Manager' || userRole == 'Artist') {
+          this.asideFooterButton = {
+            icon: 'ion-md-musical-note',
+            title: 'Start uploading'
+          };
+        }
       }
-      if (this.userRole == 'Beatmaker' || this.userRole == 'Artist') {
-        this.menuItems = this.menuConfigService.beatmakerMenuItems;
+      else {
+        this.menuItems = this.menuConfigService.guestMenuItems;
       }
-      else if (this.userRole == 'Manager') {
-        this.menuItems = this.menuConfigService.managerMenuItems;
-      }
-      if (this.userRole == 'Manager' || this.userRole == 'Artist') {
-        this.asideFooterButton = {
-          icon: 'ion-md-musical-note',
-          title: 'Start uploading'
-        };
-      }
-    }
+    })
   }
 
   hideSidebar() {
@@ -72,6 +77,7 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.userSubscription.unsubscribe();
     this.skinSubscription.unsubscribe();
   }
 

@@ -12,15 +12,11 @@ export class AppComponent implements OnInit {
   title = 'listen';
 
   constructor(private ngxSpinnerService: NgxSpinnerService,
-    private authService: AuthService,
-    private router: Router) {
+    private authService: AuthService) {
     this.ngxSpinnerService.show('routing')
   }
 
   ngOnInit() {
-    let result = this.authService.autoLogin();
-    if (result == true) {
-      this.router.navigate(['/home']);
-    }
+    this.authService.autoLogin();
   }
 }
