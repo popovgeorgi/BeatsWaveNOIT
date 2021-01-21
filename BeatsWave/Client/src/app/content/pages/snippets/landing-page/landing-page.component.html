@@ -68,7 +68,7 @@
         <!-- End | Landing Section -->
 
         <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
-        <div class="landing-section light-section" *ngIf="events.length > 0">
+        <div class="landing-section light-section" *ngIf="events">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto mb-5 text-center">
@@ -86,7 +86,7 @@
         <!-- End | Landing Section -->
 
         <!-- Begin | Landing Section [[ Find at scss/framework/base/pages/landing/landing.scss ]] -->
-        <div class="landing-section" *ngIf="trendingArtists.length > 0">
+        <div class="landing-section" *ngIf="trendingArtists">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
@@ -98,9 +98,9 @@
                         <ngx-slick-carousel class="carousel" [config]="sliderConfig">
                             <div ngxSlickItem *ngFor="let artist of trendingArtists" class="slide text-center">
                                 <div class="avatar avatar-xl avatar-circle mx-auto">
-                                    <img [src]="artist.cover_url" alt="{{artist.name}}">
+                                    <img [src]="artist.profileMainPhotoUrl" alt="{{artist.userName}}">
                                 </div>
-                                <h6 class="mb-0 mt-2">{{artist.name}}</h6>
+                                <h6 class="mb-0 mt-2">{{artist.userName}}</h6>
                             </div>
                         </ngx-slick-carousel>
                     </div>

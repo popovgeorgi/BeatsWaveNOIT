@@ -48,6 +48,8 @@ import { GenreListingComponent } from './genres/genre-listing/genre-listing.comp
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SongEditComponent } from './songs/song-edit/song-edit.component';
 import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
+import { LandingPageComponent } from '../snippets/landing-page/landing-page.component';
+import { PagesModule } from '../pages.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
