@@ -53,7 +53,6 @@ export class ComponentsComponent implements OnInit, OnDestroy {
       this.songPlayed = res;
     })
     const themeSkin = this.localStorageService.getThemeSkin();
-    debugger;
     if (themeSkin) {
       this.document.body.classList.remove(this.themeClass);
       this.themeClass = 'theme-' + themeSkin.theme;

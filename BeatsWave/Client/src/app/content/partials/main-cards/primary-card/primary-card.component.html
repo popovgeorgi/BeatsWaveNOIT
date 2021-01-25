@@ -8,8 +8,8 @@
                     <li *ngIf="isUserOwner"><ion-icon name="create-outline"></ion-icon></li>
                     <li *ngIf="isUserOwner"><ion-icon name="trash-outline"></ion-icon></li>
                 </div>
-                <li>{{song.likesCount}}<ion-icon name="heart-outline"></ion-icon></li>
-                <li>{{song.commentsCount}}<ion-icon name="chatbubble-outline"></ion-icon></li>
+                <li>{{song.likesCount}}<ion-icon class="like-icon" name="heart-outline"></ion-icon></li>
+                <li>{{song.commentsCount}}<ion-icon class="comment-icon" name="chatbubble-outline"></ion-icon></li>
                 <!-- <li *ngIf="song?.premium"><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
                 <li *ngIf="song?.favorite"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li> -->
             </ul>
