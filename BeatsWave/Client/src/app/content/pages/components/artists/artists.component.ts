@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Artist } from 'src/app/core/models/Artist';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-artists',
@@ -20,7 +21,15 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
     private artistService: ArtistService) { }
 
   ngOnInit() {
-    this.fetchArtists();
+    this.fetchArtists().subscribe(artists => {
+      if (artists.length < this.itemsPerPage) {
+        this.hasMoreArtistsToInclude = false;
+      }
+      this.artists = artists;
+      this.record = artists.length;
+    }, () => { }, () => {
+      this.spinner.hide('routing');
+    });
   }
 
   public showMore() {
@@ -33,15 +42,8 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
     })
   }
 
-  private fetchArtists() {
-    this.artistService.getArtists(this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(artists => {
-      if (artists.length < this.itemsPerPage) {
-        this.hasMoreArtistsToInclude = false;
-      }
-      this.artists = artists;
-      this.record = artists.length;
-      this.spinner.hide('routing');
-    })
+  private fetchArtists(): Observable<Array<Artist>> {
+    return this.artistService.getArtists(this.itemsPerPage, (this.page - 1) * this.itemsPerPage);
   }
 
   ngAfterViewInit() {

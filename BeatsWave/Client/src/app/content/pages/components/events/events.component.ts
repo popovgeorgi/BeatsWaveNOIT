@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   selector: 'app-events',
   templateUrl: './events.component.html'
 })
-export class EventsComponent implements OnInit, AfterViewInit {
+export class EventsComponent implements OnInit {
 
   allEvents: Event[];
   events: Event[] = [];
@@ -21,6 +21,8 @@ export class EventsComponent implements OnInit, AfterViewInit {
       .subscribe(events => {
         this.allEvents = events;
         this.events = events.filter(e => e.isExpired == false);
+      }, () => {}, () => {
+        this.spinner.hide('routing');
       });
   }
 
@@ -36,9 +38,5 @@ export class EventsComponent implements OnInit, AfterViewInit {
 
   fetchEvents(): Observable<Array<Event>> {
     return this.eventService.getEvents();
-  }
-
-  ngAfterViewInit() {
-    this.spinner.hide('routing');
   }
 }

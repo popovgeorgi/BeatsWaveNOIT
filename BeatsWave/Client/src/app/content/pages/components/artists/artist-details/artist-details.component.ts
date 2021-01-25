@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, mergeMap } from 'rxjs/operators';
 
@@ -8,12 +8,13 @@ import { Artist } from 'src/app/core/models/Artist';
 import { FollowService } from 'src/app/core/services/follow.service';
 import { SnotifyService } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-artist-details',
   templateUrl: './artist-details.component.html'
 })
-export class ArtistDetailsComponent implements OnInit, AfterViewInit {
+export class ArtistDetailsComponent implements OnInit {
 
   public followers: number;
   public isFollowing: boolean;
@@ -27,26 +28,27 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
     private artistService: ArtistService,
     private followService: FollowService,
     private snotifyService: SnotifyService) {
-    this.fetchData();
-  }
-
-  public fetchData() {
-    this.route.params.pipe(map(params => {
-      const id = params['id'];
-      this.artistId = id
-      return id;
-    }), mergeMap(id => this.artistService.getArtist(id))).subscribe(res => {
-      this.artistDetails = res;
-      this.followers = this.artistDetails.followersCount;
-      this.artistBeats = this.artistDetails.beats.length;
-      this.spinner.hide('routing');
-    })
   }
 
   ngOnInit() {
+    this.fetchData().subscribe(res => {
+      this.artistDetails = res;
+      this.followers = this.artistDetails.followersCount;
+      this.artistBeats = this.artistDetails.beats.length;
+    }, () => {console.log('fuck')}, () => {
+      this.spinner.hide('routing');
+    });
     this.followService.isArtistFollowedByCurrentUser(this.artistId).subscribe(res => {
       this.isFollowing = res;
     })
+  }
+
+  private fetchData(): Observable<Artist> {
+    return this.route.params.pipe(map(params => {
+      const id = params['id'];
+      this.artistId = id
+      return id;
+    }), mergeMap(id => this.artistService.getArtist(id)));
   }
 
   public OnFollowButtonClicked() {
@@ -64,10 +66,6 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
         this.snotifyService.info('Unfollowed');
       })
     }
-  }
-
-  ngAfterViewInit() {
-    this.spinner.hide('primary');
   }
 
   playAllSongs() {

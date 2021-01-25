@@ -10,77 +10,74 @@ import { PhotoResizeComponent } from 'src/app/content/partials/photo-resize/phot
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
-    selector: 'app-user-profile',
-    templateUrl: './user-profile.component.html'
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html'
 })
-export class UserProfileComponent implements OnInit, AfterViewInit {
+export class UserProfileComponent implements OnInit {
 
-    public userProfileForm: FormGroup;
-    public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveProfilePhoto';
-    public userPicture: string;
-    public userSubscription: string;
+  public userProfileForm: FormGroup;
+  public uploadSaveUrl: string = environment.apiUrl + '/FileUpload/SaveProfilePhoto';
+  public userPicture: string;
+  public userSubscription: string;
 
-    private profile: Profile;
+  private profile: Profile;
 
-    constructor(
-        private fb: FormBuilder,
-        private profileService: ProfileService,
-        private spinner: NgxSpinnerService,
-        private simpleModalService: SimpleModalService,
-        private authService: AuthService) {
-        this.userProfileForm = this.fb.group({
-            'firstName': [''],
-            'lastName': [''],
-            'mainPhotoUrl': [''],
-            'displayName': [''],
-            'location': [''],
-            'biography': ['']
-        })
-    }
+  constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService,
+    private spinner: NgxSpinnerService,
+    private simpleModalService: SimpleModalService,
+    private authService: AuthService) {
+    this.userProfileForm = this.fb.group({
+      'firstName': [''],
+      'lastName': [''],
+      'mainPhotoUrl': [''],
+      'displayName': [''],
+      'location': [''],
+      'biography': ['']
+    })
+  }
 
-    ngOnInit() {
-        this.profileService.getProfile().subscribe(res => {
-            this.profile = res;
-            this.userPicture = this.profile.mainPhotoUrl;
-            this.userProfileForm = this.fb.group({
-                'firstName': [this.profile.firstName],
-                'lastName': [this.profile.lastName],
-                'displayName': [this.profile.displayName, [Validators.required]],
-                'location': [this.profile.location],
-                'biography': [this.profile.biography]
-            })
-            this.spinner.hide('routing');
-        })
-        this.userSubscription = this.authService.user.value.subscription;
-    }
+  ngOnInit() {
+    this.profileService.getProfile().subscribe(res => {
+      this.profile = res;
+      this.userPicture = this.profile.mainPhotoUrl;
+      this.userProfileForm = this.fb.group({
+        'firstName': [this.profile.firstName],
+        'lastName': [this.profile.lastName],
+        'displayName': [this.profile.displayName, [Validators.required]],
+        'location': [this.profile.location],
+        'biography': [this.profile.biography]
+      })
+    }, () => { }, () => {
+      this.spinner.hide('routing');
+    })
+    this.userSubscription = this.authService.user.value.subscription;
+  }
 
-    ngAfterViewInit() {
-        this.spinner.hide('primary');
-    }
+  onPhotoUploading() {
+    this.spinner.show("photoUploader");
+  }
 
-    onPhotoUploading() {
-        this.spinner.show("photoUploader");
-    }
+  onPhotoUploaded(e) {
+    this.userPicture = e.originalEvent.body.uri;
+    this.spinner.hide("photoUploader");
+  }
 
-    onPhotoUploaded(e) {
-        this.userPicture = e.originalEvent.body.uri;
-        this.spinner.hide("photoUploader");
-    }
+  public editProfile() {
+    this.spinner.show("editProfile");
+    this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
+      this.spinner.hide("editProfile");
+    })
+  }
 
-    public editProfile() {
-        this.spinner.show("editProfile");
-        this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
-            this.spinner.hide("editProfile");
-        })
-    }
-
-    public openImageResizeModal() {
-      const modal = this.simpleModalService.addModal(PhotoResizeComponent, {})
-        .subscribe((isConfirmed) => {
-            if (isConfirmed) {
-              modal.remove;
-            } else {
-            }
-        });
-    }
+  public openImageResizeModal() {
+    const modal = this.simpleModalService.addModal(PhotoResizeComponent, {})
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+          modal.remove;
+        } else {
+        }
+      });
+  }
 }
