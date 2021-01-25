@@ -2,6 +2,10 @@
 <div class="section">
   <ngx-spinner name="comment" [fullScreen]="false"></ngx-spinner>
     <div class="mb-4">
+
+    <div class="comment" *ngIf="comments?.length == 0">
+      This track has no comments yet. Be the first to show some love!
+    </div>
         <form [formGroup]="commentForm" (ngSubmit)="onComment()">
           <textarea formControlName="content" name="comment" id="comment" cols="30" rows="5" class="form-control"></textarea>
           <div class="text-right mt-2">

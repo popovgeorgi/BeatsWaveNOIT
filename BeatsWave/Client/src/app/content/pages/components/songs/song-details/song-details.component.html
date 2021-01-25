@@ -11,11 +11,8 @@
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{beatDetails.name}}</h5>
-                    <p class="btn btn-bold btn-pill btn-air btn-primary" (click)="onBeatmakerClicked(beatDetails.producerId)">{{beatDetails.producerUserName}}</p>
-                    <!-- <div class="text-warning stars">
-                        <i class="la {{rating}}" *ngFor="let rating of songDetails.ratingsView"></i>
-                    </div>
-                    <span class="badge badge-pill badge-warning mt-3" *ngIf="songDetails.premium">Premium</span> -->
+                    <p class="btn btn-bold btn-pill btn-air btn-primary" (click)="onBeatmakerClicked(beatDetails.producerId)">prod. by {{beatDetails.producerUserName}}</p>
+                    <!-- <span class="badge badge-pill badge-warning mt-3">Premium</span> -->
                     <div class="mt-4">
                         <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
                                 (click)="addInPlayer()">Play</button>
