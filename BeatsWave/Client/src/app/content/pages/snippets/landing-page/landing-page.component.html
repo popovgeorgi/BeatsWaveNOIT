@@ -4,15 +4,15 @@
         <div class="banner landing-banner bg-landing">
             <header id="landing-header">
             <div class="container d-flex align-items-center py-3">
-              <a routerLink="/home" class="brand">
+              <a style="margin-left: 30px;" routerLink="/home" class="brand">
                 <img [src]="brand.logo" alt="{{brand.name}}">
               </a>
 
               <ul class="header-auto-options ml-auto d-flex align-items-center">
-                <li *ngIf="!isUserLogged"><a class="link" (click)="openLoginModal()">Sign in</a></li>
                 <li *ngIf="!isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
-                            (click)="openLoginModal()">Sign up</button></li>
-                <li *ngIf="isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
+                  (click)="openRegisterModal()">Sign up</button></li>
+                <li style="margin-right: 30px;" *ngIf="!isUserLogged"><a class="link" (click)="openLoginModal()">Sign in</a></li>
+                <li style="margin-right: 30px;" *ngIf="isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
                   (click)="redirectToHomePage()">Back To Home</button></li>
               </ul>
             </div>
@@ -21,8 +21,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 col-md-10 mx-auto text-center">
-                            <h1>World's best music app</h1>
-                            <p class="font-lg">More than 10 millions free music & 15 millions paid music track. Listen now!</p>
+                            <h1 class="landing-title">BeatsWave</h1>
+                            <p class="font-lg landing-paragraph">Home for creativity and innovation</p>
                         </div>
                     </div>
                 </div>

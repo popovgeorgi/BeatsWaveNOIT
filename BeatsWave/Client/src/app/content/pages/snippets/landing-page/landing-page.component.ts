@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { SimpleModalService } from 'ngx-simple-modal';
 
 import { LoginComponent } from '../../../layout/header/login/login.component';
@@ -12,6 +12,9 @@ import { Artist } from 'src/app/core/models/Artist';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/User';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { DOCUMENT } from '@angular/common';
+import { RegisterComponent } from 'src/app/content/layout/header/register/register.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -27,17 +30,24 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   trendingArtists: Artist[];
   sliderConfig: any = {};
 
-  constructor(private spinner: NgxSpinnerService,
+  constructor(@Inject(DOCUMENT) private document: Document,
+    private spinner: NgxSpinnerService,
     private simpleModalService: SimpleModalService,
     private eventService: EventService,
     private artistService: ArtistService,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    private localStorageService: LocalStorageService) {
     this.config = new Config();
     this.brand = this.config.config.brand;
   }
 
   ngOnInit() {
+    const themeSkin = this.localStorageService.getThemeSkin();
+    if (themeSkin) {
+      this.document.body.classList.add('theme-' + themeSkin.theme);
+    }
+
     this.userSubscription = this.authService.user.subscribe(user => {
       if (user == undefined) {
         this.isUserLogged = false;
@@ -104,6 +114,15 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openLoginModal() {
     const modal = this.simpleModalService.addModal(LoginComponent, {})
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+        } else {
+        }
+      });
+  }
+
+  openRegisterModal() {
+    const modal = this.simpleModalService.addModal(RegisterComponent, {})
       .subscribe((isConfirmed) => {
         if (isConfirmed) {
         } else {

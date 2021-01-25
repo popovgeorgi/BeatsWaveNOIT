@@ -25,7 +25,7 @@ export class Config {
 
             // Theme skin config
             themeSkin: {
-                theme: 'light',
+                theme: 'dark',
                 header: 0,
                 sidebar: 0,
                 player: 0
