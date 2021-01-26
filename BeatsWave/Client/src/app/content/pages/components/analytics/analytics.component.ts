@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -11,7 +11,7 @@ import { TotalEarningsAnalytics } from 'src/app/core/models/analytics/TotalEarni
   selector: 'app-analytics',
   templateUrl: './analytics.component.html'
 })
-export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AnalyticsComponent implements OnInit, OnDestroy {
 
   public isStatisticsLoaded: boolean = false;
   public isPurchasesLoaded: boolean = false;
@@ -32,21 +32,10 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
     })
-
-
   }
 
   private fetchData(): Observable<TotalEarningsAnalytics> {
     return this.analyticsService.getTotalEarnings();
-  }
-
-  check(){
-    if (this.isStatisticsLoaded && this.isPurchasesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
-      this.spinner.hide('routing');
-    }
-  }
-
-  ngAfterViewInit() {
   }
 
   setUsers() {
@@ -56,14 +45,23 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setSongs() {
     this.isSongsLoaded = true;
+    this.check();
   }
 
   setPurchases() {
     this.isPurchasesLoaded = true;
+    this.check();
   }
 
   setStatistics() {
     this.isStatisticsLoaded = true;
+    this.check();
+  }
+
+  private check() {
+    if (this.isStatisticsLoaded && this.isPurchasesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
+      this.spinner.hide('routing');
+    }
   }
 
   ngOnDestroy() {
