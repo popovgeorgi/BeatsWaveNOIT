@@ -10,7 +10,6 @@ import { Event } from 'src/app/core/models/Event';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Artist } from 'src/app/core/models/Artist';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { User } from 'src/app/core/models/User';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import { DOCUMENT } from '@angular/common';

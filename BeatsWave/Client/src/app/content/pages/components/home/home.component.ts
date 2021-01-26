@@ -1,18 +1,14 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { PlaylistConfigService } from '../../../../core/services/playlist-config.service';
-import { RadioConfigService } from '../../../../core/services/radio-config.service';
 import { GenresConfigService } from '../../../../core/services/genres-config.service';
-import { EventsConfigService } from '../../../../core/services/events-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Beat } from 'src/app/core/models/Beat';
-import { LoadingService } from 'src/app/core/services/loading.service';
 import { forkJoin, Observable } from 'rxjs';
 import { Event } from 'src/app/core/models/Event';
 import { EventService } from 'src/app/core/services/event.service';
+import { Artist } from 'src/app/core/models/Artist';
 
 
 @Component({
@@ -25,14 +21,10 @@ export class HomeComponent implements OnInit {
   carouselArrowPosClass2 = 'arrow-pos-2';
   carouselArrowPosClass3 = 'arrow-pos-3';
 
-  topCharts: any = {};
-  newRelease: any = {};
-  artists: any = {};
-  retro: any = {};
-  playlist: any = {};
-  radio: any = {};
-  genres: any = {};
-  tasks = [];
+  topCharts: any = null;
+  newRelease: any = null;
+  artists: any = null;
+  genres: any = null;
 
   public trendingBeats: Beat[];
   public newReleases: Beat[];
@@ -41,7 +33,6 @@ export class HomeComponent implements OnInit {
   public mainEvent: Event;
 
   constructor(private spinner: NgxSpinnerService,
-    private radioConfigService: RadioConfigService,
     private genresConfigService: GenresConfigService,
     private beatService: BeatService,
     private artistService: ArtistService,
@@ -49,25 +40,57 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchTrendingBeats().subscribe(res => {
-      this.trendingBeats = res;
-    })
-    this.fetchFeaturedBeats().subscribe(res => {
-      this.featuredBeats = res;
-    })
-    this.fetchPremiumEvents().subscribe(res => {
-      this.mainEvent = res.shift();
-      this.premiumEvents = res;
-    })
-
-    Promise.all([
-      this.initTopCharts(),
-      this.initNewRelease(),
-      this.initArtists(),
-      this.initGenres()
-    ]).then(res => {
+    forkJoin([this.fetchMostlyLikedBeats(), this.fetchNewReleases(), this.fetchFeaturedArtists(), this.fetchTrendingBeats(), this.fetchFeaturedBeats(), this.fetchPremiumEvents()]).subscribe(results => {
+      this.initTopCharts(results[0]);
+      this.initNewRelease(results[1]);
+      this.initArtists(results[2]);
+      this.trendingBeats = results[3];
+      this.featuredBeats = results[4];
+      this.mainEvent = results[5].shift();
+      this.premiumEvents = results[5];
+      this.newReleases = results[1];
+      this.initGenres();
+    }, () => { }, () => {
       this.spinner.hide('routing');
     })
+  }
+
+  initTopCharts(topCharts: Beat[]) {
+    this.topCharts = {
+      title: 'Top Charts',
+      subTitle: 'Listen top chart',
+      page: '/songs',
+      items: topCharts
+    };
+  }
+
+  initNewRelease(newReleases: Beat[]) {
+    this.newRelease = {
+      title: 'New Releases',
+      subTitle: 'Listen recently release music',
+      page: '/songs',
+      items: newReleases
+    }
+
+  }
+
+  initArtists(featuredArtists: Artist[]) {
+    this.artists = {
+      title: 'Featured Artists',
+      subTitle: 'Select you best to listen',
+      page: '/artists',
+      items: featuredArtists
+    };
+  }
+
+  //Initialize music genres object for section
+  initGenres() {
+    this.genres = {
+      title: 'Genres',
+      subTitle: 'Select you genre',
+      page: '/genres',
+      items: this.genresConfigService.genresList
+    };
   }
 
   private fetchTrendingBeats(): Observable<Array<Beat>> {
@@ -82,56 +105,15 @@ export class HomeComponent implements OnInit {
     return this.eventService.getPremium();
   }
 
-  // Initialize top charts object for section
-  async initTopCharts() {
-    this.topCharts = {
-      title: 'Top Charts',
-      subTitle: 'Listen top chart',
-      page: '/songs',
-      items: await this.beatService.getMostlyLikedBeats().toPromise()
-    };
+  private fetchMostlyLikedBeats(): Observable<Array<Beat>> {
+    return this.beatService.getMostlyLikedBeats();
   }
 
-  // Initialize new release music object for section
-  async initNewRelease() {
-    this.newReleases = await this.beatService.getBeats(20, 0).toPromise()
-    this.newRelease = {
-      title: 'New Releases',
-      subTitle: 'Listen recently release music',
-      page: '/songs',
-      items: this.newReleases
-    }
-
+  private fetchNewReleases(): Observable<Array<Beat>> {
+    return this.beatService.getBeats(20, 0);
   }
 
-  // Initialize music artists object for section
-  async initArtists() {
-    this.artists = {
-      title: 'Featured Artists',
-      subTitle: 'Select you best to listen',
-      page: '/artists',
-      items: await this.artistService.getFeaturedArtists().toPromise()
-    };
+  private fetchFeaturedArtists(): Observable<Array<Artist>> {
+    return this.artistService.getFeaturedArtists();
   }
-
-  // Initialize radio object for section
-  initRadio() {
-    this.radio = {
-      title: 'Radio',
-      subTitle: 'Listen live now',
-      page: '/stations',
-      items: this.radioConfigService.radioList
-    };
-  }
-
-  // Initialize music genres object for section
-  initGenres() {
-    this.genres = {
-      title: 'Genres',
-      subTitle: 'Select you genre',
-      page: '/genres',
-      items: this.genresConfigService.genresList
-    };
-  }
-
 }

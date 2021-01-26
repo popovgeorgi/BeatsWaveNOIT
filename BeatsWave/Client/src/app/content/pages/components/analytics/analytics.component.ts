@@ -32,13 +32,18 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
     })
-    if (this.isStatisticsLoaded && this.isPurchasesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
-      this.spinner.hide('routing');
-    }
+
+
   }
 
   private fetchData(): Observable<TotalEarningsAnalytics> {
     return this.analyticsService.getTotalEarnings();
+  }
+
+  check(){
+    if (this.isStatisticsLoaded && this.isPurchasesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
+      this.spinner.hide('routing');
+    }
   }
 
   ngAfterViewInit() {
@@ -46,6 +51,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setUsers() {
     this.isUsersLoaded = true;
+    this.check();
   }
 
   setSongs() {

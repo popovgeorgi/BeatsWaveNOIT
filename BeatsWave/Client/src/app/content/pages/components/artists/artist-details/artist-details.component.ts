@@ -35,7 +35,10 @@ export class ArtistDetailsComponent implements OnInit {
       this.artistDetails = res;
       this.followers = this.artistDetails.followersCount;
       this.artistBeats = this.artistDetails.beats.length;
-    }, () => {console.log('fuck')}, () => {
+    }, (err) => {
+      console.log(err, "error")
+     }, () => {
+       console.log("complete")
       this.spinner.hide('routing');
     });
     this.followService.isArtistFollowedByCurrentUser(this.artistId).subscribe(res => {
