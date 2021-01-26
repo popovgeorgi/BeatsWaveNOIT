@@ -38,6 +38,15 @@
                .ToListAsync();
         }
 
+        public async Task<int[]> GetLikedBeatsByIdsAsync(string userId)
+        {
+            return await this.likeRepository
+                .All()
+                .Where(l => l.UserId == userId)
+                .Select(l => l.BeatId)
+                .ToArrayAsync();
+        }
+
         public async Task SetInitialValues(string id, string displayName, string profilePicture)
         {
             var user = await this.userRepository

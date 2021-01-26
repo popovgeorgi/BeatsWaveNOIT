@@ -30,5 +30,10 @@
         [Route(nameof(Favourites))]
         public async Task<IEnumerable<UserFavouritesServiceModel>> Favourites()
             => await this.userService.GetLikedBeatsAsync<UserFavouritesServiceModel>(this.currentUser.GetId());
+
+        [HttpGet]
+        [Route(nameof(FavouritesByIds))]
+        public async Task<int[]> FavouritesByIds()
+            => await this.userService.GetLikedBeatsByIdsAsync(this.currentUser.GetId());
     }
 }
