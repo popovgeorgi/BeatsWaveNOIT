@@ -6,7 +6,7 @@
 <ul class="custom-card--labels d-flex ml-auto">
     <li>{{song.likesCount}}<ion-icon class="like-icon" name="heart-outline"></ion-icon></li>
     <li>{{song.commentsCount}}<ion-icon class="comment-icon" name="chatbubble-outline"></ion-icon></li>
-    <!-- <li><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li>
-    <li><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li> -->
+    <li *ngIf="song.isLiked"><span class="badge badge-pill badge-danger"><i class="la la-heart"></i></span></li>
+    <!-- <li><span class="badge badge-pill badge-warning"><i class="la la-star"></i></span></li> -->
     <li class="ml-4"><app-song-options [icon]="icon" [song]="song"></app-song-options></li>
 </ul>

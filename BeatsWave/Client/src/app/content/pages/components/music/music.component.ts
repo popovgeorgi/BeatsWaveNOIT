@@ -1,14 +1,12 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
 import { LoadingService } from '../../../../core/services/loading.service';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FeedHubService } from 'src/app/core/services/feed-hub.service';
 import { SnotifyPosition, SnotifyService, SnotifyStyle } from 'ng-snotify';
-import { Observable, Subscription } from 'rxjs';
-import { map, mergeMap, switchMap, switchMapTo, tap } from 'rxjs/operators';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -16,11 +14,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
   selector: 'app-music',
   templateUrl: './music.component.html'
 })
-export class MusicComponent implements OnInit, AfterViewInit {
+export class MusicComponent implements OnInit, AfterViewInit, OnDestroy {
 
   userSubscription: Subscription;
   public beats: Beat[];
-  private userFavourites: Beat[];
   public hasMoreBeatsToInclude: boolean = true;
   public beatsCount: number;
   public gridView = false;
@@ -37,40 +34,43 @@ export class MusicComponent implements OnInit, AfterViewInit {
     private authService: AuthService) { }
 
   ngOnInit() {
-    // this.userSubscription = this.authService.user
-    //   .subscribe(user => {
-    //     if (user) {
-    //       this.fetchUserFavourites()
-    //       .pipe(switchMap(beats => {
-
-    //       }))
-    //       .subscribe(beats => {
-    //         this.userFavourites = beats;
-    //       })
-    //     }
-    //   });
-
-    this.fetchInitialBeats()
-      // .pipe(tap(beats => {
-      //   beats.forEach((beat) => {
-      //     debugger;
-      //     if (this.userFavourites.includes(beat)) {
-      //       beat.isLiked = true;
-      //     }
-      //     else {
-      //       beat.isLiked = false;
-      //     }
-      //   })
-      // }
-      // ))
-      .subscribe(beats => {
-        if (beats.length < this.itemsPerPage) {
-          this.hasMoreBeatsToInclude = false;
+    this.userSubscription = this.authService.user
+      .subscribe(user => {
+        if (user) {
+          forkJoin([this.fetchInitialBeats(), this.fetchUserFavourites()]).subscribe(results => {
+            let map = new Map<string, Array<number>>();
+            map.set('favourites', results[1]);
+            results[0].forEach(beat => {
+              if (map.get('favourites').includes(beat.id)) {
+                beat.isLiked = true;
+              }
+              else {
+                beat.isLiked = false;
+              }
+            })
+            if (results[0].length < this.itemsPerPage) {
+              this.hasMoreBeatsToInclude = false;
+            }
+            this.beats = results[0];
+            this.beatsCount = results[0].length;
+          }, () => { }, () => {
+            this.spinner.hide('routing');
+          })
         }
-        this.beats = beats;
-        this.beatsCount = beats.length;
-        this.spinner.hide('routing');
-      });
+        else {
+          this.fetchInitialBeats()
+            .subscribe(beats => {
+              if (beats.length < this.itemsPerPage) {
+                this.hasMoreBeatsToInclude = false;
+              }
+              this.beats = beats;
+              this.beatsCount = beats.length;
+            }, () => { }, () => {
+              this.spinner.hide('routing');
+            });
+        }
+      })
+
     this.feedHubService.startConnection();
     this.feedHubService.resultReceived.subscribe(id => {
       this.snotifyService.create({
@@ -88,12 +88,16 @@ export class MusicComponent implements OnInit, AfterViewInit {
     return this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage);
   }
 
-  private fetchUserFavourites(): Observable<Array<Beat>> {
-    return this.userSerivce.getFavourites();
+  private fetchUserFavourites(): Observable<Array<number>> {
+    return this.userSerivce.getFavouritesByIds();
   }
 
   ngAfterViewInit() {
     this.loadingService.stopLoading();
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
   showMore() {

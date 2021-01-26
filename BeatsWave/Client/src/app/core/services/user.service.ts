@@ -19,4 +19,8 @@ export class UserService {
   getFavourites(): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.userPath + '/Favourites');
   }
+
+  getFavouritesByIds(): Observable<Array<number>> {
+    return this.http.get<Array<number>>(this.userPath + '/FavouritesByIds')
+  }
 }
