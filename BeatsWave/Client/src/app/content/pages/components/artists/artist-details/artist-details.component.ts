@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, mergeMap } from 'rxjs/operators';
+import { finalize, map, mergeMap } from 'rxjs/operators';
 
 import { AudioPlayerService } from '../../../../../core/services/audio-player.service';
 import { ArtistService } from 'src/app/core/services/artist.service';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   selector: 'app-artist-details',
   templateUrl: './artist-details.component.html'
 })
-export class ArtistDetailsComponent implements OnInit {
+export class ArtistDetailsComponent implements OnInit, AfterViewInit {
 
   public followers: number;
   public isFollowing: boolean;
@@ -31,16 +31,12 @@ export class ArtistDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchData().subscribe(res => {
-      this.artistDetails = res;
-      this.followers = this.artistDetails.followersCount;
-      this.artistBeats = this.artistDetails.beats.length;
-    }, (err) => {
-      console.log(err, "error")
-     }, () => {
-       console.log("complete")
-      this.spinner.hide('routing');
-    });
+    this.fetchData()
+      .subscribe(res => {
+        this.artistDetails = res;
+        this.followers = this.artistDetails.followersCount;
+        this.artistBeats = this.artistDetails.beats.length;
+      });
     this.followService.isArtistFollowedByCurrentUser(this.artistId).subscribe(res => {
       this.isFollowing = res;
     })
@@ -73,5 +69,9 @@ export class ArtistDetailsComponent implements OnInit {
 
   playAllSongs() {
     this.audioPlayerService.playNowPlaylist(this.artistDetails);
+  }
+
+  ngAfterViewInit(): void {
+    this.spinner.hide('routing');
   }
 }

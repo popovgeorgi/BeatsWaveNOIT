@@ -44,7 +44,8 @@ export class SongEditComponent extends SimpleModalComponent<any, any> implements
 
   public edit() {
     this.spinner.show('beatEditter');
-    this.beatService.updateBeat(this.data.id ,this.songEditForm.value).subscribe(res => {
+    this.beatService.updateBeat(this.data.id ,this.songEditForm.value).subscribe(() => {
+    }, () => {}, () => {
       this.spinner.hide('beatEditter');
     })
 

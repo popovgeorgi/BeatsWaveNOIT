@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
   selector: 'app-music',
   templateUrl: './music.component.html'
 })
-export class MusicComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MusicComponent implements OnInit, OnDestroy {
 
   userSubscription: Subscription;
   public beats: Beat[];
@@ -90,10 +90,6 @@ export class MusicComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private fetchUserFavourites(): Observable<Array<number>> {
     return this.userSerivce.getFavouritesByIds();
-  }
-
-  ngAfterViewInit() {
-    this.loadingService.stopLoading();
   }
 
   ngOnDestroy() {

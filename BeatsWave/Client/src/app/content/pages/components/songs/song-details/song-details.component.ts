@@ -9,7 +9,6 @@ import { Beat } from "src/app/core/models/Beat";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LikeService } from 'src/app/core/services/like.service';
 import { SnotifyService } from 'ng-snotify';
-import { LoadingService } from 'src/app/core/services/loading.service';
 import { CartService } from "src/app/core/services/cart.service";
 import { AuthService } from "src/app/core/services/auth.service";
 import { SimpleModalService } from "ngx-simple-modal";
@@ -30,7 +29,6 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private loadingService: LoadingService,
     private audioPlayerService: AudioPlayerService,
     private beatService: BeatService,
     private likeService: LikeService,
@@ -119,16 +117,15 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['artist/' + id + '/details']);
   }
 
-  ngAfterViewInit() {
-    this.loadingService.stopLoading();
-    this.spinner.hide('routing');
-  }
-
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
   }
 
   addInPlayer() {
     this.audioPlayerService.playSong(this.beatDetails);
+  }
+
+  ngAfterViewInit() {
+    this.spinner.hide('routing');
   }
 }

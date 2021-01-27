@@ -4,7 +4,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { map, mergeMap } from 'rxjs/operators';
 import { Beat } from 'src/app/core/models/Beat';
 import { BeatService } from 'src/app/core/services/beat.service';
-import { LoadingService } from 'src/app/core/services/loading.service';
 
 @Component({
   selector: 'app-genre-listing',

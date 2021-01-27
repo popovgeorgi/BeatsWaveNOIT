@@ -10,7 +10,7 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
   selector: 'app-checkout',
   templateUrl: './checkout.component.html'
 })
-export class CheckoutComponent implements OnInit, AfterViewInit {
+export class CheckoutComponent implements OnInit {
 
   public totalPrice: number = 0;
   public beats: Array<Beat>;
@@ -27,6 +27,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
       }))
     ).subscribe(beats => {
       this.beats = beats;
+    }, () => { }, () => {
+      this.spinner.hide('routing');
     })
   }
 
@@ -43,9 +45,5 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     let beat = this.beats.find(b => b.id == beatId);
     this.totalPrice -= beat.price;
     this.beats = this.beats.filter(beat => beat.id != beatId);
-  }
-
-  ngAfterViewInit(): void {
-    this.spinner.hide('routing');
   }
 }

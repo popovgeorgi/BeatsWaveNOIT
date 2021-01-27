@@ -1,34 +1,31 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
 import { GenresConfigService } from '../../../../core/services/genres-config.service';
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-    selector: 'app-genres',
-    templateUrl: './genres.component.html'
+  selector: 'app-genres',
+  templateUrl: './genres.component.html'
 })
 export class GenresComponent implements OnInit, AfterViewInit {
 
-    genres: any = [];
+  genres: any = [];
 
-    constructor(private loadingService: LoadingService,
-                private genresConfigService: GenresConfigService,
-                private spinner: NgxSpinnerService) { }
+  constructor(
+    private genresConfigService: GenresConfigService,
+    private spinner: NgxSpinnerService) { }
 
-    ngOnInit() {
-        this.initGenres();
-        this.spinner.hide('routing');
-    }
+  ngOnInit() {
+    this.initGenres();
+  }
 
-    ngAfterViewInit() {
-        this.loadingService.stopLoading();
-    }
+  ngAfterViewInit() {
+    this.spinner.hide('routing');
+  }
 
-    // Initialize music genres
-    initGenres() {
-        this.genres = this.genresConfigService.genresList;
-    }
+  // Initialize music genres
+  initGenres() {
+    this.genres = this.genresConfigService.genresList;
+  }
 
 }

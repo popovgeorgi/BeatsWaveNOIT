@@ -67,12 +67,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   showSearchResults() {
     this.document.body.classList.add(Config.classes.openSearch);
-    this.backdrop.nativeElement.classList.add(Config.classes.show);
+    if (this.backdrop) {
+      this.backdrop.nativeElement.classList.add(Config.classes.show);
+    }
   }
 
   hideSearchResults() {
     this.document.body.classList.remove(Config.classes.openSearch);
-    this.backdrop.nativeElement.classList.remove(Config.classes.show);
+    if (this.backdrop) {
+      this.backdrop.nativeElement.classList.remove(Config.classes.show);
+    }
   }
 
   openLanguagesModal() {
