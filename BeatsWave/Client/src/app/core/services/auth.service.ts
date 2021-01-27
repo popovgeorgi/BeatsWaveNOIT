@@ -38,6 +38,11 @@ export class AuthService {
     if (!userData) {
       return;
     }
+    if (this.tokenExpired(userData.token)) {
+      this.logout();
+      return;
+    }
+
     this.user.next(userData);
   }
 
@@ -62,5 +67,10 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  private tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 }

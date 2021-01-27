@@ -32,5 +32,4 @@ export class SongListViewComponent implements OnInit {
         this.song.isLiked = false;
       }
     }
-
 }

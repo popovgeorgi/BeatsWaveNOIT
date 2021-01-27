@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,6 +14,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 import { AuthGuardService } from './core/services/auth-guard.service';
 import { IonicModule } from '@ionic/angular';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { IonicModule } from '@ionic/angular';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     SnotifyModule,
-    IonicModule.forRoot()
+    IonicModule.forRoot(),
+    JwtModule
   ],
   providers: [
     NgxSpinnerService,
