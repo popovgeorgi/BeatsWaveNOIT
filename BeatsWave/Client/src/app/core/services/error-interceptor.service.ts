@@ -22,10 +22,9 @@ export class ErrorInterceptorService {
         else if (err.status === 404) {
           message = "404";
         }
-        else if (err.status === 400) {
-          message = "Bad request 400";
+        if (message) {
+          this.snotifyService.error(message);
         }
-        this.snotifyService.error(message);
         return throwError(err);
       })
     )

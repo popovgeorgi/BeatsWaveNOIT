@@ -55,6 +55,9 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
       this.followService.follow(this.artistId).subscribe(res => {
         this.isFollowing = true;
         this.followers = this.followers + 1;
+      }, (err) => {
+        this.snotifyService.warning(err.error)
+      }, () => {
         this.snotifyService.info('Followed');
       });
     }
