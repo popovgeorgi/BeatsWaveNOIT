@@ -27,7 +27,9 @@ export class CheckoutComponent implements OnInit {
       }))
     ).subscribe(beats => {
       this.beats = beats;
-    }, () => { }, () => {
+    }, () => {
+      this.spinner.hide('routing');
+    }, () => {
       this.spinner.hide('routing');
     })
   }

@@ -1,5 +1,7 @@
 ﻿namespace BeatsWave.Web.Models.Beats
 {
+    using System;
+
     using AutoMapper;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
@@ -19,6 +21,8 @@
         public int LikesCount { get; set; }
 
         public int CommentsCount { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

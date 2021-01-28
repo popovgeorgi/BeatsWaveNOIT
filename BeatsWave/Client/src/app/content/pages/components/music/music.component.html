@@ -1,18 +1,14 @@
 <!-- Page Banner [[ Find at scss/base/core.scss ]] -->
 <div class="banner bg-song"></div>
-
-
-
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header">
         <span class="title">{{beatsCount}} Results</span>
         <div class="ml-auto d-flex align-items-center">
-            <select class="select" name="sort" id="sort">
-                <option selected="">Popular</option>
-                <option value="0">A-Z</option>
-                <option value="1">Z-A</option>
+            <select (change)="onSelect($event)" class="select" name="sort" id="sort">
+                <option value="0">Newest</option>
+                <option value="1">Popular</option>
             </select>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>

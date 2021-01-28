@@ -11,5 +11,6 @@ export interface Beat {
     description: string,
     likesCount: number,
     commentsCount: number,
-    isLiked: boolean
+    isLiked: boolean,
+    createdOn: Date
 }

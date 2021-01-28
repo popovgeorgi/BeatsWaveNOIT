@@ -77,7 +77,7 @@ export class MusicComponent implements OnInit, OnDestroy {
     })
   }
 
-  showMore() {
+  public showMore() {
     this.page++;
     this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage)
       .pipe(tap((res) => {
@@ -91,6 +91,17 @@ export class MusicComponent implements OnInit, OnDestroy {
         }
         this.beats = this.beats.concat(beats);
       })
+  }
+
+  public onSelect(event) {
+    let option = event.target.value;
+    if (option == 0) {
+      // must work over it
+      this.beats = this.beats.sort((a, b) => b.createdOn.getSeconds() - a.createdOn.getSeconds())
+    }
+    else if (option == 1) {
+      this.beats = this.beats.sort((a, b) => b.likesCount - a.likesCount);
+    }
   }
 
   private fetchInitialBeats(): Observable<Array<Beat>> {
