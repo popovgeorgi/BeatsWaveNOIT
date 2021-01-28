@@ -27,9 +27,11 @@ export class SongListViewComponent implements OnInit {
     public changeHeartDisplay(isLiked) {
       if (isLiked) {
         this.song.isLiked = true;
+        this.song.likesCount++;
       }
       else {
         this.song.isLiked = false;
+        this.song.likesCount--;
       }
     }
 }

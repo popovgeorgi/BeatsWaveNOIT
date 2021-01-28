@@ -14,7 +14,6 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 import { AuthGuardService } from './core/services/auth-guard.service';
 import { IonicModule } from '@ionic/angular';
-import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     SnotifyModule,
-    IonicModule.forRoot(),
-    JwtModule
+    IonicModule.forRoot()
   ],
   providers: [
     NgxSpinnerService,

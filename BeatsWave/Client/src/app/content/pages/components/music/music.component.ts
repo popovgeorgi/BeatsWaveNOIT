@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -29,7 +28,6 @@ export class MusicComponent implements OnInit, OnDestroy {
     private beatService: BeatService,
     private feedHubService: FeedHubService,
     private snotifyService: SnotifyService,
-    private loadingService: LoadingService,
     private userSerivce: UserService,
     private authService: AuthService) { }
 
@@ -84,6 +82,16 @@ export class MusicComponent implements OnInit, OnDestroy {
     })
   }
 
+  showMore() {
+    this.page++;
+    this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(beats => {
+      if (beats.length < this.itemsPerPage) {
+        this.hasMoreBeatsToInclude = false;
+      }
+      this.beats = this.beats.concat(beats);
+    })
+  }
+
   private fetchInitialBeats(): Observable<Array<Beat>> {
     return this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage);
   }
@@ -94,15 +102,5 @@ export class MusicComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
-  }
-
-  showMore() {
-    this.page++;
-    this.beatService.getBeats(this.itemsPerPage, (this.page - 1) * this.itemsPerPage).subscribe(beats => {
-      if (beats.length < this.itemsPerPage) {
-        this.hasMoreBeatsToInclude = false;
-      }
-      this.beats = this.beats.concat(beats);
-    })
   }
 }

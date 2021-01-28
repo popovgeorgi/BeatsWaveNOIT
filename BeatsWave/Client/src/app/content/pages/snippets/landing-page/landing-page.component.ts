@@ -96,6 +96,7 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public redirectToHomePage() {
+    this.spinner.show('routing');
     this.router.navigate(['/home']);
   }
 
