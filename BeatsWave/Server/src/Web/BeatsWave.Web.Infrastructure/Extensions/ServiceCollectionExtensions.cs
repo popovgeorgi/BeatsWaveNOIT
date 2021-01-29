@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web.Infrastructure.Extensions
 {
+    using System.Runtime.CompilerServices;
     using System.Text;
     using BeatsWave.Services.Data;
     using BeatsWave.Services.Messaging;

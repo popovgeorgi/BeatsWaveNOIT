@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.SignalR;
+    using Microsoft.Extensions.Caching.Distributed;
+    using Newtonsoft.Json;
 
     using static BeatsWave.Common.GlobalConstants;
 
@@ -18,12 +21,14 @@
         private readonly IBeatService beatService;
         private readonly ICurrentUserService currentUser;
         private readonly IHubContext<FeedHub> feedHub;
+        private readonly IDistributedCache cacheService;
 
-        public BeatsController(IBeatService beatService, ICurrentUserService currentUser, IHubContext<FeedHub> feedHub)
+        public BeatsController(IBeatService beatService, ICurrentUserService currentUser, IHubContext<FeedHub> feedHub, IDistributedCache cacheService)
         {
             this.beatService = beatService;
             this.currentUser = currentUser;
             this.feedHub = feedHub;
+            this.cacheService = cacheService;
         }
 
         [HttpPost]
@@ -104,7 +109,30 @@
         [AllowAnonymous]
         [Route(nameof(MostlyLiked))]
         public async Task<IEnumerable<BeatListingServiceModel>> MostlyLiked()
-            => await this.beatService.ByLikes<BeatListingServiceModel>();
+        {
+            var info = await this.cacheService.GetStringAsync("MostlyLikedBeats");
+
+            IEnumerable<BeatListingServiceModel> data;
+
+            if (info == null)
+            {
+                data = await this.beatService.ByLikes<BeatListingServiceModel>();
+
+                await this.cacheService.SetStringAsync(
+                    "MostlyLikedBeats",
+                    JsonConvert.SerializeObject(data),
+                    new DistributedCacheEntryOptions
+                    {
+                        AbsoluteExpirationRelativeToNow = new TimeSpan(2, 0, 0),
+                    });
+            }
+            else
+            {
+                data = JsonConvert.DeserializeObject<IEnumerable<BeatListingServiceModel>>(info);
+            }
+
+            return data;
+        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -140,13 +168,59 @@
         [Route(nameof(Trending))]
 
         public async Task<IEnumerable<BeatListingServiceModel>> Trending()
-            => await this.beatService.MostTrending<BeatListingServiceModel>();
+        {
+            var info = await this.cacheService.GetStringAsync("TrendingBeats");
+
+            IEnumerable<BeatListingServiceModel> data;
+
+            if (info == null)
+            {
+                data = await this.beatService.MostTrending<BeatListingServiceModel>();
+
+                await this.cacheService.SetStringAsync(
+                    "TrendingBeats",
+                    JsonConvert.SerializeObject(data),
+                    new DistributedCacheEntryOptions
+                    {
+                        AbsoluteExpirationRelativeToNow = new TimeSpan(1, 0, 0),
+                    });
+            }
+            else
+            {
+                data = JsonConvert.DeserializeObject<IEnumerable<BeatListingServiceModel>>(info);
+            }
+
+            return data;
+        }
 
         [HttpGet]
         [AllowAnonymous]
         [Route(nameof(Featured))]
 
         public async Task<IEnumerable<BeatListingServiceModel>> Featured()
-            => await this.beatService.FeaturedAsync<BeatListingServiceModel>();
+        {
+            var info = await this.cacheService.GetStringAsync("FeaturedBeats");
+
+            IEnumerable<BeatListingServiceModel> data;
+
+            if (info == null)
+            {
+                data = await this.beatService.FeaturedAsync<BeatListingServiceModel>();
+
+                await this.cacheService.SetStringAsync(
+                    "FeaturedBeats",
+                    JsonConvert.SerializeObject(data),
+                    new DistributedCacheEntryOptions
+                    {
+                        AbsoluteExpirationRelativeToNow = new TimeSpan(0, 30, 0),
+                    });
+            }
+            else
+            {
+                data = JsonConvert.DeserializeObject<IEnumerable<BeatListingServiceModel>>(info);
+            }
+
+            return data;
+        }
     }
 }

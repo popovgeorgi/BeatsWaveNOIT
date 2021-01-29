@@ -50,6 +50,13 @@
             services.AddApiControllers();
             services.AddSignalR();
 
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString = this.Configuration.GetConnectionString("DefaultConnection");
+                options.SchemaName = "dbo";
+                options.TableName = "CacheRecords";
+            });
+
             services.AddSingleton(this.Configuration);
 
             // Data repositories
