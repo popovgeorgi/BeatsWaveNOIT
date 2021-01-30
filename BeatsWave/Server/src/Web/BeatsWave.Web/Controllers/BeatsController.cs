@@ -147,21 +147,21 @@
         public async Task<IEnumerable<BeatCheckoutServiceModel>> ByIds([FromQuery] int[] ids)
             => await this.beatService.ByIds<BeatCheckoutServiceModel>(ids);
 
-        [HttpPut]
-        [AllowAnonymous]
-        [Route(AddPlayRoute)]
-        public async Task<ActionResult> AddPlay(AddPlayRequestModel model)
-        {
-            var userId = this.currentUser.GetId();
+        //[HttpPut]
+        //[AllowAnonymous]
+        //[Route(AddPlayRoute)]
+        //public async Task<ActionResult> AddPlay(AddPlayRequestModel model)
+        //{
+        //    var userId = this.currentUser.GetId();
 
-            var result = await this.beatService.AddPlay(model.BeatId, userId);
-            if (result.Failure)
-            {
-                return this.BadRequest(result.Error);
-            }
+        //    var result = await this.beatService.AddPlay(model.BeatId, userId);
+        //    if (result.Failure)
+        //    {
+        //        return this.BadRequest(result.Error);
+        //    }
 
-            return this.Ok();
-        }
+        //    return this.Ok();
+        //}
 
         [HttpGet]
         [AllowAnonymous]

@@ -39,6 +39,8 @@
 
         public DbSet<Event> Events { get; set; }
 
+        public DbSet<Play> Plays { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -79,6 +81,20 @@
                 .HasOne(f => f.Follower)
                 .WithMany()
                 .HasForeignKey(f => f.FollowerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Play>()
+                .HasOne(p => p.Player)
+                .WithMany()
+                .HasForeignKey(p => p.PlayerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Play>()
+                .HasOne(p => p.Beat)
+                .WithMany(b => b.Plays)
+                .HasForeignKey(p => p.BeatId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

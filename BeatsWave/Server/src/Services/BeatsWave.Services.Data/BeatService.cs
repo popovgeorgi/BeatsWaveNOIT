@@ -19,22 +19,22 @@
             this.beatsRepository = beatsRepository;
         }
 
-        public async Task<Result> AddPlay(int id, string userId)
-        {
-            var beat = await this.beatsRepository
-                .All()
-                .FirstOrDefaultAsync(b => b.Id == id);
+        //public async Task<Result> AddPlay(int id, string clickerId)
+        //{
+        //    var beat = await this.beatsRepository
+        //        .All()
+        //        .FirstOrDefaultAsync(b => b.Id == id);
 
-            if (beat.ProducerId == userId)
-            {
-                return "Your beat clicks do not count!";
-            }
+        //    if (beat.ProducerId == clickerId)
+        //    {
+        //        return "Your beat clicks do not count!";
+        //    }
 
-            beat.Plays++;
-            await this.beatsRepository.SaveChangesAsync();
+        //    beat.Plays++;
+        //    await this.beatsRepository.SaveChangesAsync();
 
-            return true;
-        }
+        //    return true;
+        //}
 
         public async Task<IEnumerable<T>> AllAsync<T>(int? take = null, int skip = 0)
         {
