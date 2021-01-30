@@ -27,6 +27,8 @@ namespace BeatsWave.Data.Models
 
         public Subscription Subscription { get; set; }
 
+        public string Country { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

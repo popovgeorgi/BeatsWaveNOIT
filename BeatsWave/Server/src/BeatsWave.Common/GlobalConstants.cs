@@ -26,5 +26,7 @@
 
         public const string BeatCommentsRoute = "Beats/{id}";
         public const string ArtistCommentsRoute = "Artists/{id}";
+
+        public const string IpGetterEndpoint = "http://api.ipstack.com/";
     }
 }

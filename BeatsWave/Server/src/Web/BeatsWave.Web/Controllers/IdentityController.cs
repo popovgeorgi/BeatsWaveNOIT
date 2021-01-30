@@ -12,6 +12,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Options;
 
     public class IdentityController : ApiController
@@ -19,17 +20,20 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IIdentityService identityService;
         private readonly IUserService userService;
+        private readonly IConfiguration configuration;
         private readonly AppSettings appSettings;
 
         public IdentityController(
             UserManager<ApplicationUser> userManager,
             IIdentityService identityService,
             IOptions<AppSettings> appSettings,
-            IUserService userService)
+            IUserService userService,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.identityService = identityService;
             this.userService = userService;
+            this.configuration = configuration;
             this.appSettings = appSettings.Value;
         }
 
@@ -51,7 +55,9 @@
                 return this.BadRequest(result.Errors);
             }
 
-            await this.userService.SetInitialValues(user.Id, model.UserName, GlobalConstants.DefaultMainPhotoUrl);
+            var ipAddress = this.Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            var secretKey = this.configuration.GetSection("IpStack:AccessKey").Value;
+            await this.userService.SetInitialValuesAsync(user.Id, model.UserName, GlobalConstants.DefaultMainPhotoUrl, ipAddress, secretKey);
 
             await this.userManager.AddToRoleAsync(user, model.Role);
 

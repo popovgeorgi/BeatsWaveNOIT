@@ -11,6 +11,6 @@
 
         Task<int[]> GetLikedBeatsByIdsAsync(string userId);
 
-        Task SetInitialValues(string id, string displayName, string profilePicture);
+        Task SetInitialValuesAsync(string id, string displayName, string profilePicture, string ipAddress, string secretKey);
     }
 }
