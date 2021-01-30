@@ -13,5 +13,7 @@
         Task<PurchasesAnalyticsResponseModel> GetPurchasesByMonthInfo();
 
         Task<TotalEarningsAnalyticsResponseModel> GetTotalEarnings();
+
+        DistinctUsersResponseModel GetDistinctUsersListeningToUser(string producerId);
     }
 }

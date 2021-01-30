@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using AutoMapper.Configuration.Annotations;
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
@@ -13,28 +13,37 @@
     public class BeatService : IBeatService
     {
         private readonly IDeletableEntityRepository<Beat> beatsRepository;
+        private readonly IRepository<Play> playsRepository;
 
-        public BeatService(IDeletableEntityRepository<Beat> beatsRepository)
+        public BeatService(IDeletableEntityRepository<Beat> beatsRepository, IRepository<Play> playsRepository)
         {
             this.beatsRepository = beatsRepository;
+            this.playsRepository = playsRepository;
         }
 
-        //public async Task<Result> AddPlay(int id, string clickerId)
-        //{
-        //    var beat = await this.beatsRepository
-        //        .All()
-        //        .FirstOrDefaultAsync(b => b.Id == id);
+        public async Task<Result> AddPlay(int beatId, string playerId)
+        {
+            var beat = await this.beatsRepository
+                .All()
+                .FirstOrDefaultAsync(b => b.Id == beatId);
 
-        //    if (beat.ProducerId == clickerId)
-        //    {
-        //        return "Your beat clicks do not count!";
-        //    }
+            if (beat.ProducerId == playerId)
+            {
+                return "Your own clicks do not count!";
+            }
 
-        //    beat.Plays++;
-        //    await this.beatsRepository.SaveChangesAsync();
+            var play = new Play
+            {
+                BeatId = beatId,
+                PlayerId = playerId,
+                ProducerId = beat.ProducerId,
+            };
 
-        //    return true;
-        //}
+            await this.playsRepository.AddAsync(play);
+            await this.playsRepository.SaveChangesAsync();
+
+            return true;
+        }
 
         public async Task<IEnumerable<T>> AllAsync<T>(int? take = null, int skip = 0)
         {
@@ -179,7 +188,6 @@
         public async Task<IEnumerable<T>> MostTrending<T>()
             => await this.beatsRepository
                 .All()
-                .OrderByDescending(b => b.Plays)
                 .To<T>()
                 .Take(20)
                 .ToListAsync();

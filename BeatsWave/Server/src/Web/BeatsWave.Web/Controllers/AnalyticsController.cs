@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
+    using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Analytics;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,14 @@
     public class AnalyticsController : ApiController
     {
         private readonly IAnalyticsService analyticsService;
+        private readonly ICurrentUserService currentUser;
 
-        public AnalyticsController(IAnalyticsService analyticsService)
+        public AnalyticsController(
+            IAnalyticsService analyticsService,
+            ICurrentUserService currentUser)
         {
             this.analyticsService = analyticsService;
+            this.currentUser = currentUser;
         }
 
         [HttpGet]
@@ -39,5 +44,15 @@
         [Route(nameof(TotalEarnings))]
         public async Task<TotalEarningsAnalyticsResponseModel> TotalEarnings()
             => await this.analyticsService.GetTotalEarnings();
+
+        [HttpGet]
+        [Authorize(Roles = "Beatmaker, Administrator")]
+        [Route(nameof(DistinctUsers))]
+        public DistinctUsersResponseModel DistinctUsers()
+        {
+            var currentUser = this.currentUser.GetId();
+
+            return this.analyticsService.GetDistinctUsersListeningToUser(currentUser);
+        }
     }
 }

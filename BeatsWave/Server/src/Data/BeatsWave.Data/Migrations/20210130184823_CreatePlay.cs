@@ -1,10 +1,9 @@
-﻿namespace BeatsWave.Data.Migrations
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace BeatsWave.Data.Migrations
 {
-    using System;
-
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    public partial class AddPlayTableAndRemovePlayProperty : Migration
+    public partial class CreatePlay : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,8 +19,9 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     BeatId = table.Column<int>(type: "int", nullable: false),
+                    ProducerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

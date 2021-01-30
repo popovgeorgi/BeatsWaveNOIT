@@ -13,11 +13,16 @@
     {
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
         private readonly IDeletableEntityRepository<Beat> beatRepository;
+        private readonly IRepository<Play> playsRepository;
 
-        public AnalyticsService(IDeletableEntityRepository<ApplicationUser> userRepository, IDeletableEntityRepository<Beat> beatRepository)
+        public AnalyticsService(
+            IDeletableEntityRepository<ApplicationUser> userRepository,
+            IDeletableEntityRepository<Beat> beatRepository,
+            IRepository<Play> playsRepository)
         {
             this.userRepository = userRepository;
             this.beatRepository = beatRepository;
+            this.playsRepository = playsRepository;
         }
 
         public async Task<BeatsAnalyticsResponseModel> GetBeatCountByMonthInfo()
@@ -47,6 +52,20 @@
             {
                 BeatsPerMonth = beatOutput,
                 TotalCount = totalBeatCount,
+            };
+        }
+
+        public DistinctUsersResponseModel GetDistinctUsersListeningToUser(string userId)
+        {
+            var usersCount = this.playsRepository
+                .All()
+                .Where(u => u.ProducerId == userId)
+                .GroupBy(k => new { k.ProducerId, k.PlayerId })
+                .Count();
+
+            return new DistinctUsersResponseModel
+            {
+                UsersCount = usersCount,
             };
         }
 

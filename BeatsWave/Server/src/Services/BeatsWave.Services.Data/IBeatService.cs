@@ -23,7 +23,7 @@
 
         Task<IEnumerable<T>> ByIds<T>(int[] ids);
 
-        //Task<Result> AddPlay(int id, string clickerId);
+        Task<Result> AddPlay(int beatId, string playerId);
 
         Task<IEnumerable<T>> MostTrending<T>();
 

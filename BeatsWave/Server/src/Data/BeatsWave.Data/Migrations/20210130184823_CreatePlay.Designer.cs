@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeatsWave.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210130130954_AddPlayTableAndRemovePlayProperty")]
-    partial class AddPlayTableAndRemovePlayProperty
+    [Migration("20210130184823_CreatePlay")]
+    partial class CreatePlay
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -453,6 +453,10 @@ namespace BeatsWave.Data.Migrations
                     b.Property<string>("PlayerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProducerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
