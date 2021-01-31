@@ -19,12 +19,12 @@ export class MenuConfigService {
     return this.menuConfig.config.userMenu.items;
   }
 
-  get guestMenuItems() {
-    return this.menuConfig.config.aside.guestItems;
+  get artistMenuItems() {
+    return this.menuConfig.config.aside.artistItems;
   }
 
-  get beatmakerUserMenuItems() {
-    return this.menuConfig.config.beatmakerUserMenu.items;
+  get guestMenuItems() {
+    return this.menuConfig.config.aside.guestItems;
   }
 
   get beatmakerMenuItems() {
@@ -37,5 +37,9 @@ export class MenuConfigService {
 
   get adminMenuItems() {
     return this.menuConfig.config.aside.items;
+  }
+
+  get beatmakerUserMenuItems() {
+    return this.menuConfig.config.beatmakerUserMenu.items;
   }
 }

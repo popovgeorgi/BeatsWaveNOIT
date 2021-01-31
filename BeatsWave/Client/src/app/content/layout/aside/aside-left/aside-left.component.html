@@ -22,9 +22,15 @@
     <!-- End | Navbar -->
 
     <!-- Begin | Sidebar Footer -->
-    <div class="sidebar-footer">
+    <div *ngIf="userRole == 'Beatmaker' || userRole == 'Administrator'" class="sidebar-footer">
         <button type="button" routerLink="/add-music" class="btn btn-block btn-danger btn-air btn-bold"
                 (click)="hideSidebar()">
+            <i [class]="asideFooterButton.icon"></i>
+            <span>{{asideFooterButton.title}}</span>
+        </button>
+    </div>
+    <div *ngIf="!userRole || (userRole == 'Artist' || userRole == 'Manager')" class="sidebar-footer">
+        <button type="button" class="btn btn-block btn-danger btn-air btn-bold">
             <i [class]="asideFooterButton.icon"></i>
             <span>{{asideFooterButton.title}}</span>
         </button>

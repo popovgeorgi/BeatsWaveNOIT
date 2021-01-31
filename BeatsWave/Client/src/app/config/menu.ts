@@ -53,12 +53,6 @@ export class MenuConfig {
             title: 'Add Event',
             icon: 'la la-home',
             page: '/add-event'
-          },
-          { section: 'Extra Pages' },
-          {
-            title: 'Error',
-            icon: 'la la-times-circle-o',
-            page: '/404'
           }
         ],
         guestItems: [
@@ -82,6 +76,41 @@ export class MenuConfig {
             title: 'Artists',
             icon: 'la la-microphone',
             page: '/artists'
+          },
+          { section: 'Music Events' },
+          {
+            title: 'Events',
+            icon: 'la la-calendar',
+            page: '/events'
+          }
+        ],
+        artistItems: [
+          { section: 'Browse Music' },
+          {
+            title: 'Home',
+            icon: 'la la-home',
+            page: '/home'
+          },
+          {
+            title: 'Genres',
+            icon: 'la la-diamond',
+            page: '/genres'
+          },
+          {
+            title: 'Feed',
+            icon: 'la la-music',
+            page: '/music'
+          },
+          {
+            title: 'Artists',
+            icon: 'la la-microphone',
+            page: '/artists'
+          },
+          { section: 'Your Music' },
+          {
+            title: 'Favorites',
+            icon: 'la la-heart-o',
+            page: '/favorites'
           },
           { section: 'Music Events' },
           {
@@ -122,11 +151,6 @@ export class MenuConfig {
             title: 'Favorites',
             icon: 'la la-heart-o',
             page: '/favorites'
-          },
-          {
-            title: 'History',
-            icon: 'la la-history',
-            page: '/history'
           },
           { section: 'Music Events' },
           {

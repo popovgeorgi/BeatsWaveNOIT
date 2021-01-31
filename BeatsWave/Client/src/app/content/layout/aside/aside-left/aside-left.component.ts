@@ -18,6 +18,7 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   menuItems: any = [];
   asideFooterButton: any = {};
+  userRole: string;
   sidebarClass = 'sidebar-primary';
 
   skinSubscription: Subscription;
@@ -48,26 +49,38 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
     });
     this.userSubscription = this.authService.user.subscribe(user => {
       if (user) {
-        let userRole = user.role;
+        this.userRole = user.role;
 
-        if (userRole == 'Admin') {
+        if (this.userRole == 'Administrator') {
           this.menuItems = this.menuConfigService.adminMenuItems;
         }
-        if (userRole == 'Beatmaker' || userRole == 'Artist') {
+        else if (this.userRole == 'Beatmaker') {
           this.menuItems = this.menuConfigService.beatmakerMenuItems;
         }
-        else if (userRole == 'Manager') {
-          this.menuItems = this.menuConfigService.managerMenuItems;
-        }
-        if (userRole == 'Manager' || userRole == 'Artist') {
+        else if (this.userRole == 'Artist') {
+          this.menuItems = this.menuConfigService.artistMenuItems;
+
           this.asideFooterButton = {
             icon: 'ion-md-musical-note',
-            title: 'Start uploading'
+            title: 'Enjoy'
+          };
+        }
+        else if (this.userRole == 'Manager') {
+          this.menuItems = this.menuConfigService.managerMenuItems;
+
+          this.asideFooterButton = {
+            icon: 'ion-md-musical-note',
+            title: 'Enjoy'
           };
         }
       }
       else {
         this.menuItems = this.menuConfigService.guestMenuItems;
+
+        this.asideFooterButton = {
+          icon: 'ion-md-musical-note',
+          title: 'Enjoy'
+        };
       }
     })
   }
@@ -80,5 +93,4 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
     this.userSubscription.unsubscribe();
     this.skinSubscription.unsubscribe();
   }
-
 }
