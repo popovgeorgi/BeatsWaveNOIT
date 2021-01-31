@@ -57,7 +57,7 @@ export class BeatService {
   }
 
   addPlay(beatId: number) {
-    return this.http.put(this.beatPath + '/AddPlay', { 'beatId': beatId });
+    return this.http.post(this.beatPath + '/AddPlay', { 'beatId': beatId });
   }
 
   getTrending(): Observable<Array<Beat>> {

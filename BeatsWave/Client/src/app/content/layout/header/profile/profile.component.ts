@@ -8,7 +8,6 @@ import { User } from 'src/app/core/models/User';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnotifyService } from 'ng-snotify';
-import { CartService } from 'src/app/core/services/cart.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,7 +28,6 @@ export class ProfileComponent implements OnInit {
     private simpleModalService: SimpleModalService,
     private authService: AuthService,
     private snotifyService: SnotifyService,
-    private cartService: CartService,
     private router: Router) {
     this.userMenu = this.menuConfigService.userMenuItems;
   }
@@ -70,7 +68,6 @@ export class ProfileComponent implements OnInit {
 
   public Logout() {
     this.authService.logout();
-    this.cartService.clear();
     this.isLogout = true;
     this.router.navigate(['/']);
     this.snotifyService.success('You successfully logged out!');

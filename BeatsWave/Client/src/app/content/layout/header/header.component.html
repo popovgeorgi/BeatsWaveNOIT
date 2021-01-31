@@ -21,9 +21,6 @@
                     <img [src]="language.image" alt="">
                 </a>
             </li>
-            <li *ngIf="currentUser">
-                <app-cart></app-cart>
-            </li>
             <li>
                 <app-profile [user]="currentUser"></app-profile>
             </li>

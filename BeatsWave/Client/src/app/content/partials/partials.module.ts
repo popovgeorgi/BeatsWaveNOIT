@@ -18,7 +18,6 @@ import { CountdownComponent } from './countdown/countdown.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PhotoResizeComponent } from './photo-resize/photo-resize.component';
-import { SongListCheckoutComponent } from './song-list-checkout/song-list-checkout.component';
 
 @NgModule({
     declarations: [
@@ -34,8 +33,7 @@ import { SongListCheckoutComponent } from './song-list-checkout/song-list-checko
         CommentComponent,
         ThemeSettingsComponent,
         CountdownComponent,
-        PhotoResizeComponent,
-        SongListCheckoutComponent,
+        PhotoResizeComponent
     ],
     exports: [
         PrimaryCardComponent,
@@ -48,8 +46,7 @@ import { SongListCheckoutComponent } from './song-list-checkout/song-list-checko
         ImageCardComponent,
         CommentComponent,
         ThemeSettingsComponent,
-        PhotoResizeComponent,
-        SongListCheckoutComponent
+        PhotoResizeComponent
     ],
     imports: [
         CommonModule,

@@ -24,12 +24,9 @@ import { ProfileComponent } from './header/profile/profile.component';
 import { LanguageComponent } from './header/language/language.component';
 import { SearchComponent } from './header/search/search.component';
 import { LoginComponent } from './header/login/login.component';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { RegisterComponent } from './header/register/register.component';
-import { UserService } from 'src/app/core/services/user.service';
 import { LoaderComponent } from './loader/loader.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { CartComponent } from './header/cart/cart.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -50,8 +47,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LanguageComponent,
     SearchComponent,
     LoginComponent,
-    RegisterComponent,
-    CartComponent
+    RegisterComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
