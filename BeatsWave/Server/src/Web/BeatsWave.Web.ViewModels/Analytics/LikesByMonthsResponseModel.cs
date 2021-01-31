@@ -1,8 +1,8 @@
 ﻿namespace BeatsWave.Web.Models.Analytics
 {
-    public class DistinctUsersResponseModel
+    public class LikesByMonthsResponseModel
     {
-        public int[] UsersPerMonth { get; set; }
+        public int[] LikesPerMonth { get; set; }
 
         public int TotalCount { get; set; }
     }

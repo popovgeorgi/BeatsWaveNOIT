@@ -48,11 +48,32 @@
         [HttpGet]
         [Authorize(Roles = "Beatmaker, Administrator")]
         [Route(nameof(DistinctUsers))]
-        public DistinctUsersResponseModel DistinctUsers()
+        public async Task<DistinctUsersResponseModel> DistinctUsers()
         {
             var currentUser = this.currentUser.GetId();
 
-            return this.analyticsService.GetDistinctUsersListeningToUser(currentUser);
+            return await this.analyticsService.GetDistinctUsersListeningToUser(currentUser);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Beatmaker, Administrator")]
+        [Route(nameof(SongsByMonths))]
+
+        public async Task<SongsByMonthsResponseModel> SongsByMonths()
+        {
+            var currentUser = this.currentUser.GetId();
+
+            return await this.analyticsService.GetSongsPerMonthOfUser(currentUser);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Beatmaker, Administrator")]
+        [Route(nameof(LikesByMonths))]
+        public async Task<LikesByMonthsResponseModel> LikesByMonths()
+        {
+            var currentUser = this.currentUser.GetId();
+
+            return await this.analyticsService.GetLikesPerMonthOfUser(currentUser);
         }
     }
 }

@@ -14,15 +14,48 @@
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
         private readonly IDeletableEntityRepository<Beat> beatRepository;
         private readonly IRepository<Play> playsRepository;
+        private readonly IDeletableEntityRepository<Like> likesRepository;
 
         public AnalyticsService(
             IDeletableEntityRepository<ApplicationUser> userRepository,
             IDeletableEntityRepository<Beat> beatRepository,
-            IRepository<Play> playsRepository)
+            IRepository<Play> playsRepository,
+            IDeletableEntityRepository<Like> likesRepository)
         {
             this.userRepository = userRepository;
             this.beatRepository = beatRepository;
             this.playsRepository = playsRepository;
+            this.likesRepository = likesRepository;
+        }
+
+        public async Task<UsersAnalyticsResponseModel> GetUserCountByMonthInfo()
+        {
+            var usersByMonth = await this.userRepository
+                .All()
+                .Where(u => u.CreatedOn.Year == DateTime.Now.Year)
+                .GroupBy(x => new { x.CreatedOn.Month })
+                .Select(u => new UsersCountByMonthServiceModel
+                {
+                    Month = u.Key.Month.ToString(),
+                    UsersCount = u.Count(),
+                })
+                .ToListAsync();
+
+            var userOutput = new int[12];
+            var totalUserCount = 0;
+
+            foreach (var purchase in usersByMonth)
+            {
+                int month = int.Parse(purchase.Month) - 1;
+                userOutput[month] = purchase.UsersCount;
+                totalUserCount += purchase.UsersCount;
+            }
+
+            return new UsersAnalyticsResponseModel
+            {
+                UsersPerMonth = userOutput,
+                TotalCount = totalUserCount,
+            };
         }
 
         public async Task<BeatsAnalyticsResponseModel> GetBeatCountByMonthInfo()
@@ -52,20 +85,6 @@
             {
                 BeatsPerMonth = beatOutput,
                 TotalCount = totalBeatCount,
-            };
-        }
-
-        public DistinctUsersResponseModel GetDistinctUsersListeningToUser(string userId)
-        {
-            var usersCount = this.playsRepository
-                .All()
-                .Where(u => u.ProducerId == userId)
-                .GroupBy(k => new { k.ProducerId, k.PlayerId })
-                .Count();
-
-            return new DistinctUsersResponseModel
-            {
-                UsersCount = usersCount,
             };
         }
 
@@ -112,33 +131,85 @@
             };
         }
 
-        public async Task<UsersAnalyticsResponseModel> GetUserCountByMonthInfo()
+        public async Task<DistinctUsersResponseModel> GetDistinctUsersListeningToUser(string userId)
         {
-            var usersByMonth = await this.userRepository
+            var monthsOfDistinctUsers = await this.playsRepository
                 .All()
-                .Where(u => u.CreatedOn.Year == DateTime.Now.Year)
-                .GroupBy(x => new { x.CreatedOn.Month })
-                .Select(u => new UsersCountByMonthServiceModel
+                .Where(u => u.ProducerId == userId && u.CreatedOn.Year == DateTime.Now.Year)
+                .GroupBy(k => new { k.ProducerId, k.PlayerId, k.CreatedOn.Month })
+                .Select(p => p.Key.Month.ToString())
+                .ToListAsync();
+
+            var userOutput = new int[12];
+            var totalUserCount = monthsOfDistinctUsers.Count;
+
+            foreach (var month in monthsOfDistinctUsers)
+            {
+                userOutput[int.Parse(month) - 1]++;
+            }
+
+            return new DistinctUsersResponseModel
+            {
+                UsersPerMonth = userOutput,
+                TotalCount = totalUserCount,
+            };
+        }
+
+        public async Task<SongsByMonthsResponseModel> GetSongsPerMonthOfUser(string producerId)
+        {
+            var beats = this.beatRepository
+                .All()
+                .Where(b => b.ProducerId == producerId && b.CreatedOn.Year == DateTime.Now.Year);
+
+            var beatMonths = await beats
+                .GroupBy(b => new { b.CreatedOn.Month })
+                .Select(b => new BeatsCountByMonthServiceModel 
                 {
-                    Month = u.Key.Month.ToString(),
-                    UsersCount = u.Count(),
+                    Month = b.Key.Month.ToString(),
+                    BeatsCount = b.Count(),
                 })
                 .ToListAsync();
 
             var userOutput = new int[12];
-            var totalUserCount = 0;
 
-            foreach (var purchase in usersByMonth)
+            foreach (var beatMonth in beatMonths)
             {
-                int month = int.Parse(purchase.Month) - 1;
-                userOutput[month] = purchase.UsersCount;
-                totalUserCount += purchase.UsersCount;
+                userOutput[int.Parse(beatMonth.Month) - 1] = beatMonth.BeatsCount;
             }
 
-            return new UsersAnalyticsResponseModel
+            return new SongsByMonthsResponseModel
             {
-                UsersPerMonth = userOutput,
-                TotalCount = totalUserCount,
+                SongsPerMonth = userOutput,
+                TotalCount = beats.Count(),
+            };
+        }
+
+        public async Task<LikesByMonthsResponseModel> GetLikesPerMonthOfUser(string producerId)
+        {
+            var likes = this.likesRepository
+                .All()
+                .Where(l => l.Beat.ProducerId == producerId && l.CreatedOn.Year == DateTime.Now.Year);
+
+            var likesPerMonth = await likes
+                .GroupBy(l => new { l.CreatedOn.Month })
+                .Select(l => new LikesCountByMonthServiceModel
+                {
+                    Month = l.Key.Month.ToString(),
+                    BeatsCount = l.Count(),
+                })
+                .ToListAsync();
+
+            var likeOutput = new int[12];
+
+            foreach (var month in likesPerMonth)
+            {
+                likeOutput[int.Parse(month.Month) - 1] = month.BeatsCount;
+            }
+
+            return new LikesByMonthsResponseModel
+            {
+                TotalCount = likes.Count(),
+                LikesPerMonth = likeOutput,
             };
         }
     }

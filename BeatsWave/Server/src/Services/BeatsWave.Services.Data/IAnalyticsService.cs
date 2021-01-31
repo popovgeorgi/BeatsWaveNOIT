@@ -14,6 +14,10 @@
 
         Task<TotalEarningsAnalyticsResponseModel> GetTotalEarnings();
 
-        DistinctUsersResponseModel GetDistinctUsersListeningToUser(string producerId);
+        Task<DistinctUsersResponseModel> GetDistinctUsersListeningToUser(string producerId);
+
+        Task<SongsByMonthsResponseModel> GetSongsPerMonthOfUser(string producerId);
+
+        Task<LikesByMonthsResponseModel> GetLikesPerMonthOfUser(string producerId);
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace BeatsWave.Web.Models.Analytics
 {
-    public class UsersCountByMonthServiceModel
+    public class LikesCountByMonthServiceModel
     {
         public string Month { get; set; }
 
-        public int UsersCount { get; set; }
+        public int BeatsCount { get; set; }
     }
 }
