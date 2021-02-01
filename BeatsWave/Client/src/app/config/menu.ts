@@ -38,11 +38,6 @@ export class MenuConfig {
             icon: 'la la-heart-o',
             page: '/favorites'
           },
-          {
-            title: 'History',
-            icon: 'la la-history',
-            page: '/history'
-          },
           { section: 'Music Events' },
           {
             title: 'Events',

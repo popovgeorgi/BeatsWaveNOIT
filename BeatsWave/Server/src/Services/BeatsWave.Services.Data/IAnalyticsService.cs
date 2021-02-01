@@ -16,7 +16,7 @@
 
         Task<DistinctUsersResponseModel> GetDistinctUsersListeningToUser(string producerId);
 
-        Task<SongsByMonthsResponseModel> GetSongsPerMonthOfUser(string producerId);
+        Task<SongsByMonthsResponseModel> GetBeatsPerMonthOfUser(string producerId);
 
         Task<LikesByMonthsResponseModel> GetLikesPerMonthOfUser(string producerId);
     }

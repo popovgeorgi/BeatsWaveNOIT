@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BeatAnalytics } from '../models/analytics/BeatAnalytics';
+import { LikeAnalytics } from '../models/analytics/LikeAnalytics';
 import { PurchasesAnalytics } from '../models/analytics/PurchasesAnalytics';
 import { TotalEarningsAnalytics } from '../models/analytics/TotalEarningsAnalytics';
 import { UserAnalytics } from '../models/analytics/UserAnalytics';
@@ -13,6 +14,8 @@ import { UserAnalytics } from '../models/analytics/UserAnalytics';
 export class AnalyticsService {
   private analyticsPath = environment.apiUrl + '/analytics';
   constructor(private http: HttpClient) { }
+
+  //methods that are related to the whole application
 
   getUsersPerMonth(): Observable<UserAnalytics> {
     return this.http.get<UserAnalytics>(this.analyticsPath + '/UsersCountByMonths');
@@ -28,5 +31,19 @@ export class AnalyticsService {
 
   getTotalEarnings(): Observable<TotalEarningsAnalytics> {
     return this.http.get<TotalEarningsAnalytics>(this.analyticsPath + '/TotalEarnings')
+  }
+
+  //methods that are related to the producer's music
+
+  getDistinctUsers(): Observable<UserAnalytics> {
+    return this.http.get<UserAnalytics>(this.analyticsPath + '/DistinctUsers');
+  }
+
+  getUserBeatsPerMonth(): Observable<BeatAnalytics> {
+    return this.http.get<BeatAnalytics>(this.analyticsPath + '/BeatsByMonths');
+  }
+
+  getUserLikesPerMonth(): Observable<LikeAnalytics> {
+    return this.http.get<LikeAnalytics>(this.analyticsPath + '/LikesByMonths');
   }
 }

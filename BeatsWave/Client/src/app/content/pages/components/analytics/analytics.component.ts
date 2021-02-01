@@ -14,7 +14,7 @@ import { TotalEarningsAnalytics } from 'src/app/core/models/analytics/TotalEarni
 export class AnalyticsComponent implements OnInit, OnDestroy {
 
   public isStatisticsLoaded: boolean = false;
-  public isPurchasesLoaded: boolean = false;
+  public isLikesLoaded: boolean = false;
   public isUsersLoaded: boolean = false;
   public isSongsLoaded: boolean = false;
   public totalEarnings: number;
@@ -48,8 +48,8 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
     this.check();
   }
 
-  setPurchases() {
-    this.isPurchasesLoaded = true;
+  setLikes() {
+    this.isLikesLoaded = true;
     this.check();
   }
 
@@ -59,7 +59,7 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   }
 
   private check() {
-    if (this.isStatisticsLoaded && this.isPurchasesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
+    if (this.isStatisticsLoaded && this.isLikesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
       this.spinner.hide('routing');
     }
   }

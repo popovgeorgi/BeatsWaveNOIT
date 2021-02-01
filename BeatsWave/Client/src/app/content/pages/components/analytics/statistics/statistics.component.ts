@@ -42,7 +42,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   private fetchData(): Observable<UserAnalytics> {
-    return this.analyticsService.getUsersPerMonth();
+    return this.analyticsService.getDistinctUsers();
   }
 
   chartOptionsConfig() {

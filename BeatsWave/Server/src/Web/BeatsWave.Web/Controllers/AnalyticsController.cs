@@ -57,13 +57,13 @@
 
         [HttpGet]
         [Authorize(Roles = "Beatmaker, Administrator")]
-        [Route(nameof(SongsByMonths))]
+        [Route(nameof(BeatsByMonths))]
 
-        public async Task<SongsByMonthsResponseModel> SongsByMonths()
+        public async Task<SongsByMonthsResponseModel> BeatsByMonths()
         {
             var currentUser = this.currentUser.GetId();
 
-            return await this.analyticsService.GetSongsPerMonthOfUser(currentUser);
+            return await this.analyticsService.GetBeatsPerMonthOfUser(currentUser);
         }
 
         [HttpGet]

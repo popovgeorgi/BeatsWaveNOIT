@@ -40,7 +40,7 @@ export class TotalSongsComponent implements OnInit {
   }
 
   private fetchData(): Observable<BeatAnalytics> {
-    return this.analyticsService.getBeatsPerMonth();
+    return this.analyticsService.getUserBeatsPerMonth();
   }
 
   chartOptionsConfig() {

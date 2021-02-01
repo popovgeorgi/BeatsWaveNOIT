@@ -3,6 +3,7 @@ import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { LikeAnalytics } from 'src/app/core/models/analytics/LikeAnalytics';
 import { PurchasesAnalytics } from 'src/app/core/models/analytics/PurchasesAnalytics';
 import { AnalyticsService } from 'src/app/core/services/analytics.service';
 
@@ -13,8 +14,8 @@ import { AnalyticsService } from 'src/app/core/services/analytics.service';
 export class PurchasesComponent implements OnInit {
 
   @Output() isReady = new EventEmitter<boolean>();
-  totalPurchases: number;
-  purchasesPerMonth: number[];
+  totalLikes: number;
+  likesPerMonth: number[];
   chartData: ChartDataSets[] = [];
   chartLabels: Label[] = [];
   chartColors: Color[] = [];
@@ -29,9 +30,9 @@ export class PurchasesComponent implements OnInit {
   ngOnInit() {
     this.fetchData()
       .pipe(
-        tap((res: PurchasesAnalytics) => {
-          this.purchasesPerMonth = res.purchasesPerMonth;
-          this.totalPurchases = res.totalPurchases;
+        tap((res: LikeAnalytics) => {
+          this.likesPerMonth = res.likesPerMonth;
+          this.totalLikes = res.totalCount;
           this.chartDataConfig();
         })
       )
@@ -40,8 +41,8 @@ export class PurchasesComponent implements OnInit {
       });
   }
 
-  private fetchData(): Observable<PurchasesAnalytics> {
-    return this.analyticsService.getPurchasesPerMonth();
+  private fetchData(): Observable<LikeAnalytics> {
+    return this.analyticsService.getUserLikesPerMonth();
   }
 
   chartOptionsConfig() {
@@ -71,7 +72,7 @@ export class PurchasesComponent implements OnInit {
   chartDataConfig() {
     this.chartData = [{
       label: 'Purchases',
-      data: this.purchasesPerMonth,
+      data: this.likesPerMonth,
       backgroundColor: 'transparent',
       borderColor: '#222629',
       borderWidth: 3,

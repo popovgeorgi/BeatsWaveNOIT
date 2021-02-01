@@ -155,7 +155,7 @@
             };
         }
 
-        public async Task<SongsByMonthsResponseModel> GetSongsPerMonthOfUser(string producerId)
+        public async Task<SongsByMonthsResponseModel> GetBeatsPerMonthOfUser(string producerId)
         {
             var beats = this.beatRepository
                 .All()
@@ -179,7 +179,7 @@
 
             return new SongsByMonthsResponseModel
             {
-                SongsPerMonth = userOutput,
+                BeatsPerMonth = userOutput,
                 TotalCount = beats.Count(),
             };
         }

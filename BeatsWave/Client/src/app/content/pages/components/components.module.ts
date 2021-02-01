@@ -114,7 +114,7 @@ const routes: Routes = [
         path: 'analytics',
         component: AnalyticsComponent,
         canActivate: [AuthGuardService],
-        data: { roles: [Role.Administrator] }
+        data: { roles: [Role.Beatmaker, Role.Administrator] }
       },
       {
         path: 'favorites',
