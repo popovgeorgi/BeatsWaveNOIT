@@ -1,6 +1,7 @@
 ﻿namespace BeatsWave.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -211,6 +212,22 @@
                 TotalCount = likes.Count(),
                 LikesPerMonth = likeOutput,
             };
+        }
+
+        public async Task<IEnumerable<CountryListenerResponseModel>> GetListenersByCountry(string producerId)
+        {
+            var playsForUserGroupedByCountry = await this.playsRepository
+                .All()
+                .Where(p => p.ProducerId == producerId && p.Player.Country != null)
+                .GroupBy(p => p.Player.Country)
+                .Select(p => new CountryListenerResponseModel
+                {
+                    Country = p.Key,
+                    Count = p.Count(),
+                })
+                .ToListAsync();
+
+            return playsForUserGroupedByCountry;
         }
     }
 }

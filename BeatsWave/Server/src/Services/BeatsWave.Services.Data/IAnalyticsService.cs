@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Services.Data
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BeatsWave.Web.Models.Analytics;
@@ -19,5 +20,7 @@
         Task<SongsByMonthsResponseModel> GetBeatsPerMonthOfUser(string producerId);
 
         Task<LikesByMonthsResponseModel> GetLikesPerMonthOfUser(string producerId);
+
+        Task<IEnumerable<CountryListenerResponseModel>> GetListenersByCountry(string producerId);
     }
 }

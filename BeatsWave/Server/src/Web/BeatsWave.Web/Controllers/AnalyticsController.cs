@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
@@ -74,6 +75,17 @@
             var currentUser = this.currentUser.GetId();
 
             return await this.analyticsService.GetLikesPerMonthOfUser(currentUser);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Beatmaker, Administrator")]
+        [Route(nameof(ListenersByCountry))]
+
+        public async Task<IEnumerable<CountryListenerResponseModel>> ListenersByCountry()
+        {
+            var currentUser = this.currentUser.GetId();
+
+            return await this.analyticsService.GetListenersByCountry(currentUser);
         }
     }
 }
