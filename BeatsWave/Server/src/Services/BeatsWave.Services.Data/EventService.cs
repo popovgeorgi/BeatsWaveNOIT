@@ -7,6 +7,7 @@
 
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
+    using BeatsWave.Services;
     using BeatsWave.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
@@ -48,6 +49,28 @@
             await this.eventRepository.SaveChangesAsync();
 
             return newEvent.Id;
+        }
+
+        public async Task<Result> DeleteAsync(int eventId, string managerId)
+        {
+            var wantedEvent = await this.eventRepository
+                .All()
+                .FirstOrDefaultAsync(e => e.Id == eventId);
+
+            if (wantedEvent == null)
+            {
+                return "Event does not exist";
+            }
+
+            if (wantedEvent.ManagerId != managerId)
+            {
+                return "You cannot delete an event that is not yours!";
+            }
+
+            this.eventRepository.Delete(wantedEvent);
+            await this.eventRepository.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<T> DetailsAsync<T>(int id)

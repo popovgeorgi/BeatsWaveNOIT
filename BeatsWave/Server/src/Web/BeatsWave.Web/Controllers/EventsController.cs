@@ -60,5 +60,20 @@
 
         public async Task<IEnumerable<EventListingServiceModel>> HomepageListed()
             => await this.eventService.PremiumAsync<EventListingServiceModel>();
+
+        [HttpDelete]
+        public async Task<ActionResult> Delete(int eventId)
+        {
+            var currentUser = this.currentUser.GetId();
+
+            var result = await this.eventService.DeleteAsync(eventId, currentUser);
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return this.Ok();
+        }
     }
 }

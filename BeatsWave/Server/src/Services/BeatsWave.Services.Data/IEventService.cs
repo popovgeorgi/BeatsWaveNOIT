@@ -1,8 +1,6 @@
 ﻿namespace BeatsWave.Services.Data
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
 
     public interface IEventService
@@ -14,5 +12,7 @@
         Task<T> DetailsAsync<T>(int id);
 
         Task<IEnumerable<T>> PremiumAsync<T>();
+
+        Task<Result> DeleteAsync(int eventId, string managerId);
     }
 }
