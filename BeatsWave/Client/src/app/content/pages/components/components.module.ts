@@ -39,17 +39,13 @@ import { StatisticsComponent } from './analytics/statistics/statistics.component
 import { ReferralsComponent } from './analytics/referrals/referrals.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { UserMyBeatsComponent } from './user/user-my-beats/user-my-beats.component';
 import { AuthGuardService } from 'src/app/core/services/auth-guard.service';
 import { Role } from 'src/app/core/models/Role';
 import { PhotoResizeComponent } from '../../partials/photo-resize/photo-resize.component';
 import { GenreListingComponent } from './genres/genre-listing/genre-listing.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { SongEditComponent } from './songs/song-edit/song-edit.component';
 import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
-import { LandingPageComponent } from '../snippets/landing-page/landing-page.component';
-import { PagesModule } from '../pages.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -157,11 +153,6 @@ const routes: Routes = [
         path: 'my-beats',
         component: UserMyBeatsComponent,
         canActivate: [AuthGuardService]
-      },
-      {
-        path: 'checkout',
-        component: CheckoutComponent,
-        canActivate: [AuthGuardService]
       }
     ]
   },
@@ -197,7 +188,6 @@ const routes: Routes = [
     ReferralsComponent,
     UserMyBeatsComponent,
     GenreListingComponent,
-    CheckoutComponent,
     SongEditComponent
   ],
   entryComponents: [
@@ -215,8 +205,7 @@ const routes: Routes = [
     ChartsModule,
     RouterModule.forChild(routes),
     FileUploadModule,
-    NgxSpinnerModule,
-    InfiniteScrollModule
+    NgxSpinnerModule
   ],
   providers: [
     ThemeService,

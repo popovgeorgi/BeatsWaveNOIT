@@ -26,16 +26,9 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
     private analyticsService: AnalyticsService) { }
 
   ngOnInit() {
-    this.fetchData().subscribe(res => {
-      this.totalEarnings = res.totalEarnings;
-    })
     this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
     })
-  }
-
-  private fetchData(): Observable<TotalEarningsAnalytics> {
-    return this.analyticsService.getTotalEarnings();
   }
 
   setUsers() {

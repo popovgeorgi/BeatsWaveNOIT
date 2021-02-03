@@ -6,7 +6,6 @@ import { SkinService } from '../../../../core/services/skin.service';
 import { LocalStorageService } from '../../../../core/services/local-storage.service';
 import { Config } from '../../../../config/config';
 import { DOCUMENT } from '@angular/common';
-import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -53,9 +52,19 @@ export class AsideLeftComponent implements OnInit, OnDestroy {
 
         if (this.userRole == 'Administrator') {
           this.menuItems = this.menuConfigService.adminMenuItems;
+
+          this.asideFooterButton = {
+            icon: 'ion-md-musical-note',
+            title: 'Add Music'
+          };
         }
         else if (this.userRole == 'Beatmaker') {
           this.menuItems = this.menuConfigService.beatmakerMenuItems;
+
+          this.asideFooterButton = {
+            icon: 'ion-md-musical-note',
+            title: 'Add Music'
+          };
         }
         else if (this.userRole == 'Artist') {
           this.menuItems = this.menuConfigService.artistMenuItems;

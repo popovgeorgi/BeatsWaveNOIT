@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BeatAnalytics } from '../models/analytics/BeatAnalytics';
+import { CountryAnalytics } from '../models/analytics/CountryAnalytics';
 import { LikeAnalytics } from '../models/analytics/LikeAnalytics';
 import { PurchasesAnalytics } from '../models/analytics/PurchasesAnalytics';
 import { TotalEarningsAnalytics } from '../models/analytics/TotalEarningsAnalytics';
@@ -45,5 +46,9 @@ export class AnalyticsService {
 
   getUserLikesPerMonth(): Observable<LikeAnalytics> {
     return this.http.get<LikeAnalytics>(this.analyticsPath + '/LikesByMonths');
+  }
+
+  getListenersByCountry(): Observable<Array<CountryAnalytics>> {
+    return this.http.get<Array<CountryAnalytics>>(this.analyticsPath + '/ListenersByCountry');
   }
 }

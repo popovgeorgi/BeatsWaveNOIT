@@ -30,6 +30,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('userData');
+    this.deleteToken();
     this.user.next(null);
   }
 
@@ -38,7 +39,7 @@ export class AuthService {
     if (!userData) {
       return;
     }
-    if (this.tokenExpired(userData.token)) {
+    if (this.tokenExpired(this.getToken())) {
       this.logout();
       return;
     }

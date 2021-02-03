@@ -1,8 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { CountryAnalytics } from 'src/app/core/models/analytics/CountryAnalytics';
 import { UserAnalytics } from 'src/app/core/models/analytics/UserAnalytics';
 import { AnalyticsService } from 'src/app/core/services/analytics.service';
 
@@ -21,31 +22,36 @@ export class StatisticsComponent implements OnInit {
   chartLegend = false;
   chartType = 'bar';
 
-  topCountries = [];
+  topCountries: Array<CountryAnalytics>;
 
   constructor(private analyticsService: AnalyticsService) {
     this.chartOptionsConfig();
   }
 
   ngOnInit() {
-    this.topCountriesData();
-    this.fetchData()
+    forkJoin([this.fetchData(), this.fetchTopCountries()])
       .pipe(
-        tap((res: UserAnalytics) => {
-          this.usersPerMonth = res.usersPerMonth;
+        tap((res) => {
+          this.usersPerMonth = res[0].usersPerMonth;
           this.chartDataConfig();
         })
       )
-      .subscribe(() => {}, () => {}, () => {
+      .subscribe(res => {
+        this.topCountries = res[1];
+      }, () => { }, () => {
         this.isReady.emit(true);
-      },)
+      })
   }
 
   private fetchData(): Observable<UserAnalytics> {
     return this.analyticsService.getDistinctUsers();
   }
 
-  chartOptionsConfig() {
+  private fetchTopCountries(): Observable<Array<CountryAnalytics>> {
+    return this.analyticsService.getListenersByCountry();
+  }
+
+  private chartOptionsConfig() {
     this.chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
@@ -69,7 +75,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   // This is static data replace with you data
-  chartDataConfig() {
+  private chartDataConfig() {
     this.chartData = [{
       label: 'Statistics',
       data: this.usersPerMonth,
@@ -81,22 +87,5 @@ export class StatisticsComponent implements OnInit {
     }];
 
     this.chartLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  }
-
-  topCountriesData() {
-    this.topCountries = [
-      {
-        name: 'USA',
-        data: '1,243'
-      },
-      {
-        name: 'UK',
-        data: '643'
-      },
-      {
-        name: 'Russia',
-        data: '351'
-      }
-    ];
   }
 }
