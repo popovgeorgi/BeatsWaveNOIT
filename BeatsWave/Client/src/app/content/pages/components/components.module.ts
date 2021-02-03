@@ -46,6 +46,7 @@ import { PhotoResizeComponent } from '../../partials/photo-resize/photo-resize.c
 import { GenreListingComponent } from './genres/genre-listing/genre-listing.component';
 import { SongEditComponent } from './songs/song-edit/song-edit.component';
 import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
+import { DpDatePickerModule } from 'ng2-date-picker';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -205,7 +206,7 @@ const routes: Routes = [
     ChartsModule,
     RouterModule.forChild(routes),
     FileUploadModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   providers: [
     ThemeService,
