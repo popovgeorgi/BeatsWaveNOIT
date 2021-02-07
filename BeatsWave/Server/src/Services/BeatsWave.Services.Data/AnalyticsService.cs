@@ -136,8 +136,8 @@
         {
             var monthsOfDistinctUsers = await this.playsRepository
                 .All()
-                .Where(u => u.ProducerId == userId && u.CreatedOn.Year == DateTime.Now.Year)
-                .GroupBy(k => new { k.ProducerId, k.PlayerId, k.CreatedOn.Month })
+                .Where(u => u.Beat.ProducerId == userId && u.CreatedOn.Year == DateTime.Now.Year)
+                .GroupBy(k => new { k.Beat.ProducerId, k.PlayerId, k.CreatedOn.Month })
                 .Select(p => p.Key.Month.ToString())
                 .ToListAsync();
 
@@ -218,13 +218,14 @@
         {
             var playsForUserGroupedByCountry = await this.playsRepository
                 .All()
-                .Where(p => p.ProducerId == producerId && p.Player.Country != null)
+                .Where(p => p.Beat.ProducerId == producerId && p.Player.Country != null)
                 .GroupBy(p => p.Player.Country)
                 .Select(p => new CountryListenerResponseModel
                 {
                     Country = p.Key,
                     Count = p.Count(),
                 })
+                .Take(3)
                 .ToListAsync();
 
             return playsForUserGroupedByCountry;

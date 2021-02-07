@@ -15,8 +15,5 @@
         public int BeatId { get; set; }
 
         public virtual Beat Beat { get; set; }
-
-        [Required]
-        public string ProducerId { get; set; }
     }
 }

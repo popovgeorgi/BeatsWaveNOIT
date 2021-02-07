@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AutoMapper.Configuration.Annotations;
+
     using BeatsWave.Data.Common.Repositories;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
@@ -36,7 +36,6 @@
             {
                 BeatId = beatId,
                 PlayerId = playerId,
-                ProducerId = beat.ProducerId,
             };
 
             await this.playsRepository.AddAsync(play);
