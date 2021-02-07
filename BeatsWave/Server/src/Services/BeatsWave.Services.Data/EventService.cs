@@ -29,6 +29,16 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> ByUser<T>(string managerId)
+        {
+            return await this.eventRepository
+                .All()
+                .Where(e => e.ManagerId == managerId)
+                .OrderByDescending(e => e.CreatedOn)
+                .To<T>()
+                .ToListAsync();
+        }
+
         public async Task<int> CreateAsync(string name, string imageUrl, string venue, string phoneNumber, string email, string conductDate, string description, decimal? price, string managerId)
         {
             var newEvent = new Event

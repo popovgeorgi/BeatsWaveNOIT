@@ -75,5 +75,11 @@
 
             return this.Ok();
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Manager")]
+        [Route(nameof(Mine))]
+        public async Task<IEnumerable<EventListingServiceModel>> Mine()
+            => await this.eventService.ByUser<EventListingServiceModel>(this.currentUser.GetId());
     }
 }

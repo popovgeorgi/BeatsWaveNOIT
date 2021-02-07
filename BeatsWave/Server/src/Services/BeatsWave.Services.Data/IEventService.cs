@@ -14,5 +14,7 @@
         Task<IEnumerable<T>> PremiumAsync<T>();
 
         Task<Result> DeleteAsync(int eventId, string managerId);
+
+        Task<IEnumerable<T>> ByUser<T>(string managerId);
     }
 }
