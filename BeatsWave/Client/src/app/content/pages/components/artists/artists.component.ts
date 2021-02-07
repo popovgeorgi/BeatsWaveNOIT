@@ -42,6 +42,18 @@ export class ArtistsComponent implements OnInit, AfterViewInit {
     })
   }
 
+  public onSelect(event) {
+    let option = event.target.value;
+    if (option == 0) {
+      this.artists = this.artists.sort((a, b) => {
+        return <any>new Date(b.createdOn) - <any>new Date(a.createdOn);
+      });
+    }
+    else if (option == 1) {
+      this.artists = this.artists.sort((a, b) => b.followersCount - a.followersCount);
+    }
+  }
+
   private fetchArtists(): Observable<Array<Artist>> {
     return this.artistService.getArtists(this.itemsPerPage, (this.page - 1) * this.itemsPerPage);
   }

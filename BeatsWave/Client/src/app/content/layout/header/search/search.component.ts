@@ -11,44 +11,43 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-search',
-    templateUrl: './search.component.html'
+  selector: 'app-search',
+  templateUrl: './search.component.html'
 })
 export class SearchComponent implements OnInit, OnDestroy {
 
-    searchResult$: Observable<Search>;
-    searchSubscription: Subscription;
-    beats: Beat[];
-    artists: Artist[];
-    item: string;
+  searchResult$: Observable<Search>;
+  searchSubscription: Subscription;
+  beats: Beat[];
+  artists: Artist[];
+  item: string;
 
-    constructor(private router: Router,
-                private searchService: SearchService) { }
-  ngOnDestroy(): void {
-    if(this.searchSubscription){
+  constructor(private router: Router,
+    private searchService: SearchService) { }
+
+  ngOnInit() {
+    this.searchSubscription = this.searchService.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.searchService.searchBeatsAndArtist(term).pipe(
+        tap(res => {
+          if (res) {
+            this.beats = res.beats;
+            this.artists = res.artists;
+          }
+        })
+      ))).subscribe();
+  }
+
+  goToPage(page) {
+    page = '/' + page;
+    this.searchService.hideSearchResult();
+    this.router.navigate([page]);
+  }
+
+  ngOnDestroy() {
+    if (this.searchSubscription) {
       this.searchSubscription.unsubscribe()
     }
   }
-
-    ngOnInit() {
-       this.searchSubscription =  this.searchService.searchTerms.pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        switchMap((term: string) => this.searchService.searchBeatsAndArtist(term).pipe(
-          tap(res => {
-            if(res){
-              this.beats = res.beats;
-              this.artists = res.artists;
-            }
-          })
-        ))).subscribe();
-
-    }
-
-    goToPage(page) {
-        page = '/' + page;
-        this.searchService.hideSearchResult();
-        this.router.navigate([page]);
-    }
-
 }

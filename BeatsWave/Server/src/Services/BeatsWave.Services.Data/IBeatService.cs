@@ -28,5 +28,7 @@
         Task<IEnumerable<T>> MostTrending<T>();
 
         Task<IEnumerable<T>> FeaturedAsync<T>();
+
+        Task<int> GetTotalCount();
     }
 }

@@ -18,7 +18,6 @@ export class AudioPlayerService implements OnDestroy {
 
   playSong(song: Beat) {
     this.userSubscription = this.authService.user.subscribe(user => {
-      debugger;
       if (user) {
         this.beatService.addPlay(song.id).subscribe(() => { }, err => {
           console.log(err.error);
@@ -45,7 +44,9 @@ export class AudioPlayerService implements OnDestroy {
     Amplitude.playNow(song);
   }
 
-  ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

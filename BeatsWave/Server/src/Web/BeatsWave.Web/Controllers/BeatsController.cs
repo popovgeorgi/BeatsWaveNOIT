@@ -143,9 +143,14 @@
         [HttpGet]
         [AllowAnonymous]
         [Route(nameof(ByIds))]
-
         public async Task<IEnumerable<BeatCheckoutServiceModel>> ByIds([FromQuery] int[] ids)
             => await this.beatService.ByIds<BeatCheckoutServiceModel>(ids);
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route(nameof(TotalCount))]
+        public async Task<int> TotalCount()
+            => await this.beatService.GetTotalCount();
 
         [HttpPost]
         [AllowAnonymous]

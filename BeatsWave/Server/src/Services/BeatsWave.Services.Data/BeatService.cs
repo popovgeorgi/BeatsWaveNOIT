@@ -191,6 +191,11 @@
                 .Take(20)
                 .ToListAsync();
 
+        public async Task<int> GetTotalCount()
+            => await this.beatsRepository
+                .All()
+                .CountAsync();
+
         private void ChangeBeat(Beat beat, string name, int? price, string genre, int? bpm, string description)
         {
             if (beat.Name != name && name != null)

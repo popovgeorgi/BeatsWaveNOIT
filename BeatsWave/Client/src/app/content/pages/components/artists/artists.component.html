@@ -6,10 +6,9 @@
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header">
         <span class="title">{{record}} Results</span>
-        <select class="select ml-auto" name="sort" id="sort">
-            <option value="0">Popular</option>
-            <option value="1">A-Z</option>
-            <option value="2">Z-A</option>
+        <select (change)="onSelect($event)" class="select ml-auto" name="sort" id="sort">
+          <option value="0">Newest</option>
+          <option value="1">Popular</option>
         </select>
     </div>
     <!-- End | Container header -->
