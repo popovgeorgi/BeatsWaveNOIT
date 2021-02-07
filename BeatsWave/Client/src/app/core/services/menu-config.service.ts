@@ -42,4 +42,8 @@ export class MenuConfigService {
   get beatmakerUserMenuItems() {
     return this.menuConfig.config.beatmakerUserMenu.items;
   }
+
+  get managerUserMenuItems() {
+    return this.menuConfig.config.managerUserMenu.items;
+  }
 }

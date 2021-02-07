@@ -30,15 +30,15 @@ export class PrimaryCardComponent implements OnInit {
     addFavorite() {
       this.likeService.vote(this.song.id).subscribe(res => {
         if (res == true) {
+          this.song.likesCount++;
           this.snotifyService.success('Liked ' + this.song.name);
         }
         else {
+          this.song.likesCount--;
           this.snotifyService.success('Unliked ' + this.song.name);
         }
       });
     }
-
-    getSongInfo() {}
 
     addInPlayer() {
         this.audioPlayerService.playSong(this.song);

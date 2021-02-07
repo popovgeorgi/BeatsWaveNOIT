@@ -39,6 +39,9 @@ export class ProfileComponent implements OnInit {
       if (this.userRole == 'Beatmaker' || this.userRole == 'Administrator') {
         this.userMenu = this.menuConfigService.beatmakerUserMenuItems;
       }
+      else if (this.userRole == 'Manager') {
+        this.userMenu = this.menuConfigService.managerUserMenuItems;
+      }
     }
   }
 

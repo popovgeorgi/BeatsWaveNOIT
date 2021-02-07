@@ -204,7 +204,7 @@ export class MenuConfig {
           },
           {
             title: 'My Beats',
-            icon: 'ion-md-music',
+            icon: 'ion-ios-musical-notes',
             page: '/my-beats'
           },
           {
@@ -225,6 +225,30 @@ export class MenuConfig {
             title: 'Profile',
             icon: 'ion-md-contact',
             page: '/profile'
+          },
+          {
+            title: 'Your Plan',
+            icon: 'ion-md-radio-button-off',
+            page: '/plan'
+          },
+          {
+            title: 'Settings',
+            icon: 'ion-md-settings',
+            page: '/settings'
+          }
+        ]
+      },
+      managerUserMenu: {
+        items: [
+          {
+            title: 'Profile',
+            icon: 'ion-md-contact',
+            page: '/profile'
+          },
+          {
+            title: 'My Events',
+            icon: 'ion-ios-arrow-dropleft',
+            page: '/my-events'
           },
           {
             title: 'Your Plan',

@@ -1,22 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Beat } from '../models/Beat';
+import { AuthService } from './auth.service';
 import { BeatService } from './beat.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AudioPlayerService {
+export class AudioPlayerService implements OnDestroy {
 
+  userSubscription: Subscription;
   public songPlayed = new BehaviorSubject<boolean>(false);
 
-  constructor(private beatService: BeatService) { }
+  constructor(private beatService: BeatService,
+    private authService: AuthService) { }
 
   playSong(song: Beat) {
-    this.beatService.addPlay(song.id).subscribe(() => {}, err => {
-      console.log(err.error);
-    });
+    this.userSubscription = this.authService.user.subscribe(user => {
+      debugger;
+      if (user) {
+        this.beatService.addPlay(song.id).subscribe(() => { }, err => {
+          console.log(err.error);
+        });
+      }
+    })
     this.songPlayed.next(true);
     Amplitude.removeSong(0);
     Amplitude.playNow(song);
@@ -35,5 +43,9 @@ export class AudioPlayerService {
     Amplitude.playPlaylistSongAtIndex(songIndex, listName);
     const song = playlist.songs[songIndex];
     Amplitude.playNow(song);
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
 }

@@ -67,6 +67,10 @@ export class BeatService {
   getFeatured(): Observable<Array<Beat>> {
     return this.http.get<Array<Beat>>(this.beatPath + '/Featured');
   }
+
+  getTotalCount(): Observable<number> {
+    return this.http.get<number>(this.beatPath + '/TotalCount');
+  }
 }
 
 

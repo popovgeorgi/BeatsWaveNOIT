@@ -37,7 +37,7 @@ export class MusicComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.user
       .subscribe(user => {
         if (user) {
-          forkJoin([this.fetchInitialBeats(), this.fetchUserFavourites()]).subscribe(results => {
+          forkJoin([this.fetchInitialBeats(), this.fetchUserFavourites(), this.fetchBeatsTotalCount()]).subscribe(results => {
             this.userFavourites = results[1];
             this.setFeedLikes(results[0], this.userFavourites);
 
@@ -45,22 +45,23 @@ export class MusicComponent implements OnInit, OnDestroy {
               this.hasMoreBeatsToInclude = false;
             }
             this.beats = results[0];
-            this.beatsCount = results[0].length;
+            this.beatsCount = results[2];
           }, () => { }, () => {
             this.spinner.hide('routing');
           })
         }
         else {
-          this.fetchInitialBeats()
-            .subscribe(beats => {
-              if (beats.length < this.itemsPerPage) {
-                this.hasMoreBeatsToInclude = false;
-              }
-              this.beats = beats;
-              this.beatsCount = beats.length;
-            }, () => { }, () => {
-              this.spinner.hide('routing');
-            });
+          forkJoin([this.fetchInitialBeats(), this.fetchBeatsTotalCount()]).subscribe(results => {
+            let beats = results[0];
+            if (beats.length < this.itemsPerPage) {
+              this.hasMoreBeatsToInclude = false;
+            }
+            this.beats = beats;
+            this.beatsCount = beats.length;
+            this.beatsCount = results[1];
+          }, () => { }, () => {
+            this.spinner.hide('routing');
+          });
         }
       })
 
@@ -96,8 +97,9 @@ export class MusicComponent implements OnInit, OnDestroy {
   public onSelect(event) {
     let option = event.target.value;
     if (option == 0) {
-      // must work over it
-      this.beats = this.beats.sort((a, b) => b.createdOn.getSeconds() - a.createdOn.getSeconds())
+      this.beats = this.beats.sort((a, b) => {
+        return <any>new Date(b.createdOn) - <any>new Date(a.createdOn);
+      });
     }
     else if (option == 1) {
       this.beats = this.beats.sort((a, b) => b.likesCount - a.likesCount);
@@ -110,6 +112,10 @@ export class MusicComponent implements OnInit, OnDestroy {
 
   private fetchUserFavourites(): Observable<Array<number>> {
     return this.userSerivce.getFavouritesByIds();
+  }
+
+  private fetchBeatsTotalCount(): Observable<number> {
+    return this.beatService.getTotalCount();
   }
 
   private setFeedLikes(beats: Beat[], userFavourites: Array<number>) {
