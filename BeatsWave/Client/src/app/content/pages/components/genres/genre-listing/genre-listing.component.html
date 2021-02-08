@@ -9,11 +9,10 @@
     <div class="container-header">
         <span class="title">{{beatsCount}} Results</span>
         <div class="ml-auto d-flex align-items-center">
-            <select class="select" name="sort" id="sort">
-                <option selected="">Popular</option>
-                <option value="0">A-Z</option>
-                <option value="1">Z-A</option>
-            </select>
+          <select (change)="onSelect($event)" class="select" name="sort" id="sort">
+            <option value="0">Newest</option>
+            <option value="1">Popular</option>
+        </select>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
                 <ng-template #gridViewButton>
