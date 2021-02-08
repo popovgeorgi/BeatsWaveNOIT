@@ -4,7 +4,7 @@ import { Observable, Subscription } from "rxjs";
 
 import { AudioPlayerService } from "../../../../../core/services/audio-player.service";
 import { BeatService } from "src/app/core/services/beat.service";
-import { map, mergeMap, tap } from "rxjs/operators";
+import { first, map, mergeMap, tap } from "rxjs/operators";
 import { Beat } from "src/app/core/models/Beat";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LikeService } from 'src/app/core/services/like.service';
@@ -17,7 +17,7 @@ import { SongEditComponent } from "../song-edit/song-edit.component";
   selector: "app-song-details",
   templateUrl: "./song-details.component.html",
 })
-export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SongDetailsComponent implements OnInit, OnDestroy {
 
   private userSubscription: Subscription;
   public isLiked: boolean;
@@ -49,19 +49,20 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     ).subscribe(beat => {
       this.beatDetails = beat;
+    }, () => { }, () => {
+      this.spinner.hide('routing');
     })
   }
 
   private fetchData(): Observable<Beat> {
     return this.route.params
-      .pipe(map((params) => {
-        const id = params["id"];
-        return id;
-      }),
-        mergeMap((id) => this.beatService.getBeat(id)))
-    // this.likeService.doesUserLike(this.beatId).subscribe(res => {
-    //   this.isLiked = res;
-    // });
+      .pipe(
+        first(),
+        map((params) => {
+          const id = params["id"];
+          return id;
+        }),
+        mergeMap((id) => this.beatService.getBeat(id)));
   }
 
   public edit() {
@@ -117,9 +118,5 @@ export class SongDetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   addInPlayer() {
     this.audioPlayerService.playSong(this.beatDetails);
-  }
-
-  ngAfterViewInit() {
-    this.spinner.hide('routing');
   }
 }
