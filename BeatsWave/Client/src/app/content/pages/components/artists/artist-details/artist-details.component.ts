@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize, map, mergeMap } from 'rxjs/operators';
+import { finalize, first, map, mergeMap } from 'rxjs/operators';
 
-import { AudioPlayerService } from '../../../../../core/services/audio-player.service';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Artist } from 'src/app/core/models/Artist';
 import { FollowService } from 'src/app/core/services/follow.service';
@@ -14,7 +13,7 @@ import { Observable } from 'rxjs';
   selector: 'app-artist-details',
   templateUrl: './artist-details.component.html'
 })
-export class ArtistDetailsComponent implements OnInit, AfterViewInit {
+export class ArtistDetailsComponent implements OnInit {
 
   public followers: number;
   public isFollowing: boolean;
@@ -24,7 +23,6 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private audioPlayerService: AudioPlayerService,
     private artistService: ArtistService,
     private followService: FollowService,
     private snotifyService: SnotifyService) {
@@ -36,6 +34,8 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
         this.artistDetails = res;
         this.followers = this.artistDetails.followersCount;
         this.artistBeats = this.artistDetails.beats.length;
+      }, () => { }, () => {
+        this.spinner.hide('routing');
       });
     this.followService.isArtistFollowedByCurrentUser(this.artistId).subscribe(res => {
       this.isFollowing = res;
@@ -43,11 +43,25 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
   }
 
   private fetchData(): Observable<Artist> {
-    return this.route.params.pipe(map(params => {
-      const id = params['id'];
-      this.artistId = id
-      return id;
-    }), mergeMap(id => this.artistService.getArtist(id)));
+    return this.route.params.pipe(
+      first(),
+      map(params => {
+        const id = params['id'];
+        this.artistId = id
+        return id;
+      }), mergeMap(id => this.artistService.getArtist(id)));
+  }
+
+  public onSelect(event) {
+    let option = event.target.value;
+    if (option == 0) {
+      this.artistDetails.beats = this.artistDetails.beats.sort((a, b) => {
+        return <any>new Date(b.createdOn) - <any>new Date(a.createdOn);
+      });
+    }
+    else if (option == 1) {
+      this.artistDetails.beats = this.artistDetails.beats.sort((a, b) => b.likesCount - a.likesCount);
+    }
   }
 
   public OnFollowButtonClicked() {
@@ -68,13 +82,5 @@ export class ArtistDetailsComponent implements OnInit, AfterViewInit {
         this.snotifyService.info('Unfollowed');
       })
     }
-  }
-
-  playAllSongs() {
-    this.audioPlayerService.playNowPlaylist(this.artistDetails);
-  }
-
-  ngAfterViewInit(): void {
-    this.spinner.hide('routing');
   }
 }

@@ -13,14 +13,12 @@
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{artistDetails.userName}}</h5>
                     <div class="mt-4">
-                      <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
-                              (click)="playAllSongs()">Play All</button>
+                      <button type="button" class="btn btn-pill btn-air btn-bold btn-danger">({{followers}}) Followers</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6">
                     <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
-                        <h2>{{followers}}</h2>
-                        <button class="btn btn-pill btn-air btn-danger btn-icon-only" (click)="OnFollowButtonClicked()"><i class="la la-heart-o"></i></button>
+                        <button class="btn btn-pill btn-air btn-danger btn-icon-only" (click)="OnFollowButtonClicked()"><i class="ion-md-add-circle"></i></button>
                         <button class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
                     </div>
                 </div>
@@ -30,14 +28,14 @@
     <!-- End | Section -->
 
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
-    <div class="section">
+    <div *ngIf="artistDetails" class="section">
         <!-- Begin | Line Tabs [[ Find at scss/framework/components/line-tabs.scss ]] -->
         <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="artistDetails" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="song-tab" data-toggle="tab" href="#song" role="tab"
                    aria-controls="song" aria-selected="true">Top Songs</a>
             </li>
-            <li class="nav-item">
+            <li *ngIf="artistDetails && artistDetails.profileBiography" class="nav-item">
                 <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab"
                    aria-controls="bio" aria-selected="false">Biography</a>
             </li>
@@ -49,15 +47,18 @@
         <!-- End | Line Tabs -->
 
         <!-- Begin | Tab Content -->
-        <div *ngIf="artistDetails" class="tab-content" id="artistDetailsContent">
+        <div class="tab-content" id="artistDetailsContent">
             <div class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
-                <div class="container-header">
+                <div class="artist-not-having-beats" *ngIf="artistBeats == 0">
+                    <h1>{{artistDetails.userName}} has not uploaded any beats yet.</h1>
+                </div>
+                <div *ngIf="artistBeats != 0" class="container-header">
                     <span class="title">{{artistBeats}} Results</span>
-                    <select class="select ml-auto" name="sort-1" id="sort-1">
-                        <option value="0">Popular</option>
-                        <option value="1">A-Z</option>
-                        <option value="2">Z-A</option>
+                    <select (change)="onSelect($event)" class="select ml-auto" name="sort-1" id="sort-1">
+                        <option>Sort by</option>
+                        <option value="0">Newest</option>
+                        <option value="1">Popular</option>
                     </select>
                 </div>
                 <!-- End | Container header -->
@@ -67,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="artistDetails.profileBiography != null" class="tab-pane fade" id="bio" role="tabpanel" aria-labelledby="bio-tab">
+            <div *ngIf="artistDetails.profileBiography" class="tab-pane fade artist-biography" id="bio" role="tabpanel" aria-labelledby="bio-tab">
                 <div class="bio-content" [innerHTML]="artistDetails.profileBiography"></div>
             </div>
         </div>
