@@ -22,9 +22,8 @@
                     <div class="card h-auto">
                         <div class="card-body">
                             <form [formGroup]="userProfileForm" (ngSubmit)="editProfile()" class="row">
-                                <ngx-spinner name="editProfile" [fullScreen]="false">
-                                    <p class="loading">Loading Awesomeness...</p>
-                                </ngx-spinner>
+                                <ngx-spinner bdColor = "rgba(0,0,0,0.5)" name="editProfile" size = "medium" color = "#753fdc" type = "line-scale" [fullScreen] = "false"><p style="color: white" > BeatsWave </p></ngx-spinner>
+
                                 <div class="col-xl-6 form-group">
                                     <label for="firstName" class="form-label">First Name</label>
                                     <input type="text" id="firstName" name="firstName" class="form-control"

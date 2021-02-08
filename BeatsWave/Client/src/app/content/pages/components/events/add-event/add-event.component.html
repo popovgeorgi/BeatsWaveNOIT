@@ -10,7 +10,8 @@
                     <h6 class="card-title mb-0">Add Event</h6>
                 </div>
                 <div class="card-body">
-                    <ngx-spinner name="eventPhotoUploaded" [fullScreen]="false"></ngx-spinner>
+                    <ngx-spinner bdColor = "rgba(0,0,0,0.5)" name="eventPhotoUploaded" size = "medium" color = "#753fdc" type = "line-scale" [fullScreen] = "false"><p style="color: white" > BeatsWave </p></ngx-spinner>
+
                     <form [formGroup]="eventForm" (ngSubmit)="uploadEvent()">
                         <div class="form-row form-group">
                             <label for="eventName" class="col-md-4 text-md-right col-form-label">Event Name</label>
