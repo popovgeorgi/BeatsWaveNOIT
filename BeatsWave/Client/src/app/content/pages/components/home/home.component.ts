@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
     this.topCharts = {
       title: 'Top Charts',
       subTitle: 'Listen top chart',
-      page: '/songs',
+      page: '/music',
       items: topCharts
     };
   }
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
     this.newRelease = {
       title: 'New Releases',
       subTitle: 'Listen recently release music',
-      page: '/songs',
+      page: '/music',
       items: newReleases
     }
 

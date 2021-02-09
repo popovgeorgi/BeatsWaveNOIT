@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { Beat } from 'src/app/core/models/Beat';
+import { User } from 'src/app/core/models/User';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { UserService } from 'src/app/core/services/user.service';
 
