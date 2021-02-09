@@ -1,6 +1,5 @@
 <!-- Page Banner [[ Find at scss/base/core.scss ]] -->
 <div class="banner bg-song"></div>
-
 <!-- Begin | Main Container [[ Find at scss/base/core.scss ]] -->
 <div class="main-container">
     <div *ngIf="beatDetails" class="row section text-center text-md-left">
@@ -22,6 +21,7 @@
                     <div class="pt-3 pt-lg-0 text-lg-right btn-inline">
                         <button *ngIf="isUserOwner" type="button" class="btn btn-pill btn-air btn-warning btn-icon-only" (click)="edit()"><ion-icon class="icon-details" size='medium' name="create-outline"></ion-icon></button>
                         <button *ngIf="isUserOwner" type="button" class="btn btn-pill btn-air btn-danger btn-icon-only" (click)="delete()"><ion-icon class="icon-details" size='medium' name="trash-outline"></ion-icon></button>
+                        <button *ngIf="!isUserOwner" type="button" class="btn btn-pill btn-air btn-warning btn-icon-only" (click)="contact()"><ion-icon class="icon-details" size='medium' name="cash-outline"></ion-icon></button>
                         <button type="button" class="btn btn-pill btn-air btn-danger btn-icon-only" (click)="vote()"><i class="la la-heart-o"></i></button>
                         <button type="button" class="btn btn-pill btn-air btn-brand btn-icon-only"><i class="la la-share-alt"></i></button>
                     </div>

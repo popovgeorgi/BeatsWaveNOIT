@@ -55,7 +55,7 @@
             <input type="text" formControlName="description" id="description" class="form-control"
                    placeholder="Description">
         </div>
-              <button type="submit" class="btn btn-block btn-bold btn-air btn-info load-page">Edit</button>
+              <button type="submit" class="btn btn-block btn-bold btn-air btn-info load-page" [disabled]="!songEditForm.valid">Edit</button>
           </form>
       </div>
   </div>

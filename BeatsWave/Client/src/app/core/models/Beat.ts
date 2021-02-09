@@ -12,5 +12,7 @@ export interface Beat {
     likesCount: number,
     commentsCount: number,
     isLiked: boolean,
-    createdOn: Date
+    createdOn: Date,
+    producerProfileMainPhotoUrl: string,
+    producerEmail: string
 }

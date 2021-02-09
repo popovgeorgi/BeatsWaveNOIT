@@ -46,6 +46,7 @@ import { PhotoResizeComponent } from '../../partials/photo-resize/photo-resize.c
 import { GenreListingComponent } from './genres/genre-listing/genre-listing.component';
 import { SongEditComponent } from './songs/song-edit/song-edit.component';
 import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
+import { SongBuyComponent } from './songs/song-buy/song-buy.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -188,11 +189,13 @@ const routes: Routes = [
     ReferralsComponent,
     UserMyBeatsComponent,
     GenreListingComponent,
-    SongEditComponent
+    SongEditComponent,
+    SongBuyComponent
   ],
   entryComponents: [
     PhotoResizeComponent,
-    SongEditComponent
+    SongEditComponent,
+    SongBuyComponent
   ],
   imports: [
     ReactiveFormsModule,

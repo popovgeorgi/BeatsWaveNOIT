@@ -12,6 +12,7 @@ import { SnotifyService } from 'ng-snotify';
 import { AuthService } from "src/app/core/services/auth.service";
 import { SimpleModalService } from "ngx-simple-modal";
 import { SongEditComponent } from "../song-edit/song-edit.component";
+import { SongBuyComponent } from "../song-buy/song-buy.component";
 
 @Component({
   selector: "app-song-details",
@@ -63,6 +64,15 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
           return id;
         }),
         mergeMap((id) => this.beatService.getBeat(id)));
+  }
+
+  public contact() {
+    const modal = this.simpleModalService.addModal(SongBuyComponent, { data: this.beatDetails })
+      .subscribe((isConfirmed) => {
+        if (isConfirmed) {
+        } else {
+        }
+      });
   }
 
   public edit() {

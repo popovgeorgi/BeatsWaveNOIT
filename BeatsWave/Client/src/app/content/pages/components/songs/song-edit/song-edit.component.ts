@@ -3,15 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Beat } from 'src/app/core/models/Beat';
+import { EditBeat } from 'src/app/core/models/modals/EditBeat';
 import { BeatService } from 'src/app/core/services/beat.service';
 
 @Component({
   selector: 'app-song-edit',
   templateUrl: './song-edit.component.html'
 })
-export class SongEditComponent extends SimpleModalComponent<any, any> implements OnInit {
+export class SongEditComponent extends SimpleModalComponent<EditBeat, boolean> implements EditBeat ,OnInit {
 
-  @Input() data: Beat;
+  data: Beat;
   public songEditForm: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -46,6 +47,7 @@ export class SongEditComponent extends SimpleModalComponent<any, any> implements
     this.spinner.show('beatEditter');
     this.beatService.updateBeat(this.data.id ,this.songEditForm.value).subscribe(() => {
     }, () => {}, () => {
+      this.close();
       this.spinner.hide('beatEditter');
     })
 

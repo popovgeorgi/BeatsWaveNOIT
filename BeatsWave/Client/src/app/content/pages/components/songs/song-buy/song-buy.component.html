@@ -1,0 +1,25 @@
+<div class="modal-dialog theme-dialog" role="document">
+  <div class="modal-content">
+      <ngx-spinner bdColor = "rgba(0,0,0,0.5)" name="onSendEmail" size = "medium" color = "#753fdc" type = "line-scale" [fullScreen] = "false"><p style="color: white" > BeatsWave </p></ngx-spinner>
+
+      <div class="modal-header border-bottom-0 pb-0">
+          <button type="button" class="close" (click)="close()">&times;</button>
+      </div>
+      <h6 class="modal-title text-center mb-3">Contact the producer of <strong>{{data.name}}</strong> and keep on the correspondence via email.</h6>
+      <img class="img-edit-beat" src="{{data.producerProfileMainPhotoUrl}}" />
+      <div class="modal-body">
+        <form [formGroup]="contactForm" class="mx-4 pb-5" (ngSubmit)="send()">
+          <div class="form-group">
+            <label for="genre" class="text-md-right col-form-label">Request message</label>
+              <input [ngClass]="{'red-border-solid': htmlContent.errors?.required && htmlContent.touched}" type="text" formControlName="htmlContent" id="request" class="form-control"
+                     placeholder="message">
+                     <div *ngIf="htmlContent.errors?.required && htmlContent.touched" class="invalid-feedback"
+                     ngClass="d-block">
+                     <span>This field is required</span>
+                     </div>
+          </div>
+          <button type="submit" class="btn btn-block btn-bold btn-air btn-info load-page" [disabled]="!contactForm.valid">Send</button>
+        </form>
+      </div>
+  </div>
+</div>
