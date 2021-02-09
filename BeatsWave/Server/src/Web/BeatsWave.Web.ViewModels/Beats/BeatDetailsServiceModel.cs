@@ -24,6 +24,10 @@
 
         public string ProducerUserName { get; set; }
 
+        public string ProducerEmail { get; set; }
+
+        public string ProducerProfileMainPhotoUrl { get; set; }
+
         public string ProducerId { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
