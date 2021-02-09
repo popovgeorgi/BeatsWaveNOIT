@@ -47,9 +47,9 @@
             return services;
         }
 
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
             => services
-            .AddTransient<IEmailSender, NullMessageSender>()
+            .AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration.GetSection("SendGrid:AccessKey").Value))
             .AddTransient<IIdentityService, IdentityService>()
             .AddTransient<IProfileService, ProfileService>()
             .AddTransient<ICurrentUserService, CurrentUserService>()

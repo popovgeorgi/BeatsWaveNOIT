@@ -12,5 +12,9 @@
         Task<int[]> GetLikedBeatsByIdsAsync(string userId);
 
         Task SetInitialValuesAsync(string id, string displayName, string profilePicture, string ipAddress, string secretKey);
+
+        Task<bool> CheckIfUserEmailExists(string email);
+
+        Task<string> GetUserEmailById(string id);
     }
 }

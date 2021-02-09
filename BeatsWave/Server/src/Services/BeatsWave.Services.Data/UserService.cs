@@ -23,6 +23,11 @@
             this.likeRepository = likeRepository;
         }
 
+        public async Task<bool> CheckIfUserEmailExists(string email)
+            => await this.userRepository
+                .All()
+                .AnyAsync(u => u.Email == email);
+
         public async Task<T> GetInfo<T>(string id)
             => await this.userRepository
                 .All()
@@ -48,6 +53,13 @@
                 .Select(l => l.BeatId)
                 .ToArrayAsync();
         }
+
+        public async Task<string> GetUserEmailById(string id)
+            => await this.userRepository
+                .All()
+                .Where(u => u.Id == id)
+                .Select(u => u.Email)
+                .FirstOrDefaultAsync();
 
         public async Task SetInitialValuesAsync(string id, string displayName, string profilePicture, string ipAddress, string secretKey)
         {
