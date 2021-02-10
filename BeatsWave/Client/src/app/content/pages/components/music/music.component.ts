@@ -133,5 +133,6 @@ export class MusicComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSubscription.unsubscribe();
+    this.feedHubService.stopConnection();
   }
 }

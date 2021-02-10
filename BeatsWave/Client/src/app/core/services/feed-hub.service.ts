@@ -25,6 +25,10 @@ export class FeedHubService {
       .catch(err => console.log('Error while starting connection: ' + err));
   }
 
+  public stopConnection() {
+    this.hubConnection.stop();
+  }
+
   public registerBeatEvents() {
     this.hubConnection.on("NewBeatReceived", id => {
       this.resultReceived.emit(id);
