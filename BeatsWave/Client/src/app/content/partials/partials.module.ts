@@ -17,7 +17,6 @@ import { ThemeSettingsComponent } from './theme-settings/theme-settings.componen
 import { CountdownComponent } from './countdown/countdown.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { PhotoResizeComponent } from './photo-resize/photo-resize.component';
 
 @NgModule({
     declarations: [
@@ -32,8 +31,7 @@ import { PhotoResizeComponent } from './photo-resize/photo-resize.component';
         ImageCardComponent,
         CommentComponent,
         ThemeSettingsComponent,
-        CountdownComponent,
-        PhotoResizeComponent
+        CountdownComponent
     ],
     exports: [
         PrimaryCardComponent,
@@ -45,8 +43,7 @@ import { PhotoResizeComponent } from './photo-resize/photo-resize.component';
         SongHorizontalComponent,
         ImageCardComponent,
         CommentComponent,
-        ThemeSettingsComponent,
-        PhotoResizeComponent
+        ThemeSettingsComponent
     ],
     imports: [
         CommonModule,

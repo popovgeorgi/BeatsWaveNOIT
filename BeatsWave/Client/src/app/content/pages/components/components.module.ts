@@ -42,7 +42,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { UserMyBeatsComponent } from './user/user-my-beats/user-my-beats.component';
 import { AuthGuardService } from 'src/app/core/services/auth-guard.service';
 import { Role } from 'src/app/core/models/Role';
-import { PhotoResizeComponent } from '../../partials/photo-resize/photo-resize.component';
 import { GenreListingComponent } from './genres/genre-listing/genre-listing.component';
 import { SongEditComponent } from './songs/song-edit/song-edit.component';
 import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
@@ -193,7 +192,6 @@ const routes: Routes = [
     SongBuyComponent
   ],
   entryComponents: [
-    PhotoResizeComponent,
     SongEditComponent,
     SongBuyComponent
   ],

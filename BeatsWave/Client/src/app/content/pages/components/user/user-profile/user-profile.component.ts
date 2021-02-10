@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProfileService } from 'src/app/core/services/profile.service';
@@ -6,7 +6,6 @@ import { Profile } from 'src/app/core/models/Profile';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SimpleModalService } from 'ngx-simple-modal';
-import { PhotoResizeComponent } from 'src/app/content/partials/photo-resize/photo-resize.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -55,7 +54,7 @@ export class UserProfileComponent implements OnInit {
     this.userSubscription = this.authService.user.value.subscription;
   }
 
-  onPhotoUploading() {
+  onPhotoUploading(event) {
     this.spinner.show("photoUploader");
   }
 
@@ -69,15 +68,5 @@ export class UserProfileComponent implements OnInit {
     this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
       this.spinner.hide("editProfile");
     })
-  }
-
-  public openImageResizeModal() {
-    const modal = this.simpleModalService.addModal(PhotoResizeComponent, {})
-      .subscribe((isConfirmed) => {
-        if (isConfirmed) {
-          modal.remove;
-        } else {
-        }
-      });
   }
 }
