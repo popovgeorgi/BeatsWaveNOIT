@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
+    using System.Text;
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
