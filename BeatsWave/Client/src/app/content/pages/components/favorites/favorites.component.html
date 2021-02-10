@@ -7,11 +7,10 @@
     <div class="container-header">
         <span *ngIf="favoriteSongs" class="title">{{favoriteSongs.length}} Results</span>
         <div class="ml-auto d-flex align-items-center">
-            <select class="select" name="sort" id="sort">
-                <option selected="">Popular</option>
-                <option value="0">A-Z</option>
-                <option value="1">Z-A</option>
-            </select>
+            <select (change)="onSelect($event)" class="select" name="sort" id="sort">
+              <option value="0">Newest</option>
+              <option value="1">Popular</option>
+          </select>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
                 <ng-template #gridViewButton>
@@ -24,6 +23,16 @@
 
     <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
     <div class="section">
+        <div *ngIf="favoriteSongs && favoriteSongs.length == 0">
+          <div class="txt-center">
+            <img class="h-300" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/68d5a28b-6cc5-4134-a3a1-c918c313a2c7/d5wr0ji-163d8605-3912-440a-95fc-da8109329c50.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvNjhkNWEyOGItNmNjNS00MTM0LWEzYTEtYzkxOGMzMTNhMmM3XC9kNXdyMGppLTE2M2Q4NjA1LTM5MTItNDQwYS05NWZjLWRhODEwOTMyOWM1MC5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.ZECNEwwoLRbpSkU9paLD8uwsOyx2Zu-Eu_dRzbc2I-Y" />
+          </div>
+          <h1 class="txt-h">You have not liked any beats yet</h1>
+          <p class="txt-p">Explore the feed</p>
+          <div class="favourites-button-empty">
+            <button (click)="goToFeed()" class="btn btn-primary btn-air btn-empty">To The Feed</button>
+          </div>
+        </div>
         <div *ngIf="favoriteSongs" class="row custom-card-list">
             <ng-container *ngIf="gridView; else listView">
                 <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let beat of favoriteSongs">

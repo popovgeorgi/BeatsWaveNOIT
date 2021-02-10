@@ -54,7 +54,7 @@ export class UserProfileComponent implements OnInit {
     this.userSubscription = this.authService.user.value.subscription;
   }
 
-  onPhotoUploading(event) {
+  onPhotoUploading() {
     this.spinner.show("photoUploader");
   }
 

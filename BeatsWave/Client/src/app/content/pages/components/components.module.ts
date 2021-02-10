@@ -19,9 +19,7 @@ import { ArtistsComponent } from './artists/artists.component';
 import { ArtistDetailsComponent } from './artists/artist-details/artist-details.component';
 import { SongsComponent } from './songs/songs.component';
 import { SongDetailsComponent } from './songs/song-details/song-details.component';
-import { StationsComponent } from './stations/stations.component';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { HistoryComponent } from './history/history.component';
 import { EventsComponent } from './events/events.component';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { AddEventComponent } from './events/add-event/add-event.component';
@@ -29,8 +27,6 @@ import { AddMusicComponent } from './songs/add-music/add-music.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UserPlanComponent } from './user/user-plan/user-plan.component';
 import { SettingsComponent } from './user/settings/settings.component';
-import { AlbumsComponent } from './albums/albums.component';
-import { AlbumDetailsComponent } from './albums/album-details/album-details.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { TotalUserComponent } from './analytics/total-user/total-user.component';
 import { TotalSongsComponent } from './analytics/total-songs/total-songs.component';
@@ -93,14 +89,6 @@ const routes: Routes = [
         component: SongDetailsComponent
       },
       {
-        path: 'albums',
-        component: AlbumsComponent
-      },
-      {
-        path: 'album/:id/details',
-        component: AlbumDetailsComponent
-      },
-      {
         path: 'add-music',
         component: AddMusicComponent,
         canActivate: [AuthGuardService],
@@ -116,10 +104,6 @@ const routes: Routes = [
         path: 'favorites',
         component: FavoritesComponent,
         canActivate: [AuthGuardService]
-      },
-      {
-        path: 'history',
-        component: HistoryComponent
       },
       {
         path: 'events',
@@ -168,9 +152,7 @@ const routes: Routes = [
     ArtistDetailsComponent,
     SongsComponent,
     SongDetailsComponent,
-    StationsComponent,
     FavoritesComponent,
-    HistoryComponent,
     EventsComponent,
     EventDetailsComponent,
     AddEventComponent,
@@ -178,8 +160,6 @@ const routes: Routes = [
     UserProfileComponent,
     UserPlanComponent,
     SettingsComponent,
-    AlbumsComponent,
-    AlbumDetailsComponent,
     AnalyticsComponent,
     TotalUserComponent,
     TotalSongsComponent,

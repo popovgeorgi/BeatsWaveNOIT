@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { Beat } from 'src/app/core/models/Beat';
@@ -14,10 +15,10 @@ export class UserMyBeatsComponent implements OnInit {
   public beats: Beat[];
   public beatsCount: number;
   public gridView = false;
-  private takeBeatsCount: number = 20;
 
   constructor(private spinner: NgxSpinnerService,
-    private beatService: BeatService) { }
+    private beatService: BeatService,
+    private router: Router) { }
 
   ngOnInit() {
     this.fetchBeats().subscribe(beats => {
@@ -26,6 +27,10 @@ export class UserMyBeatsComponent implements OnInit {
     }, () => { }, () => {
       this.spinner.hide('routing')
     });
+  }
+
+  public goToUpload() {
+    this.router.navigate(['/add-music']);
   }
 
   private fetchBeats(): Observable<Array<Beat>> {
