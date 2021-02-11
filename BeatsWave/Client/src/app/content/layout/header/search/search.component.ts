@@ -1,13 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
-import { ArtistsConfigService } from '../../../../core/services/artists-config.service';
 import { SearchService } from '../../../../core/services/search.service';
 import { Search } from 'src/app/core/models/Search';
 import { Beat } from 'src/app/core/models/Beat';
 import { Artist } from 'src/app/core/models/Artist';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -16,6 +14,8 @@ import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/op
 })
 export class SearchComponent implements OnInit, OnDestroy {
 
+  noFoundArtists: boolean = false;
+  noFoundBeats: boolean = false;
   searchResult$: Observable<Search>;
   searchSubscription: Subscription;
   beats: Beat[];
@@ -32,6 +32,18 @@ export class SearchComponent implements OnInit, OnDestroy {
       switchMap((term: string) => this.searchService.searchBeatsAndArtist(term).pipe(
         tap(res => {
           if (res) {
+            if (res.beats.length == 0) {
+              this.noFoundBeats = true;
+            }
+            else {
+              this.noFoundBeats = false;
+            }
+            if (res.artists.length == 0) {
+              this.noFoundArtists = true;
+            }
+            else {
+              this.noFoundArtists = false;
+            }
             this.beats = res.beats;
             this.artists = res.artists;
           }
