@@ -42,6 +42,7 @@ import { GenreListingComponent } from './genres/genre-listing/genre-listing.comp
 import { SongEditComponent } from './songs/song-edit/song-edit.component';
 import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
 import { SongBuyComponent } from './songs/song-buy/song-buy.component';
+import { UserPrivacyComponent } from './user/user-privacy/user-privacy.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -137,6 +138,11 @@ const routes: Routes = [
         path: 'my-beats',
         component: UserMyBeatsComponent,
         canActivate: [AuthGuardService]
+      },
+      {
+        path: 'privacy',
+        component: UserPrivacyComponent,
+        canActivate: [AuthGuardService]
       }
     ]
   },
@@ -169,7 +175,8 @@ const routes: Routes = [
     UserMyBeatsComponent,
     GenreListingComponent,
     SongEditComponent,
-    SongBuyComponent
+    SongBuyComponent,
+    UserPrivacyComponent
   ],
   entryComponents: [
     SongEditComponent,

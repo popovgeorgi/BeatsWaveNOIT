@@ -213,6 +213,11 @@ export class MenuConfig {
             page: '/plan'
           },
           {
+            title: 'Privacy',
+            icon: 'ion-ios-lock',
+            page: '/privacy'
+          },
+          {
             title: 'Settings',
             icon: 'ion-md-settings',
             page: '/settings'
@@ -230,6 +235,11 @@ export class MenuConfig {
             title: 'Your Plan',
             icon: 'ion-md-radio-button-off',
             page: '/plan'
+          },
+          {
+            title: 'Privacy',
+            icon: 'ion-ios-lock',
+            page: '/privacy'
           },
           {
             title: 'Settings',
@@ -254,6 +264,11 @@ export class MenuConfig {
             title: 'Your Plan',
             icon: 'ion-md-radio-button-off',
             page: '/plan'
+          },
+          {
+            title: 'Privacy',
+            icon: 'ion-ios-lock',
+            page: '/privacy'
           },
           {
             title: 'Settings',

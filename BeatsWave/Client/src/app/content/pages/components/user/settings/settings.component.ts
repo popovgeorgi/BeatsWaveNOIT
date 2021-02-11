@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { LoadingService } from '../../../../../core/services/loading.service';
 
@@ -10,7 +11,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
 
     settings: any;
 
-    constructor(private loadingService: LoadingService) { }
+    constructor(private spinner: NgxSpinnerService) { }
 
     ngOnInit() {
         // This is static data just to display replace with your data
@@ -25,7 +26,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.loadingService.stopLoading();
+        this.spinner.hide('routing');
     }
 
 }
