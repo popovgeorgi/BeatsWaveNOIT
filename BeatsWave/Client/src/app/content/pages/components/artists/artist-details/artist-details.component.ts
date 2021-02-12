@@ -1,20 +1,23 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize, first, map, mergeMap } from 'rxjs/operators';
+import { first, map, mergeMap, tap } from 'rxjs/operators';
 
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Artist } from 'src/app/core/models/Artist';
 import { FollowService } from 'src/app/core/services/follow.service';
 import { SnotifyService } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-artist-details',
   templateUrl: './artist-details.component.html'
 })
-export class ArtistDetailsComponent implements OnInit {
+export class ArtistDetailsComponent implements OnInit, OnDestroy {
 
+  userSubscription: Subscription;
+  public isLoggedIn: boolean = false;
   public followers: number;
   public isFollowing: boolean;
   public artistDetails: Artist;
@@ -25,24 +28,51 @@ export class ArtistDetailsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private artistService: ArtistService,
     private followService: FollowService,
-    private snotifyService: SnotifyService) {
+    private snotifyService: SnotifyService,
+    private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.fetchData()
-      .subscribe(res => {
-        this.artistDetails = res;
-        this.followers = this.artistDetails.followersCount;
-        this.artistBeats = this.artistDetails.beats.length;
-      }, () => { }, () => {
-        this.spinner.hide('routing');
-      });
-    this.followService.isArtistFollowedByCurrentUser(this.artistId).subscribe(res => {
-      this.isFollowing = res;
+    this.userSubscription = this.authService.user.subscribe(user => {
+      if (user) {
+        this.isLoggedIn = true;
+        this.fetchForLoggedUser().subscribe(res => {
+          this.isFollowing = res;
+        }, () => {}, () => {
+          this.spinner.hide('routing');
+        })
+      }
+      else {
+        this.fetchArtist()
+          .subscribe(res => {
+            this.artistDetails = res;
+            this.followers = this.artistDetails.followersCount;
+            this.artistBeats = this.artistDetails.beats.length;
+          }, () => { }, () => {
+            this.spinner.hide('routing');
+          });
+      }
     })
   }
 
-  private fetchData(): Observable<Artist> {
+  private fetchForLoggedUser(): Observable<boolean> {
+    return this.fetchArtist()
+      .pipe(
+        tap(artist => {
+          this.artistDetails = artist;
+          this.followers = this.artistDetails.followersCount;
+          this.artistBeats = this.artistDetails.beats.length;
+        }),
+        mergeMap((value, index) => {
+          return this.fetchIfUserIsFollowed();
+        }));
+  }
+
+  private fetchIfUserIsFollowed(): Observable<boolean> {
+    return this.followService.isArtistFollowedByCurrentUser(this.artistId);
+  }
+
+  private fetchArtist(): Observable<Artist> {
     return this.route.params.pipe(
       first(),
       map(params => {
@@ -65,7 +95,12 @@ export class ArtistDetailsComponent implements OnInit {
   }
 
   public OnFollowButtonClicked() {
-    if (!this.isFollowing) {
+    if (!this.isLoggedIn) {
+      this.snotifyService.error('You should be logged in!', '', {
+        showProgressBar: false
+      });
+    }
+    else if (this.isFollowing == false) {
       this.followService.follow(this.artistId).subscribe(res => {
         this.isFollowing = true;
         this.followers = this.followers + 1;
@@ -81,6 +116,12 @@ export class ArtistDetailsComponent implements OnInit {
         this.followers = this.followers - 1;
         this.snotifyService.info('Unfollowed');
       })
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
     }
   }
 }
