@@ -73,6 +73,8 @@ export class ProfileComponent implements OnInit {
     this.authService.logout();
     this.isLogout = true;
     this.router.navigate(['/']);
-    this.snotifyService.success('You successfully logged out!');
+    this.snotifyService.info('You successfully logged out!', '', {
+      showProgressBar: false
+    });
   }
 }

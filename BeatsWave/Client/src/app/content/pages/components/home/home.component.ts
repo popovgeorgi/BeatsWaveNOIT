@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
   initTopCharts(topCharts: Beat[]) {
     this.topCharts = {
       title: 'Top Charts',
-      subTitle: 'Listen top chart',
+      subTitle: 'Listen top charts',
       page: '/music',
       items: topCharts
     };
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
   initNewRelease(newReleases: Beat[]) {
     this.newRelease = {
       title: 'New Releases',
-      subTitle: 'Listen recently release music',
+      subTitle: 'Listen recently released music',
       page: '/music',
       items: newReleases
     }
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
   initArtists(featuredArtists: Artist[]) {
     this.artists = {
       title: 'Featured Artists',
-      subTitle: 'Select you best to listen',
+      subTitle: 'Select the featured artists',
       page: '/artists',
       items: featuredArtists
     };
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
   initGenres() {
     this.genres = {
       title: 'Genres',
-      subTitle: 'Select you genre',
+      subTitle: 'Select your genre',
       page: '/genres',
       items: this.genresConfigService.genresList
     };

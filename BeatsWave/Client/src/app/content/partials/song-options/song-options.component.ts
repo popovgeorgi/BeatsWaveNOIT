@@ -25,11 +25,15 @@ export class SongOptionsComponent implements OnInit {
   addFavorite() {
     this.likeService.vote(this.song.id).subscribe(res => {
       if (res == true) {
-        this.snotifyService.success('Liked ' + this.song.name);
+        this.snotifyService.info('Liked ' + this.song.name, '', {
+          showProgressBar: false
+        });
         this.onVote.emit(true);
       }
       else {
-        this.snotifyService.success('Unliked ' + this.song.name);
+        this.snotifyService.info('Unliked ' + this.song.name, '', {
+          showProgressBar: false
+        });
         this.onVote.emit(false);
       }
     });

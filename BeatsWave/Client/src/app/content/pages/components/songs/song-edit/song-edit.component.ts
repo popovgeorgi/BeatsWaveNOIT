@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SnotifyService } from 'ng-snotify';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Beat } from 'src/app/core/models/Beat';
@@ -17,7 +18,8 @@ export class SongEditComponent extends SimpleModalComponent<EditBeat, boolean> i
 
   constructor(private fb: FormBuilder,
     private spinner: NgxSpinnerService,
-    private beatService: BeatService) {
+    private beatService: BeatService,
+    private snotifyService: SnotifyService) {
     super();
   }
 
@@ -46,11 +48,15 @@ export class SongEditComponent extends SimpleModalComponent<EditBeat, boolean> i
   public edit() {
     this.spinner.show('beatEditter');
     this.beatService.updateBeat(this.data.id ,this.songEditForm.value).subscribe(() => {
-    }, () => {}, () => {
+    }, () => {
+      this.snotifyService.error('You have got an error within your data!');
       this.close();
+    }, () => {
+      this.snotifyService.info('Successfully edited!', '', {
+        showProgressBar: false
+      });
       this.spinner.hide('beatEditter');
+      this.close();
     })
-
-    this.close();
   }
 }

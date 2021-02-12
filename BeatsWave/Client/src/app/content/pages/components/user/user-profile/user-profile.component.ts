@@ -5,8 +5,8 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 import { Profile } from 'src/app/core/models/Profile';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SimpleModalService } from 'ngx-simple-modal';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-user-profile',
@@ -25,8 +25,8 @@ export class UserProfileComponent implements OnInit {
     private fb: FormBuilder,
     private profileService: ProfileService,
     private spinner: NgxSpinnerService,
-    private simpleModalService: SimpleModalService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private snotifyService: SnotifyService) {
     this.userProfileForm = this.fb.group({
       'firstName': [''],
       'lastName': [''],
@@ -61,12 +61,18 @@ export class UserProfileComponent implements OnInit {
   onPhotoUploaded(e) {
     this.userPicture = e.originalEvent.body.uri;
     this.spinner.hide("photoUploader");
+    this.snotifyService.info('Successfully uploaded', '', {
+      showProgressBar: false
+    });
   }
 
   public editProfile() {
     this.spinner.show("editProfile");
-    this.profileService.editProfile(this.userProfileForm.value).subscribe(res => {
+    this.profileService.editProfile(this.userProfileForm.value).subscribe(res => { }, () => { }, () => {
       this.spinner.hide("editProfile");
+      this.snotifyService.info('Successfully updated', '', {
+        showProgressBar: false
+      });
     })
   }
 }

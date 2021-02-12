@@ -47,7 +47,9 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     this.authService.login(this.login.value).subscribe(data => {
       this.authService.saveToken(data['token']);
       this.spinner.hide('loginModal');
-      this.snotifyService.success('You are successfully logged in!');
+      this.snotifyService.info('You are successfully logged in!', '', {
+        showProgressBar: false
+      });
     },
       error => {
         this.spinner.hide('loginModal');

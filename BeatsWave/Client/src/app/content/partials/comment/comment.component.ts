@@ -51,7 +51,9 @@ export class CommentComponent implements OnInit {
     this.commentService.commentBeat(this.commentForm.value).subscribe(res => {
       this.comments.push(res)
     }, () => {}, () => {
-      this.snotifyService.info('Successfully comented');
+      this.snotifyService.info('Successfully comented', '', {
+        showProgressBar: false
+      });
       this.spinner.hide('comment');
       this.commentForm.reset();
     })
@@ -67,11 +69,22 @@ export class CommentComponent implements OnInit {
     this.parentId = parentId;
   }
 
-  public onReply() {
+  public onReply(comment: Comment) {
     this.replyForm.value.beatId = this.beatId;
     this.replyForm.value.parentId = this.parentId;
-    this.commentService.commentBeat(this.replyForm.value).subscribe(res => { }, () => { }, () => {
-      this.snotifyService.info('Successfully replied');
+    const index = this.comments.indexOf(comment);
+
+    this.commentService.commentBeat(this.replyForm.value).subscribe(res => {
+      if  (this.comments[index].children == undefined) {
+        this.comments[index].children = Array<Comment>();
+      }
+      this.comments[index].children.push(res);
+     }, () => { }, () => {
+      this.snotifyService.info('Successfully replied', '', {
+        showProgressBar: false
+      });
+      this.replyClicked = false;
+      this.replyForm.reset();
     })
   }
 }

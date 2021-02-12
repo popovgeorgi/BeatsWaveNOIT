@@ -6,41 +6,45 @@ import { LikeService } from 'src/app/core/services/like.service';
 import { SnotifyService } from 'ng-snotify';
 
 @Component({
-    selector: 'app-primary-card',
-    templateUrl: './primary-card.component.html'
+  selector: 'app-primary-card',
+  templateUrl: './primary-card.component.html'
 })
 export class PrimaryCardComponent implements OnInit {
 
-    @Input() isUserOwner: boolean = false;
-    @Input() song: Beat;
-    @Input() showOptions = false;
-    @Input() imageBorderRadiusClass = 'card-img--radius-lg';
+  @Input() isUserOwner: boolean = false;
+  @Input() song: Beat;
+  @Input() showOptions = false;
+  @Input() imageBorderRadiusClass = 'card-img--radius-lg';
 
-    classes = '';
+  classes = '';
 
-    constructor(private audioPlayerService: AudioPlayerService,
-      private likeService: LikeService,
-      private snotifyService: SnotifyService) {
-    }
+  constructor(private audioPlayerService: AudioPlayerService,
+    private likeService: LikeService,
+    private snotifyService: SnotifyService) {
+  }
 
-    ngOnInit() {
-        this.classes = 'custom-card--img ' + this.imageBorderRadiusClass;
-    }
+  ngOnInit() {
+    this.classes = 'custom-card--img ' + this.imageBorderRadiusClass;
+  }
 
-    addFavorite() {
-      this.likeService.vote(this.song.id).subscribe(res => {
-        if (res == true) {
-          this.song.likesCount++;
-          this.snotifyService.success('Liked ' + this.song.name);
-        }
-        else {
-          this.song.likesCount--;
-          this.snotifyService.success('Unliked ' + this.song.name);
-        }
-      });
-    }
+  addFavorite() {
+    this.likeService.vote(this.song.id).subscribe(res => {
+      if (res == true) {
+        this.song.likesCount++;
+        this.snotifyService.info('Liked ' + this.song.name, '', {
+          showProgressBar: false
+        });
+      }
+      else {
+        this.song.likesCount--;
+        this.snotifyService.info('Unliked ' + this.song.name, '', {
+          showProgressBar: false
+        });
+      }
+    });
+  }
 
-    addInPlayer() {
-        this.audioPlayerService.playSong(this.song);
-    }
+  addInPlayer() {
+    this.audioPlayerService.playSong(this.song);
+  }
 }

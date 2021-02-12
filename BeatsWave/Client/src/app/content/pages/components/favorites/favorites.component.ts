@@ -51,7 +51,6 @@ export class FavoritesComponent implements OnInit {
     return this.userService.getFavourites()
   }
 
-  // Initialize song object for section
   initSongs() {
     this.songs = {
       title: 'Also Like',

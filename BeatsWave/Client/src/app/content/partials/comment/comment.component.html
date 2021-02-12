@@ -1,6 +1,6 @@
 <!-- Begin | Section [[ Find at scss/base/core.scss ]] -->
 <div class="section">
-  <ngx-spinner name="comment" [fullScreen]="false"></ngx-spinner>
+  <ngx-spinner bdColor = "rgba(0,0,0,0.5)" name="comment" size = "medium" color = "#753fdc" type = "line-scale" [fullScreen] = "false"><p style="color: white" > BeatsWave </p></ngx-spinner>
     <div class="mb-4">
 
     <div class="comment" *ngIf="comments?.length == 0">
@@ -21,9 +21,9 @@
         <div class="pl-3 flex-grow-1 flex-basis-0">
             <span class="d-block font-weight-bold mb-1">{{comment.userUserName}}</span>
             <p class="mb-2">{{comment.content}}</p>
-            <a (click)="onOpenReply(comment.id)" class="btn p-0"><i class="la la-reply"></i> Reply</a>
+            <a (click)="onOpenReply(comment.id)" class="btn p-0 reply"><i class="la la-reply"></i> Reply</a>
             <div *ngIf="replyClicked && parentId == comment.id">
-              <form [formGroup]="replyForm" (ngSubmit)="onReply()">
+              <form [formGroup]="replyForm" (ngSubmit)="onReply(comment)">
                 <textarea style="margin-top: 15px;" formControlName="content" name="comment" id={{comment.id}} cols="30" rows="5" class="form-control"></textarea>
                 <div class="text-right mt-2">
                   <button type="submit" class="btn btn-info" [disabled]="!replyForm.valid">Reply</button>

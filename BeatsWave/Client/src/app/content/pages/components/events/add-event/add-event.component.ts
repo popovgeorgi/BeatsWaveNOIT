@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SnotifyService } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EventService } from 'src/app/core/services/event.service';
 import { environment } from 'src/environments/environment';
@@ -10,12 +11,14 @@ import { environment } from 'src/environments/environment';
 })
 export class AddEventComponent implements AfterViewInit {
 
+  public isEventPaid: boolean = false;
   public eventForm: FormGroup;
   public uploadSaveImageUrl: string = environment.apiUrl + '/FileUpload/SavePhoto';
 
   constructor(private spinner: NgxSpinnerService,
     private fb: FormBuilder,
-    private eventService: EventService) {
+    private eventService: EventService,
+    private snotifyService: SnotifyService) {
     this.eventForm = this.fb.group({
       "name": ['', [Validators.required]],
       "imageUrl": ['', [Validators.required]],
@@ -59,17 +62,31 @@ export class AddEventComponent implements AfterViewInit {
   public onPhotoUploaded(e) {
     this.eventForm.controls['imageUrl'].setValue(e.originalEvent.body.uri);
     this.spinner.hide('eventPhotoUploaded');
+    this.snotifyService.success('Photo successfully uploaded!');
+  }
+
+  public onPaidEvent() {
+    this.isEventPaid = true;
+  }
+
+  public onFreeEvent() {
+    this.isEventPaid = false;
   }
 
   public uploadEvent() {
     this.spinner.show('eventPhotoUploaded');
-    this.eventService.uploadEvent(this.eventForm.value).subscribe(res => {
+    if (this.eventForm.controls['price'].value == '') {
+      this.eventForm.removeControl('price');
+    }
+    this.eventService.uploadEvent(this.eventForm.value).subscribe(res => {  }, (err) => {
+      this.snotifyService.error('You have got an error within your data!');
+    }, () => {
       this.spinner.hide('eventPhotoUploaded');
+      this.snotifyService.success('Event successfully created!');
     })
   }
 
   ngAfterViewInit() {
     this.spinner.hide('routing');
   }
-
 }

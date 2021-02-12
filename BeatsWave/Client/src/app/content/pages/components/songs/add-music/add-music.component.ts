@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-add-music',
@@ -20,7 +21,8 @@ export class AddMusicComponent implements AfterViewInit {
 
   constructor(private spinner: NgxSpinnerService,
     private fb: FormBuilder,
-    private beatService: BeatService) {
+    private beatService: BeatService,
+    private snotifyService: SnotifyService) {
     this.beatForm = this.fb.group({
       "name": ['', [Validators.required]],
       "beatUrl": ['', [Validators.required]],
@@ -39,6 +41,9 @@ export class AddMusicComponent implements AfterViewInit {
   public onPhotoUploaded(e) {
     this.beatForm.controls['imageUrl'].setValue(e.originalEvent.body.uri)
     this.spinner.hide('beatUploader');
+    this.snotifyService.info('Successfully uploaded', '', {
+      showProgressBar: false
+    });
     this.isImageUploaded = true;
 
   }
@@ -50,13 +55,19 @@ export class AddMusicComponent implements AfterViewInit {
   public onBeatUploaded(e) {
     this.beatForm.controls['beatUrl'].setValue(e.originalEvent.body.uri)
     this.spinner.hide('beatUploader');
+    this.snotifyService.info('Successfully uploaded', '', {
+      showProgressBar: false
+    });
     this.isBeatUploaded = true;
   }
 
   public uploadBeat() {
     this.spinner.show('beatUploader');
-    this.beatService.uploadBeat(this.beatForm.value).subscribe(res => {
+    this.beatService.uploadBeat(this.beatForm.value).subscribe(res => { }, () => { }, () => {
       this.spinner.hide('beatUploader');
+      this.snotifyService.success('Beat added', '', {
+        showProgressBar: false
+      });
     })
   }
 

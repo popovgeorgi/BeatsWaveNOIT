@@ -110,10 +110,14 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
     this.likeService.vote(this.beatDetails.id).subscribe(res => {
       this.isLiked = res;
       if (this.isLiked == true) {
-        this.snotifyService.info('Liked' + ' ' + this.beatDetails.name);
+        this.snotifyService.info('Liked ' + this.beatDetails.name, '', {
+          showProgressBar: false
+        });
       }
       else if (this.isLiked == false) {
-        this.snotifyService.info('Unliked' + ' ' + this.beatDetails.name);
+        this.snotifyService.info('Unliked ' + this.beatDetails.name, '', {
+          showProgressBar: false
+        });
       }
     })
   }

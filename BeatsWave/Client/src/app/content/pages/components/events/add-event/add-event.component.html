@@ -85,20 +85,20 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-row form-group">
+                        <div class="form-row form-group">
                             <div class="col-md-4"></div>
                             <div class="col-md-7">
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="free" name="eventType" class="custom-control-input">
+                                    <input (click)="onFreeEvent()" type="radio" id="free" name="eventType" class="custom-control-input">
                                     <label class="custom-control-label" for="free">Free Event</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="paid" name="eventType" class="custom-control-input">
+                                    <input (click)="onPaidEvent()" type="radio" id="paid" name="eventType" class="custom-control-input">
                                     <label class="custom-control-label" for="paid">Paid Event</label>
                                 </div>
                             </div>
-                        </div> -->
-                        <div class="form-row form-group">
+                        </div>
+                        <div *ngIf="isEventPaid" class="form-row form-group">
                             <label for="eventPrice" class="col-md-4 text-md-right col-form-label">Event Price</label>
                             <div class="col-md-7">
                                 <input type="text" id="eventPrice" class="form-control" formControlName="price">

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SnotifyService } from 'ng-snotify';
 import { SimpleModalComponent, SimpleModalService } from 'ngx-simple-modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +15,8 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
-    private loader: NgxSpinnerService,
-    private simpleModalService: SimpleModalService) {
+    private spinner: NgxSpinnerService,
+    private snotifyService: SnotifyService) {
     super();
   }
 
@@ -31,9 +31,13 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
   }
 
   submitRegister() {
-    this.loader.show('register');
+    this.spinner.show('register');
     this.authService.register(this.registerForm.value).subscribe(res => {
-      this.loader.hide('register');
+    }, () => {}, () => {
+      this.spinner.hide('register');
+      this.snotifyService.info('You are registered now', '', {
+        showProgressBar: false
+      });
     })
   }
 
