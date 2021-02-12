@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from './core/services/auth.service';
+import { LocalStorageService } from './core/services/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +9,12 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent implements OnInit {
   title = 'listen';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.authService.getToken();
     this.authService.autoLogin();
+    this.localStorageService.setLocalStorage('themeSkin', {"theme":"dark","header":0,"sidebar":0,"player":0});
   }
 }

@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { map, mergeMap } from 'rxjs/operators';
+import { first, map, mergeMap } from 'rxjs/operators';
 import { EventService } from 'src/app/core/services/event.service';
 import { Event } from 'src/app/core/models/Event';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   selector: 'app-event-details',
   templateUrl: './event-details.component.html'
 })
-export class EventDetailsComponent implements AfterViewInit {
+export class EventDetailsComponent {
 
   eventId: number;
   eventDetails: Event;
@@ -22,19 +22,19 @@ export class EventDetailsComponent implements AfterViewInit {
   ) {
     this.fetchData().subscribe((event) => {
       this.eventDetails = event;
+    }, () => { }, () => {
+      this.spinner.hide('routing');
     });
   }
 
   private fetchData(): Observable<Event> {
     return this.route.params
-      .pipe(map((params) => {
-        const id = params["id"];
-        return id;
-      }),
+      .pipe(
+        first(),
+        map((params) => {
+          const id = params["id"];
+          return id;
+        }),
         mergeMap((id) => this.eventService.getEvent(id)))
-  }
-
-  ngAfterViewInit() {
-    this.spinner.hide('routing');
   }
 }
