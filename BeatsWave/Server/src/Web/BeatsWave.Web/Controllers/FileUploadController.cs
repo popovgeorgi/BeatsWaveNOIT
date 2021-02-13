@@ -1,6 +1,5 @@
 ﻿namespace BeatsWave.Web.Controllers
 {
-    using System;
     using System.IO;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
@@ -9,7 +8,6 @@
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure;
     using BeatsWave.Web.Infrastructure.Services;
-
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -21,6 +19,8 @@
     using SixLabors.ImageSharp.Formats.Jpeg;
     using SixLabors.ImageSharp.Formats.Png;
     using SixLabors.ImageSharp.Processing;
+
+    using static BeatsWave.Common.GlobalConstants;
 
     public class FileUploadController : ApiController
     {
@@ -138,7 +138,6 @@
 
             var container = blobClient.GetContainerReference($"{storage}");
 
-            var thumbnailWidth = 320;
             var extension = Path.GetExtension(file.FileName);
             var encoder = GetEncoder(extension);
 
@@ -150,10 +149,7 @@
                 using (var output = new MemoryStream())
                 using (Image image = Image.Load(fileStream))
                 {
-                    var divisor = image.Width / thumbnailWidth;
-                    var height = Convert.ToInt32(Math.Round((decimal)(image.Height / divisor)));
-
-                    image.Mutate(x => x.Resize(thumbnailWidth, height));
+                    image.Mutate(x => x.Resize(ImageWidth, ImageHeight));
                     image.Save(output, encoder);
                     output.Position = 0;
                     await blockBlob.UploadFromStreamAsync(output);

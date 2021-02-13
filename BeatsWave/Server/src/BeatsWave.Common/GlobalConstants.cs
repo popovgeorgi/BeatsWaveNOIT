@@ -28,5 +28,8 @@
         public const string ArtistCommentsRoute = "Artists/{id}";
 
         public const string IpGetterEndpoint = "http://api.ipstack.com/";
+
+        public const int ImageHeight = 320;
+        public const int ImageWidth = 320;
     }
 }
