@@ -16,5 +16,7 @@
         Task<bool> CheckIfUserEmailExists(string email);
 
         Task<string> GetUserEmailById(string id);
+
+        Task<string[]> GetAllEmailsAsync();
     }
 }

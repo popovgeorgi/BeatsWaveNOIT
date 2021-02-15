@@ -28,6 +28,12 @@
                 .All()
                 .AnyAsync(u => u.Email == email);
 
+        public async Task<string[]> GetAllEmailsAsync()
+            => await this.userRepository
+                .All()
+                .Select(u => u.Email.ToLower())
+                .ToArrayAsync();
+
         public async Task<T> GetInfo<T>(string id)
             => await this.userRepository
                 .All()

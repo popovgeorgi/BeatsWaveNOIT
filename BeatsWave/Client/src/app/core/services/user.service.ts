@@ -23,4 +23,8 @@ export class UserService {
   getFavouritesByIds(): Observable<Array<number>> {
     return this.http.get<Array<number>>(this.userPath + '/FavouritesByIds')
   }
+
+  getAllEmails(): Observable<Array<string>> {
+    return this.http.get<Array<string>>(this.userPath + '/AllEmails');
+  }
 }

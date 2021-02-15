@@ -35,5 +35,11 @@
         [Route(nameof(FavouritesByIds))]
         public async Task<int[]> FavouritesByIds()
             => await this.userService.GetLikedBeatsByIdsAsync(this.currentUser.GetId());
+
+        [HttpGet]
+        [Route(nameof(AllEmails))]
+        [AllowAnonymous]
+        public async Task<string[]> AllEmails()
+            => await this.userService.GetAllEmailsAsync();
     }
 }

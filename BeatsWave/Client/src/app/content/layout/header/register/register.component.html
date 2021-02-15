@@ -23,6 +23,7 @@
                     <div class="invalid-feedback" *ngIf="!email.valid && email.touched" ngClass="d-block">
                         <span *ngIf="email.errors?.required">This field is required</span>
                         <span *ngIf="email.errors?.email">This must be an email</span>
+                        <span *ngIf="email.errors?.emailIsForbidden">This email is already in use</span>
                     </div>
                 </div>
                 <label for="password">Password</label>
