@@ -1,16 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { AudioPlayerService } from '../../../../core/services/audio-player.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { LikeService } from 'src/app/core/services/like.service';
 import { SnotifyService } from 'ng-snotify';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-primary-card',
   templateUrl: './primary-card.component.html'
 })
-export class PrimaryCardComponent implements OnInit {
+export class PrimaryCardComponent implements OnInit, OnDestroy {
 
+  userSubscription: Subscription;
   @Input() isUserOwner: boolean = false;
   @Input() song: Beat;
   @Input() showOptions = false;
@@ -20,7 +23,8 @@ export class PrimaryCardComponent implements OnInit {
 
   constructor(private audioPlayerService: AudioPlayerService,
     private likeService: LikeService,
-    private snotifyService: SnotifyService) {
+    private snotifyService: SnotifyService,
+    private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -28,20 +32,35 @@ export class PrimaryCardComponent implements OnInit {
   }
 
   addFavorite() {
-    this.likeService.vote(this.song.id).subscribe(res => {
-      if (res == true) {
-        this.song.likesCount++;
-        this.snotifyService.info('Liked ' + this.song.name, '', {
-          showProgressBar: false
+    this.userSubscription = this.authService.user.subscribe(user => {
+      if (user) {
+        this.likeService.vote(this.song.id).subscribe(res => {
+          if (res == true) {
+            this.song.likesCount++;
+            this.snotifyService.info('Liked ' + this.song.name, '', {
+              showProgressBar: false
+            });
+          }
+          else {
+            this.song.likesCount--;
+            this.snotifyService.info('Unliked ' + this.song.name, '', {
+              showProgressBar: false
+            });
+          }
         });
       }
       else {
-        this.song.likesCount--;
-        this.snotifyService.info('Unliked ' + this.song.name, '', {
+        this.snotifyService.warning("You must be logged in", '', {
           showProgressBar: false
         });
       }
-    });
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   addInPlayer() {

@@ -95,6 +95,10 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
     };
   }
 
+  public redirectToArtistDetails(id: string) {
+    this.router.navigate(['/artist/' + id + '/details'])
+  }
+
   public redirectToHomePage() {
     this.spinner.show('routing');
     this.router.navigate(['/home']);
@@ -130,7 +134,9 @@ export class LandingPageComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

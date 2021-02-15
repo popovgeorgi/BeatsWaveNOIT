@@ -45,11 +45,13 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
       this.snotifyService.error(err.error[0].description, '', {
         showProgressBar: false
       });
+      this.close();
     }, () => {
       this.spinner.hide('register');
-      this.snotifyService.info('You are registered now', '', {
+      this.snotifyService.info('You are successfully registered', '', {
         showProgressBar: false
       });
+      this.close();
     })
   }
 

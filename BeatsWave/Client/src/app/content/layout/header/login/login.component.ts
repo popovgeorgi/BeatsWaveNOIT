@@ -5,6 +5,7 @@ import { SimpleModalComponent } from 'ngx-simple-modal';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnotifyService } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     private fb: FormBuilder,
     private authService: AuthService,
     private spinner: NgxSpinnerService,
-    private snotifyService: SnotifyService) {
+    private snotifyService: SnotifyService,
+    private router: Router) {
     super();
   }
 
@@ -43,14 +45,16 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     this.formSubmitted = true;
     this.authService.login(this.login.value).subscribe(data => {
       this.authService.saveToken(data['token']);
-      this.spinner.hide('loginModal');
-      this.snotifyService.info('You are successfully logged in!', '', {
-        showProgressBar: false
-      });
     },
       error => {
         this.spinner.hide('loginModal');
         this.snotifyService.error("Your data is not valid");
+      }, () => {
+        this.spinner.hide('loginModal');
+        this.snotifyService.info('You are successfully logged in!', '', {
+          showProgressBar: false
+        });
+        this.router.navigate(['/home']);
       });
 
     this.close();

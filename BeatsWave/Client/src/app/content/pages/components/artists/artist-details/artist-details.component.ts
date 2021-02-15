@@ -96,7 +96,7 @@ export class ArtistDetailsComponent implements OnInit, OnDestroy {
 
   public OnFollowButtonClicked() {
     if (!this.isLoggedIn) {
-      this.snotifyService.error('You should be logged in!', '', {
+      this.snotifyService.warning('You should be logged in!', '', {
         showProgressBar: false
       });
     }

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SnotifyService } from 'ng-snotify';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-music',
@@ -22,7 +23,8 @@ export class AddMusicComponent implements AfterViewInit {
   constructor(private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private beatService: BeatService,
-    private snotifyService: SnotifyService) {
+    private snotifyService: SnotifyService,
+    private router: Router) {
     this.beatForm = this.fb.group({
       "name": ['', [Validators.required]],
       "beatUrl": ['', [Validators.required]],
@@ -63,11 +65,17 @@ export class AddMusicComponent implements AfterViewInit {
 
   public uploadBeat() {
     this.spinner.show('beatUploader');
-    this.beatService.uploadBeat(this.beatForm.value).subscribe(res => { }, () => { }, () => {
+    this.beatService.uploadBeat(this.beatForm.value).subscribe(res => { }, () => {
+      this.spinner.hide('beatUploader');
+      this.snotifyService.error('You have got an error within your data!', '', {
+        showProgressBar: false
+      });
+    }, () => {
       this.spinner.hide('beatUploader');
       this.snotifyService.success('Beat added', '', {
         showProgressBar: false
       });
+      this.router.navigate(['/music']);
     })
   }
 

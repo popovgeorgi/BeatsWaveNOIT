@@ -13,7 +13,7 @@ export class ErrorInterceptorService {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request.url == "https://localhost:5001/identity/login" && request.method == "POST") {
-      return;
+      return next.handle(request);
     }
     return next.handle(request).pipe(
       retry(1),

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SnotifyService } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EventService } from 'src/app/core/services/event.service';
@@ -18,7 +19,8 @@ export class AddEventComponent implements AfterViewInit {
   constructor(private spinner: NgxSpinnerService,
     private fb: FormBuilder,
     private eventService: EventService,
-    private snotifyService: SnotifyService) {
+    private snotifyService: SnotifyService,
+    private router: Router) {
     this.eventForm = this.fb.group({
       "name": ['', [Validators.required]],
       "imageUrl": ['', [Validators.required]],
@@ -79,10 +81,12 @@ export class AddEventComponent implements AfterViewInit {
       this.eventForm.removeControl('price');
     }
     this.eventService.uploadEvent(this.eventForm.value).subscribe(res => {  }, (err) => {
+      this.spinner.hide('eventPhotoUploaded');
       this.snotifyService.error('You have got an error within your data!');
     }, () => {
       this.spinner.hide('eventPhotoUploaded');
       this.snotifyService.success('Event successfully created!');
+      this.router.navigate(['/events']);
     })
   }
 
