@@ -4,49 +4,40 @@
         <div class="modal-header border-bottom-0 pb-0">
             <button type="button" class="close" (click)="close()">&times;</button>
         </div>
-        <h6 class="modal-title text-center mb-3">Register For Awesome Listing Experience</h6>
+        <img class="form-logo" src="../../../../../assets/images/forms/formLogo.svg" />
         <div class="modal-body">
             <form [formGroup]="registerForm" class="mx-4 pb-5" (ngSubmit)="submitRegister()">
-                <!-- <div class="social-login">
-                    <a href="javascript:void(0);" class="w-100 btn btn-social btn-facebook btn-default-air">
-                        <span class="btn-content">
-                            <i class="ion-logo-facebook"></i>
-                            <span class="pl-2">Login With Facebook</span>
-                        </span>
-                    </a>
-                    <a href="javascript:void(0);" class="w-100 mt-3 btn btn-social btn-google btn-default-air">
-                        <span class="btn-content">
-                            <i class="ion-logo-google"></i>
-                            <span class="pl-2">Login With Google</span>
-                        </span>
-                    </a>
-                </div> -->
+                <label for="userName">Username</label>
                 <div class="form-group">
-                    <input type="text" formControlName="userName" id="userName" class="form-control"
+                    <input [ngClass]="{'red-border-solid': userName.errors?.required && userName.touched}" type="text" formControlName="userName" id="userName" class="form-control"
                         placeholder="Username" required>
                     <div *ngIf="userName.errors?.required && userName.touched" class="invalid-feedback"
                         ngClass="d-block">
                         <span>This field is required</span>
                     </div>
                 </div>
+                <label for="email">Email</label>
                 <div class="form-group">
-                    <input type="text" formControlName="email" id="email" class="form-control" placeholder="Email"
+                    <input [ngClass]="{'red-border-solid': email.errors && email.touched}" type="text" formControlName="email" id="email" class="form-control" placeholder="Email"
                         required email>
                     <div class="invalid-feedback" *ngIf="!email.valid && email.touched" ngClass="d-block">
                         <span *ngIf="email.errors?.required">This field is required</span>
                         <span *ngIf="email.errors?.email">This must be an email</span>
                     </div>
                 </div>
+                <label for="password">Password</label>
                 <div class="form-group">
-                    <input type="password" formControlName="password" id="password" class="form-control"
+                    <input [ngClass]="{'red-border-solid': password.errors && password.touched}" type="password" formControlName="password" id="password" class="form-control"
                         placeholder="Password" required>
-                    <div class="invalid-feedback" *ngIf="password.errors?.required && password.touched"
+                    <div class="invalid-feedback" *ngIf="password.errors && password.touched"
                         ngClass="d-block">
-                        <span>This field is required</span>
+                        <span *ngIf="password.errors?.required">This field is required</span>
+                        <span *ngIf="password.errors?.minlength">This field must be at least 6 symbols</span>
                     </div>
                 </div>
+                <label for="confirmPassword">Confirm Password</label>
                 <div class="form-group">
-                    <input type="password" formControlName="confirmPassword" id="confirmPassword" class="form-control"
+                    <input [ngClass]="{'red-border-solid': confirmPassword.errors?.required && confirmPassword.touched}" type="password" formControlName="confirmPassword" id="confirmPassword" class="form-control"
                         placeholder="Confirm Password" required>
                     <div class="invalid-feedback" *ngIf="registerForm.hasError('notSame') && confirmPassword.touched"
                         ngClass="d-block">
@@ -57,7 +48,7 @@
                         <span>This field is required</span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group select-role">
                     <div class="custom-control custom-radio custom-control-inline">
                         <input value="Beatmaker" type="radio" id="customRadioInline1"
                             class="custom-control-input"  formControlName="role">

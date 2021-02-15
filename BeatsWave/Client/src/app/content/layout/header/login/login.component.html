@@ -4,41 +4,26 @@
         <div class="modal-header border-bottom-0 pb-0">
             <button type="button" class="close" (click)="close()">&times;</button>
         </div>
-        <h6 class="modal-title text-center mb-3">Login For Awesome Listing Experience</h6>
+        <img class="form-logo" src="../../../../../assets/images/forms/formLogo.svg" />
         <div class="modal-body">
             <form action="#" [formGroup]="login" class="mx-4 pb-5" (ngSubmit)="submitLogin()">
-                <!-- <div class="social-login">
-                    <a href="javascript:void(0);" class="w-100 btn btn-social btn-facebook btn-default-air">
-                        <span class="btn-content">
-                            <i class="ion-logo-facebook"></i>
-                            <span class="pl-2">Login With Facebook</span>
-                        </span>
-                    </a>
-                    <a href="javascript:void(0);" class="w-100 mt-3 btn btn-social btn-google btn-default-air">
-                        <span class="btn-content">
-                            <i class="ion-logo-google"></i>
-                            <span class="pl-2">Login With Google</span>
-                        </span>
-                    </a>
-                </div> -->
+                <label for="userName">Username</label>
                 <div class="form-group">
-                    <input type="text" formControlName="userName" id="userName" class="form-control"
-                           placeholder="Email Id" required>
-                    <div class="invalid-feedback" *ngIf="(formSubmitted && userName.invalid) &&
-                    (userName.dirty || userName.touched)" ngClass="d-block">
-                        <span *ngIf="userName.errors.required">Please fill this field</span>
-                        <span *ngIf="userName.errors.email">Filled email id not valid</span>
+                    <input [ngClass]="{'red-border-solid': userName.errors && userName.touched}" type="text" formControlName="userName" id="userName" class="form-control"
+                           placeholder="Username">
+                    <div class="invalid-feedback" *ngIf="userName.errors?.required && userName.touched" ngClass="d-block">
+                        <span>This field is required</span>
                     </div>
                 </div>
+                <label for="password">Password</label>
                 <div class="form-group">
-                    <input type="password" formControlName="password" id="password" class="form-control"
-                           placeholder="Password" minlength="4" required>
-                    <div class="invalid-feedback" *ngIf="(formSubmitted && password.invalid) &&
-                    (password.dirty || password.touched)" ngClass="d-block">
-                        <span *ngIf="password.errors.required">Please fill this field</span>
+                    <input [ngClass]="{'red-border-solid': password.errors && password.touched}" type="password" formControlName="password" id="password" class="form-control"
+                           placeholder="Password">
+                    <div class="invalid-feedback"*ngIf="password.errors?.required && password.touched" ngClass="d-block">
+                        <span>This field is required</span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-block btn-bold btn-air btn-info load-page">Login</button>
+                <button type="submit" [disabled]="!login.valid" class="btn btn-block btn-bold btn-air btn-info load-page">Login</button>
             </form>
         </div>
     </div>

@@ -24,7 +24,7 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
     this.registerForm = this.fb.group({
       'userName': ['', [Validators.required]],
       'email': ['', [Validators.required, Validators.email]],
-      'password': ['', [Validators.required]],
+      'password': ['', [Validators.required, Validators.minLength(6)]],
       'confirmPassword': ['', [Validators.required]],
       'role': ['', [Validators.required]]
     }, { validators: this.passwordsMatchValidator })
@@ -33,7 +33,12 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
   submitRegister() {
     this.spinner.show('register');
     this.authService.register(this.registerForm.value).subscribe(res => {
-    }, () => {}, () => {
+    }, (err) => {
+      this.spinner.hide('register');
+      this.snotifyService.error(err.error[0].description, '', {
+        showProgressBar: false
+      });
+    }, () => {
       this.spinner.hide('register');
       this.snotifyService.info('You are registered now', '', {
         showProgressBar: false

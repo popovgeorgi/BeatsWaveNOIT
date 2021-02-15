@@ -11,7 +11,7 @@
               <ul class="header-auto-options ml-auto d-flex align-items-center">
                 <li *ngIf="!isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
                   (click)="openRegisterModal()">Sign up</button></li>
-                <li style="margin-right: 30px;" *ngIf="!isUserLogged"><a class="link" (click)="openLoginModal()">Sign in</a></li>
+                <li  style="margin-right: 30px;" *ngIf="!isUserLogged"><a class="link" (click)="openLoginModal()">Sign in</a></li>
                 <li style="margin-right: 30px;" *ngIf="isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
                   (click)="redirectToHomePage()">Back To Home</button></li>
               </ul>

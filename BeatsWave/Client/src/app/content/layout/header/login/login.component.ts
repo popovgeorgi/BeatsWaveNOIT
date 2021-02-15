@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -16,6 +16,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
   formSubmitted = false;
 
   constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
     private spinner: NgxSpinnerService,
     private snotifyService: SnotifyService) {
@@ -23,14 +24,10 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
   }
 
   ngOnInit() {
-    this.login = new FormGroup({
-      userName: new FormControl('listen_app@kri8thm.com', [
-        Validators.required,
-      ]),
-      password: new FormControl('123456789', [
-        Validators.required
-      ]),
-    });
+    this.login = this.fb.group({
+      'userName': ['', [Validators.required]],
+      'password': ['', [Validators.required]]
+    })
   }
 
   get userName() {
@@ -53,7 +50,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     },
       error => {
         this.spinner.hide('loginModal');
-        this.snotifyService.error("You asda");
+        this.snotifyService.error("Your data is not valid");
       });
 
     this.close();

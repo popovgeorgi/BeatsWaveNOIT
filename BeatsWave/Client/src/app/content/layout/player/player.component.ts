@@ -1,9 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Subscription } from 'rxjs';
 
 import { LocalStorageService } from '../../../core/services/local-storage.service';
-import { SkinService } from '../../../core/services/skin.service';
 import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
 import { Beat } from 'src/app/core/models/Beat';
@@ -12,18 +10,15 @@ import { Beat } from 'src/app/core/models/Beat';
     selector: 'app-player',
     templateUrl: './player.component.html'
 })
-export class PlayerComponent implements OnInit, OnDestroy {
+export class PlayerComponent implements OnInit {
 
     song: Beat;
     volumeIcon = 'ion-md-volume-low';
     showPlaylist = 'open-right-sidebar';
     playerClass = 'player-primary';
 
-    skinSubscription: Subscription;
-
     constructor(@Inject(DOCUMENT) private document: Document,
-                private localStorageService: LocalStorageService,
-                private skinService: SkinService) { }
+                private localStorageService: LocalStorageService) { }
 
     ngOnInit() {
         Amplitude.init();
@@ -32,12 +27,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
         if (themeSkin) {
             this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
         }
-
-        this.skinSubscription = this.skinService.themeSkin.subscribe((skin) => {
-            if (skin) {
-                this.playerClass = 'player-' + Config.THEME_CLASSES[skin.player];
-            }
-        });
     }
 
     changeVolumeIcon(event) {
@@ -57,9 +46,5 @@ export class PlayerComponent implements OnInit, OnDestroy {
         } else {
             this.document.body.classList.add(this.showPlaylist);
         }
-    }
-
-    ngOnDestroy() {
-        this.skinSubscription.unsubscribe();
     }
 }

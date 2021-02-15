@@ -12,6 +12,9 @@ export class ErrorInterceptorService {
   constructor(private snotifyService: SnotifyService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (request.url == "https://localhost:5001/identity/login" && request.method == "POST") {
+      return;
+    }
     return next.handle(request).pipe(
       retry(1),
       catchError((err) => {
