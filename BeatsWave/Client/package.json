@@ -22,7 +22,7 @@
     "@aspnet/signalr": "^1.1.4",
     "@ionic/angular": "^5.5.2",
     "@microsoft/signalr": "^5.0.0",
-    "amplitudejs": "^5.0.2",
+    "amplitudejs": "5.0.2",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.9.2",
     "guid-typescript": "^1.0.9",
@@ -49,6 +49,7 @@
     "@angular/cli": "~8.3.2",
     "@angular/compiler-cli": "~8.2.4",
     "@angular/language-service": "~8.2.4",
+    "@ionic/angular-toolkit": "latest",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
@@ -63,7 +64,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "^3.4.5",
-    "@ionic/angular-toolkit": "latest"
+    "typescript": "^3.4.5"
   }
 }

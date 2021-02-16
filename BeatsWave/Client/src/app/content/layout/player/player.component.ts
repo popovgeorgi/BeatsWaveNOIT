@@ -5,46 +5,56 @@ import { LocalStorageService } from '../../../core/services/local-storage.servic
 import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
 import { Beat } from 'src/app/core/models/Beat';
+import { SongsConfigService } from 'src/app/core/services/songs-config.service';
+import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-player',
-    templateUrl: './player.component.html'
+  selector: 'app-player',
+  templateUrl: './player.component.html'
 })
 export class PlayerComponent implements OnInit {
 
-    song: Beat;
-    volumeIcon = 'ion-md-volume-low';
-    showPlaylist = 'open-right-sidebar';
-    playerClass = 'player-primary';
+  audioSubscription: Subscription;
+  song: Beat;
+  imageUrl: string;
+  volumeIcon = 'ion-md-volume-low';
+  showPlaylist = 'open-right-sidebar';
+  playerClass = 'player-primary';
 
-    constructor(@Inject(DOCUMENT) private document: Document,
-                private localStorageService: LocalStorageService) { }
+  constructor(@Inject(DOCUMENT) private document: Document,
+    private localStorageService: LocalStorageService,
+    private songsConfigService: SongsConfigService,
+    private audioPlayerService: AudioPlayerService) { }
 
-    ngOnInit() {
-        Amplitude.init();
+  ngOnInit() {
+    this.audioSubscription = this.audioPlayerService.songPlayed.subscribe(beat => {
+      this.song = beat;
+      debugger;
+    })
 
-        const themeSkin = this.localStorageService.getThemeSkin();
-        if (themeSkin) {
-            this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
-        }
+    const themeSkin = this.localStorageService.getThemeSkin();
+    if (themeSkin) {
+      this.playerClass = 'player-' + Config.THEME_CLASSES[themeSkin.player];
     }
+  }
 
-    changeVolumeIcon(event) {
-        const value = event.target.value;
-        if (value < 1) {
-            this.volumeIcon = 'ion-md-volume-mute';
-        } else if (value > 0 && value < 70) {
-            this.volumeIcon = 'ion-md-volume-low';
-        } else if (value > 70) {
-            this.volumeIcon = 'ion-md-volume-high';
-        }
+  changeVolumeIcon(event) {
+    const value = event.target.value;
+    if (value < 1) {
+      this.volumeIcon = 'ion-md-volume-mute';
+    } else if (value > 0 && value < 70) {
+      this.volumeIcon = 'ion-md-volume-low';
+    } else if (value > 70) {
+      this.volumeIcon = 'ion-md-volume-high';
     }
+  }
 
-    openPlaylist() {
-        if (this.document.body.classList.contains(this.showPlaylist)) {
-            this.document.body.classList.remove(this.showPlaylist);
-        } else {
-            this.document.body.classList.add(this.showPlaylist);
-        }
+  openPlaylist() {
+    if (this.document.body.classList.contains(this.showPlaylist)) {
+      this.document.body.classList.remove(this.showPlaylist);
+    } else {
+      this.document.body.classList.add(this.showPlaylist);
     }
+  }
 }
