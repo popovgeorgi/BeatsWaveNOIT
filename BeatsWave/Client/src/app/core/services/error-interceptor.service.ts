@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { SnotifyService } from 'ng-snotify';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ErrorInterceptorService {
   constructor(private snotifyService: SnotifyService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (request.url == "https://localhost:5001/identity/login" && request.method == "POST") {
+    if (request.url == environment.apiUrl + "/identity/login" && request.method == "POST") {
       return next.handle(request);
     }
     return next.handle(request).pipe(

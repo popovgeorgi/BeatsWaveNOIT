@@ -27,7 +27,7 @@
                             <label for="eventImage" class="col-md-4 text-md-right col-form-label">Event Cover Image</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
-                                  <p-fileUpload name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
+                                  <p-fileUpload [ngClass]="{'file-uploaded': isImageUploaded}" name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
                                   class="custom-file-input" id="songImage" (onSend)="onPhotoUploading()"
                                   (onUpload)="onPhotoUploaded($event)"></p-fileUpload>
                                 </div>
@@ -102,7 +102,6 @@
                             <label for="eventPrice" class="col-md-4 text-md-right col-form-label">Event Price</label>
                             <div class="col-md-7">
                                 <input type="text" id="eventPrice" class="form-control" formControlName="price">
-                                <span class="form-text text-muted">Please add Event Price if Event is paid</span>
                             </div>
                         </div>
                         <div class="card-footer">

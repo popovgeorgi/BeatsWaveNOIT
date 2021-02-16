@@ -7,7 +7,7 @@
             <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
                     [colors]="chartColors" [legend]="chartLegend" [chartType]="chartType"></canvas>
         </div>
-        <div class="text-center">
+        <div *ngIf="topCountries == []" class="text-center">
             <span class="font-weight-bold d-block mt-3">Top Countries</span>
             <div class="row">
                 <div class="col-4" [ngClass]="!isLast ? 'border-right' : ''"

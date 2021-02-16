@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AddEventComponent implements AfterViewInit {
 
+  public isImageUploaded: boolean = false;
   public isEventPaid: boolean = false;
   public eventForm: FormGroup;
   public uploadSaveImageUrl: string = environment.apiUrl + '/FileUpload/SavePhoto';
@@ -64,7 +65,10 @@ export class AddEventComponent implements AfterViewInit {
   public onPhotoUploaded(e) {
     this.eventForm.controls['imageUrl'].setValue(e.originalEvent.body.uri);
     this.spinner.hide('eventPhotoUploaded');
-    this.snotifyService.success('Photo successfully uploaded!');
+    this.snotifyService.success('Successfully uploaded', '', {
+      showProgressBar: false
+    });
+    this.isImageUploaded = true;
   }
 
   public onPaidEvent() {

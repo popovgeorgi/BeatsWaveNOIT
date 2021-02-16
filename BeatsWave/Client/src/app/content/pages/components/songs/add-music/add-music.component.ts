@@ -47,7 +47,6 @@ export class AddMusicComponent implements AfterViewInit {
       showProgressBar: false
     });
     this.isImageUploaded = true;
-
   }
 
   public onBeatUploading() {

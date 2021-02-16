@@ -28,7 +28,7 @@
                                 Image</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
-                                    <p-fileUpload name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
+                                    <p-fileUpload [ngClass]="{'file-uploaded': isImageUploaded}" name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
                                         (onSend)="onPhotoUploading()" (onUpload)="onPhotoUploaded($event)">
                                     </p-fileUpload>
                                 </div>
@@ -38,7 +38,7 @@
                             <label for="songFile" class="col-md-4 text-md-right col-form-label">Song File</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
-                                    <p-fileUpload name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
+                                    <p-fileUpload [ngClass]="{'file-uploaded': isBeatUploaded}" name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
                                         (onSend)="onBeatUploading()" (onUpload)="onBeatUploaded($event)">
                                     </p-fileUpload>
                                 </div>

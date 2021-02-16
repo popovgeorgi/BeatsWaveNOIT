@@ -22,9 +22,11 @@ export class AudioPlayerService implements OnDestroy {
     Amplitude.playNow(song);
     this.userSubscription = this.authService.user.subscribe(user => {
       if (user) {
-        this.beatService.addPlay(song.id).subscribe(() => { }, err => {
-          console.log(err.error);
-        });
+        if (user.id != song.producerId) {
+          this.beatService.addPlay(song.id).subscribe(() => { }, err => {
+            console.log(err.error);
+          });
+        }
       }
     })
   }
