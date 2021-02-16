@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { LocalStorageService } from './core/services/local-storage.service';
-import * as Amplitude from 'amplitudejs';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,6 @@ export class AppComponent implements OnInit {
     private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
-    Amplitude.init({});
     this.authService.getToken();
     this.authService.autoLogin();
     this.localStorageService.setLocalStorage('themeSkin', {"theme":"dark","header":0,"sidebar":0,"player":0});

@@ -20,6 +20,7 @@ import { SongBuyComponent } from "../song-buy/song-buy.component";
 })
 export class SongDetailsComponent implements OnInit, OnDestroy {
 
+  private user;
   private userSubscription: Subscription;
   public isLiked: boolean;
   public beatDetails: Beat;
@@ -41,6 +42,7 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
     this.fetchData().pipe(
       tap(beat => {
         this.userSubscription = this.authService.user.subscribe(user => {
+          this.user = user;
           if (user) {
             if (beat.producerId == user.id) {
               this.isUserOwner = true;
@@ -67,12 +69,19 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
   }
 
   public contact() {
-    const modal = this.simpleModalService.addModal(SongBuyComponent, { data: this.beatDetails })
+    if (this.user) {
+      const modal = this.simpleModalService.addModal(SongBuyComponent, { data: this.beatDetails })
       .subscribe((isConfirmed) => {
         if (isConfirmed) {
         } else {
         }
       });
+    }
+    else {
+      this.snotifyService.info("Sign up in order to contact the producer", '', {
+        showProgressBar: false
+      });
+    }
   }
 
   public edit() {
@@ -107,19 +116,26 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
   }
 
   public vote() {
-    this.likeService.vote(this.beatDetails.id).subscribe(res => {
-      this.isLiked = res;
-      if (this.isLiked == true) {
-        this.snotifyService.info('Liked ' + this.beatDetails.name, '', {
-          showProgressBar: false
-        });
-      }
-      else if (this.isLiked == false) {
-        this.snotifyService.info('Unliked ' + this.beatDetails.name, '', {
-          showProgressBar: false
-        });
-      }
-    })
+    if (this.user) {
+      this.likeService.vote(this.beatDetails.id).subscribe(res => {
+        this.isLiked = res;
+        if (this.isLiked == true) {
+          this.snotifyService.info('Liked ' + this.beatDetails.name, '', {
+            showProgressBar: false
+          });
+        }
+        else if (this.isLiked == false) {
+          this.snotifyService.info('Unliked ' + this.beatDetails.name, '', {
+            showProgressBar: false
+          });
+        }
+      })
+    }
+    else {
+      this.snotifyService.warning("You must be logged in", '', {
+        showProgressBar: false
+      });
+    }
   }
 
   public onBeatmakerClicked(id: string) {

@@ -5,7 +5,6 @@ import { LocalStorageService } from '../../../core/services/local-storage.servic
 import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
 import { Beat } from 'src/app/core/models/Beat';
-import { SongsConfigService } from 'src/app/core/services/songs-config.service';
 import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
 import { Subscription } from 'rxjs';
 
@@ -24,14 +23,14 @@ export class PlayerComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: Document,
     private localStorageService: LocalStorageService,
-    private songsConfigService: SongsConfigService,
     private audioPlayerService: AudioPlayerService) { }
 
   ngOnInit() {
     this.audioSubscription = this.audioPlayerService.songPlayed.subscribe(beat => {
       this.song = beat;
-      debugger;
     })
+
+    Amplitude.init({});
 
     const themeSkin = this.localStorageService.getThemeSkin();
     if (themeSkin) {
