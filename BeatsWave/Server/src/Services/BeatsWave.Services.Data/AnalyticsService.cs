@@ -216,19 +216,27 @@
 
         public async Task<IEnumerable<CountryListenerResponseModel>> GetListenersByCountry(string producerId)
         {
-            var playsForUserGroupedByCountry = await this.playsRepository
+            var playsGroupedByPlayerId = await this.playsRepository
                 .All()
                 .Where(p => p.Beat.ProducerId == producerId && p.Player.Country != null)
-                .GroupBy(p => p.Player.Country)
+                .GroupBy(p => new { p.PlayerId, p.Player.Country })
+                .Select(p => new
+                {
+                    PlayerId = p.Key,
+                    Country = p.Key.Country,
+                })
+                .ToListAsync();
+
+            var groupByCountry = playsGroupedByPlayerId
+                .GroupBy(p => p.Country)
                 .Select(p => new CountryListenerResponseModel
                 {
                     Country = p.Key,
                     Count = p.Count(),
                 })
-                .Take(3)
-                .ToListAsync();
+                .ToList();
 
-            return playsForUserGroupedByCountry;
+            return groupByCountry;
         }
     }
 }
