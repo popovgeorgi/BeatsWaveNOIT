@@ -1,0 +1,47 @@
+//== Import base theme configuration file for override
+@import "../../assets/scss/base/config";
+
+// Override bootstrap typo
+$font-family-base: 'Open Sans', sans-serif;
+$font-size-base: .875rem;
+
+$line-height-base: 1.45;
+
+$h1-font-size: 2.5rem;
+$h2-font-size: 2.25rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.5rem;
+$h5-font-size: 1.25rem;
+$h6-font-size: 1rem;
+
+// Override focus variables
+$input-btn-focus-width: 0;
+$custom-select-focus-width: 0;
+$custom-range-thumb-focus-width: 0;
+
+// Override input + button variables
+$input-btn-line-height: 1;
+$input-focus-border-color: $indigo;
+
+$input-height: 2.5rem;
+$input-height-lg: 3.25rem;
+$input-height-sm: 1.75rem;
+
+$btn-padding-y: .625rem;
+$btn-padding-x: 1.5rem;
+
+$btn-padding-y-sm: .325rem;
+$btn-padding-x-sm: 1rem;
+
+$btn-padding-y-lg: 1rem;
+$btn-padding-x-lg: 2.25rem;
+
+$modal-content-border-width: 0;
+$modal-content-border-radius: .5rem;
+
+$dropdown-border-width: 0;
+
+$dropdown-link-active-color: $gray-800;
+$dropdown-link-active-bg: $gray-100;
+
+$dropdown-item-padding-y: .5rem;

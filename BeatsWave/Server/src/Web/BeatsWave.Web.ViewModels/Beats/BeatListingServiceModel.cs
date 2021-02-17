@@ -18,6 +18,8 @@
 
         public string ProducerUserName { get; set; }
 
+        public string ProducerId { get; set; }
+
         public int LikesCount { get; set; }
 
         public int CommentsCount { get; set; }
