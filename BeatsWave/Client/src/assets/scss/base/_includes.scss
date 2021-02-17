@@ -1,0 +1,11 @@
+//== 1: Theme configuration file
+@import "config";
+
+//== 2: Theme function file
+@import "mixins";
+
+//== 3: Theme mixins file
+@import "functions";
+
+//== 4: Theme core file
+@import "core";

@@ -1,0 +1,175 @@
+//== Import navbar mixins for set different skins
+@import "../components/navbar/mixins";
+
+//== Import audio player mixins for set different skins
+@import "../base/audio-player/mixins";
+
+// Generate color variant for sidebar
+@each $class-name, $value in $theme-colors {
+    .sidebar-#{$class-name} {
+        @include nav-link-hover($value);
+    }
+}
+
+// Generate color variant for sidebar
+@each $class-name, $value in $theme-colors {
+    .player-#{$class-name} {
+        @include player-skin($value);
+    }
+}
+
+// Dark theme styles
+body {
+    &.theme-dark {
+        background-color: $gray-800;
+        color: $gray-500;
+
+        a:not(.btn) {
+            color: $gray-500;
+        }
+
+        hr {
+            border-top-color: $gray-700;
+        }
+
+        .link, .banner-content {
+            color: $white !important;
+        }
+
+        #sidebar {
+            background-color: $gray-900;
+
+            .toggle-menu span {
+                background-color: $gray-400;
+            }
+        }
+
+        .navbar-nav {
+            .nav-header {
+                color: $gray-300;
+            }
+
+            .nav-link:not(.active) {
+                @include hover-focus {
+                    color: $gray-400;
+                }
+            }
+        }
+
+        .banner {
+            &:before {
+                background-color: rgba($black, .3);
+            }
+
+            &:after {
+                background: linear-gradient(to bottom, rgba($gray-800, 0) 0%, rgba($gray-800, 1) 78%, rgba($gray-800, 1) 100%);
+            }
+        }
+
+        .btn-default {
+            background-color: $gray-700;
+            color: $gray-500;
+        }
+
+        .form-control, .custom-select, .custom-file-label, .custom-control-label::before {
+            background-color: $gray-800;
+            border-color: $gray-600;
+            color: $gray-500;
+
+            &:focus {
+                border-color: theme-color(primary);
+            }
+        }
+
+        .btn-outline-secondary, .btn-outline-dark {
+            color: $white;
+            background-color: $gray-700;
+            border-color: $gray-700;
+            &:hover {
+                background-color: $gray-600;
+                border-color: $gray-600;
+            }
+        }
+
+        .progress,
+        .dropdown-menu {
+            background-color: $gray-700;
+        }
+
+        .dropdown-item {
+            &:hover, &:focus {
+                background-color: $gray-800;
+            }
+        }
+
+        .custom-file-label::after {
+            background-color: $gray-600;
+            color: $gray-200;
+        }
+
+        #pageWrapper, #audioPlayer, #rightSidebar, .list-group-item, .card, .search-card, .modal-content {
+            background-color: $gray-800;
+        }
+
+        .list-group-item, [class^='border-'],
+        [class*=' border-'],
+        .social-login,
+        .modal-header,
+        .modal-footer,
+        .container-header,
+        .search-item .search-item-header,
+        .card-header,
+        .card-footer {
+            border-color: $gray-700 !important;
+        }
+
+        .social-login:after {
+            background-color: $gray-800;
+        }
+
+        .custom-card .custom-card--link h6, #audioPlayer .btn {
+            color: $gray-400;
+        }
+
+        .text-dark.custom-card--inline, .custom-card .text-dark, .font-weight-bold.text-dark {
+            color: $gray-400 !important;
+        }
+
+        .container-header .select, .song-h .song-h--desc .song-h--artist, .search-card, .text-dark {
+            color: $gray-500 !important;
+        }
+
+        .song-list--item .song-list--item-number, #settingsWrapper .theme-settings-body {
+            color: $gray-700;
+        }
+
+        .bg-warning {
+            color: $gray-900;
+        }
+
+        .container-header .select {
+            background: url(assets/images/arrow-light.png) right 0 center no-repeat;
+            option {
+                color: $gray-900;
+            }
+        }
+
+        .close {
+            color: $gray-500;
+            text-shadow: none;
+            &:hover {
+                color: $gray-500;
+            }
+        }
+
+        #footer {
+            &:before {
+                background-color: rgba($gray-900, .3);
+            }
+
+            &:after {
+                background: linear-gradient(to bottom, rgba($gray-800, 1) 0%, rgba($gray-800, 0) 100%);
+            }
+        }
+    }
+}

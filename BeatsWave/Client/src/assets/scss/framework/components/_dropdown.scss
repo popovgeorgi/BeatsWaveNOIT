@@ -1,0 +1,86 @@
+// styling for dropdown
+.dropdown {
+    &.fade-in {
+        .dropdown-menu {
+            display: block;
+            visibility: hidden;
+            opacity: 0;
+            margin-top: 30px;
+            transition: $transition-medium;
+        }
+
+        &.show {
+            .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                margin-top: 0;
+            }
+        }
+    }
+
+}
+
+.dropdown-menu {
+    box-shadow: $dropdown-menu-shadow;
+}
+
+.dropdown-item {
+    display: table;
+    width: 100%;
+    @include icons-style {
+        @include icon-size($icon-size-base);
+        @include table-cell-middle;
+    }
+
+    .dropdown-link {
+        display: table;
+        &:hover {
+            color: theme-color() !important;
+        }
+    }
+
+    span {
+        @include table-cell-middle;
+        padding-left: .5rem;
+    }
+}
+
+// Styling for dropdown icon
+.dropdown-icon {
+    > [data-toggle="dropdown"] {
+        @include icons-style {
+            @include icon-size($icon-size-base);
+            display: inline-block;
+            text-align: center;
+        }
+    }
+
+    .dropdown-menu {
+        min-width: inherit;
+        padding: 0 .5rem !important;
+        &:after {
+            @include pseudoContent;
+            clear: both;
+        }
+        &.show {
+            display: flex;
+        }
+
+        .dropdown-item {
+            padding: 0 !important;
+            float: left;
+            clear: inherit;
+            width: auto;
+
+            .dropdown-link {
+                padding: .325rem;
+
+                @include icons-style {
+                    @include icon-size($icon-size-base);
+                    display: inline-block;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}

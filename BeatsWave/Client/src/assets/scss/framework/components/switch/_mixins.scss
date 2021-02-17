@@ -1,0 +1,31 @@
+// Checked input mixin for switches
+@mixin input-checked-thumb {
+    input[type='checkbox'] {
+        &:checked + label:after {
+            @content;
+        }
+    }
+}
+
+// Set styles on switch thumb
+@mixin switch-and-thumb($width, $height: $width) {
+    width: $width;
+    height: $height;
+    border-radius: $height;
+}
+
+// Set styles on switch
+@mixin switch-styles($width) {
+    @include input-checked-thumb {
+        right: $width / 2;
+        transform: translate3d($width / 2.5, 0, 0);
+    }
+    label {
+        @include switch-and-thumb($width, $width / 2);
+        &:after {
+            top: $switch-thumb-spacing;
+            left: $switch-thumb-spacing;
+            @include switch-and-thumb(($width / 2) - ($switch-thumb-spacing * 2));
+        }
+    }
+}

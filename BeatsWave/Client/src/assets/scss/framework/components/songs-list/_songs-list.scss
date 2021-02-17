@@ -1,0 +1,79 @@
+//== Import song configuration file
+@import "config";
+
+// Styling for song list
+.song-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    .song-h {
+        @include flex(calc(100% - #{$song-label-width + $song-item-number-width}));
+    }
+
+    .song-list-group--item-separator {
+        margin-top: $song-item-separator-margin-y;
+        margin-bottom: $song-item-separator-margin-y;
+        height: $song-item-separator-height;
+        background: $gray-500;
+    }
+}
+
+.song-list--item {
+    @include flexBox();
+    align-items: center;
+    width: 100%;
+
+    .song-list--item-number {
+        width: $song-item-number-width;
+        font-size: $song-item-number-font-size;
+        line-height: 1;
+        font-family: $heading-font-family;
+        color: $gray-400;
+        font-weight: 600;
+    }
+
+    .song-h {
+        padding-right: $song-item-info-padding-x;
+    }
+
+    .song-list--item-options {
+        list-style: none;
+        margin-bottom: 0;
+    }
+
+    .custom-card--labels {
+        @include flex($song-label-width);
+        justify-content: flex-end;
+    }
+
+    + .song-list--item {
+        margin-top: $song-item-margin-y;
+    }
+}
+
+.song-h {
+    @include flexBox();
+    align-items: center;
+    cursor: pointer;
+    .song-h--desc {
+        padding-left: $song-item-desc-padding-x;
+        .song-h--name {
+            display: block;
+            font-weight: map-get($font-weight, medium);
+        }
+        .song-h--artist {
+            font-size: $song-artist-font-size;
+            color: $gray-600;
+        }
+    }
+
+    &.song-h--sm {
+        .song-h--img {
+            max-width: $song-item-image-width-sm;
+        }
+        .song-h--desc {
+            width: calc(100% - #{$song-item-image-width-sm});
+        }
+    }
+}

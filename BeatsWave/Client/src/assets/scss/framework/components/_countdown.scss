@@ -1,0 +1,28 @@
+.countdown {
+    @include flexBox();
+    font-family: inherit !important;
+    justify-content: flex-start !important;
+    align-items: center;
+    font-weight: map-get($font-weight, medium);
+    font-size: 1rem;
+    margin-left: -.25rem;
+    margin-right: -.25rem;
+
+    .measurements {
+        padding-right: .25rem;
+        padding-left: .25rem;
+        position: relative;
+        &:after {
+            @include absolute(top -1px right -2px);
+            content: ':';
+        }
+
+        &:last-child:after {
+            display: none;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+}

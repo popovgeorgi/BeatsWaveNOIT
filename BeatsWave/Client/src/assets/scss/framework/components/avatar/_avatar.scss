@@ -1,0 +1,19 @@
+//== Import avatar configuration
+@import "config";
+
+.avatar {
+    border-radius: $avatar-border-radius;
+    overflow: hidden;
+}
+
+.avatar-circle {
+    border-radius: 50%;
+}
+
+//== Generate avatar sizing classes
+@for $i from 1 through length($avatar-size-list) {
+    .avatar-#{nth($avatar-size-list, $i)} {
+        width: $i + rem;
+        height: $i + rem;
+    }
+}

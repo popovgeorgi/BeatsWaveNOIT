@@ -1,0 +1,65 @@
+//== Import landing configuration
+@import "config";
+
+// Styling for landing page header
+#landing-header {
+    @include absolute(top 0 right 0 left 0);
+    z-index: 2;
+    .header-auto-options {
+        list-style: none;
+        li + li {
+            margin-left: $landing-auth-options-margin-x;
+        }
+    }
+}
+
+// Styling for landing page banner
+.landing-banner {
+    height: $landing-banner-height;
+    position: relative;
+    .banner-content {
+        @include absolute(top 50% right 15px left 15px);
+        transform: translateY(-50%);
+    }
+
+    // Responsive styles
+    @include media-breakpoint-down(lg) {
+        height: $landing-banner-height-md;
+    }
+    @include media-breakpoint-down(sm) {
+        height: $landing-banner-height-sm;
+    }
+}
+
+// Styling for landing page section
+.landing-section {
+    padding-top: $landing-section-padding-y;
+    padding-bottom: $landing-section-padding-y;
+    .slick-arrow {
+        display: none !important;
+    }
+}
+
+.light-section {
+    background-color: rgba($black, .05);
+}
+
+// Responsive styles
+@include media-breakpoint-down(lg) {
+    .feature {
+        margin-bottom: $feature-margin-x;
+    }
+}
+
+.landing-paragraph {
+  font-family: 'Megrim', cursive;
+  color: white;
+  font-weight: bolder;
+}
+
+.landing-title {
+  font-family: 'Megrim', cursive;
+  font-weight: bold;
+  font-size: xxx-large;
+  color: white;
+}

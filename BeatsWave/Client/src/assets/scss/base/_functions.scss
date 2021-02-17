@@ -1,0 +1,9 @@
+// Retrieve color Sass maps
+@function theme-color($key: "primary") {
+    @return map-get($theme-colors, $key);
+}
+
+//== Function for position
+@function is-valid-length($value) {
+    @return type-of($value) == "number" and not unitless($value) or index(auto initial inherit 0, $value) != false;
+}

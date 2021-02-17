@@ -1,0 +1,145 @@
+//== Import wrapper configuration
+@import "../wrapper/config";
+
+//== Import header configuration
+@import "config";
+
+// Header styling
+#header {
+    @include fixed(top 1rem right $wrapper-padding-x left $header-from-left);
+    height: map-get($header, height);
+    border-radius: map-get($header, radius);
+    background-color: theme-color();
+    color: $white;
+    z-index: $zIndex-header;
+    padding: 0 map-get($header, padding-x);
+    flex-wrap: wrap;
+    box-shadow: 0 2px .5rem 2px rgba($black, .15);
+    transition: $transition-medium;
+
+    &.scrolled {
+        top: 0;
+        right: 0;
+        left: $sidebar-width;
+        border-radius: 0;
+    }
+
+    .toggle-menu {
+        display: none;
+        span {
+            background-color: $white;
+        }
+    }
+
+    .header-options {
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style: none;
+
+            + li {
+                margin-left: 1.5rem;
+            }
+
+            > a {
+                @include plain-hover-focus {
+                    color: $white;
+                }
+            }
+        }
+    }
+}
+
+.header-backdrop {
+    z-index: $zIndex-header - 1;
+}
+
+.language {
+    display: table;
+
+    span {
+        @include table-cell-middle;
+        padding-right: .25rem;
+    }
+
+    img {
+        width: 1.25rem;
+        @include table-cell-middle;
+    }
+}
+
+//== Responsive styling
+@include media-breakpoint-up(md) {
+    .iconic-sidebar #header {
+        left: $iconic-sidebar-header-from-left;
+
+        &.scrolled {
+            left: $iconic-sidebar-width;
+        }
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .iconic-sidebar #header {
+        left: $wrapper-padding-x;
+    }
+
+    #header {
+        left: $wrapper-padding-x;
+
+        &.scrolled {
+            left: 0 !important;
+        }
+
+        .toggle-menu {
+            display: block;
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    #header {
+        left: $wrapper-padding-sm-x;
+        right: $wrapper-padding-sm-x;
+    }
+
+    .header-options > li a > span {
+        display: none;
+    }
+}
+
+.card_count{
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  position: absolute;
+  top: 3px;
+  right: 144px;
+  color: #fff;
+  background-color: #2ac4b7;
+  padding: 3px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+@media(max-width:575px){
+  .card_count{
+    right: 47px;
+  }
+}

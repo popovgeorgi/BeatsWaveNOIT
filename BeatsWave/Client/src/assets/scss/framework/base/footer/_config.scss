@@ -1,0 +1,8 @@
+//== Import audio player configuration
+@import "../audio-player/config";
+
+$footer-background-image: 'assets/images/background/footer.jpg';
+
+$footer-padding-top: 2rem;
+$footer-padding-bottom: $player-height + 3.5rem;
+$footer-padding-x: $wrapper-padding-x

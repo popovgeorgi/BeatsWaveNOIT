@@ -1,0 +1,49 @@
+// Styling for line tabs
+.line-tabs {
+    position: relative;
+    &.nav-tabs {
+        border: none;
+
+        .nav-item {
+            margin-bottom: 0;
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+
+        .nav-link {
+            text-align: center;
+            display: block;
+            border: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-link.active, .nav-item.show .nav-link {
+            background-color: transparent;
+        }
+    }
+
+    .tabs-link-line {
+        @include absolute(bottom -.25rem left 0);
+        display: block;
+        width: 100%;
+        height: 2px;
+        transition: $transition-medium;
+    }
+}
+
+// Generate color variant line tabs
+@each $tab-name, $value in $theme-colors {
+    .line-tabs-#{$tab-name} {
+        .tabs-link-line {
+            background-color: $value;
+        }
+
+        &.nav-tabs {
+            .nav-link.active, .nav-item.show .nav-link {
+                color: $value;
+            }
+        }
+
+    }
+}

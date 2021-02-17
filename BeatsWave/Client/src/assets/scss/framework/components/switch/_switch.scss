@@ -1,0 +1,54 @@
+//== Import switch configuration file
+@import "config";
+
+//== Import switch mixins file
+@import "mixins";
+
+// Styling for switches
+.switch {
+    input[type='checkbox'] {
+        display: none;
+        &:checked + label:after {
+            left: inherit;
+        }
+        &:disabled + label {
+            opacity: .7;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+    label {
+        background-color: rgba($black, .15);
+        display: block;
+        position: relative;
+        cursor: pointer;
+        margin-bottom: 0;
+
+        &:after {
+            @include pseudoContent;
+            position: absolute;
+            display: block;
+            background-color: $switch-thumb-bg-color;
+            transform: translate3d(0, 0, 0);
+            transition: transform .3s, width .28s, background-color .6s;
+            transition-timing-function: cubic-bezier(0.42, 0.8, 0.58, 1.2);
+        }
+    }
+    // Set sizing for switch
+    @include switch-styles($switch-width);
+    &.switch-lg {
+        @include switch-styles($switch-width-lg);
+    }
+    &.switch-sm {
+        @include switch-styles($switch-width-sm);
+    }
+}
+
+// Generate different color variant for switches
+@each $switch-name, $value in $theme-colors {
+    .switch-#{$switch-name} {
+        @include input-checked-thumb {
+            background-color: $value;
+        }
+    }
+}

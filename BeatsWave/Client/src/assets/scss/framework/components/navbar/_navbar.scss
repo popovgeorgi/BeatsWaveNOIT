@@ -1,0 +1,59 @@
+//== Import navbar configuration file
+@import "config";
+
+//== Import mixins
+@import "mixins";
+
+// Navbar styles
+.navbar {
+    margin-top: $nav-margin-top;
+    margin-bottom: $nav-margin-bottom;
+    padding: 0 !important;
+}
+
+.navbar-nav {
+    max-height: calc(100vh - 11.5rem);
+    display: block;
+    width: 100%;
+
+    .nav-header {
+        padding: map-get($nav-header, padding);
+        font-size: map-get($nav-header, font-size);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: map-get($font-weight, medium);
+        color: theme-color(dark);
+    }
+
+    .nav-link {
+        display: table;
+        width: 100%;
+        padding: $nav-link-padding-y $nav-link-padding-x;
+
+        @include hover-focus {
+            color: theme-color(secondary);
+            font-weight: map-get($font-weight, medium);
+        }
+
+        &.active {
+            position: relative;
+            font-weight: map-get($font-weight, medium);
+            &:before {
+                @include pseudoContent;
+                @include absolute(top 0 bottom 0 left 0);
+                width: .25rem;
+            }
+        }
+
+        @include icons-style {
+            @include icon-size($nav-link-icon-size);
+            @include table-cell-middle;
+            text-align: center;
+        }
+
+        span {
+            @include table-cell-middle;
+            padding-left: .5rem;
+        }
+    }
+}

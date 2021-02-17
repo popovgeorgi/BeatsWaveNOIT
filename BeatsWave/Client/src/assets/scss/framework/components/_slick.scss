@@ -1,0 +1,52 @@
+// Slick slider styles
+.slick-slider {
+    .btn {
+        position: absolute;
+        margin-top: -1.25rem;
+        z-index: 100;
+        visibility: hidden;
+        opacity: 0;
+        transition: $transition-medium;
+
+        &.btn-prev {
+            left: -1.25rem;
+        }
+
+        &.btn-next {
+            right: -1.25rem;
+        }
+    }
+
+    &:hover {
+        .btn {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    &.arrow-pos-1 .btn {
+        top: 50%
+    }
+
+    &.arrow-pos-2 .btn {
+        top: 45%
+    }
+
+    &.arrow-pos-3 .btn {
+        top: 40%
+    }
+}
+
+.slick-list {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.slick-slide {
+    padding-right: 15px;
+    padding-left: 15px;
+
+    &:focus {
+        outline: none;
+    }
+}

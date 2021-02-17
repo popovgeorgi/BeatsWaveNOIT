@@ -1,0 +1,343 @@
+p {
+    margin-bottom: 1rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: theme-color(secondary);
+    transition: $transition-medium;
+    cursor: pointer;
+    @include hover-focus-active {
+        text-decoration: none;
+        outline: none;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+// Backdrop style
+.backdrop {
+    @include fixed(top 0 right 0 bottom 0 left 0);
+    background: rgba($black, .6);
+    visibility: hidden;
+    opacity: 0;
+    transition: $transition-long;
+
+    &.show {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.social-login {
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    border-bottom: 1px solid $gray-300;
+
+    &:after {
+        content: 'OR';
+        display: inline-block;
+        @include absolute(bottom -.875rem left 50%);
+        padding: .25rem .5rem;
+        margin-left: -1.125rem;
+        z-index: 2;
+        background-color: $white;
+    }
+}
+
+// Styling for page banners
+.banner {
+    background-size: cover;
+    background-position: center center;
+    height: $banner-height;
+    margin: 0 #{-$wrapper-padding-x};
+    position: relative;
+    z-index: 1;
+
+    @include before-after {
+        @include pseudoContent
+    }
+
+    &:before {
+        @include absolute(top 0 right 0 bottom 0 left 0);
+        background-color: rgba($white, .3);
+    }
+
+    &:after {
+        @include absolute(right 0 bottom 0 left 0);
+        height: 10rem;
+        background: linear-gradient(to bottom, rgba($white, 0) 0%, rgba($white, 1) 78%, rgba($white, 1) 100%);
+    }
+}
+
+@for $i from 1 through length($banner-bg-list) {
+    .bg-#{nth($banner-bg-list, $i)} {
+        background-image: url('#{$banner-bg-image-url}#{nth($banner-bg-list, $i)}.jpg');
+    }
+}
+
+// Page style
+.main-container {
+    position: relative;
+    z-index: 2;
+    margin-top: -6rem;
+    min-height: calc(100vh / 3.26);
+    &.under-banner-content {
+        margin-top: 0;
+    }
+}
+
+.mainPhotoHeight {
+  height: 100%;
+}
+
+.heading {
+    margin-bottom: 2rem;
+}
+
+.section {
+    margin-bottom: 4rem !important;
+}
+
+// Background style
+.bg-img {
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+}
+
+.bg-img-radius-lg {
+    border-radius: $radius-lg;
+}
+
+.bg-img-radius-md {
+    border-radius: $radius-md;
+}
+
+.bg-img-radius-sm {
+    border-radius: $radius-sm;
+}
+
+.bg-blur {
+    @include absolute(top 50% right 0 left 0);
+    padding: 1rem;
+    transform: translateY(-50%);
+    font-weight: map-get($font-weight, medium);
+    font-size: 1rem;
+    text-align: center;
+    color: $white;
+    background-color: rgba($black, .5);
+}
+
+// Event card style
+.event {
+    position: relative;
+
+    &:after {
+        @include pseudoContent;
+        @include absolute(right 0 bottom 0 left 0);
+        height: 45%;
+        background: linear-gradient(to bottom, rgba(0,0,0, 0) 0%, rgba(0,0,0, 1) 50%, rgba(0,0,0, 1) 100%);
+        z-index: 1;
+    }
+
+    .event-content {
+        color: $white;
+        @include absolute(right 0 bottom 0 left 0);
+        z-index: 2;
+
+        h6 {
+            color: $white;
+        }
+    }
+}
+
+.event-v {
+    min-height: $event-v-height;
+}
+
+.event-h {
+    min-height: $event-h-height;
+}
+
+// Styling for common elements
+.stars {
+    font-size: 1.25rem;
+    line-height: 1;
+    i + i {
+        margin-left: .25rem;
+    }
+}
+
+.flex-basis-0 {
+    flex-basis: 0;
+}
+
+.table {
+    th, td {
+        vertical-align: middle;
+    }
+}
+
+.custom-file-label, .custom-file-label::after {
+    padding: .75rem;
+}
+
+.custom-file-label::after {
+    height: 100%;
+}
+
+.setting-label {
+    max-width: calc(100% - 100px);
+}
+
+.container-header {
+    @include flexBox;
+    align-items: center;
+    padding-bottom: .75rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid $gray-400;
+    .title {
+        font-weight: map-get($font-weight, medium);
+    }
+    .select {
+        appearance: none;
+        border: none;
+        outline: none;
+        padding: .25rem 1.5rem .25rem 1rem;
+        cursor: pointer;
+        background: url(assets/images/arrow.png) right 0 center no-repeat;
+    }
+    .icon {
+        @include icons-style {
+            @include icon-size(1.5rem);
+            display: inline-block;
+            text-align: center;
+        }
+        margin-left: 1rem;
+    }
+}
+
+.col-xl-custom {
+    @include flex(20%);
+}
+
+.red-border-solid {
+  border: 1px solid red !important;
+}
+
+.mt-50px {
+  margin-top: -50px;
+}
+
+.mt-35px {
+  margin-top: 35px;
+}
+
+.event-heading {
+  margin-left: 230px;
+  font-weight: bold;
+  color: white;
+}
+
+.icon-upload-suc {
+  color: green
+}
+
+body div.ui-fileupload-buttonbar.ui-widget-header.ui-corner-top {
+  background-color: rgb(52, 58, 64);
+  border: 1px solid #6C757D;
+  margin-bottom: -3px;
+}
+
+.icon-details {
+  font-size: 20px;
+}
+
+.img-edit-beat {
+  border-radius: 35px;
+  width: 80%;
+  margin: auto;
+}
+
+.comment {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.artist-not-having-beats {
+  text-align: center;
+  margin-top: 60px
+}
+
+.artist-biography {
+  font-size: x-large;
+  text-align: center;
+  margin-top: 60px;
+  font-weight: 600;
+}
+
+.favourites-button-empty {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.txt-center {
+  text-align: center;
+}
+
+.h-300 {
+  height: 300px;
+}
+
+.btn-empty {
+  height: 50px;
+  width: 140px;
+}
+
+.txt-h {
+  text-align: center;
+  font-weight: bolder;
+}
+
+.txt-p {
+  text-align: center;
+  font-weight: 700;
+}
+
+.mt-80 {
+  margin-top: 100px;
+}
+
+.search-not-found {
+  margin: auto;
+  font-size: large;
+  font-weight: 700;
+}
+
+.reply {
+  color: #735FDC;
+}
+
+.form-logo {
+  width: 80%;
+  margin: auto;
+}
+
+.select-role {
+  text-align: center;
+}
+
+.file-uploaded {
+  .ui-fileupload-content{
+    background-color: green !important;
+  }
+}

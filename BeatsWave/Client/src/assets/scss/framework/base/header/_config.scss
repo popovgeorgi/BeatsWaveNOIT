@@ -1,0 +1,8 @@
+$header-from-left: $sidebar-width + $wrapper-padding-x;
+$iconic-sidebar-header-from-left: $iconic-sidebar-width + $wrapper-padding-x;
+
+$header: (
+    height: 3rem,
+    radius: .5rem,
+    padding-x: 1.25rem
+)

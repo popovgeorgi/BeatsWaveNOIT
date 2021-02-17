@@ -1,0 +1,154 @@
+//== Import left sidebar configuration
+@import "config";
+
+// Styling for sidebar
+#sidebar {
+    @include fixed(top 0 bottom 0);
+    width: $sidebar-width;
+    background-color: $gray-100;
+    transition: $transition-medium;
+
+    .toggle-menu {
+        span {
+            background-color: theme-color(dark);
+        }
+    }
+}
+
+#hideSidebar {
+    display: none;
+}
+
+.sidebar-header {
+    padding: 1rem;
+}
+
+.sidebar-footer {
+    padding-right: $sidebar-footer-padding-x;
+    padding-left: $sidebar-footer-padding-x;
+
+    .ion-md-musical-note {
+        display: none;
+    }
+}
+
+.sidebar-backdrop {
+    z-index: $zIndex-sidebar - 1;
+}
+
+// Toggle menu styles
+.toggle-menu {
+    position: relative;
+    width: map-get($toggle-menu, width);
+    height: map-get($toggle-menu, height);
+    padding: 0 !important;
+    cursor: pointer;
+    margin-left: auto;
+    border: none !important;
+
+    span {
+        display: block;
+        height: 2px;
+        margin-left: auto;
+        transition: $transition-short;
+
+        &:nth-child(1) {
+            width: map-get($toggle-menu, width) / 1.5;
+        }
+
+        &:nth-child(2) {
+            margin-top: 4px;
+            width: map-get($toggle-menu, width);
+        }
+
+        &:nth-child(3) {
+            margin-top: 4px;
+            width: map-get($toggle-menu, width) / 1.75;
+        }
+    }
+}
+
+// Styling for brand
+.brand {
+    display: block;
+    font-weight: map-get($font-weight, medium);
+    flex-wrap: wrap;
+    width: $brand-width;
+}
+
+//== Responsive styles
+@include media-breakpoint-up(md) {
+    .iconic-sidebar #sidebar {
+        width: $iconic-sidebar-width;
+
+        .toggle-menu span {
+            width: 100%;
+        }
+
+        .brand {
+            display: none;
+        }
+
+        .navbar-nav {
+            max-height: calc(100vh - 10.25rem);
+        }
+
+        .nav-header, .nav-link span {
+            display: none;
+        }
+
+        .toggle-menu {
+            margin-right: auto;
+        }
+
+        .nav-link {
+            padding-right: 1rem;
+            padding-left: 1rem;
+            display: block;
+            text-align: center;
+
+            @include icons-style {
+                @include icon-size(1.75rem);
+                display: inline-block;
+            }
+        }
+
+        .sidebar-header {
+            padding-top: 1.75rem;
+        }
+
+        .sidebar-footer {
+            padding-right: .5rem;
+            padding-left: .5rem;
+
+            .ion-md-musical-note {
+                display: block;
+            }
+
+            span {
+                display: none;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    #sidebar {
+        left: -$sidebar-width;
+        z-index: $zIndex-sidebar;
+
+        .toggle-menu {
+            display: none;
+        }
+    }
+
+    #hideSidebar {
+        display: block;
+    }
+
+    .open-sidebar {
+        #sidebar {
+            left: 0;
+        }
+    }
+}

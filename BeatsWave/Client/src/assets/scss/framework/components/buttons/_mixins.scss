@@ -1,0 +1,5 @@
+@mixin btn-air($color) {
+    &.btn-air {
+        box-shadow: $btn-shadow rgba($color, .35);
+    }
+}

@@ -1,0 +1,53 @@
+#customSettings {
+    @include fixed(right $wrapper-padding-x bottom $player-height + 1rem);
+    z-index: 1024;
+}
+
+#settingsWrapper {
+    @include fixed(right $wrapper-padding-x bottom $player-height + 3rem);
+    max-width: 25rem;
+    width: 100%;
+    box-shadow: 0 1px 1rem 1px rgba($black, .15);
+    z-index: 1024;
+    transform: translateY(0);
+    transition: all .5s;
+    opacity: 0;
+    visibility: hidden;
+
+    &.open-settings {
+        transform: translateY(-1rem);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    header {
+        padding: 1rem 1.5rem;
+        background-color: theme-color(brand);
+        @include flexBox(true);
+
+        .title-bold, a {
+            color: $white !important;
+        }
+    }
+
+    .theme-settings-body {
+        background-color: $white;
+        padding: 1rem 1.5rem 3rem;
+
+        [class*=' bg-'] {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            border: 2px solid $white;
+
+            &.active {
+                box-shadow: 0 0 0 2px theme-color(dark);
+            }
+
+            + [class*=' bg-'] {
+                margin-left: .5rem;
+            }
+        }
+    }
+}

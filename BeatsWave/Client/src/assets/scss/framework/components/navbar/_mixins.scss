@@ -1,0 +1,15 @@
+@mixin nav-link-hover($color) {
+    .nav-link {
+        &.active {
+            background-color: rgba($color, .1);
+
+            @include plain-hover-focus {
+                color: $color;
+            }
+
+            &:before {
+                background-color: $color;
+            }
+        }
+    }
+}

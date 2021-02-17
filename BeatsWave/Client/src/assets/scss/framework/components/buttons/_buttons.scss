@@ -1,0 +1,104 @@
+//== Import buttons configuration
+@import "config";
+
+//== Import buttons mixins
+@import "mixins";
+
+.btn,
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    &:focus {
+        outline: none !important;
+    }
+}
+
+// Default button styles
+.btn-default {
+    background-color: $white;
+
+    &.btn-air {
+        box-shadow: $btn-shadow rgba(theme-color(dark), .15);
+    }
+
+    @include hover-focus-active {
+        background-color: theme-color(primary) !important;
+        color: $white !important;
+    }
+}
+
+.btn-default-air {
+    @include plain-hover-focus {
+        box-shadow: $btn-shadow rgba(theme-color(dark), .15);
+    }
+}
+
+// Button text uppercase bold
+.btn-bold {
+    font-weight: map-get($font-weight, medium) !important;
+    text-transform: uppercase;
+}
+
+.btn-pill {
+    border-radius: $btn-pill-border-radius;
+}
+
+// Icon button styles
+.btn-icon-only {
+    padding: 0 !important;
+    width: 2.5rem;
+    height: 2.5rem;
+
+    @include icons-style {
+        @include icon-size($icon-size-base);
+    }
+}
+
+.btn-inline {
+    .btn + .btn {
+        margin-left: .25rem;
+    }
+}
+
+// Styling for social buttons
+.btn-social {
+    font-weight: map-get($font-weight, medium);
+    text-align: center;
+    @include  icons-style {
+        @include icon-size(1.5rem);
+    }
+}
+
+.btn-content {
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+
+    * {
+        @include table-cell-middle;
+    }
+}
+
+.btn-facebook {
+    @include plain-hover-focus {
+        color: #3b5998;
+    }
+}
+
+.btn-google {
+    @include plain-hover-focus {
+        color: #dd4b39;
+    }
+}
+
+// Generate color variant buttons
+@each $button-name, $value in $theme-colors {
+    .btn-#{$button-name} {
+        @include btn-air($value);
+    }
+
+    .btn-outline-#{$button-name} {
+        @include btn-air($value);
+    }
+}

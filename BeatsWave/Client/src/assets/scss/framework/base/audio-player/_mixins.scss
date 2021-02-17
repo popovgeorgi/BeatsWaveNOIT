@@ -1,0 +1,140 @@
+//== Import audio player configuration
+@import "config";
+
+//== Range thumb mixins
+@mixin thumb($opacity) {
+    -webkit-appearance: none;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 50%;
+    @if $opacity == true {
+        opacity: 0;
+    }
+}
+
+@mixin thumb-skins($color) {
+    &::-webkit-slider-thumb {
+        background-color: $color;
+    }
+
+    &::-moz-range-thumb {
+        background-color: $color;
+    }
+
+    &::-ms-thumb {
+        background-color: $color;
+    }
+}
+
+@mixin range-thumb($opacity: true) {
+    &::-webkit-slider-thumb {
+        @include thumb($opacity);
+    }
+
+    &::-moz-range-thumb {
+        @include thumb($opacity);
+    }
+
+    &::-ms-thumb {
+        @include thumb($opacity);
+    }
+}
+
+@mixin range-thumb-hover {
+    &::-webkit-slider-thumb {
+        opacity: 1;
+    }
+
+    &::-moz-range-thumb {
+        opacity: 1;
+    }
+
+    &::-ms-thumb {
+        opacity: 1;
+    }
+}
+
+@mixin volume-range-thumb {
+    &::-webkit-slider-thumb {
+        @include thumb(false);
+        position: relative;
+        top: -.325rem;
+    }
+
+    &::-moz-range-thumb {
+        @include thumb(false);
+        position: relative;
+        top: -.325rem;
+    }
+
+    &::-ms-thumb {
+        @include thumb(false);
+        position: relative;
+        top: -.325rem;
+    }
+}
+
+//== Range track mixins
+@mixin track {
+    border-radius: $volume-height;
+    height: $volume-height;
+    background-color: lighten(theme-color(primary), 30%);
+}
+
+@mixin range-track {
+    &::-webkit-slider-runnable-track {
+        @include track;
+    }
+
+    &::-moz-range-track {
+        @include track;
+    }
+
+    &::-ms-track {
+        @include track;
+    }
+}
+
+//== Progress value mixin
+@mixin progress-value($color, $light: false) {
+    @if $light == true {
+        background-color: rgba($color, .4);
+    } @else {
+        background-color: $color;
+    }
+    border-radius: $player-progress-bar-height;
+}
+
+//== Player skin mixin
+@mixin player-skin($color) {
+    &#audioPlayer {
+        input[type="range"] {
+            @include thumb-skins($color);
+        }
+
+        .audio-progress {
+            &::-moz-progress-bar {
+                @include progress-value($color);
+            }
+
+            &.audio-progress--played {
+                &[value]::-webkit-progress-value {
+                    @include progress-value($color);
+                }
+            }
+
+            &.audio-progress--buffered {
+                &[value]::-webkit-progress-value {
+                    @include progress-value($color, true);
+                }
+            }
+        }
+
+        .btn-default {
+            @include hover-focus {
+                background-color: $color;
+            }
+        }
+    }
+
+}

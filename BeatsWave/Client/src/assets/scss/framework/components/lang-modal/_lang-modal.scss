@@ -1,0 +1,49 @@
+//== Import language modal configuration file
+@import "config";
+
+.lang-content {
+    .modal-header, .modal-body, .modal-footer {
+        padding-left: $lang-content-child-padding-x;
+        padding-right: $lang-content-child-padding-x;
+    }
+}
+
+.language-list {
+    @include flexBox;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    .language-item {
+        @include flex(50%);
+        input[type="checkbox"] {
+            @include absolute(left -10000px);
+            &:checked + label {
+                background-color: $gray-100;
+                &:after {
+                    padding: .2rem .325rem;
+                    border-right: 1px solid theme-color(success);
+                    border-top: 1px solid theme-color(success);
+                    transform: rotate(130deg);
+                }
+            }
+        }
+        label {
+            margin-bottom: 0;
+            display: block;
+            position: relative;
+            cursor: pointer;
+            padding: $lang-label-padding-y $lang-label-padding-x;
+            &:hover {
+                background-color: $gray-100;
+            }
+            &:after {
+                @include pseudoContent;
+                @include absolute(top $lang-label-padding-y + .325rem right $lang-label-padding-x);
+                padding: .25rem;
+                border-right: 1px solid $gray-500;
+                border-top: 1px solid $gray-500;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}

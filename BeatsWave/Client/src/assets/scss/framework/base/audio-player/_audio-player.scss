@@ -1,0 +1,234 @@
+//== Import audio player mixins
+@import "mixins";
+
+// Styling for audio player
+#audioPlayer {
+    @include flexBox();
+    @include fixed(right $wrapper-padding-x bottom .5rem left $player-from-left);
+    align-items: center;
+    background-color: $white;
+    border-radius: $radius-md;
+    height: $player-height;
+    z-index: $zIndex-player;
+    box-shadow: $player-shadow;
+    transition: $transition-medium;
+
+    &:hover {
+        #progress-container input[type="range"] {
+            height: $player-progress-bar-height * 2;
+            @include range-thumb-hover;
+        }
+
+        .audio-progress {
+            height: $player-progress-bar-height * 2;
+        }
+    }
+
+    input[type="range"] {
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+// Styling for audio player progress container
+#progress-container {
+    @include absolute(top 0 right .625rem left .625rem);
+
+    input[type="range"] {
+        @include absolute(top 0);
+        appearance: none;
+        width: 100%;
+        background-color: transparent;
+        height: $player-progress-bar-height;
+        z-index: 3;
+        cursor: pointer;
+        @include range-thumb;
+
+        &::-moz-range-track {
+            background: none;
+        }
+    }
+
+    .audio-progress {
+        @include absolute(top 0 left 0);
+        appearance: none;
+        display: block;
+        height: $player-progress-bar-height;
+        background: transparent;
+        border: none;
+        width: 100%;
+        border-radius: $player-progress-bar-height;
+
+        &[value]::-webkit-progress-bar {
+            background: none;
+        }
+
+        &::-moz-progress-bar {
+            background: none;
+        }
+
+        &.audio-progress--played {
+            z-index: 2;
+        }
+
+        &.audio-progress--buffered {
+            z-index: 1;
+        }
+    }
+}
+
+// Styling for audio
+.audio {
+    @include flexBox();
+    @include flex(37%);
+    align-items: center;
+
+    .song-image {
+        @include flex($player-cover-image-width);
+
+        img {
+            border-top-left-radius: $radius-md;
+            border-bottom-left-radius: $radius-md;
+        }
+    }
+
+    .song-info {
+        @include flex(calc(100% - #{$player-cover-image-width}));
+    }
+
+    .song-name, .song-artists {
+        max-width: 100%;
+    }
+
+    .song-name {
+        font-weight: map-get($font-weight, medium);
+        text-transform: capitalize;
+    }
+}
+
+// Styling for audio player controls
+.audio-controls {
+    @include flexBox(true);
+    @include flex(26%);
+    align-items: center;
+}
+
+.audio-controls--left,
+.audio-controls--right {
+    .btn {
+        color: $gray-600;
+    }
+}
+
+.audio-controls--main {
+    .btn-default {
+        margin-right: .5rem;
+        margin-left: .5rem;
+    }
+}
+
+.audio-info {
+    @include flex(37%);
+    justify-content: flex-end;
+}
+
+// Play and pause button styles
+.amplitude-play-pause {
+    .ion-md-pause {
+        display: none;
+    }
+
+    &.amplitude-playing {
+        .ion-md-pause {
+            display: inline-block;
+        }
+
+        .ion-md-play {
+            display: none;
+        }
+    }
+}
+
+// Volume button styles
+.audio-volume {
+    input[type="range"] {
+        appearance: none;
+        position: relative;
+        top: -.25rem;
+        width: 100%;
+        cursor: pointer;
+        @include volume-range-thumb;
+        @include range-track;
+    }
+
+    .dropdown-menu {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+//== Responsive style
+@include media-breakpoint-down(xl) {
+    .audio {
+        @include flex(55%);
+    }
+
+    .audio-controls {
+        @include flex(45%);
+        padding-right: $audio-control-padding-x;
+    }
+
+    .audio-info {
+        display: none !important;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .iconic-sidebar #audioPlayer {
+        left: $iconic-sidebar-player-from-left;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    #audioPlayer {
+        left: $wrapper-padding-x;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .audio {
+        @include flex(53%);
+    }
+
+    .audio-controls {
+        @include flex(47%);
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    #audioPlayer {
+        right: $wrapper-padding-sm-x;
+        left: $wrapper-padding-sm-x;
+    }
+
+    .song-info {
+        display: none;
+    }
+
+    .audio {
+        @include flex($player-cover-image-width);
+    }
+
+    .audio-controls {
+        @include flex(calc(100% - #{$player-cover-image-width}));
+        padding-left: $audio-control-padding-x;
+    }
+}
+
+@include custom-media-breakpoint-down(379px) {
+    .audio-controls {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

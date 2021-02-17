@@ -1,0 +1,17 @@
+@mixin scrollbar-scheme($color) {
+    .ps__thumb-y {
+        background-color: $color !important;
+    }
+
+    .ps__rail-y {
+        @include hover-focus {
+            > .ps__thumb-y {
+                background-color: $color !important;
+            }
+        }
+
+        &.ps--clicking .ps__thumb-y {
+            background-color: $color !important;
+        }
+    }
+}

@@ -1,0 +1,142 @@
+//== Pseudo Content
+@mixin pseudoContent() {
+    content: '';
+    display: block;
+}
+
+//== Position mixin
+@mixin position($position, $args: ()) {
+    $offsets: top right bottom left;
+    position: $position;
+    @each $offset in $offsets {
+        $index: index($args, $offset);
+        @if $index {
+            @if $index == length($args) {
+                #{$offset}: 0;
+            } @else {
+                $next: nth($args, $index + 1);
+                @if is-valid-length($next) {
+                    #{$offset}: $next;
+                } @else if index($offsets, $next) {
+                    #{$offset}: 0;
+                } @else {
+                    @warn "Invalid value `#{$next}` for offset `#{$offset}`.";
+                }
+            }
+        }
+    }
+}
+
+@mixin absolute($args: ()) {
+    @include position(absolute, $args);
+}
+
+@mixin fixed($args: ()) {
+    @include position(fixed, $args);
+}
+
+//== Mixin set flex and max width of element
+//== @value param must in number value
+@mixin flex($value) {
+    flex: 0 0 $value;
+    max-width: $value;
+}
+
+@mixin flexBox($center: false) {
+    display: flex;
+    flex-wrap: wrap;
+    @if $center == true {
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@mixin table-cell-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+//== Mixin set input placeholder color
+//== @color param must in color code
+@mixin placeholder($color: $gray-500) {
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
+    &::-moz-placeholder {
+        color: $color;
+    }
+    &:-ms-input-placeholder {
+        color: $color;
+    }
+    &:-moz-placeholder {
+        color: $color;
+    }
+}
+
+@mixin icon-size($size) {
+    width: $size;
+    height: $size;
+    font-size: $size;
+    line-height: 1;
+}
+
+@mixin icons-style {
+    // lineawesome
+    [class^="la-"],
+    [class*=" la-"],
+    // ionic icons
+    [class^="ion-"],
+    [class*=" ion-"] {
+        @content;
+    }
+}
+
+@mixin before-after {
+    &:before,
+    &:after {
+        @content;
+    }
+}
+
+@mixin hover-focus {
+    &:hover,
+    &:focus {
+        @content;
+    }
+}
+
+@mixin plain-hover-focus {
+    &,
+    &:hover,
+    &:focus {
+        @content;
+    }
+}
+
+@mixin hover-focus-active {
+    &:hover,
+    &:focus,
+    &:active {
+        @content;
+    }
+}
+
+//== Generate media query
+//== $breakpoint size declare in config
+@mixin media-breakpoint-up($name) {
+    @media (min-width: #{map-get($breakpoints, $name)}) {
+        @content;
+    }
+}
+
+@mixin media-breakpoint-down($name) {
+    @media (max-width: #{map-get($breakpoints, $name)}) {
+        @content;
+    }
+}
+
+@mixin custom-media-breakpoint-down($name) {
+    @media (max-width: $name) {
+        @content;
+    }
+}

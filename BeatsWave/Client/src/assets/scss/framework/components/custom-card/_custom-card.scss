@@ -1,0 +1,133 @@
+//== Import card configuration
+@import "config";
+
+.custom-card-list {
+    .custom-card, .song-list--item {
+        margin-bottom: $card-margin-y;
+    }
+}
+
+// Styling for custom card
+.custom-card {
+    .custom-card--img {
+        position: relative;
+        overflow: hidden;
+
+        .custom-card--info {
+            @include absolute(top 0 right 0 left 0);
+
+            &:after {
+                @include pseudoContent;
+                @include absolute(top 0 right 0 left 0);
+                height: 4rem;
+                z-index: 1;
+                background: rgba(0,0,0,0.75);
+                background: linear-gradient(to bottom, rgba($black, 0.75) 0%, rgba($black, 0) 100%);
+                visibility: visible;
+                opacity: 0;
+                transition: $transition-short;
+            }
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .custom-card--labels {
+            @include absolute(top 1.25rem left 1rem);
+            z-index: 2;
+        }
+
+        .dropdown {
+            @include absolute(top 1.25rem right 1rem);
+            visibility: hidden;
+            opacity: 0;
+            transition: $transition-short;
+            z-index: 2;
+
+            > a {
+                color: $white;
+            }
+        }
+    }
+
+    .custom-card--link {
+        display: block;
+        color: theme-color(secondary);
+
+        h6 {
+            color: $gray-900;
+            margin-bottom: .25rem;
+        }
+    }
+
+    &:hover {
+        .custom-card--img .custom-card--info {
+            &:after, .dropdown {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+}
+
+// Styling for custom card labels
+.custom-card--labels {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+
+    > li + li {
+        margin-left: .75rem;
+    }
+
+    .badge {
+        width: $badge-width;
+        height: $badge-height;
+        display: table;
+        padding: 0;
+        @include icons-style {
+            @include icon-size($card-badge-font-size);
+            @include table-cell-middle;
+        }
+    }
+}
+
+// Custom card inline styles
+.custom-card--inline {
+    @include flexBox;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+
+    .custom-card--inline-img {
+        @include flex($inline-card-img-width);
+    }
+
+    .custom-card--inline-desc {
+        padding-left: 1rem;
+        @include flex(calc(100% - #{$inline-card-img-width}));
+    }
+}
+
+// Styling for card image radius
+.card-img--radius-lg {
+    border-radius: $card-img-radius-lg;
+}
+
+.card-img--radius-md {
+    border-radius: $card-img-radius-md;
+}
+
+.card-img--radius-sm {
+    border-radius: $card-img-radius-sm;
+}
+
+.like-icon {
+  color: red;
+}
+
+.comment-icon {
+  color: dodgerblue;
+}

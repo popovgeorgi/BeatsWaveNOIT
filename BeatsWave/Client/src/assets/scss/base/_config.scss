@@ -1,0 +1,105 @@
+//== Gray shade color scheme
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #222629;
+$black:    #000;
+
+//== Base Colors
+$blue:      #196eed;
+$indigo:    #753fdc;
+$purple:    #ad20d4;
+$pink:      #e60087;
+$red:       #f11717;
+$orange:    #ff9900;
+$yellow:    #ffcf00;
+$green:     #00c746;
+$cyan:      #26bebf;
+$teal:      #20c997;
+
+//== Marge base colors in theme colors array
+$theme-colors: ();
+$theme-colors: map-merge(
+    (
+        "primary":    $indigo,
+        "secondary":  $gray-700,
+        "brand":      $purple,
+        "success":    $green,
+        "info":       $blue,
+        "warning":    $yellow,
+        "danger":     $red,
+        "light":      $gray-300,
+        "dark":       $gray-900
+    ), $theme-colors
+);
+
+// Heading font
+$heading-font-family: 'Roboto Slab', serif !default;
+// Theme base font size
+$font-size-base: .875rem !default;
+// Theme base line height
+$line-height-base: 1.45 !default;
+
+//== Font weight array
+$font-weight: (
+    'light': 300,
+    'normal': 400,
+    'medium': 600,
+    'bold': 700,
+    'bolder': 800
+);
+
+//== Sidebar variables
+$sidebar-width: 17.5rem !default;
+$iconic-sidebar-width: 5rem !default;
+$sidebar-padding-x: 1.5rem !default;
+
+//== Wrapper padding
+$wrapper-padding-x: 2rem !default;
+$wrapper-padding-sm-x: 1rem !default;
+
+//== Transition
+$transition-short: .2s all ease-in !default;
+$transition-medium: .4s all ease-in !default;
+$transition-long: .6s all ease-in !default;
+
+// Icon size
+$icon-size-base: 1.25rem !default;
+// Dropdown shadow
+$dropdown-menu-shadow: 0 1px 12px 2px rgba($black, .15) !default;
+
+//== Z-index
+$zIndex-player: 1004;
+$zIndex-header: 1014;
+$zIndex-sidebar: 1024;
+$zIndex-loader: 3000;
+
+//== Banner images variables
+$banner-height: 20rem;
+$banner-bg-image-url: 'assets/images/banner/' !default;
+$banner-bg-list: 'analytics', 'artists', 'event', 'home', 'radio', 'song', 'landing' !default;
+
+//== Event banner height variables
+$event-v-height: 25rem !default;
+$event-h-height: $event-v-height / 2;
+
+//== App border radius variables
+$radius-lg: 1.5rem;
+$radius-md: 1rem;
+$radius-sm: .5rem;
+
+//== Responsive breakpoints
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+);
+

@@ -1,0 +1,137 @@
+//== Import search configuration
+@import "config";
+
+//== Import left sidebar configuration
+@import "../sidebar/left/config";
+
+//== Import left header configuration
+@import "../header/config";
+
+// Styling for search form
+#searchForm {
+    position: relative;
+    flex: 1;
+
+    .btn {
+        @include absolute(top .625rem left 0);
+        color: $white;
+        padding: 0 !important;
+        font-size: $icon-size-base;
+    }
+
+    .form-control {
+        background-color: transparent !important;
+        border: none;
+        color: $white;
+        padding-left: 1.75rem;
+        @include placeholder($white);
+    }
+}
+
+// Styling for search card
+.search-card {
+    position: absolute !important;
+    top: 100%;
+    right: 0;
+    left: -#{map-get($header, padding-x)};
+    background-color: $white;
+    border-radius: map-get($search-ui, radius);
+    padding-top: map-get($search-ui, padding);
+    padding-bottom: map-get($search-ui, padding);
+    margin-top: .5rem;
+    color: theme-color(secondary);
+    visibility: hidden;
+    opacity: 0;
+    transition: $transition-long;
+
+    perfect-scrollbar {
+        max-height: map-get($search-ui, height);
+    }
+}
+
+.search-item {
+    padding-left: map-get($search-ui, padding);
+    padding-right: map-get($search-ui, padding);
+    .search-item-header {
+        @include flexBox;
+        align-items: center;
+        padding-bottom: $search-header-padding-y;
+        border-bottom: 1px solid $gray-300;
+        .search-item-title {
+            font-family: $heading-font-family;
+            font-weight: map_get($font-weight, medium);
+            text-transform: uppercase;
+        }
+        .search-item-link {
+            font-size: $search-link-font-size;
+            font-weight: 600;
+            color: theme-color();
+            position: relative;
+            &:after {
+                @include pseudoContent;
+                @include absolute(bottom -.125rem left 0);
+                height: 1px;
+                width: 0;
+                background-color: theme-color();
+                transition: $transition-short;
+            }
+            &:hover {
+                color: theme-color();
+                &:after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .search-item-body {
+        padding-top: $search-body-padding-y;
+        padding-bottom: $search-body-padding-y;
+        margin-bottom: -#{$search-body-child-margin-y};
+        .song-h {
+            margin-bottom: $search-body-child-margin-y;
+        }
+        .custom-card--link {
+            margin-bottom: $search-body-child-margin-y;
+            h6 {
+                font-family: $font-family-base;
+                font-size: $font-size-base;
+            }
+        }
+    }
+
+    + .search-item {
+        margin-top: $search-item-margin-y;
+    }
+    &:last-child {
+        .search-item-body {
+            padding-bottom: 0;
+        }
+    }
+}
+
+.open-search {
+    #overlay {
+        z-index: $zIndex-header - 1;
+    }
+
+    #sidebar {
+        z-index: $zIndex-header - 2;
+    }
+
+    .search-card {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+//== Responsive styles
+@include media-breakpoint-down(md) {
+    #searchForm {
+        position: static;
+    }
+    .search-card {
+        left: -#{map-get($header, padding-x)};
+        right: -#{map-get($header, padding-x)};
+    }
+}

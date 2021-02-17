@@ -1,0 +1,39 @@
+//== Import right sidebar configuration
+@import "config";
+
+// Styling for right sidebar
+#rightSidebar {
+    @include fixed(top 6rem right #{-$right-sidebar-width} bottom 6rem);
+    width: $right-sidebar-width;
+    background-color: $white;
+    border-bottom-left-radius: $radius-md;
+    border-top-left-radius: $radius-md;
+    z-index: $zIndex-player;
+    box-shadow: $right-sidebar-shadow;
+    transition: $transition-medium;
+
+    .right-sidebar-header {
+        border-top-left-radius: $radius-md;
+        padding: $right-sidebar-header-padding-y $right-sidebar-header-padding-x;
+        background-color: theme-color(primary);
+        font-weight: map-get($font-weight, medium);
+        color: $white;
+        text-transform: uppercase;
+    }
+
+    .right-sidebar-body {
+        border-bottom-left-radius: $radius-md;
+        height: calc(100% - 3.25rem);
+        overflow: auto;
+
+        > .ps {
+            height: 100%;
+        }
+    }
+}
+
+.open-right-sidebar {
+    #rightSidebar {
+        right: 0;
+    }
+}

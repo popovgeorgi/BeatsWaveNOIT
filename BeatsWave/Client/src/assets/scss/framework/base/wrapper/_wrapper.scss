@@ -1,0 +1,53 @@
+//== Import wrapper configuration
+@import "config";
+
+// Wrapper styles
+#wrapper {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#pageWrapper {
+    padding: 0 $page-wrapper-padding-x;
+    min-height: 100vh;
+    background-color: $white;
+    transition: $transition-medium;
+}
+
+.main-ps {
+    margin-left: $page-wrapper-margin-left;
+    max-width: calc(100% - #{$page-wrapper-margin-left});
+    width: 100%;
+}
+
+//== Responsive styles
+@include media-breakpoint-up(md) {
+    .iconic-sidebar {
+        .main-ps {
+            margin-left: $iconic-sidebar-page-wrapper-margin-left;
+            max-width: calc(100% - #{$iconic-sidebar-page-wrapper-margin-left});
+        }
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .iconic-sidebar {
+        .main-ps {
+            margin-left: 0;
+            max-width: initial;
+        }
+    }
+
+    .main-ps {
+        margin-left: 0;
+        max-width: initial;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    #pageWrapper {
+        padding-left: $wrapper-padding-sm-x;
+        padding-right: $wrapper-padding-sm-x;
+    }
+}
