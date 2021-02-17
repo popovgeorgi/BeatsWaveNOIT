@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: "api/",
-  feedHubUrl: "api/feed"
+  apiUrl: "https://beatswave.azurewebsites.net",
+  feedHubUrl: "https://beatswave.azurewebsites.net/feed"
 };
