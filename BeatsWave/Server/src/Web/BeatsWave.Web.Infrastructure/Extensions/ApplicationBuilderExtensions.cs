@@ -34,7 +34,7 @@
                 .UseCors(policy =>
                 {
                     policy
-                    .WithOrigins("http://localhost:4200")
+                    .WithOrigins("https://beatswave-client.azurewebsites.net")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials();
