@@ -1,0 +1,1 @@
+[![Build Status](https://dev.azure.com/popovgeorgi002/BeatsWave/_apis/build/status/BeatsWave-CI?branchName=master)](https://dev.azure.com/popovgeorgi002/BeatsWave/_build/latest?definitionId=1&branchName=master)
