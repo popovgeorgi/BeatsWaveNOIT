@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SubscriptionService } from 'src/app/core/services/subscription.service';
@@ -13,7 +13,9 @@ export class UserPlanComponent implements OnInit, AfterViewInit {
   constructor(private spinner: NgxSpinnerService,
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
-    private snotifyService: SnotifyService) { }
+    private snotifyService: SnotifyService) {
+    this.snotifyService.config = ToastDefaults;
+  }
 
   userSubscription: string;
 

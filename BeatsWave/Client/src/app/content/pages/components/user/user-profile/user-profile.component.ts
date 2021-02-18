@@ -6,7 +6,7 @@ import { Profile } from 'src/app/core/models/Profile';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 
 @Component({
   selector: 'app-user-profile',
@@ -35,6 +35,7 @@ export class UserProfileComponent implements OnInit {
       'location': [''],
       'biography': ['']
     })
+    this.snotifyService.config = ToastDefaults;
   }
 
   ngOnInit() {

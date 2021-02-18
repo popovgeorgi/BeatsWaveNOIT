@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 
 import { AuthService } from 'src/app/core/services/auth.service';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 
@@ -23,6 +23,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
     private snotifyService: SnotifyService,
     private router: Router) {
     super();
+    this.snotifyService.config = ToastDefaults;
   }
 
   ngOnInit() {
@@ -51,10 +52,10 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
         this.snotifyService.error("Your data is not valid");
       }, () => {
         this.spinner.hide('loginModal');
+        this.router.navigate(['/home']);
         this.snotifyService.info('You are successfully logged in!', '', {
           showProgressBar: false
         });
-        this.router.navigate(['/home']);
       });
 
     this.close();

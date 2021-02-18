@@ -8,7 +8,7 @@ import { first, map, mergeMap, tap } from "rxjs/operators";
 import { Beat } from "src/app/core/models/Beat";
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LikeService } from 'src/app/core/services/like.service';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { AuthService } from "src/app/core/services/auth.service";
 import { SimpleModalService } from "ngx-simple-modal";
 import { SongEditComponent } from "../song-edit/song-edit.component";
@@ -36,7 +36,9 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
     private snotifyService: SnotifyService,
     private authService: AuthService,
     private simpleModalService: SimpleModalService
-  ) { }
+  ) {
+    this.snotifyService.config = ToastDefaults;
+  }
 
   ngOnInit() {
     this.fetchData().pipe(
@@ -71,11 +73,11 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
   public contact() {
     if (this.user) {
       const modal = this.simpleModalService.addModal(SongBuyComponent, { data: this.beatDetails })
-      .subscribe((isConfirmed) => {
-        if (isConfirmed) {
-        } else {
-        }
-      });
+        .subscribe((isConfirmed) => {
+          if (isConfirmed) {
+          } else {
+          }
+        });
     }
     else {
       this.snotifyService.info("Sign up in order to contact the producer", '', {

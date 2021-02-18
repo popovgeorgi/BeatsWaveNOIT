@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Router } from '@angular/router';
 
 @Component({
@@ -34,6 +34,7 @@ export class AddMusicComponent implements AfterViewInit {
       "bpm": [''],
       "description": ['']
     })
+    this.snotifyService.config = ToastDefaults;
   }
 
   public onPhotoUploading() {

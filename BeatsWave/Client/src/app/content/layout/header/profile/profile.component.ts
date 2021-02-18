@@ -7,7 +7,7 @@ import { SimpleModalService } from 'ngx-simple-modal';
 import { User } from 'src/app/core/models/User';
 import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private snotifyService: SnotifyService,
     private router: Router) {
+    this.snotifyService.config = ToastDefaults;
     this.userMenu = this.menuConfigService.userMenuItems;
   }
 

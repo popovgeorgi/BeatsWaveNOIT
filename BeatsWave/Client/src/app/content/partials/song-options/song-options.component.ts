@@ -1,5 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Subscription } from 'rxjs';
 import { Beat } from 'src/app/core/models/Beat';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -20,7 +20,9 @@ export class SongOptionsComponent implements OnInit, OnDestroy {
 
   constructor(private likeService: LikeService,
     private snotifyService: SnotifyService,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+    this.snotifyService.config = ToastDefaults;
+  }
 
   ngOnInit() {
     this.icon = 'la ' + this.icon;

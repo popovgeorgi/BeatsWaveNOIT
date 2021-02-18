@@ -4,7 +4,7 @@ import { BeatService } from 'src/app/core/services/beat.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { FeedHubService } from 'src/app/core/services/feed-hub.service';
-import { SnotifyPosition, SnotifyService, SnotifyStyle } from 'ng-snotify';
+import { SnotifyPosition, SnotifyService, SnotifyStyle, ToastDefaults } from 'ng-snotify';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -31,7 +31,9 @@ export class MusicComponent implements OnInit, OnDestroy {
     private feedHubService: FeedHubService,
     private snotifyService: SnotifyService,
     private userSerivce: UserService,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+    this.snotifyService.config = ToastDefaults;
+  }
 
   ngOnInit() {
     this.userSubscription = this.authService.user

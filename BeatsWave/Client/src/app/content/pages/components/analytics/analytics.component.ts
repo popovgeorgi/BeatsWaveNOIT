@@ -22,8 +22,7 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   public currentUser: User;
 
   constructor(private spinner: NgxSpinnerService,
-    private authService: AuthService,
-    private analyticsService: AnalyticsService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
@@ -58,6 +57,8 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSub.unsubscribe();
+    if (this.userSub) {
+      this.userSub.unsubscribe();
+    }
   }
 }

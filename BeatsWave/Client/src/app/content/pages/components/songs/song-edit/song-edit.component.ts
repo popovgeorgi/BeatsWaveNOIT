@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Beat } from 'src/app/core/models/Beat';
@@ -21,6 +21,7 @@ export class SongEditComponent extends SimpleModalComponent<EditBeat, boolean> i
     private beatService: BeatService,
     private snotifyService: SnotifyService) {
     super();
+    this.snotifyService.config = ToastDefaults;
   }
 
   ngOnInit() {

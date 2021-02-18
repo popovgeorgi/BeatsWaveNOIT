@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, of } from 'rxjs';
@@ -22,6 +22,7 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
     private snotifyService: SnotifyService,
     private userService: UserService) {
     super();
+    this.snotifyService.config = ToastDefaults;
   }
 
   ngOnInit() {
@@ -75,10 +76,10 @@ export class RegisterComponent extends SimpleModalComponent<any, any> implements
     return this.registerForm.get('confirmPassword');
   }
 
-  private validateEmails(control: FormControl): {[s: string]: boolean} {
+  private validateEmails(control: FormControl): { [s: string]: boolean } {
     if (this.forbiddenEmails) {
       if (this.forbiddenEmails.includes(control.value.toLowerCase())) {
-        return {'emailIsForbidden': true};
+        return { 'emailIsForbidden': true };
       }
       return null;
     }

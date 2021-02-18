@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, Subscription } from 'rxjs';
-import { Beat } from 'src/app/core/models/Beat';
 import { Comment } from 'src/app/core/models/Comment';
 import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -29,7 +28,9 @@ export class CommentComponent implements OnInit {
     private commentService: CommentService,
     private snotifyService: SnotifyService,
     private spinner: NgxSpinnerService,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+    this.snotifyService.config = ToastDefaults;
+  }
 
   ngOnInit() {
     this.userSubscription = this.authService.user.subscribe(user => {
@@ -95,11 +96,11 @@ export class CommentComponent implements OnInit {
       const index = this.comments.indexOf(comment);
 
       this.commentService.commentBeat(this.replyForm.value).subscribe(res => {
-        if  (this.comments[index].children == undefined) {
+        if (this.comments[index].children == undefined) {
           this.comments[index].children = Array<Comment>();
         }
         this.comments[index].children.push(res);
-       }, () => { }, () => {
+      }, () => { }, () => {
         this.snotifyService.info('Successfully replied', '', {
           showProgressBar: false
         });

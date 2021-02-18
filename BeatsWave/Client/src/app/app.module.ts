@@ -26,7 +26,7 @@ import { IonicModule } from '@ionic/angular';
     HttpClientModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    SnotifyModule,
+    SnotifyModule.forRoot(),
     IonicModule.forRoot()
   ],
   providers: [

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EventService } from 'src/app/core/services/event.service';
 import { environment } from 'src/environments/environment';
@@ -32,6 +32,7 @@ export class AddEventComponent implements AfterViewInit {
       "description": ['', [Validators.maxLength(500)]],
       "price": ['']
     })
+    this.snotifyService.config = ToastDefaults;
   }
 
   get name() {
@@ -84,7 +85,7 @@ export class AddEventComponent implements AfterViewInit {
     if (this.eventForm.controls['price'].value == '') {
       this.eventForm.removeControl('price');
     }
-    this.eventService.uploadEvent(this.eventForm.value).subscribe(res => {  }, (err) => {
+    this.eventService.uploadEvent(this.eventForm.value).subscribe(res => { }, (err) => {
       this.spinner.hide('eventPhotoUploaded');
       this.snotifyService.error('You have got an error within your data!');
     }, () => {

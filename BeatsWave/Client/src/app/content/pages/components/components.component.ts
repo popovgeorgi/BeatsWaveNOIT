@@ -7,8 +7,6 @@ import { Subscription } from 'rxjs';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { SkinService } from '../../../core/services/skin.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-components',
@@ -29,8 +27,7 @@ export class ComponentsComponent implements OnInit, OnDestroy {
     private router: Router,
     private localStorageService: LocalStorageService,
     private skinService: SkinService,
-    private ngxSpinnerService: NgxSpinnerService,
-    private audioPlayerService: AudioPlayerService) {
+    private ngxSpinnerService: NgxSpinnerService) {
     this.router.events.subscribe((event) => {
       switch (true) {
         case event instanceof NavigationStart: {

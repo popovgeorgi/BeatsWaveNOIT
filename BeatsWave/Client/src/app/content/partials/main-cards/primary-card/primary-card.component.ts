@@ -3,7 +3,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AudioPlayerService } from '../../../../core/services/audio-player.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { LikeService } from 'src/app/core/services/like.service';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -25,6 +25,7 @@ export class PrimaryCardComponent implements OnInit, OnDestroy {
     private likeService: LikeService,
     private snotifyService: SnotifyService,
     private authService: AuthService) {
+    this.snotifyService.config = ToastDefaults;
   }
 
   ngOnInit() {

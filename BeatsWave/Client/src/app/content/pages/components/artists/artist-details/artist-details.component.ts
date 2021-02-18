@@ -5,7 +5,7 @@ import { first, map, mergeMap, tap } from 'rxjs/operators';
 import { ArtistService } from 'src/app/core/services/artist.service';
 import { Artist } from 'src/app/core/models/Artist';
 import { FollowService } from 'src/app/core/services/follow.service';
-import { SnotifyService } from 'ng-snotify';
+import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -30,6 +30,7 @@ export class ArtistDetailsComponent implements OnInit, OnDestroy {
     private followService: FollowService,
     private snotifyService: SnotifyService,
     private authService: AuthService) {
+      this.snotifyService.config = ToastDefaults;
   }
 
   ngOnInit() {
