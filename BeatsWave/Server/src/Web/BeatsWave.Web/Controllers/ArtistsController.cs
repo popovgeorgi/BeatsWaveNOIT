@@ -30,6 +30,12 @@
         public async Task<IEnumerable<ArtistListingServiceModel>> All(int take, int skip)
         {
             var artists = await this.userManager.GetUsersInRoleAsync(BeatmakerRoleName);
+            var administrators = await this.userManager.GetUsersInRoleAsync(AdministratorRoleName);
+            foreach (var adminstrator in administrators)
+            {
+                artists.Add(adminstrator);
+            }
+
             var artistsIds = artists.Select(a => a.Id).ToList();
 
             return await this.artistService.AllAsync<ArtistListingServiceModel>(artistsIds, take, skip);
