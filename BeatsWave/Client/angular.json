@@ -27,6 +27,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/.htaccess",
+              "src/web.config",
               {
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
@@ -34,6 +35,7 @@
               }
             ],
             "styles": [
+              "node_modules/ng-snotify/styles/material.scss",
               "node_modules/ionicons/dist/css/ionicons.min.css",
               "node_modules/slick-carousel/slick/slick.scss",
               "node_modules/slick-carousel/slick/slick-theme.scss",
