@@ -4,7 +4,6 @@ import { DOCUMENT } from '@angular/common';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 import { Config } from '../../../config/config';
 import * as Amplitude from 'amplitudejs';
-import { Beat } from 'src/app/core/models/Beat';
 import { AudioPlayerService } from 'src/app/core/services/audio-player.service';
 import { Subscription } from 'rxjs';
 
@@ -15,7 +14,8 @@ import { Subscription } from 'rxjs';
 export class PlayerComponent implements OnInit {
 
   audioSubscription: Subscription;
-  song: Beat;
+  initialSong: any;
+  song: any;
   imageUrl: string;
   volumeIcon = 'ion-md-volume-low';
   showPlaylist = 'open-right-sidebar';
@@ -30,7 +30,14 @@ export class PlayerComponent implements OnInit {
       this.song = beat;
     })
 
-    Amplitude.init({});
+    this.song = {
+      name: 'Start listening',
+      producerUserName: 'Just click on a beat',
+      imageUrl: 'https://beatswave.blob.core.windows.net/photos/note.jpg'
+    }
+    Amplitude.init({
+      songs: [this.song]
+    });
 
     const themeSkin = this.localStorageService.getThemeSkin();
     if (themeSkin) {

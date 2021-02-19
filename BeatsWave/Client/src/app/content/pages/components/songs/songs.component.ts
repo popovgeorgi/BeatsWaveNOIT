@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { LoadingService } from '../../../../core/services/loading.service';
 import { Beat } from 'src/app/core/models/Beat';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { NgxSpinnerService } from 'ngx-spinner';

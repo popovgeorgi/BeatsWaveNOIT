@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DemoPageComponent } from './snippets/demo-page/demo-page.component';
 import { LandingPageComponent } from './snippets/landing-page/landing-page.component';
 import { ErrorPageComponent } from './snippets/error-page/error-page.component';
 import { PagesComponent } from './pages.component';
