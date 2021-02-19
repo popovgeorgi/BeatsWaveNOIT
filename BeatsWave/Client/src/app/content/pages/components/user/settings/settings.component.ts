@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { LoadingService } from '../../../../../core/services/loading.service';
-
 @Component({
     selector: 'app-settings',
     templateUrl: './settings.component.html'

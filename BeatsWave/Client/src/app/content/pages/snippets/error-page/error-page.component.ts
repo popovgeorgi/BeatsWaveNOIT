@@ -1,20 +1,15 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-
-import { LoadingService } from '../../../../core/services/loading.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-error-page',
     templateUrl: './error-page.component.html'
 })
-export class ErrorPageComponent implements OnInit, AfterViewInit {
+export class ErrorPageComponent {
 
-    constructor(private loadingService: LoadingService) { }
+    constructor(private router: Router) { }
 
-    ngOnInit() {
+    public goToFeed() {
+      this.router.navigate(['/music']);
     }
-
-    ngAfterViewInit() {
-        this.loadingService.stopLoading();
-    }
-
 }

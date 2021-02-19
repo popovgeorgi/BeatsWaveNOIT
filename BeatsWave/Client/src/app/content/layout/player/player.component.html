@@ -1,14 +1,5 @@
 <!-- Begin | Audio Player [[ Find at scss/framework/base/audio-player/audio-player.scss ]] -->
 <div id="audioPlayer" [class]="playerClass">
-
-  <!-- Begin | Audio Player Progress -->
-  <div id="progress-container">
-      <input type="range" class="amplitude-song-slider">
-      <progress class="audio-progress audio-progress--played amplitude-song-played-progress"></progress>
-      <progress class="audio-progress audio-progress--buffered amplitude-buffered-progress" value="0"></progress>
-  </div>
-  <!-- End | Audio Player Progress -->
-
   <!-- Begin | Audio -->
   <div class="audio">
       <div class="song-image"><img data-amplitude-song-info="cover_art_url" [src]="song?.imageUrl" alt=""></div>
@@ -46,7 +37,7 @@
       </div>
 
       <!-- Song options -->
-      <app-song-options [icon]="'la-ellipsis-v'" [song]="song"></app-song-options>
+      <app-song-options *ngIf="song.name != 'Start listening'" [icon]="'la-ellipsis-v'" [song]="song"></app-song-options>
   </div>
   <!-- End | Audio Info -->
 

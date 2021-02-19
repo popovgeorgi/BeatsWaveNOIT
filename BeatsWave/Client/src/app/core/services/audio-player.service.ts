@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import * as Amplitude from 'amplitudejs';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Beat } from '../models/Beat';
 import { AuthService } from './auth.service';
 import { BeatService } from './beat.service';

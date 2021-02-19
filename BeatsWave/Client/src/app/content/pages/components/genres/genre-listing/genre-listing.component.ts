@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable, Subscription } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
+import { first, map, mergeMap, take, tap } from 'rxjs/operators';
 import { Beat } from 'src/app/core/models/Beat';
-import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BeatService } from 'src/app/core/services/beat.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -13,8 +12,9 @@ import { UserService } from 'src/app/core/services/user.service';
   selector: 'app-genre-listing',
   templateUrl: './genre-listing.component.html',
 })
-export class GenreListingComponent implements OnInit, AfterViewInit {
+export class GenreListingComponent implements OnInit, AfterViewInit ,OnDestroy {
 
+  userSubscription: Subscription;
   public gridView = false;
   public beats: Beat[];
   public hasMoreBeatsToInclude: boolean = true;
@@ -27,35 +27,68 @@ export class GenreListingComponent implements OnInit, AfterViewInit {
   constructor(private beatService: BeatService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private authService: AuthService) { }
 
   ngOnInit() {
-    this.fetchInitialBeats().subscribe(results => {
-      this.userFavourites = results[1];
-      this.setFeedLikes(results[0], this.userFavourites);
+    this.userSubscription = this.authService.user.subscribe(user => {
+      if (user) {
+        this.fetchInitialBeatsWhenUserIsLogged().subscribe(results => {
+          this.userFavourites = results[1];
+          this.setFeedLikes(results[0], this.userFavourites);
 
-      let beats = results[0];
-      if (beats.length < this.itemsPerPage) {
-        this.hasMoreBeatsToInclude = false;
+          let beats = results[0];
+          if (beats.length < this.itemsPerPage) {
+            this.hasMoreBeatsToInclude = false;
+          }
+          this.beats = beats;
+          this.beatsCount = beats.length;
+        });
       }
-      this.beats = beats;
-      this.beatsCount = beats.length;
-    });
+      else {
+        this.fetchInitialBeats().subscribe(beats => {
+          if (beats.length < this.itemsPerPage) {
+            this.hasMoreBeatsToInclude = false;
+          }
+          this.beats = beats;
+          this.beatsCount = beats.length;
+        })
+      }
+    })
   }
 
-  private fetchInitialBeats(): Observable<[Beat[], number[]]> {
-    return this.route.params.pipe(map(params => {
-      let genre = params['name'];
-      if (genre == 'Hip-Hop') {
-        genre = 'HipHop';
-      }
-      else if (genre == 'R&B') {
-        genre = 'RB';
-      }
-      this.genre = genre;
-      return genre;
-    }),
-      mergeMap(genre => forkJoin([this.fetchGenreBeats(genre), this.fetchUserFavourites()])));
+  private fetchInitialBeatsWhenUserIsLogged(): Observable<[Beat[], number[]]> {
+    return this.route.params
+      .pipe(
+        map(params => {
+          let genre = params['name'];
+          if (genre == 'Hip-Hop') {
+            genre = 'HipHop';
+          }
+          else if (genre == 'R&B') {
+            genre = 'RB';
+          }
+          this.genre = genre;
+          return genre;
+        }),
+        mergeMap(genre => forkJoin([this.fetchGenreBeats(genre), this.fetchUserFavourites()])));
+  }
+
+  private fetchInitialBeats(): Observable<Array<Beat>> {
+    return this.route.params
+      .pipe(
+        map(params => {
+          let genre = params['name'];
+          if (genre == 'Hip-Hop') {
+            genre = 'HipHop';
+          }
+          else if (genre == 'R&B') {
+            genre = 'RB';
+          }
+          this.genre = genre;
+          return genre;
+        }),
+        mergeMap(genre => this.fetchGenreBeats(genre)));
   }
 
   private fetchGenreBeats(genre: string): Observable<Array<Beat>> {
@@ -65,17 +98,17 @@ export class GenreListingComponent implements OnInit, AfterViewInit {
   showMore() {
     this.page++;
     this.beatService.getBeatsByGenre(this.genre, this.itemsPerPage, (this.page - 1) * this.itemsPerPage)
-    .pipe(tap((res) => {
-      if (this.userFavourites) {
-        this.setFeedLikes(res, this.userFavourites);
-      }
-    }))
-    .subscribe(beats => {
-      if (beats.length < this.itemsPerPage) {
-        this.hasMoreBeatsToInclude = false;
-      }
-      this.beats = this.beats.concat(beats);
-    })
+      .pipe(tap((res) => {
+        if (this.userFavourites) {
+          this.setFeedLikes(res, this.userFavourites);
+        }
+      }))
+      .subscribe(beats => {
+        if (beats.length < this.itemsPerPage) {
+          this.hasMoreBeatsToInclude = false;
+        }
+        this.beats = this.beats.concat(beats);
+      })
   }
 
   public onSelect(event) {
@@ -109,5 +142,11 @@ export class GenreListingComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.spinner.hide('routing');
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }
