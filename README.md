@@ -111,4 +111,4 @@ Main languages: C#, TS
 
 ## License
 
-This project is licensed with the [GNU license](COPYING).
+This project is licensed with the [GNU license](COPYING.txt).
