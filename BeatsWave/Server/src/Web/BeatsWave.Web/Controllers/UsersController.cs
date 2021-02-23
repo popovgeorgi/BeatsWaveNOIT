@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Users;
@@ -41,5 +40,19 @@
         [AllowAnonymous]
         public async Task<string[]> AllEmails()
             => await this.userService.GetAllEmailsAsync();
+
+        [HttpPut]
+        [Route(nameof(ChangeEmailReceiving))]
+        public async Task<ActionResult> ChangeEmailReceiving()
+        {
+            var result = await this.userService.UpdateEmailReceivingAsync(this.currentUser.GetId());
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return this.Ok();
+        }
     }
 }

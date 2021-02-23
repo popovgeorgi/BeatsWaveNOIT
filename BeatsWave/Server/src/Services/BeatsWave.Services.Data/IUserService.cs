@@ -18,5 +18,7 @@
         Task<string> GetUserEmailById(string id);
 
         Task<string[]> GetAllEmailsAsync();
+
+        Task<Result> UpdateEmailReceivingAsync(string userId);
     }
 }

@@ -86,6 +86,24 @@
             await this.userRepository.SaveChangesAsync();
         }
 
+        public async Task<Result> UpdateEmailReceivingAsync(string userId)
+        {
+            var user = await this.userRepository
+                .All()
+                .Include(u => u.Profile)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return "User does not exist";
+            }
+
+            user.Profile.IsReceivingEmails = !user.Profile.IsReceivingEmails;
+            await this.userRepository.SaveChangesAsync();
+
+            return true;
+        }
+
         private async Task<string> GetUserCountryByIpAsync(string ipAddress, string secretKey)
         {
             string info = await new WebClient().DownloadStringTaskAsync(GlobalConstants.IpGetterEndpoint + ipAddress + "?access_key=" + secretKey);
