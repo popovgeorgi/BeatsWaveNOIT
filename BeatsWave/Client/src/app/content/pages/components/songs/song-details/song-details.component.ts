@@ -71,7 +71,13 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
   }
 
   public contact() {
-    if (this.user) {
+    if (!this.beatDetails.isProducerReceivingEmails) {
+      this.snotifyService.info(`The producer of ${this.beatDetails.name} is currently not receiving emails. Find another way to contact him.`, '', {
+        showProgressBar: false,
+        timeout: 5000
+      });
+    }
+    else if (this.user) {
       const modal = this.simpleModalService.addModal(SongBuyComponent, { data: this.beatDetails })
         .subscribe((isConfirmed) => {
           if (isConfirmed) {

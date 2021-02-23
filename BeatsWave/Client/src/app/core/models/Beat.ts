@@ -14,5 +14,6 @@ export interface Beat {
     isLiked: boolean,
     createdOn: Date,
     producerProfileMainPhotoUrl: string,
-    producerEmail: string
+    producerEmail: string,
+    isProducerReceivingEmails: boolean
 }
