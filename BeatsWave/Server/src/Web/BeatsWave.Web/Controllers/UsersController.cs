@@ -41,5 +41,24 @@
         [AllowAnonymous]
         public async Task<string[]> AllEmails()
             => await this.userService.GetAllEmailsAsync();
+
+        [HttpPut]
+        [Route(nameof(ChangeEmailReceiving))]
+        public async Task<ActionResult> ChangeEmailReceiving()
+        {
+            var result = await this.userService.UpdateEmailReceivingAsync(this.currentUser.GetId());
+
+            if (result.Failure)
+            {
+                return this.BadRequest(result.Error);
+            }
+
+            return this.Ok();
+        }
+
+        [HttpGet]
+        [Route(nameof(CheckIfUserReceivesEmails))]
+        public async Task<bool> CheckIfUserReceivesEmails()
+            => await this.userService.GetEmailNotificationsBehaviourAsync(this.currentUser.GetId());
     }
 }

@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { PrimaryCardComponent } from './main-cards/primary-card/primary-card.component';
 import { SecondaryCardComponent } from './main-cards/secondary-card/secondary-card.component';
@@ -49,8 +48,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
         CommonModule,
         RouterModule,
         ReactiveFormsModule,
-        NgxSpinnerModule,
-        ImageCropperModule
+        NgxSpinnerModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

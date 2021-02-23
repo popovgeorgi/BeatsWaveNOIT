@@ -27,4 +27,12 @@ export class UserService {
   getAllEmails(): Observable<Array<string>> {
     return this.http.get<Array<string>>(this.userPath + '/AllEmails');
   }
+
+  changeEmailNotification() {
+    return this.http.put<any>(this.userPath + '/ChangeEmailReceiving', '');
+  }
+
+  getIfUserWantsToReceiveEmails() {
+    return this.http.get<string>(this.userPath + '/CheckIfUserReceivesEmails');
+  }
 }

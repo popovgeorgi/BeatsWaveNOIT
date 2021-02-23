@@ -12,6 +12,7 @@
         public Profile(string displayName)
         {
             this.DisplayName = displayName;
+            this.IsReceivingEmails = true;
         }
 
         [Required]
@@ -37,5 +38,8 @@
 
         [MaxLength(MaxBiographyLength)]
         public string Biography { get; set; }
+
+        [Required]
+        public bool IsReceivingEmails { get; set; }
     }
 }
