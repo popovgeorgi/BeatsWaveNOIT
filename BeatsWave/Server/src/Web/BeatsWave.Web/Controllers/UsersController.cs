@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Users;
@@ -54,5 +55,10 @@
 
             return this.Ok();
         }
+
+        [HttpGet]
+        [Route(nameof(CheckIfUserReceivesEmails))]
+        public async Task<bool> CheckIfUserReceivesEmails()
+            => await this.userService.GetEmailNotificationsBehaviourAsync(this.currentUser.GetId());
     }
 }

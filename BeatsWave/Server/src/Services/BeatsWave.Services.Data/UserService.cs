@@ -34,6 +34,14 @@
                 .Select(u => u.Email.ToLower())
                 .ToArrayAsync();
 
+        public async Task<bool> GetEmailNotificationsBehaviourAsync(string userId)
+            => await this.userRepository
+                .All()
+                .Include(u => u.Profile)
+                .Where(u => u.Id == userId)
+                .Select(u => u.Profile.IsReceivingEmails)
+                .FirstOrDefaultAsync();
+
         public async Task<T> GetInfo<T>(string id)
             => await this.userRepository
                 .All()
