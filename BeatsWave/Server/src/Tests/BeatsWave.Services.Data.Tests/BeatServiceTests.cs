@@ -23,7 +23,7 @@
         public async Task CheckIfAllMethodReturnsTheCorrectAmountOfData(int? take = null, int skip = 0)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseInMemoryDatabase("BeatsWaveVirtual");
+               .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
             dbContext.Database.EnsureDeleted();
             var beatRepo = new EfDeletableEntityRepository<Beat>(dbContext);

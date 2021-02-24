@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Newtonsoft.Json;
     using SendGrid;
     using SendGrid.Helpers.Mail;
 
@@ -27,6 +27,14 @@
             var fromAddress = new EmailAddress(from, fromName);
             var toAddress = new EmailAddress(to);
             var message = MailHelper.CreateSingleEmail(fromAddress, toAddress, subject, null, htmlContent);
+            message.SetTemplateId("d-5e820da05b05435db4234e09df8d72eb");
+
+            var dynamicTemplateData = new TemplateDataModel
+            {
+                Request = htmlContent,
+            };
+            message.SetTemplateData(dynamicTemplateData);
+
             if (attachments?.Any() == true)
             {
                 foreach (var attachment in attachments)
@@ -47,5 +55,11 @@
                 throw;
             }
         }
+    }
+
+    public class TemplateDataModel
+    {
+        [JsonProperty("request")]
+        public string Request { get; set; }
     }
 }
