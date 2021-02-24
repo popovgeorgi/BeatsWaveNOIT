@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgcCookieConsentService } from 'ngx-cookieconsent';
 import { AuthService } from './core/services/auth.service';
 import { LocalStorageService } from './core/services/local-storage.service';
 
@@ -10,7 +11,8 @@ export class AppComponent implements OnInit {
   title = 'listen';
 
   constructor(private authService: AuthService,
-    private localStorageService: LocalStorageService) { }
+    private localStorageService: LocalStorageService,
+    private ccService: NgcCookieConsentService) { }
 
   ngOnInit() {
     this.authService.getToken();

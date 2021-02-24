@@ -30,6 +30,7 @@
     "jquery": "^3.4.1",
     "ng-snotify": "^9.0.1",
     "ng2-charts": "^2.3.0",
+    "ngx-cookieconsent": "^2.2.3",
     "ngx-perfect-scrollbar": "^8.0.0",
     "ngx-simple-modal": "^1.4.14",
     "ngx-slick-carousel": "^0.4.6",
