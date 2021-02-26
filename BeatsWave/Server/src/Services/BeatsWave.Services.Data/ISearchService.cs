@@ -9,6 +9,6 @@
     {
         Task<IEnumerable<BeatsSearchServiceModel>> GetBeatsByTermAsync(string term);
 
-        Task<IEnumerable<ArtistsSearchServiceModel>> GetArtistsByTermAsync(string term);
+        Task<IEnumerable<ArtistsSearchServiceModel>> GetArtistsByTermAsync(string term, IEnumerable<string> artistsIds);
     }
 }

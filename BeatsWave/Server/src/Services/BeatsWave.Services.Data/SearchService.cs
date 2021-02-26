@@ -23,11 +23,11 @@
             this.beatRepository = beatRepository;
         }
 
-        public async Task<IEnumerable<ArtistsSearchServiceModel>> GetArtistsByTermAsync(string term)
+        public async Task<IEnumerable<ArtistsSearchServiceModel>> GetArtistsByTermAsync(string term, IEnumerable<string> artistsIds)
         {
             return await this.userRepository
                 .All()
-                .Where(x => x.UserName.ToLower().Contains(term.ToLower()))
+                .Where(x => artistsIds.Contains(x.Id) && x.UserName.ToLower().Contains(term.ToLower()))
                 .Take(TakeArtistsBySearch)
                 .To<ArtistsSearchServiceModel>()
                 .ToListAsync();

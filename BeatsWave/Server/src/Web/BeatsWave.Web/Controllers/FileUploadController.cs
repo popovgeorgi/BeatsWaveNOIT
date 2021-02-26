@@ -56,7 +56,7 @@
         [HttpPost("[action]")]
         public async Task<ActionResult> SavePhoto(IFormFile file)
         {
-            var blockBlob = await this.UploadImageToStorage(file, GlobalConstants.BlobImageContainer);
+            var blockBlob = await this.UploadImageToStorage(file, BlobImageContainer);
 
             return this.Ok(new
             {
@@ -69,7 +69,7 @@
         [HttpPost("[action]")]
         public async Task<ActionResult> SaveBeat(IFormFile file)
         {
-            var blockBlob = await this.UploadBeatToStorage(file, GlobalConstants.BlobBeatContainer);
+            var blockBlob = await this.UploadBeatToStorage(file, BlobBeatContainer);
 
             return this.Ok(new
             {
