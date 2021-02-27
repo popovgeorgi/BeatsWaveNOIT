@@ -24,6 +24,7 @@
 
         public async Task CheckIfAllMethodReturnsTheCorrectAmountOfData(int? take = null, int skip = 0)
         {
+            // Arrange
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
@@ -31,6 +32,7 @@
             var playRepo = new EfRepository<Play>(dbContext);
             var beatService = new BeatService(beatRepo, playRepo);
 
+            // Act
             for (int i = 1; i <= 100; i++)
             {
                 var year = 2020;
@@ -47,6 +49,7 @@
             dbContext.Database.EnsureDeleted();
             result.OrderBy(x => x.Id);
 
+            // Assert
             Assert.Equal(take, result.ToList().Count);
             Assert.Equal(skip + 1, result.First().Id);
         }
@@ -54,6 +57,7 @@
         [Fact]
         public void CheckIfAddPlayMethodDoesNotAddPlayToTheSameUserThatRequested()
         {
+            // Arrange
             var plays = new List<Play>();
             var beats = new List<Beat>();
             var beatRepo = new Mock<IDeletableEntityRepository<Beat>>();
@@ -66,9 +70,12 @@
             playRepo.Setup(r => r.All()).Returns(plays.AsQueryable());
             var beatService = new BeatService(beatRepo.Object, playRepo.Object);
 
+            // Act
             beatService.CreateAsync("test", "test", "test", 10, Genre.Rock.ToString(), 112, "test", "user").GetAwaiter();
             beatService.AddPlay(0, "user").GetAwaiter();
 
+
+            // Assert
             Assert.Empty(plays);
         }
 

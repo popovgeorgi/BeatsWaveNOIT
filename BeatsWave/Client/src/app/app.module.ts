@@ -13,37 +13,6 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 import { AuthGuardService } from './core/services/auth-guard.service';
 import { IonicModule } from '@ionic/angular';
-import { NgcCookieConsentConfig, NgcCookieConsentModule } from 'ngx-cookieconsent';
-
-const cookieConfig: NgcCookieConsentConfig =
-{
-  cookie: {
-    domain: "beatswave-client.azurewebsites.net"
-  },
-  position: "bottom-left",
-  theme: "classic",
-  palette: {
-    popup: {
-      background: "#753fdc",
-      text: "#ffffff",
-      link: "#ffffff"
-    },
-    button: {
-      background: "#ffffff",
-      text: "#000000",
-      border: "transparent"
-    }
-  },
-  type: "info",
-  content: {
-    message: "This website uses cookies to ensure you get the best experience on our website.",
-    dismiss: "Got it!",
-    deny: "Refuse cookies",
-    link: "Learn more",
-    href: "https://cookiesandyou.com",
-    policy: "Cookie Policy"
-  }
-}
 
 @NgModule({
   declarations: [
@@ -57,8 +26,7 @@ const cookieConfig: NgcCookieConsentConfig =
     NgxSpinnerModule,
     BrowserAnimationsModule,
     SnotifyModule.forRoot(),
-    IonicModule.forRoot(),
-    NgcCookieConsentModule.forRoot(cookieConfig)
+    IonicModule.forRoot()
   ],
   providers: [
     NgxSpinnerService,

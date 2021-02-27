@@ -35,7 +35,6 @@
               }
             ],
             "styles": [
-              "node_modules/cookieconsent/build/cookieconsent.min.css",
               "node_modules/ng-snotify/styles/material.scss",
               "node_modules/ionicons/dist/css/ionicons.min.css",
               "node_modules/slick-carousel/slick/slick.scss",
@@ -77,7 +76,6 @@
               }
             ],
             "scripts": [
-              "node_modules/cookieconsent/build/cookieconsent.min.js",
               "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/slick-carousel/slick/slick.min.js"
