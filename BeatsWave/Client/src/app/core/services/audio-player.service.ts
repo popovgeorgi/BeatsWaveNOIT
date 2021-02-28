@@ -14,14 +14,9 @@ export class AudioPlayerService {
   userSubscription: Subscription;
   public songPlayed = new Subject<Beat>();
 
-  constructor(private beatService: BeatService,
-    private localStorageService: LocalStorageService) { }
+  constructor() { }
 
   playSong(song: Beat) {
-    let token = this.localStorageService.getLocalStorage('token');
-    if (token) {
-      this.beatService.addPlay(song.id).subscribe();
-    }
     this.songPlayed.next(song);
     Amplitude.removeSong(0);
     Amplitude.playNow(song);

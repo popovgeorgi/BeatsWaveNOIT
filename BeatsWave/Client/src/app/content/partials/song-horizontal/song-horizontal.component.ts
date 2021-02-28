@@ -28,7 +28,8 @@ export class SongHorizontalComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private searchService: SearchService,
     private audioPlayerService: AudioPlayerService,
-    private localStorageService: LocalStorageService) { }
+    private authService: AuthService,
+    private beatService: BeatService) { }
 
   @HostListener('click') onClick() {
     this.searchService.hideSearchResult();
@@ -38,6 +39,11 @@ export class SongHorizontalComponent implements OnInit, OnDestroy {
       this.router.navigate([this.routeLink]);
     } else {
       this.audioPlayerService.playSong(this.song);
+
+      let userId = this.authService.getUserId();
+      if (userId != null && userId != this.song.producerId) {
+        this.beatService.addPlay(this.song.id).subscribe();
+      }
     }
   }
 
