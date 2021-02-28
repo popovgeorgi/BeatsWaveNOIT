@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { LocalStorageService } from './core/services/local-storage.service';
+
+//declare gives Angular app access to ga function
+declare let gtag: Function;
 
 @Component({
   selector: 'app-root',
@@ -10,11 +14,18 @@ export class AppComponent implements OnInit {
   title = 'listen';
 
   constructor(private authService: AuthService,
-    private localStorageService: LocalStorageService) { }
+    private localStorageService: LocalStorageService,
+    public router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        gtag('config', 'G-JTQSH5Y2B6', { 'page_path': event.urlAfterRedirects });
+      }
+    })
+  }
 
   ngOnInit() {
     this.authService.getToken();
     this.authService.autoLogin();
-    this.localStorageService.setLocalStorage('themeSkin', {"theme":"dark","header":0,"sidebar":0,"player":0});
+    this.localStorageService.setLocalStorage('themeSkin', { "theme": "dark", "header": 0, "sidebar": 0, "player": 0 });
   }
 }

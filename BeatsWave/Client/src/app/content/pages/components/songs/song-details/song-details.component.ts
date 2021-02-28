@@ -13,6 +13,7 @@ import { AuthService } from "src/app/core/services/auth.service";
 import { SimpleModalService } from "ngx-simple-modal";
 import { SongEditComponent } from "../song-edit/song-edit.component";
 import { SongBuyComponent } from "../song-buy/song-buy.component";
+import { GoogleAnalyticsService } from "src/app/core/services/google-analytics.service";
 
 @Component({
   selector: "app-song-details",
@@ -35,7 +36,8 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
     private likeService: LikeService,
     private snotifyService: SnotifyService,
     private authService: AuthService,
-    private simpleModalService: SimpleModalService
+    private simpleModalService: SimpleModalService,
+    public googleAnalyticsService: GoogleAnalyticsService
   ) {
     this.snotifyService.config = ToastDefaults;
   }
@@ -71,6 +73,7 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
   }
 
   public contact() {
+    this.googleAnalyticsService.eventEmitter("user_trying_to_contact_producer", "contact", "connect", "click", 1);
     if (!this.beatDetails.isProducerReceivingEmails) {
       this.snotifyService.info(`The producer of ${this.beatDetails.name} is currently not receiving emails. Find another way to contact him.`, '', {
         showProgressBar: false,

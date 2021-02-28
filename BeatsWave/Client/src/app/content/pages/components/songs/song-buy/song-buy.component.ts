@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Beat } from 'src/app/core/models/Beat';
 import { Contact } from 'src/app/core/models/modals/contact';
 import { EmailService } from 'src/app/core/services/email.service';
+import { GoogleAnalyticsService } from 'src/app/core/services/google-analytics.service';
 
 @Component({
   selector: 'app-song-buy',
@@ -16,7 +17,8 @@ export class SongBuyComponent extends SimpleModalComponent<Contact, boolean> imp
 
   constructor(private fb: FormBuilder,
     private emailService: EmailService,
-    private spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService,
+    public googleAnalyticsService: GoogleAnalyticsService) {
     super();
   }
 
@@ -30,6 +32,7 @@ export class SongBuyComponent extends SimpleModalComponent<Contact, boolean> imp
   }
 
   public send() {
+    this.googleAnalyticsService.eventEmitter("user_sending_email", "contact", "connect", "click", 1);
     this.spinner.show('onSendEmail');
     this.emailService.sendEmail(this.contactForm.value).subscribe(() => { }, () => { }, () => {
       this.close();
