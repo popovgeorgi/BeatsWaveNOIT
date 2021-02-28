@@ -156,5 +156,10 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
 
   addInPlayer() {
     this.audioPlayerService.playSong(this.beatDetails);
+
+    let userId = this.authService.getUserId();
+      if (userId != null && userId != this.beatDetails.producerId) {
+        this.beatService.addPlay(this.beatDetails.id).subscribe();
+      }
   }
 }
