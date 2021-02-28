@@ -65,6 +65,9 @@ export class AddMusicComponent implements AfterViewInit {
 
   public uploadBeat() {
     this.spinner.show('beatUploader');
+    if (this.beatForm.controls['bpm'].value == "") {
+      this.beatForm.controls['bpm'].setValue(null);
+    }
     this.beatService.uploadBeat(this.beatForm.value).subscribe(res => { }, () => {
       this.spinner.hide('beatUploader');
       this.snotifyService.error('You have got an error within your data!', '', {
