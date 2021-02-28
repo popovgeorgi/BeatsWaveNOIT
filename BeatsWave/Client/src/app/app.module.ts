@@ -13,6 +13,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 import { AuthGuardService } from './core/services/auth-guard.service';
 import { IonicModule } from '@ionic/angular';
+import { GoogleAnalyticsService } from './core/services/google-analytics.service';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { IonicModule } from '@ionic/angular';
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService,
     AuthGuardService,
+    GoogleAnalyticsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

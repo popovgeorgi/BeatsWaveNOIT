@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnotifyService, ToastDefaults } from 'ng-snotify';
+import { GoogleAnalyticsService } from 'src/app/core/services/google-analytics.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -26,7 +27,8 @@ export class UserProfileComponent implements OnInit {
     private profileService: ProfileService,
     private spinner: NgxSpinnerService,
     private authService: AuthService,
-    private snotifyService: SnotifyService) {
+    private snotifyService: SnotifyService,
+    public googleAnalyticsService: GoogleAnalyticsService) {
     this.userProfileForm = this.fb.group({
       'firstName': [''],
       'lastName': [''],
@@ -68,6 +70,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   public editProfile() {
+    this.googleAnalyticsService.eventEmitter("user_changing_his_profile", "profile", "change", "click", 1);
     this.spinner.show("editProfile");
     this.profileService.editProfile(this.userProfileForm.value).subscribe(res => { }, () => { }, () => {
       this.spinner.hide("editProfile");
