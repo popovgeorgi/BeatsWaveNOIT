@@ -34,9 +34,10 @@
                 .UseCors(policy =>
                 {
                     policy
-                    .AllowAnyOrigin()
+                    .WithOrigins("https://beatswave-client.azurewebsites.net")
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    .AllowAnyHeader()
+                    .AllowCredentials();
                 });
     }
 }
