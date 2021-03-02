@@ -6,6 +6,7 @@ import { LikeService } from 'src/app/core/services/like.service';
 import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BeatService } from 'src/app/core/services/beat.service';
 
 @Component({
   selector: 'app-primary-card',
@@ -24,7 +25,8 @@ export class PrimaryCardComponent implements OnInit, OnDestroy {
   constructor(private audioPlayerService: AudioPlayerService,
     private likeService: LikeService,
     private snotifyService: SnotifyService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private beatService: BeatService) {
     this.snotifyService.config = ToastDefaults;
   }
 
@@ -66,5 +68,10 @@ export class PrimaryCardComponent implements OnInit, OnDestroy {
 
   addInPlayer() {
     this.audioPlayerService.playSong(this.song);
+
+    let userId = this.authService.getUserId();
+    if (userId != null && userId != this.song.producerId) {
+      this.beatService.addPlay(this.song.id).subscribe();
+    }
   }
 }

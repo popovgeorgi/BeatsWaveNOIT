@@ -25,7 +25,6 @@ import { LanguageComponent } from './header/language/language.component';
 import { SearchComponent } from './header/search/search.component';
 import { LoginComponent } from './header/login/login.component';
 import { RegisterComponent } from './header/register/register.component';
-import { LoaderComponent } from './loader/loader.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -43,7 +42,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PlayerComponent,
     SectionComponent,
     ProfileComponent,
-    LoaderComponent,
     LanguageComponent,
     SearchComponent,
     LoginComponent,
@@ -58,7 +56,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HeaderComponent,
     FooterComponent,
     PlayerComponent,
-    LoaderComponent,
     SectionComponent,
     ProfileComponent,
     SearchComponent,

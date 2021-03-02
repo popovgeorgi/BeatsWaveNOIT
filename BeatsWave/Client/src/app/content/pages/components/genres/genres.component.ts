@@ -23,9 +23,7 @@ export class GenresComponent implements OnInit, AfterViewInit {
     this.spinner.hide('routing');
   }
 
-  // Initialize music genres
   initGenres() {
     this.genres = this.genresConfigService.genresList;
   }
-
 }

@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { Beat } from 'src/app/core/models/Beat';
 import { UserService } from 'src/app/core/services/user.service';
 
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
-
 @Component({
   selector: 'app-favorites',
   templateUrl: './favorites.component.html'
@@ -18,12 +16,10 @@ export class FavoritesComponent implements OnInit {
   gridView = false;
 
   constructor(private spinner: NgxSpinnerService,
-    private songsConfigService: SongsConfigService,
     private userService: UserService,
     private router: Router) { }
 
   ngOnInit() {
-    this.initSongs();
     this.fetchData().subscribe(res => {
       this.favoriteSongs = res;
     }, () => { }, () => {
@@ -50,14 +46,4 @@ export class FavoritesComponent implements OnInit {
   private fetchData(): Observable<Array<Beat>> {
     return this.userService.getFavourites()
   }
-
-  initSongs() {
-    this.songs = {
-      title: 'Also Like',
-      subTitle: 'Check it out these songs',
-      page: '/songs',
-      items: this.songsConfigService.songsList
-    };
-  }
-
 }

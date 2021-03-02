@@ -7,13 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './content/layout/layout.module';
 import { MenuConfigService } from './core/services/menu-config.service';
-import { SongsConfigService } from './core/services/songs-config.service';
 import { TokenInterceptorService } from './core/services/token-interceptor.service';
 import { NgxSpinnerModule, NgxSpinnerService } from '../../node_modules/ngx-spinner';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { ErrorInterceptorService } from './core/services/error-interceptor.service';
 import { AuthGuardService } from './core/services/auth-guard.service';
 import { IonicModule } from '@ionic/angular';
+import { GoogleAnalyticsService } from './core/services/google-analytics.service';
 
 @NgModule({
   declarations: [
@@ -32,10 +32,10 @@ import { IonicModule } from '@ionic/angular';
   providers: [
     NgxSpinnerService,
     MenuConfigService,
-    SongsConfigService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService,
     AuthGuardService,
+    GoogleAnalyticsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

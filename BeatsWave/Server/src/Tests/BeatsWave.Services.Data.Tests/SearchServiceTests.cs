@@ -28,6 +28,8 @@
             var userRepo = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
             var searchService = new SearchService(userRepo, beatRepo);
 
+            var artistIds = new List<string>();
+            artistIds.Add("user");
             await userRepo.AddAsync(new ApplicationUser
             {
                 Id = "user",
@@ -40,10 +42,11 @@
                     Id = "1" + i,
                     UserName = Guid.NewGuid().ToString(),
                 });
+                artistIds.Add("1" + i);
             };
             await userRepo.SaveChangesAsync();
             AutoMapperConfig.RegisterMappings(typeof(ArtistsSearchServiceModel).Assembly);
-            var result = await searchService.GetArtistsByTermAsync(searchValue);
+            var result = await searchService.GetArtistsByTermAsync(searchValue, artistIds);
             dbContext.Database.EnsureDeleted();
 
             Assert.True(result.FirstOrDefault(x => x.UserName == searchValue).Id == "user");

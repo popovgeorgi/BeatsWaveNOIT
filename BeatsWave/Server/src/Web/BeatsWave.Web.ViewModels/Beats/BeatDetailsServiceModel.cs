@@ -30,12 +30,15 @@
 
         public string ProducerId { get; set; }
 
+        public bool IsProducerReceivingEmails { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration
                 .CreateMap<Beat, BeatDetailsServiceModel>()
                 .ForMember(b => b.Genre, m => m.MapFrom(b => b.Genre.ToString()))
-                .ForMember(b => b.Url, m => m.MapFrom(b => b.BeatUrl));
+                .ForMember(b => b.Url, m => m.MapFrom(b => b.BeatUrl))
+                .ForMember(b => b.IsProducerReceivingEmails, m => m.MapFrom(b => b.Producer.Profile.IsReceivingEmails));
         }
     }
 }

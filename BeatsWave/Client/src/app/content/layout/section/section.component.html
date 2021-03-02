@@ -19,7 +19,7 @@
             <app-primary-card *ngIf="primaryCard" [song]="item" [showOptions]="showImageOptions"
                               [imageBorderRadiusClass]="imageBorderRadiusClass"></app-primary-card>
 
-            <app-secondary-card *ngIf="secondaryCard" [item]="item" [imageBorderRadiusClass]="imageBorderRadiusClass">
+            <app-secondary-card [routerLink]="'/genre/' + item.name" *ngIf="secondaryCard" [item]="item" [imageBorderRadiusClass]="imageBorderRadiusClass">
             </app-secondary-card>
         </div>
     </ngx-slick-carousel>

@@ -1,7 +1,6 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 
 import { PlaylistConfigService } from '../../../../core/services/playlist-config.service';
-import { SongsConfigService } from '../../../../core/services/songs-config.service';
 
 @Component({
     selector: 'app-aside-right',
@@ -14,8 +13,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
     playlist: any = {};
     private playlistSubscription;
 
-    constructor(private playlistConfigService: PlaylistConfigService,
-                private songsConfigService: SongsConfigService) { }
+    constructor(private playlistConfigService: PlaylistConfigService) { }
 
     ngOnInit() {
         this.setDefaultPlaylist();
@@ -29,7 +27,7 @@ export class AsideRightComponent implements OnInit, OnDestroy {
             id: 1,
             name: 'Listen Special',
             cover_url: './assets/images/background/horizontal/1.jpg',
-            songs: this.songsConfigService.songsList
+            songs: []
         };
     }
 

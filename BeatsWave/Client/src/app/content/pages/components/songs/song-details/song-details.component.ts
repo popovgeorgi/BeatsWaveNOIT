@@ -13,6 +13,7 @@ import { AuthService } from "src/app/core/services/auth.service";
 import { SimpleModalService } from "ngx-simple-modal";
 import { SongEditComponent } from "../song-edit/song-edit.component";
 import { SongBuyComponent } from "../song-buy/song-buy.component";
+import { GoogleAnalyticsService } from "src/app/core/services/google-analytics.service";
 
 @Component({
   selector: "app-song-details",
@@ -35,7 +36,8 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
     private likeService: LikeService,
     private snotifyService: SnotifyService,
     private authService: AuthService,
-    private simpleModalService: SimpleModalService
+    private simpleModalService: SimpleModalService,
+    public googleAnalyticsService: GoogleAnalyticsService
   ) {
     this.snotifyService.config = ToastDefaults;
   }
@@ -71,7 +73,14 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
   }
 
   public contact() {
-    if (this.user) {
+    this.googleAnalyticsService.eventEmitter("user_trying_to_contact_producer", "contact", "connect", "click", 1);
+    if (!this.beatDetails.isProducerReceivingEmails) {
+      this.snotifyService.info(`The producer of ${this.beatDetails.name} is currently not receiving emails. Find another way to contact him.`, '', {
+        showProgressBar: false,
+        timeout: 5000
+      });
+    }
+    else if (this.user) {
       const modal = this.simpleModalService.addModal(SongBuyComponent, { data: this.beatDetails })
         .subscribe((isConfirmed) => {
           if (isConfirmed) {
@@ -150,5 +159,10 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
 
   addInPlayer() {
     this.audioPlayerService.playSong(this.beatDetails);
+
+    let userId = this.authService.getUserId();
+      if (userId != null && userId != this.beatDetails.producerId) {
+        this.beatService.addPlay(this.beatDetails.id).subscribe();
+      }
   }
 }

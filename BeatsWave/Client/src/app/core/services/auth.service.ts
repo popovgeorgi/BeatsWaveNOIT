@@ -63,6 +63,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  getUserId() {
+    if (localStorage.getItem('userData') != null) {
+      return JSON.parse(localStorage.getItem('userData')).id;
+    }
+  }
+
   isAuthenticated() {
     if (this.getToken()) {
       return true;

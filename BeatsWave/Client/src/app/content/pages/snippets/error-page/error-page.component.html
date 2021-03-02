@@ -1,9 +1,16 @@
 <perfect-scrollbar style="height: 100vh">
-    <div class="d-flex align-items-center justify-content-center h-100">
+    <div style="background-color: #222629;" class="d-flex align-items-center justify-content-center h-100">
         <div class="text-center px-3">
-            <h1 class="display-2">404</h1>
-            <p>Sorry! But the page you are looking for does not exist, have been removed. <br>Name change or is temporarily unavailable</p>
-            <button type="button" routerLink="/home" class="load-page btn btn-pill btn-air btn-brand">Go To Homepage</button>
+            <div>
+              <div class="txt-center">
+                <img style="height: 200px;" src="https://media.giphy.com/media/S4Gh3T1SwITKMhoUTt/giphy.gif" />
+              </div>
+              <h1 style="color:#FFFFFF" class="txt-h">The page you are looking for does not exist</h1>
+              <p style="color: #FFFFFF;" class="txt-p">Keep on browsing</p>
+              <div class="favourites-button-empty">
+                <button (click)="goToFeed()" class="btn btn-primary btn-air btn-empty">To the feed</button>
+              </div>
+            </div>
         </div>
     </div>
 </perfect-scrollbar>

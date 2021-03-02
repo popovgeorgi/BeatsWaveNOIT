@@ -9,6 +9,7 @@ import { forkJoin, Observable, Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-music',
@@ -31,7 +32,8 @@ export class MusicComponent implements OnInit, OnDestroy {
     private feedHubService: FeedHubService,
     private snotifyService: SnotifyService,
     private userSerivce: UserService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private router: Router) {
     this.snotifyService.config = ToastDefaults;
   }
 
@@ -69,14 +71,25 @@ export class MusicComponent implements OnInit, OnDestroy {
 
     this.feedHubService.startConnection();
     this.feedHubService.resultReceived.subscribe(id => {
-      this.snotifyService.create({
-        title: 'New Content',
-        body: 'New beat available. Check it out!',
-        config: {
-          position: SnotifyPosition.centerTop,
-          type: SnotifyStyle.info
-        }
-      })
+      this.snotifyService.confirm('Do you want to check it out?', 'New Content', {
+        position: SnotifyPosition.centerTop,
+        type: SnotifyStyle.info,
+        timeout: 5000,
+        showProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: true,
+        buttons: [
+          {
+            text: 'Yes', action: (toast) => {
+              this.router.navigate(['/song/' + id + '/details'])
+              this.snotifyService.remove(toast.id);
+            },
+            bold: false
+          },
+          { text: 'No', action: (toast) => { this.snotifyService.remove(toast.id); } },
+          { text: 'Later', action: (toast) => { this.snotifyService.remove(toast.id); } },
+        ]
+      });
     })
   }
 

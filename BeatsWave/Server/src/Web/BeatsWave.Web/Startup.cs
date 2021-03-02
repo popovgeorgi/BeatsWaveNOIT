@@ -85,14 +85,12 @@
             {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
+                app.UseSwaggerUI();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
