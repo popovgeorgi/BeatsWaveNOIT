@@ -21,6 +21,7 @@ namespace BeatsWave.Data.Models
             this.Beats = new HashSet<Beat>();
             this.Likes = new HashSet<Like>();
             this.Comments = new HashSet<ArtistComment>();
+            this.Notifications = new HashSet<Notification>();
         }
 
         public Profile Profile { get; set; }
@@ -47,6 +48,8 @@ namespace BeatsWave.Data.Models
 
         // Comments from other users to this user
         public virtual ICollection<ArtistComment> Comments { get; }
+
+        public virtual ICollection<Notification> Notifications { get; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

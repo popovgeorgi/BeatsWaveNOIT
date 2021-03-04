@@ -41,6 +41,8 @@
 
         public DbSet<Play> Plays { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -157,6 +159,20 @@
                 .Entity<Event>()
                 .Property(e => e.Price)
                 .HasColumnType("decimal(18,4)");
+
+            builder
+                .Entity<Notification>()
+                .HasOne(n => n.User)
+                .WithMany(u => u.Notifications)
+                .HasForeignKey(n => n.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Notification>()
+                .HasOne(n => n.Initiator)
+                .WithMany()
+                .HasForeignKey(n => n.InitiatorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
