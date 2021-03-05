@@ -5,6 +5,8 @@
 
     using BeatsWave.Services.Data;
     using BeatsWave.Web.Infrastructure.Services;
+    using BeatsWave.Web.Models.Artists;
+    using BeatsWave.Web.Models.Beats;
     using BeatsWave.Web.Models.Comments;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -15,11 +17,22 @@
     {
         private readonly ICommentService commentService;
         private readonly ICurrentUserService currentUser;
+        private readonly INotificationService notificationService;
+        private readonly IArtistService artistService;
+        private readonly IBeatService beatService;
 
-        public CommentsController(ICommentService commentService, ICurrentUserService currentUser)
+        public CommentsController(
+            ICommentService commentService,
+            ICurrentUserService currentUser,
+            INotificationService notificationService,
+            IArtistService artistService,
+            IBeatService beatService)
         {
             this.commentService = commentService;
             this.currentUser = currentUser;
+            this.notificationService = notificationService;
+            this.artistService = artistService;
+            this.beatService = beatService;
         }
 
         [HttpPost]
@@ -37,6 +50,14 @@
                 {
                     return this.BadRequest();
                 }
+            }
+
+            var producerOfCommentedBeat = await this.artistService.GetProducerByBeatIdAsync<ArtistByBeatIdServiceModel>(model.BeatId);
+
+            if (producerOfCommentedBeat.ProducerId != this.currentUser.GetId())
+            {
+                var beat = await this.beatService.DetailsAsync<BeatNameServiceModel>(model.BeatId);
+                await this.notificationService.CreateAsync(producerOfCommentedBeat.ProducerId, this.currentUser.GetId(), string.Format(CommentNotification, this.currentUser.GetUserName(), beat.Name), "Comment");
             }
 
             return await this.commentService.CreateBeatCommentAsync<BeatCommentResponseModel>(model.BeatId, this.currentUser.GetId(), model.Content, parentId);

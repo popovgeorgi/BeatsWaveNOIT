@@ -34,5 +34,6 @@
 
         public const string LikeNotification = "{0} liked your beat {1}";
         public const string FollowNotification = "{0} is now following your profile";
+        public const string CommentNotification = "{0} commented your beat {1}";
     }
 }
