@@ -22,5 +22,7 @@
         Task<Result> UpdateEmailReceivingAsync(string userId);
 
         Task<bool> GetEmailNotificationsBehaviourAsync(string userId);
+
+        Task<T> GetUserByEmailAsync<T>(string email);
     }
 }

@@ -68,6 +68,13 @@
                 .ToArrayAsync();
         }
 
+        public async Task<T> GetUserByEmailAsync<T>(string email)
+            => await this.userRepository
+                .All()
+                .Where(u => u.Email == email)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
         public async Task<string> GetUserEmailById(string id)
             => await this.userRepository
                 .All()
