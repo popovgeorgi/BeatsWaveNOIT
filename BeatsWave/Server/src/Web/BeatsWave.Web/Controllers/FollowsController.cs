@@ -7,15 +7,22 @@
     using BeatsWave.Web.Models.Follows;
     using Microsoft.AspNetCore.Mvc;
 
+    using static BeatsWave.Common.GlobalConstants;
+
     public class FollowsController : ApiController
     {
         private readonly IFollowService followService;
         private readonly ICurrentUserService currentUser;
+        private readonly INotificationService notificationService;
 
-        public FollowsController(IFollowService followService, ICurrentUserService currentUser)
+        public FollowsController(
+            IFollowService followService,
+            ICurrentUserService currentUser,
+            INotificationService notificationService)
         {
             this.followService = followService;
             this.currentUser = currentUser;
+            this.notificationService = notificationService;
         }
 
         [HttpPost]
@@ -30,6 +37,8 @@
             {
                 return this.BadRequest(result.Error);
             }
+
+            await this.notificationService.CreateAsync(model.UserId, this.currentUser.GetId(), string.Format(FollowNotification, this.currentUser.GetUserName()), "Follow");
 
             return this.Ok();
         }

@@ -33,5 +33,6 @@
         public const int ImageWidth = 320;
 
         public const string LikeNotification = "{0} liked your beat {1}";
+        public const string FollowNotification = "{0} is now following your profile";
     }
 }
