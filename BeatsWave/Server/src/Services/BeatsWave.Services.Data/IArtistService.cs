@@ -12,5 +12,7 @@
         Task<IEnumerable<T>> FeaturedAsync<T>();
 
         Task<IEnumerable<T>> TrendingAsync<T>();
+
+        Task<T> GetProducerByBeatIdAsync<T>(int beatId);
     }
 }

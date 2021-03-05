@@ -31,5 +31,7 @@
 
         public const int ImageHeight = 320;
         public const int ImageWidth = 320;
+
+        public const string LikeNotification = "{0} liked your beat {1}";
     }
 }

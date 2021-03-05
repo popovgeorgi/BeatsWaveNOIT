@@ -12,9 +12,15 @@
     public class ArtistService : IArtistService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;
+        private readonly IDeletableEntityRepository<Beat> beatRepository;
 
-        public ArtistService(IDeletableEntityRepository<ApplicationUser> userRepository)
-            => this.userRepository = userRepository;
+        public ArtistService(
+            IDeletableEntityRepository<ApplicationUser> userRepository,
+            IDeletableEntityRepository<Beat> beatRepository)
+        {
+            this.userRepository = userRepository;
+            this.beatRepository = beatRepository;
+        }
 
         public async Task<IEnumerable<T>> AllAsync<T>(IEnumerable<string> artistsIds, int? take = null, int skip = 0)
         {
@@ -66,5 +72,12 @@
 
             return trendingArtists;
         }
+
+        public async Task<T> GetProducerByBeatIdAsync<T>(int beatId)
+            => await this.beatRepository
+                .All()
+                .Where(b => b.Id == beatId)
+                .To<T>()
+                .FirstOrDefaultAsync();
     }
 }
