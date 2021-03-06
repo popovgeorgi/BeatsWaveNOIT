@@ -1,0 +1,26 @@
+<li class="dropdown dropdown-notifications">
+  <a (click)="seeNotifications()" class="text-white icon-notifications" role="button" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="ion-ios-notifications-outline"></i>
+    <span *ngIf="data" class="notifications-number">{{unseen}}</span>
+  </a>
+  <div class="dropdown-menu dropdown-menu-notifications dropdown-menu-right" aria-labelledby="notifications">
+    <perfect-scrollbar style="height: 320px" class="song-list">
+      <div *ngIf="data && data.length > 0" class="dropdown-menu-notifications-body">
+        <div *ngFor="let notification of data">
+          <app-notification [data]="notification"></app-notification>
+        </div>
+      </div>
+      <div *ngIf="data && data.length == 0" class="empty-notifications">
+        <div class="empty-notifications-wrap">
+          <span class="empty-notifications-icon"><i class="ion-ios-notifications-outline"></i></span>
+          <span class="font-weight-bold d-block">No Notification</span>
+          <p class="font-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+    </perfect-scrollbar>
+
+    <div *ngIf="data && data.length > 0" class="dropdown-menu-notifications-foot">
+      <a class="text-white">All Notifications</a>
+    </div>
+  </div>
+</li>

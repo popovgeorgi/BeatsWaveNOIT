@@ -1,0 +1,15 @@
+<a [routerLink]="'/artist/' + data.initiatorId + '/details'" [ngClass]="{'recent': data.isSeen == false}" class="dropdown-item d-block">
+  <div class="d-flex align-items-center">
+    <div class="avatar avatar-md avatar-circle">
+      <i *ngIf="data.type == 'Comment'" class="ion-ios-chatboxes"></i>
+      <ion-icon *ngIf="data.type == 'Like'" style="font-size: 20px;" name="heart"></ion-icon>
+      <ion-icon *ngIf="data.type == 'Email'" style="font-size: 20px;" name="mail"></ion-icon>
+      <ion-icon *ngIf="data.type == 'Follow'" style="font-size: 20px;" name="person-add-outline"></ion-icon>
+      <div class="avatar avatar-thumb avatar-circle"><img src="{{data.initiatorImage}}" alt="user"></div>
+    </div>
+    <div style="min-width: 0">
+      <span class="d-block text-truncate">{{data.message}}</span>
+      <span class="d-block text-white-50 font-sm">{{data.createdOn | timeAgo}}</span>
+    </div>
+  </div>
+</a>

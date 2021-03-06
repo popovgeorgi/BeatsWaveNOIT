@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { SimpleModalService } from 'ngx-simple-modal';
 import { LanguageComponent } from './language/language.component';
@@ -10,6 +10,8 @@ import { SkinService } from '../../../core/services/skin.service';
 import { Config } from '../../../config/config';
 import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { Notification } from 'src/app/core/models/Notification';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +22,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('headerBackdrop', { static: false }) backdrop: ElementRef;
   headerClasses = 'bg-primary';
 
-
+  public notifications: Array<Notification>;
+  public unseenNotifications: number;
   private userSub: Subscription;
   language: any = {};
   currentUser: User;
@@ -33,7 +36,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private simpleModalService: SimpleModalService,
     private localStorageService: LocalStorageService,
     private skinService: SkinService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private notificationService: NotificationService) {
     this.language = {
       title: 'Language',
       image: './assets/images/svg/translate.svg'
@@ -41,6 +45,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.notificationService.getNotifications().subscribe(notifications => {
+      this.notifications = notifications;
+      this.unseenNotifications = notifications.filter(n => n.isSeen == false).length;
+    })
     this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
     });

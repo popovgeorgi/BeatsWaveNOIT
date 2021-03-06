@@ -39,6 +39,7 @@
     "rxjs": "~6.4.0",
     "signalr": "^2.4.1",
     "slick-carousel": "^1.8.1",
+    "time-ago-pipe": "^1.3.2",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

@@ -15,6 +15,7 @@
 
         <!-- Begin | Header Options -->
         <ul class="header-options d-flex align-items-center">
+            <app-notifications style="margin-right: 20px;" *ngIf="currentUser" [data]="notifications" [unseen]="unseenNotifications"></app-notifications>
             <li>
                 <app-profile [user]="currentUser"></app-profile>
             </li>

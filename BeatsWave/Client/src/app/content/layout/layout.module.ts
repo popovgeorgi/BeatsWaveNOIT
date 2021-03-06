@@ -26,6 +26,9 @@ import { SearchComponent } from './header/search/search.component';
 import { LoginComponent } from './header/login/login.component';
 import { RegisterComponent } from './header/register/register.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NotificationsComponent } from './header/notifications/notifications.component';
+import { NotificationComponent } from './header/notifications/notification/notification.component';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -45,7 +48,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LanguageComponent,
     SearchComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotificationsComponent,
+    NotificationComponent,
+    TimeAgoPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

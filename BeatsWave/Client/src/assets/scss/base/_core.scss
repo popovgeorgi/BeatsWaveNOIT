@@ -341,3 +341,122 @@ body div.ui-fileupload-buttonbar.ui-widget-header.ui-corner-top {
     background-color: green !important;
   }
 }
+
+.icon-notifications {
+  position: relative;
+  display: table;
+  @include icons-style {
+    @include icon-size(1.5rem);
+    @include table-cell-middle;
+    text-align: center;
+  }
+
+  .notifications-number {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    display: block;
+    @include size(12px);
+    border-radius: 50%;
+    background-color: $red;
+    color: $white;
+    font-size: 8px;
+    text-align: center;
+    line-height: 12px;
+    font-weight: 500;
+  }
+}
+
+.dropdown-menu-notifications {
+  width: 320px;
+  flex-direction: column;
+
+  &.show {
+    display: flex;
+  }
+
+  .dropdown-menu-notifications-body {
+    flex: 1;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .dropdown-menu-notifications-foot {
+    padding: 16px 8px 8px;
+    font-weight: 600;
+    text-align: center;
+    border-top: 1px solid rgba($white, .1);
+  }
+
+  .dropdown-item {
+    color: $white !important;
+    font-size: 14px;
+
+    + .dropdown-item {
+      border-top: 1px solid rgba($white, .1);
+    }
+
+    &.recent {
+      position: relative;
+      &:after {
+        @include pseudoContent;
+        @include absolute(left 8px top 50%);
+        @include size(8px);
+        margin-top: -4px;
+        background-color: $blue;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .avatar {
+    @include flexBox(true);
+    background-color: rgba($black, .5);
+    overflow: visible;
+    position: relative;
+    @include icons-style {
+      text-align: center;
+    }
+
+    img {
+      border-radius: 50%;
+    }
+
+    .avatar-thumb {
+      @include absolute(right -2px bottom -2px);
+      @include size(20px);
+    }
+  }
+  .avatar-md {
+    flex: 0 0 3rem;
+  }
+
+  .empty-notifications {
+    @include flexBox(true);
+    height: 320px;
+    color: $white;
+    padding: 16px;
+    text-align: center;
+    .empty-notifications-icon {
+      @include icons-style {
+        @include icon-size(2rem);
+      }
+    }
+  }
+}
+
+.dropdown-notifications {
+  position: static;
+}
+
+@media (max-width: 379px) {
+  .dropdown-menu-notifications {
+    width: 260px;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .dropdown-notifications {
+    position: relative;
+  }
+}
