@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { Notification } from 'src/app/core/models/Notification';
 
 @Component({
