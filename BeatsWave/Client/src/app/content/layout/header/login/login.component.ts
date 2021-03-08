@@ -44,9 +44,7 @@ export class LoginComponent extends SimpleModalComponent<any, any> implements On
   submitLogin() {
     this.spinner.show('loginModal');
     this.formSubmitted = true;
-    this.authService.login(this.login.value).subscribe(data => {
-      this.authService.saveToken(data['token']);
-    },
+    this.authService.login(this.login.value).subscribe(data => { },
       error => {
         this.spinner.hide('loginModal');
         this.snotifyService.error("Your data is not valid");

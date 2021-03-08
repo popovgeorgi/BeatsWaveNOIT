@@ -19,13 +19,15 @@ export class AuthService {
 
   login(data): Observable<any> {
     return this.http.post<any>(this.loginPath, data)
-      .pipe(map(user => {
-        if (user && user.token) {
-          localStorage.setItem('userData', JSON.stringify(user));
-          this.user.next(user);
-        }
-        return user;
-      }));
+      .pipe(
+        map(user => {
+          if (user && user.token) {
+            localStorage.setItem('userData', JSON.stringify(user));
+            localStorage.setItem('token', user.token)
+            this.user.next(user);
+          }
+          return user;
+        }));
   }
 
   logout() {

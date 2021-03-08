@@ -45,12 +45,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.notificationService.getNotifications().subscribe(notifications => {
-      this.notifications = notifications;
-      this.unseenNotifications = notifications.filter(n => n.isSeen == false).length;
-    })
     this.userSub = this.authService.user.subscribe(user => {
       this.currentUser = user;
+
+      if (user) {
+        this.notificationService.getNotifications().subscribe(notifications => {
+          this.notifications = notifications;
+          this.unseenNotifications = notifications.filter(n => n.isSeen == false).length;
+        })
+      }
     });
     const themeSkin = this.localStorageService.getThemeSkin();
     if (themeSkin) {

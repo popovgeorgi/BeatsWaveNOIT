@@ -11,8 +11,7 @@ export class NotificationsComponent {
   @Input() data: Array<Notification>;
   @Input() unseen: number;
 
-  constructor(private notificationService: NotificationService) {
-  }
+  constructor(private notificationService: NotificationService) { }
 
   public seeNotifications() {
     const unseenMessages = this.data.filter(n => n.isSeen == false).length;
