@@ -1,9 +1,10 @@
 ﻿namespace BeatsWave.Web.Models.Notifications
 {
+    using System;
+
     using AutoMapper;
     using BeatsWave.Data.Models;
     using BeatsWave.Services.Mapping;
-    using System;
 
     public class NotificationsByUserServiceModel : IMapFrom<Notification>, IHaveCustomMappings
     {

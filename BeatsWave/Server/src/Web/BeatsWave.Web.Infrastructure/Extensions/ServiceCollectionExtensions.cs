@@ -1,6 +1,7 @@
 ﻿ namespace BeatsWave.Web.Infrastructure.Extensions
 {
     using System.Text;
+    using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
     using BeatsWave.Services.Messaging;
@@ -41,6 +42,22 @@
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
                         ValidateAudience = false,
+                    };
+                    x.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+
+                            var path = context.HttpContext.Request.Path;
+                            if (!string.IsNullOrEmpty(accessToken) &&
+                                path.StartsWithSegments("/notification"))
+                            {
+                                context.Token = accessToken;
+                            }
+
+                            return Task.CompletedTask;
+                        },
                     };
                 });
 

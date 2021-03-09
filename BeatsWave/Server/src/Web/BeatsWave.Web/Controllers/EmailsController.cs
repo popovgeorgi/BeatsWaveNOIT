@@ -4,10 +4,13 @@
 
     using BeatsWave.Services.Data;
     using BeatsWave.Services.Messaging;
+    using BeatsWave.Web.Hubs;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Emails;
+    using BeatsWave.Web.Models.Notifications;
     using BeatsWave.Web.Models.Users;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
 
     using static BeatsWave.Common.GlobalConstants;
 
@@ -17,17 +20,20 @@
         private readonly IUserService userService;
         private readonly ICurrentUserService currentUser;
         private readonly INotificationService notificationService;
+        private readonly IHubContext<NotificationHub> notificationHub;
 
         public EmailsController(
             IEmailSender emailSender,
             IUserService userService,
             ICurrentUserService currentUser,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            IHubContext<NotificationHub> notificationHub)
         {
             this.emailSender = emailSender;
             this.userService = userService;
             this.currentUser = currentUser;
             this.notificationService = notificationService;
+            this.notificationHub = notificationHub;
         }
 
         [HttpPost]
@@ -45,7 +51,10 @@
 
             // Sending notification to the user
             var targetUser = await this.userService.GetUserByEmailAsync<UserByEmailServiceModel>(emailRequestModel.To);
-            await this.notificationService.CreateAsync(targetUser.Id, this.currentUser.GetId(), string.Format(EmailNotification, this.currentUser.GetUserName()), "Email");
+            var notificationId = await this.notificationService.CreateAsync(targetUser.Id, this.currentUser.GetId(), string.Format(EmailNotification, this.currentUser.GetUserName()), "Email");
+
+            var notification = await this.notificationService.GetNotificationById<NotificationsByUserServiceModel>(notificationId);
+            await this.notificationHub.Clients.User(targetUser.Id).SendAsync("NewNotificationReceived", notification);
 
             return this.Ok();
         }

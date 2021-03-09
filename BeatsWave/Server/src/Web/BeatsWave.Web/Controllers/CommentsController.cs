@@ -4,12 +4,15 @@
     using System.Threading.Tasks;
 
     using BeatsWave.Services.Data;
+    using BeatsWave.Web.Hubs;
     using BeatsWave.Web.Infrastructure.Services;
     using BeatsWave.Web.Models.Artists;
     using BeatsWave.Web.Models.Beats;
     using BeatsWave.Web.Models.Comments;
+    using BeatsWave.Web.Models.Notifications;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
 
     using static BeatsWave.Common.GlobalConstants;
 
@@ -20,19 +23,22 @@
         private readonly INotificationService notificationService;
         private readonly IArtistService artistService;
         private readonly IBeatService beatService;
+        private readonly IHubContext<NotificationHub> notificationHub;
 
         public CommentsController(
             ICommentService commentService,
             ICurrentUserService currentUser,
             INotificationService notificationService,
             IArtistService artistService,
-            IBeatService beatService)
+            IBeatService beatService,
+            IHubContext<NotificationHub> notificationHub)
         {
             this.commentService = commentService;
             this.currentUser = currentUser;
             this.notificationService = notificationService;
             this.artistService = artistService;
             this.beatService = beatService;
+            this.notificationHub = notificationHub;
         }
 
         [HttpPost]
@@ -57,7 +63,10 @@
             if (producerOfCommentedBeat.ProducerId != this.currentUser.GetId())
             {
                 var beat = await this.beatService.DetailsAsync<BeatNameServiceModel>(model.BeatId);
-                await this.notificationService.CreateAsync(producerOfCommentedBeat.ProducerId, this.currentUser.GetId(), string.Format(CommentNotification, this.currentUser.GetUserName(), beat.Name), "Comment");
+                var notificationId = await this.notificationService.CreateAsync(producerOfCommentedBeat.ProducerId, this.currentUser.GetId(), string.Format(CommentNotification, this.currentUser.GetUserName(), beat.Name), "Comment");
+
+                var notification = await this.notificationService.GetNotificationById<NotificationsByUserServiceModel>(notificationId);
+                await this.notificationHub.Clients.User(producerOfCommentedBeat.ProducerId).SendAsync("NewNotificationReceived", notification);
             }
 
             return await this.commentService.CreateBeatCommentAsync<BeatCommentResponseModel>(model.BeatId, this.currentUser.GetId(), model.Content, parentId);

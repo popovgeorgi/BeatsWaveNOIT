@@ -14,7 +14,8 @@
     {
         private readonly IRepository<Notification> notificationsRepository;
 
-        public NotificationService(IRepository<Notification> notificationsRepository)
+        public NotificationService(
+            IRepository<Notification> notificationsRepository)
         {
             this.notificationsRepository = notificationsRepository;
         }
@@ -29,7 +30,7 @@
                 .ToListAsync();
         }
 
-        public async Task CreateAsync(string userId, string initiatorId, string message, string type)
+        public async Task<int> CreateAsync(string userId, string initiatorId, string message, string type)
         {
             var notification = new Notification
             {
@@ -41,7 +42,16 @@
 
             await this.notificationsRepository.AddAsync(notification);
             await this.notificationsRepository.SaveChangesAsync();
+
+            return notification.Id;
         }
+
+        public async Task<T> GetNotificationById<T>(int notificationId)
+            => await this.notificationsRepository
+                .All()
+                .Where(n => n.Id == notificationId)
+                .To<T>()
+                .FirstOrDefaultAsync();
 
         public async Task SeeNotificationsAsync(string userId)
         {

@@ -9,7 +9,7 @@
     </div>
     <div style="min-width: 0">
       <span class="d-block text-truncate">{{data.message}}</span>
-      <span class="d-block text-white-50 font-sm">{{data.createdOn | timeAgo}}</span>
+      <span *ngIf="data.createdOn" class="d-block text-white-50 font-sm">{{data.createdOn | timeAgo}}</span>
     </div>
   </div>
 </a>

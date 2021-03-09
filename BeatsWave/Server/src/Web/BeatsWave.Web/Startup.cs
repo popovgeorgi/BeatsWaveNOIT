@@ -107,6 +107,7 @@
                 endpoints =>
                     {
                         endpoints.MapHub<FeedHub>("/feed");
+                        endpoints.MapHub<NotificationHub>("/notification");
                         endpoints.MapControllers();
                     });
         }
