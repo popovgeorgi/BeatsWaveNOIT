@@ -4,5 +4,5 @@ export interface Notification {
   type: string,
   initiatorId: string,
   initiatorImage: string,
-  createdOn: Date
+  createdOn: string
 }
