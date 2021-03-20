@@ -85,7 +85,8 @@
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
-                recurringJobManager.AddOrUpdate<GetLatestLikeInformationJob>("GetLatestLikeInformationJob", x => x.Work(null), Cron.Daily, TimeZoneInfo.Local);
+                recurringJobManager.AddOrUpdate<GetLatestLikeInformationJob>("GetLatestLikeInformationJob", x => x.Work(null), Cron.Daily, TimeZoneInfo.Utc);
+                recurringJobManager.AddOrUpdate<TrainModelJob>("TrainModelJob", x => x.Work(null), Cron.Daily, TimeZoneInfo.Local);
             }
 
             if (env.IsDevelopment())
