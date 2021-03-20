@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.2" />
+    <PackageReference Include="Microsoft.ML" Version="1.5.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.205" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -26,6 +27,7 @@
     <ProjectReference Include="..\..\Data\BeatsWave.Data.Common\BeatsWave.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeatsWave.Data.Models\BeatsWave.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\BeatsWave.Web.ViewModels\BeatsWave.Web.Models.csproj" />
+    <ProjectReference Include="..\BeatsWave.Services.CronJobs\BeatsWave.Services.CronJobs.csproj" />
     <ProjectReference Include="..\BeatsWave.Services.Mapping\BeatsWave.Services.Mapping.csproj" />
     <ProjectReference Include="..\BeatsWave.Services\BeatsWave.Services.csproj" />
   </ItemGroup>
