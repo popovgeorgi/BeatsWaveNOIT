@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.20" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.20" />
     <PackageReference Include="ICSharpCode.Decompiler" Version="6.2.1.6137" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
@@ -38,6 +40,7 @@
     <ProjectReference Include="..\..\BeatsWave.Common\BeatsWave.Common.csproj" />
     <ProjectReference Include="..\..\Data\BeatsWave.Data.Models\BeatsWave.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\BeatsWave.Data\BeatsWave.Data.csproj" />
+    <ProjectReference Include="..\..\Services\BeatsWave.Services.CronJobs\BeatsWave.Services.CronJobs.csproj" />
     <ProjectReference Include="..\..\Services\BeatsWave.Services.Data\BeatsWave.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\BeatsWave.Services.Mapping\BeatsWave.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\BeatsWave.Services.Messaging\BeatsWave.Services.Messaging.csproj" />

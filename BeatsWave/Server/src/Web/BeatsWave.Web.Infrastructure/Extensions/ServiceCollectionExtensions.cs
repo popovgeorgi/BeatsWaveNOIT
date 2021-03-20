@@ -1,5 +1,6 @@
 ﻿ namespace BeatsWave.Web.Infrastructure.Extensions
 {
+    using System;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -7,6 +8,8 @@
     using BeatsWave.Services.Messaging;
     using BeatsWave.Web.Infrastructure.Filters;
     using BeatsWave.Web.Infrastructure.Services;
+    using Hangfire;
+    using Hangfire.SqlServer;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +23,29 @@
             var applicationSettingsConfiguration = configuration.GetSection("ApplicationSettings");
             services.Configure<AppSettings>(applicationSettingsConfiguration);
             return applicationSettingsConfiguration.Get<AppSettings>();
+        }
+
+        public static IServiceCollection AddHangfire(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            services
+                .AddHangfire(configuration => configuration
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(
+                        connectionString,
+                        new SqlServerStorageOptions
+                        {
+                            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                            QueuePollInterval = TimeSpan.Zero,
+                            UseRecommendedIsolationLevel = true,
+                            DisableGlobalLocks = true,
+                        }));
+
+            return services;
         }
 
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, AppSettings appSettings)

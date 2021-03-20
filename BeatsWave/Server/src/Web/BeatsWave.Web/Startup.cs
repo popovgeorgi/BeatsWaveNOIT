@@ -1,5 +1,6 @@
 ﻿namespace BeatsWave.Web
 {
+    using System;
     using System.Reflection;
 
     using BeatsWave.Data;
@@ -8,10 +9,12 @@
     using BeatsWave.Data.Models;
     using BeatsWave.Data.Repositories;
     using BeatsWave.Data.Seeding;
+    using BeatsWave.Services.CronJobs;
     using BeatsWave.Services.Mapping;
     using BeatsWave.Web.Hubs;
     using BeatsWave.Web.Infrastructure.Extensions;
     using BeatsWave.Web.Models;
+    using Hangfire;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -29,6 +32,9 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(this.Configuration);
+            services.AddHangfireServer();
+
             services.AddCors();
 
             services.AddDbContext<ApplicationDbContext>(
@@ -69,7 +75,7 @@
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
@@ -79,6 +85,7 @@
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 dbContext.Database.Migrate();
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                recurringJobManager.AddOrUpdate<GetLatestLikeInformationJob>("GetLatestLikeInformationJob", x => x.Work(null), Cron.Daily, TimeZoneInfo.Local);
             }
 
             if (env.IsDevelopment())
@@ -96,6 +103,8 @@
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseHangfireDashboard();
+
             app.UseRouting();
 
             app.UseCorsPolicy();
@@ -109,6 +118,7 @@
                         endpoints.MapHub<FeedHub>("/feed");
                         endpoints.MapHub<NotificationHub>("/notification");
                         endpoints.MapControllers();
+                        endpoints.MapHangfireDashboard();
                     });
         }
     }
