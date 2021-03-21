@@ -28,7 +28,7 @@
                 .ForMember(b => b.Url, m => m.MapFrom(l => l.Beat.BeatUrl))
                 .ForMember(b => b.Name, m => m.MapFrom(l => l.Beat.Name))
                 .ForMember(b => b.ImageUrl, m => m.MapFrom(l => l.Beat.ImageUrl))
-                .ForMember(b => b.ProducerUserName, m => m.MapFrom(l => l.User.UserName))
+                .ForMember(b => b.ProducerUserName, m => m.MapFrom(l => l.Beat.Producer.UserName))
                 .ForMember(b => b.LikesCount, m => m.MapFrom(l => l.Beat.Likes.Count))
                 .ForMember(b => b.CommentsCount, m => m.MapFrom(l => l.Beat.Comments.Count));
         }
