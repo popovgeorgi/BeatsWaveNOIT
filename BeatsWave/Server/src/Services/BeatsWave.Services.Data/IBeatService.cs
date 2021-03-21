@@ -30,5 +30,7 @@
         Task<IEnumerable<T>> FeaturedAsync<T>();
 
         Task<int> GetTotalCount();
+
+        Task<IEnumerable<T>> AllNotLikedAndNotProducedByUserAsync<T>(string userId);
     }
 }

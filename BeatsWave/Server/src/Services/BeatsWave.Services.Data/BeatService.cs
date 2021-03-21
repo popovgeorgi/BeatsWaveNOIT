@@ -14,11 +14,16 @@
     {
         private readonly IDeletableEntityRepository<Beat> beatsRepository;
         private readonly IRepository<Play> playsRepository;
+        private readonly IDeletableEntityRepository<Like> likesRepository;
 
-        public BeatService(IDeletableEntityRepository<Beat> beatsRepository, IRepository<Play> playsRepository)
+        public BeatService(
+            IDeletableEntityRepository<Beat> beatsRepository,
+            IRepository<Play> playsRepository,
+            IDeletableEntityRepository<Like> likesRepository)
         {
             this.beatsRepository = beatsRepository;
             this.playsRepository = playsRepository;
+            this.likesRepository = likesRepository;
         }
 
         public async Task<Result> AddPlay(int beatId, string playerId)
@@ -195,6 +200,23 @@
             => await this.beatsRepository
                 .All()
                 .CountAsync();
+
+        public async Task<IEnumerable<T>> AllNotLikedAndNotProducedByUserAsync<T>(string userId)
+        {
+            var likedBeatsByUser = await this.likesRepository
+                .All()
+                .Where(l => l.UserId == userId)
+                .Select(b => b.BeatId)
+                .ToListAsync();
+
+            var notLikedBeats = await this.beatsRepository
+                .All()
+                .Where(b => !likedBeatsByUser.Contains(b.Id) && b.ProducerId != userId)
+                .To<T>()
+                .ToListAsync();
+
+            return notLikedBeats;
+        }
 
         private void ChangeBeat(Beat beat, string name, int? price, string genre, int? bpm, string description)
         {

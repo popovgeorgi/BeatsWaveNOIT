@@ -18,6 +18,10 @@
 
         public string ProducerUserName { get; set; }
 
+        public int LikesCount { get; set; }
+
+        public int CommentsCount { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
