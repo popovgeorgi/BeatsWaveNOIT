@@ -153,16 +153,18 @@ export class SongDetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['artist/' + id + '/details']);
   }
 
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
-  }
-
   addInPlayer() {
     this.audioPlayerService.playSong(this.beatDetails);
 
     let userId = this.authService.getUserId();
-      if (userId != null && userId != this.beatDetails.producerId) {
-        this.beatService.addPlay(this.beatDetails.id).subscribe();
-      }
+    if (userId != null && userId != this.beatDetails.producerId) {
+      this.beatService.addPlay(this.beatDetails.id).subscribe();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }
