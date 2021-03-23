@@ -30,7 +30,8 @@
             var dbContext = new ApplicationDbContext(optionsBuilder.Options);
             var beatRepo = new EfDeletableEntityRepository<Beat>(dbContext);
             var playRepo = new EfRepository<Play>(dbContext);
-            var beatService = new BeatService(beatRepo, playRepo);
+            var likeRepo = new EfDeletableEntityRepository<Like>(dbContext);
+            var beatService = new BeatService(beatRepo, playRepo, likeRepo);
 
             // Act
             for (int i = 1; i <= 100; i++)
@@ -68,12 +69,12 @@
             playRepo.Setup(p => p.AddAsync(It.IsAny<Play>())).Callback(
                 (Play play) => plays.Add(play));
             playRepo.Setup(r => r.All()).Returns(plays.AsQueryable());
-            var beatService = new BeatService(beatRepo.Object, playRepo.Object);
+            var likeRepo = new Mock<IDeletableEntityRepository<Like>>();
+            var beatService = new BeatService(beatRepo.Object, playRepo.Object, likeRepo.Object);
 
             // Act
             beatService.CreateAsync("test", "test", "test", 10, Genre.Rock.ToString(), 112, "test", "user").GetAwaiter();
             beatService.AddPlay(0, "user").GetAwaiter();
-
 
             // Assert
             Assert.Empty(plays);
@@ -89,7 +90,8 @@
                 (Beat beat) => beats.Add(beat));
             beatRepo.Setup(b => b.All()).Returns(beats.AsQueryable());
             var playRepo = new Mock<IRepository<Play>>();
-            var beatService = new BeatService(beatRepo.Object, playRepo.Object);
+            var likeRepo = new Mock<IDeletableEntityRepository<Like>>();
+            var beatService = new BeatService(beatRepo.Object, playRepo.Object, likeRepo.Object);
 
             beatService.CreateAsync("test", "test", "test", 10, Genre.Rock.ToString(), 112, "test", "user").GetAwaiter();
             beatService.UpdateAsync("anotherUser", 0, "hack", 100, Genre.HipHop.ToString(), 120, "hack").GetAwaiter();
@@ -108,7 +110,8 @@
                 (Beat beat) => beats.Add(beat));
             beatRepo.Setup(b => b.All()).Returns(beats.AsQueryable());
             var playRepo = new Mock<IRepository<Play>>();
-            var beatService = new BeatService(beatRepo.Object, playRepo.Object);
+            var likeRepo = new Mock<IDeletableEntityRepository<Like>>();
+            var beatService = new BeatService(beatRepo.Object, playRepo.Object, likeRepo.Object);
 
             beatService.CreateAsync("test", "test", "test", 10, Genre.Rock.ToString(), 112, "test", "user").GetAwaiter();
             beatService.DeleteAsync("hacker", 0).GetAwaiter();
