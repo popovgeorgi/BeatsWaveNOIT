@@ -46,11 +46,15 @@ Main languages: C#, TS
 
 - SignalR
 
+- ML.NET
+
+- Hangfire
+
 - Swagger
 
 - Sendgrid
 
-- Azure CI & CD
+- Azure DevOps CI & CD
 
 ## Screenshots:
 
