@@ -59,7 +59,7 @@ export class FavoritesComponent implements OnInit {
   private setRecommendedSongs(beats: Array<Beat>) {
     this.songs = {
       title: 'Also Like',
-      subTitle: 'Check out these songs',
+      subTitle: 'Check out these beats',
       page: '/music',
       items: beats
     };

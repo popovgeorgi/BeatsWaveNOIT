@@ -49,7 +49,7 @@
     <!-- End | Section -->
 
     <!-- Songs -->
-    <app-section *ngIf="songs" [section]="songs" [carouselButtonPositionClass]="'arrow-pos-3'"
+    <app-section *ngIf="songs && recommendedSongs.length != 0" [section]="songs" [carouselButtonPositionClass]="'arrow-pos-3'"
                  [primaryCard]="true" [showImageOptions]="true">
     </app-section>
 </div>
