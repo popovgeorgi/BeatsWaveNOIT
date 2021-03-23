@@ -3,6 +3,7 @@
     using System;
     using System.Reflection;
 
+    using BeatsWave.Common;
     using BeatsWave.Data;
     using BeatsWave.Data.Common;
     using BeatsWave.Data.Common.Repositories;
@@ -15,6 +16,7 @@
     using BeatsWave.Web.Infrastructure.Extensions;
     using BeatsWave.Web.Models;
     using Hangfire;
+    using Hangfire.Dashboard;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -104,7 +106,9 @@
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard(
+                "/hangfire",
+                new DashboardOptions{ Authorization = new[] { new HangfireAuthorizationFilter() } });
 
             app.UseRouting();
 
@@ -121,6 +125,15 @@
                         endpoints.MapControllers();
                         endpoints.MapHangfireDashboard();
                     });
+        }
+
+        private class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
+        {
+            public bool Authorize(DashboardContext context)
+            {
+                var httpContext = context.GetHttpContext();
+                return httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
+            }
         }
     }
 }

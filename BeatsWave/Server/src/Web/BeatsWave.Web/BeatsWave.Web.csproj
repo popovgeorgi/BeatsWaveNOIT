@@ -48,4 +48,13 @@
     <ProjectReference Include="..\BeatsWave.Web.Infrastructure\BeatsWave.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BeatsWave.Web.ViewModels\BeatsWave.Web.Models.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="dataModel.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TrainedModel.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
