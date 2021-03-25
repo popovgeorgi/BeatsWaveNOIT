@@ -3,15 +3,26 @@
     using BeatsWave.Services.CronJobs.Models;
     using Hangfire;
     using Hangfire.Server;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.ML;
     using Microsoft.ML.Trainers;
+
     public class TrainModelJob
     {
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public TrainModelJob(IWebHostEnvironment webHostEnvironment)
+        {
+            this.webHostEnvironment = webHostEnvironment;
+        }
+
+
         [AutomaticRetry(Attempts = 2)]
         public void Work(PerformContext context)
         {
-            var modelFile = "TrainedModel.zip";
-            TrainModel("dataModel.csv", modelFile);
+            var trainedModelFile = this.webHostEnvironment.WebRootPath + "\\TrainedModel.zip";
+            var dataModel = this.webHostEnvironment.WebRootPath + "\\dataModel.csv";
+            TrainModel(dataModel, trainedModelFile);
         }
 
         private static void TrainModel(string inputFile, string modelFile)
