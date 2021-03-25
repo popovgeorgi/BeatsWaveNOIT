@@ -1,27 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 
 @Component({
-    selector: 'app-footer',
-    templateUrl: './footer.component.html'
+  selector: 'app-footer',
+  templateUrl: './footer.component.html'
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
-    public footerButtons: any = [
-        {
-            classes: 'btn btn-dark btn-air platform-btn',
-            icon: 'ion-logo-android',
-            subtitle: 'Android'
-        },
-        {
-            classes: 'btn btn-danger btn-air platform-btn',
-            icon: 'ion-logo-apple',
-            subtitle: 'App Store'
-        }
-    ];
+  constructor(@Inject(DOCUMENT) private document: Document) { }
 
-    constructor() { }
-
-    ngOnInit() {
+  public footerButtons: any = [
+    {
+      classes: 'btn btn-danger btn-air platform-btn github-button',
+      icon: 'ion-logo-github github-icon',
+      subtitle: 'BeatsWave'
     }
+  ];
+
+  public redirectToGithub() {
+    this.document.location.href = "https://github.com/popovgeorgi/BeatsWaveNOIT";
+  }
 
 }
