@@ -20,7 +20,7 @@
         [AutomaticRetry(Attempts = 2)]
         public void Work(PerformContext context)
         {
-            var trainedModelFile = this.webHostEnvironment.WebRootPath + "\\TrainedModel.zip";
+            var trainedModelFile = this.webHostEnvironment.ContentRootPath + "\\TrainedModel.zip";
             var dataModel = this.webHostEnvironment.WebRootPath + "\\dataModel.csv";
             TrainModel(dataModel, trainedModelFile);
         }

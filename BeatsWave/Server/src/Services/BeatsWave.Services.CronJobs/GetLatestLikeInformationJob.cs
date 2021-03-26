@@ -39,7 +39,7 @@
                 })
                 .ToListAsync();
 
-            var modelPath = this.webHostEnvironment.WebRootPath + "\\dataModel.csv";
+            var modelPath = this.webHostEnvironment.ContentRootPath + "\\dataModel.csv";
             using (var writer = new StreamWriter(modelPath))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
