@@ -21,7 +21,7 @@
         public void Work(PerformContext context)
         {
             var trainedModelFile = this.webHostEnvironment.ContentRootPath + "\\TrainedModel.zip";
-            var dataModel = this.webHostEnvironment.WebRootPath + "\\dataModel.csv";
+            var dataModel = this.webHostEnvironment.ContentRootPath + "\\dataModel.csv";
             TrainModel(dataModel, trainedModelFile);
         }
 
