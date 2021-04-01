@@ -1,6 +1,8 @@
 ﻿namespace BeatsWave.Web
 {
     using System;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
     using System.Reflection;
 
     using BeatsWave.Common;
@@ -108,7 +110,7 @@
 
             app.UseHangfireDashboard(
                 "/hangfire",
-                new DashboardOptions{ Authorization = new[] { new HangfireAuthorizationFilter() } });
+                new DashboardOptions { Authorization = new[] { new HangfireAuthorizationFilter() } });
 
             app.UseRouting();
 
@@ -132,7 +134,16 @@
             public bool Authorize(DashboardContext context)
             {
                 var httpContext = context.GetHttpContext();
-                return httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
+                var handler = new JwtSecurityTokenHandler();
+                var jsonToken = handler.ReadToken(httpContext.Request.Cookies.FirstOrDefault(x => x.Key == GlobalConstants.HangFireCookie).Value);
+                var jwt = jsonToken as JwtSecurityToken;
+                var role = jwt.Claims.FirstOrDefault(c => c.Type == "role").Value;
+                if (role == GlobalConstants.AdministratorRoleName)
+                {
+                    return true;
+                }
+
+                return false;
             }
         }
     }
