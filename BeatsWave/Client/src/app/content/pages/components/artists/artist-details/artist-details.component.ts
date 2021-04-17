@@ -30,16 +30,26 @@ export class ArtistDetailsComponent implements OnInit, OnDestroy {
     private followService: FollowService,
     private snotifyService: SnotifyService,
     private authService: AuthService) {
-      this.snotifyService.config = ToastDefaults;
+    this.snotifyService.config = ToastDefaults;
   }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (this.isLoggedIn) {
+        this.fetchForLoggedUser().subscribe(res => {
+          this.isFollowing = res;
+        }, () => { }, () => {
+          this.spinner.hide('routing');
+        })
+      }
+    })
+
     this.userSubscription = this.authService.user.subscribe(user => {
       if (user) {
         this.isLoggedIn = true;
         this.fetchForLoggedUser().subscribe(res => {
           this.isFollowing = res;
-        }, () => {}, () => {
+        }, () => { }, () => {
           this.spinner.hide('routing');
         })
       }
