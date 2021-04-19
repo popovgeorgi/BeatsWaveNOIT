@@ -21,7 +21,7 @@ export class ComponentsComponent implements OnInit, OnDestroy {
   skinSubscription: Subscription;
   routerSubscription: Subscription;
 
-  @ViewChild('perfectScroll', { static: false }) perfectScroll: PerfectScrollbarComponent;
+  @ViewChild('perfectScroll') perfectScroll: PerfectScrollbarComponent;
 
   constructor(@Inject(DOCUMENT) private document: Document,
     private router: Router,
