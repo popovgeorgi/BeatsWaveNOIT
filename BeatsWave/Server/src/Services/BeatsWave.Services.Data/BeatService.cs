@@ -149,6 +149,7 @@
         public async Task<IEnumerable<T>> ByUser<T>(string userId)
             => await this.beatsRepository
                 .All()
+                .OrderByDescending(b => b.CreatedOn)
                 .Where(x => x.ProducerId == userId)
                 .To<T>()
                 .ToListAsync();
