@@ -10,7 +10,7 @@ import { Config } from '../../../config/config';
 })
 export class ThemeSettingsComponent implements OnInit {
 
-  @ViewChild('settingsWrapper', { static: false }) settingsWrapper: ElementRef;
+  @ViewChild('settingsWrapper') settingsWrapper: ElementRef;
 
   public config: Config = new Config();
   public themeClass = Config.THEME_CLASSES;

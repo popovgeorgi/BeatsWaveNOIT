@@ -19,7 +19,7 @@ import { Notification } from 'src/app/core/models/Notification';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  @ViewChild('headerBackdrop', { static: false }) backdrop: ElementRef;
+  @ViewChild('headerBackdrop') backdrop: ElementRef;
   headerClasses = 'bg-primary';
 
   public notifications: Array<Notification>;
