@@ -7,23 +7,23 @@
         <img class="form-logo" src="../../../../../assets/images/forms/formLogo.svg" />
         <div class="modal-body">
             <form action="#" [formGroup]="login" class="mx-4 pb-5" (ngSubmit)="submitLogin()">
-                <label for="userName">Username</label>
+                <label for="userName">{{'Username' | translate}}</label>
                 <div class="form-group">
                     <input [ngClass]="{'red-border-solid': userName.errors && userName.touched}" type="text" formControlName="userName" id="userName" class="form-control"
                            placeholder="Username">
                     <div class="invalid-feedback" *ngIf="userName.errors?.required && userName.touched" ngClass="d-block">
-                        <span>This field is required</span>
+                        <span>{{'This field is required' | translate}}</span>
                     </div>
                 </div>
-                <label for="password">Password</label>
+                <label for="password">{{'Password' | translate}}</label>
                 <div class="form-group">
                     <input [ngClass]="{'red-border-solid': password.errors && password.touched}" type="password" formControlName="password" id="password" class="form-control"
                            placeholder="Password">
                     <div class="invalid-feedback"*ngIf="password.errors?.required && password.touched" ngClass="d-block">
-                        <span>This field is required</span>
+                        <span>{{'This field is required' | translate}}</span>
                     </div>
                 </div>
-                <button type="submit" [disabled]="!login.valid" class="btn btn-block btn-bold btn-air btn-info load-page">Login</button>
+                <button type="submit" [disabled]="!login.valid" class="btn btn-block btn-bold btn-air btn-info load-page">{{'Login' | translate}}</button>
             </form>
         </div>
     </div>

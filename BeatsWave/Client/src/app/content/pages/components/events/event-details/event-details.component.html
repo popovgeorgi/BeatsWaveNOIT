@@ -17,15 +17,15 @@
             <div class="col-sm-5">
                 <div class="event-h bg-img bg-img-radius-lg mb-4" [ngStyle]="{'background-image': 'url(' + eventDetails.imageUrl + ')'}"></div>
                 <div class="mb-3" *ngIf="eventDetails.venue">
-                    <b>Venue At</b>
+                    <b>{{'Venue At' | translate}}</b>
                     <div [innerHTML]="eventDetails.venue"></div>
                 </div>
                 <div class="mb-3" *ngIf="eventDetails.phoneNumber">
-                    <b>Phone Number</b>
+                    <b>{{'Phone Number' | translate}}</b>
                     <p>{{eventDetails.phoneNumber}}</p>
                 </div>
                 <div class="mb-3" *ngIf="eventDetails.email">
-                    <b>Email</b>
+                    <b>{{'Email' | translate}}</b>
                     <p>{{eventDetails.email}}</p>
                 </div>
             </div>

@@ -5,8 +5,8 @@
 <div class="main-container">
     <div class="container-header">
         <select (change)="onSelect($event)" class="select ml-auto" name="sort" id="sort">
-          <option value="0">Upcoming</option>
-          <option value="1">All</option>
+          <option value="0">{{'Upcoming' | translate}}</option>
+          <option value="1">{{'All' | translate}}</option>
         </select>
     </div>
     <div class="row section" *ngIf="events && events.length > 0">

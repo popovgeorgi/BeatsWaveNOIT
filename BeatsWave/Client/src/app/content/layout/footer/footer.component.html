@@ -1,12 +1,12 @@
 <!-- Begin | Footer [[ Find at scss/framework/base/footer/footer.scss ]] -->
 <footer id="footer" class="bg-img">
     <div class="footer-content">
-        <a style="font-family: 'Bebas Neue', cursive;" class="email">Your Beat, Your Story</a>
+        <a style="font-family: 'Bebas Neue', cursive;" class="email">{{'Your Beat, Your Story' | translate}}</a>
         <div class="platform-btn-inline">
           <button (click) = "redirectToGithub()" *ngFor="let button of footerButtons" [class]="button.classes">
               <i [class]="button.icon"></i>
               <span class="platform-btn-info">
-                  <span class="platform-desc">Thanks for using</span>
+                  <span class="platform-desc">{{'Thanks for using' | translate}}</span>
                   <span class="platform-name">{{button.subtitle}}</span>
               </span>
           </button>

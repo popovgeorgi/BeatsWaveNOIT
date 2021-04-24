@@ -5,9 +5,9 @@
 <div class="main-container">
     <div class="section">
         <div class="mb-5">
-            <h5><ng-container *ngIf="currentUser">Hi <span class="text-brand">{{currentUser.firstName}}</span>,</ng-container>
-              Welcome to BeatsWave</h5>
-            <p>There you have a brief analytics section for your music.</p>
+            <h5><ng-container *ngIf="currentUser">{{'Hi' | translate}} <span class="text-brand">{{currentUser.firstName}}</span>,</ng-container>
+              {{'Welcome to BeatsWave' | translate}}</h5>
+            <p>{{'There you have a brief analytics section for your music.' | translate}}</p>
         </div>
 
         <div class="row">

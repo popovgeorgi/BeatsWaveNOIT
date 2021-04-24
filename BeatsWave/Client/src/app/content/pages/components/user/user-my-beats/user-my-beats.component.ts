@@ -29,6 +29,18 @@ export class UserMyBeatsComponent implements OnInit {
     });
   }
 
+  public onSelect(event) {
+    let option = event.target.value;
+    if (option == 0) {
+      this.beats = this.beats.sort((a, b) => {
+        return <any>new Date(b.createdOn) - <any>new Date(a.createdOn);
+      });
+    }
+    else if (option == 1) {
+      this.beats = this.beats.sort((a, b) => b.likesCount - a.likesCount);
+    }
+  }
+
   public goToUpload() {
     this.router.navigate(['/add-music']);
   }

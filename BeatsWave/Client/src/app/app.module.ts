@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,12 @@ import { ErrorInterceptorService } from './core/services/error-interceptor.servi
 import { AuthGuardService } from './core/services/auth-guard.service';
 import { IonicModule } from '@ionic/angular';
 import { GoogleAnalyticsService } from './core/services/google-analytics.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -27,7 +33,15 @@ import { GoogleAnalyticsService } from './core/services/google-analytics.service
     NgxSpinnerModule,
     BrowserAnimationsModule,
     SnotifyModule.forRoot(),
-    IonicModule.forRoot()
+    IonicModule.forRoot(),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     NgxSpinnerService,

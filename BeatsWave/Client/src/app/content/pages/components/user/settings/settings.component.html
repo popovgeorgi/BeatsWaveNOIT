@@ -5,24 +5,24 @@
 <div class="main-container under-banner-content">
     <div class="row section">
         <div class="col-xl-8 col-md-10 mx-auto">
-            <h5 class="mb-3">Notifications</h5>
+            <h5 class="mb-3">{{'Notifications' | translate}}</h5>
             <div class="d-flex align-items-center mb-1">
-                <label for="not1" class="setting-label pr-2">Get email notifications</label>
+                <label for="not1" class="setting-label pr-2">{{'Get email notifications' | translate}}</label>
                 <div class="switch switch-primary ml-auto">
                     <input type="checkbox" id="not1" [checked]="settings.emailNotification"
                            (change)="changeEmailNotifications()">
                     <label for="not1"></label>
                 </div>
             </div>
-            <h5 class="mt-4 mb-3">Music Quality</h5>
+            <h5 class="mt-4 mb-3">{{'Music Quality' | translate}}</h5>
             <div class="d-flex align-items-center mb-1">
-                <label for="strea" class="setting-label pr-2">Streaming quality</label>
+                <label for="strea" class="setting-label pr-2">{{'Streaming quality' | translate}}</label>
                 <select name="strea" id="strea" class="custom-select custom-select-sm w-auto ml-auto"
                         ([ngModal])="settings.streamingQuality">
-                    <option value="0">Very High</option>
-                    <option value="1">High</option>
-                    <option value="2">Medium</option>
-                    <option value="4">Low</option>
+                    <option value="0">{{'Very High' | translate}}</option>
+                    <option value="1">{{'High' | translate}}</option>
+                    <option value="2">{{'Medium' | translate}}</option>
+                    <option value="4">{{'Low' | translate}}</option>
                 </select>
             </div>
         </div>

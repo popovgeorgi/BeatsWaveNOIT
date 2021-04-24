@@ -29,6 +29,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NotificationsComponent } from './header/notifications/notifications.component';
 import { NotificationComponent } from './header/notifications/notification/notification.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -69,6 +70,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RegisterComponent
   ],
   imports: [
+    TranslateModule,
     CommonModule,
     NgxSpinnerModule,
     PerfectScrollbarModule,

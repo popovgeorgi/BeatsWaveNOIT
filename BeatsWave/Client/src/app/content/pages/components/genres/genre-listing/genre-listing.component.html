@@ -5,11 +5,11 @@
 <div class="main-container">
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header">
-        <span class="title">{{beatsCount}} Results</span>
+        <span class="title">{{beatsCount}} {{'Results' | translate}}</span>
         <div class="ml-auto d-flex align-items-center">
           <select (change)="onSelect($event)" class="select" name="sort" id="sort">
-            <option value="0">Newest</option>
-            <option value="1">Popular</option>
+            <option value="0">{{'Newest' | translate}}</option>
+            <option value="1">{{'Popular' | translate}}</option>
         </select>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
@@ -41,12 +41,12 @@
     <div *ngIf="hasMoreBeatsToInclude" class="sidebar-footer mt-50px">
       <button type="button" class="btn btn-block btn-danger btn-air btn-bold"
               (click)="showMore()">
-          <span>Show more</span>
+          <span>{{'Show more' | translate}}</span>
       </button>
     </div>
     <div *ngIf="!hasMoreBeatsToInclude" class="sidebar-footer mt-50px">
       <div class="btn btn-block btn-danger btn-air btn-bold">
-          <span>There is no more to show :)</span>
+          <span>{{'There is no more to show :)' | translate}}</span>
       </div>
     </div>
     <!-- End | Section -->

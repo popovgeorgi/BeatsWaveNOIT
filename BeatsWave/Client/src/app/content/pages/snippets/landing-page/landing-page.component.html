@@ -10,10 +10,10 @@
 
               <ul class="header-auto-options ml-auto d-flex align-items-center">
                 <li *ngIf="!isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
-                  (click)="openRegisterModal()">Sign up</button></li>
-                <li  style="margin-right: 30px;" *ngIf="!isUserLogged"><a class="link" (click)="openLoginModal()">Sign in</a></li>
+                  (click)="openRegisterModal()">{{'Sign up' | translate}}</button></li>
+                <li  style="margin-right: 30px;" *ngIf="!isUserLogged"><a class="link" (click)="openLoginModal()">{{'Sign in' | translate}}</a></li>
                 <li style="margin-right: 30px;" *ngIf="isUserLogged"><button type="button" class="btn btn-pill btn-air btn-sm btn-danger"
-                  (click)="redirectToHomePage()">Back To Home</button></li>
+                  (click)="redirectToHomePage()">{{'Back To Home' | translate}}</button></li>
               </ul>
             </div>
           </header>
@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-lg-8 col-md-10 mx-auto text-center">
                             <h1 class="landing-title">BeatsWave</h1>
-                            <p class="font-lg landing-paragraph">Home for creativity and innovation</p>
+                            <p class="font-lg landing-paragraph">{{'Home for creativity and innovation' | translate}}</p>
                         </div>
                     </div>
                 </div>
@@ -35,8 +35,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
-                        <h3>Features of BeatsWave</h3>
-                        <p class="font-md">BeatsWave is the place where you connect with like-minded people.</p>
+                        <h3>{{'Features of BeatsWave' | translate}}</h3>
+                        <p class="font-md">{{'BeatsWave is the place where you connect with like-minded people.' | translate}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -44,23 +44,23 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-6 text-center feature">
                                 <img src="../../../../../assets/images/svg/music.svg" alt="">
-                                <h5 class="mt-3">Beats</h5>
-                                <p>You can popularize your music.</p>
+                                <h5 class="mt-3">{{'Beats' | translate}}</h5>
+                                <p>{{'You can popularize your music.' | translate}}</p>
                             </div>
                             <div class="col-lg-3 col-sm-6 text-center feature">
                                 <img src="../../../../../assets/images/svg/comment.svg" alt="">
-                                <h5 class="mt-3">Comments</h5>
-                                <p>You can share your thoughts on your favorites.</p>
+                                <h5 class="mt-3">{{'Comments' | translate}}</h5>
+                                <p>{{'You can share your thoughts on your favorites.' | translate}}</p>
                             </div>
                             <div class="col-lg-3 col-sm-6 text-center feature">
                                 <img src="../../../../../assets/images/svg/event.svg" alt="">
-                                <h5 class="mt-3">Events</h5>
-                                <p>Create free and paid events in a few minutes.</p>
+                                <h5 class="mt-3">{{'Events' | translate}}</h5>
+                                <p>{{'Create free and paid events in a few minutes.' | translate}}</p>
                             </div>
                             <div class="col-lg-3 col-sm-6 text-center feature">
                                 <img src="../../../../../assets/images/svg/other.svg" alt="">
-                                <h5 class="mt-3">Other</h5>
-                                <p>You can also like, share, have recommendations based on your taste.</p>
+                                <h5 class="mt-3">{{'Other' | translate}}</h5>
+                                <p>{{'You can also like, share, have recommendations based on your taste.' | translate}}</p>
                             </div>
                         </div>
                     </div>
@@ -74,8 +74,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto mb-5 text-center">
-                        <h3>Upcoming Events</h3>
-                        <p class="font-md">Be part of some of the upcoming beats.</p>
+                        <h3>{{'Upcoming Events' | translate}}</h3>
+                        <p class="font-md">{{'Be part of some of the upcoming events.' | translate}}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -92,7 +92,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto text-center mb-5">
-                        <h3>Trending Artists</h3>
+                        <h3>{{'Trending Artists' | translate}}</h3>
                     </div>
                 </div>
                 <div class="row">

@@ -9,7 +9,7 @@
                 <li class="nav-item" *ngFor="let item of menuItems" [ngClass]="item.section ? 'nav-header' : ''"
                     (click)="hideSidebar()">
                     <!-- Menu section heading-->
-                    <ng-container *ngIf="item.section; else menuSection">{{item.section}}</ng-container>
+                    <ng-container *ngIf="item.section; else menuSection">{{item.section | translate}}</ng-container>
 
                     <!-- Menu section-->
                     <ng-template #menuSection>
@@ -26,7 +26,7 @@
         <button type="button" routerLink="/add-music" class="btn btn-block btn-danger btn-air btn-bold"
                 (click)="hideSidebar()">
             <i [class]="asideFooterButton.icon"></i>
-            <span>{{asideFooterButton.title}}</span>
+            <span>{{asideFooterButton.title | translate}}</span>
         </button>
     </div>
     <div *ngIf="!userRole || (userRole == 'Artist' || userRole == 'Manager')" class="sidebar-footer">

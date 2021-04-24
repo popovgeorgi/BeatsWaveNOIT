@@ -26,42 +26,41 @@
                                 <ngx-spinner bdColor = "rgba(0,0,0,0.5)" name="editProfile" size = "medium" color = "#753fdc" type = "line-scale" [fullScreen] = "false"><p style="color: white" > BeatsWave </p></ngx-spinner>
 
                                 <div class="col-xl-6 form-group">
-                                    <label for="firstName" class="form-label">First Name</label>
+                                    <label for="firstName" class="form-label">{{'First Name' | translate}}</label>
                                     <input type="text" id="firstName" name="firstName" class="form-control"
                                         formControlName="firstName">
                                 </div>
                                 <div class="col-xl-6 form-group">
-                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <label for="lastName" class="form-label">{{'Last Name' | translate}}</label>
                                     <input type="text" id="lastName" name="lastName" class="form-control"
                                         formControlName="lastName">
                                 </div>
                                 <div class="col-12 form-group">
-                                    <label for="displayName" class="form-label">Display Name</label>
+                                    <label for="displayName" class="form-label">{{'Display Name' | translate}}</label>
                                     <input type="text" id="displayName" name="displayName" class="form-control"
                                         formControlName="displayName">
                                 </div>
                                 <div class="col-12 form-group">
-                                    <label for="loc" class="form-label">Location</label>
+                                    <label for="loc" class="form-label">{{'Location' | translate}}</label>
                                     <input type="text" id="loc" name="loc" class="form-control"
                                         formControlName="location">
                                 </div>
                                 <div class="col-12 form-group">
-                                    <label for="about" class="form-label">About</label>
+                                    <label for="about" class="form-label">{{'About' | translate}}</label>
                                     <textarea name="about" id="about" cols="30" rows="5" class="form-control"
                                         formControlName="biography"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-air" [disabled]="!userProfileForm.valid">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary btn-air" [disabled]="!userProfileForm.valid">{{'Save Changes' | translate}}</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
                         <h6>{{userSubscription}}</h6>
-                        <p>You can upgrade your plan for better benefits.
+                        <p>{{'You can upgrade your plan for better benefits.' | translate}}
                         </p>
-                        <button type="button" class="btn btn-pill btn-air btn-success" routerLink="/plan">Select
-                            Plan</button>
+                        <button type="button" class="btn btn-pill btn-air btn-success" routerLink="/plan">{{'Select Plan' | translate}}</button>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,6 @@
             <app-countdown [text]="countText" [showZero]="'0'" units="Days | Hours | Minutes | Seconds"
                        [end]="musicEvent.conductDate"></app-countdown>
         </div>
-        <button [routerLink]="'/event/' + musicEvent.id + '/details'" type="button" class="btn btn-bold btn-pill btn-air btn-warning btn-sm">Buy Ticket</button>
+        <button [routerLink]="'/event/' + musicEvent.id + '/details'" type="button" class="btn btn-bold btn-pill btn-air btn-warning btn-sm">{{'Buy Ticket' | translate}}</button>
     </div>
 </div>

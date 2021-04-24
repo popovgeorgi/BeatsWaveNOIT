@@ -8,14 +8,20 @@
         <div id="searchForm">
             <div class="position-relative">
                 <button type="button" class="btn ion-ios-search"></button>
-                <input #searchBox type="text" placeholder="Search..." id="searchInput" class="form-control" (focus)="showSearchResults()" (input)="search(searchBox.value)">
+                <input #searchBox type="text" [placeholder]="'Search...' | translate" id="searchInput" class="form-control" (focus)="showSearchResults()" (input)="search(searchBox.value)">
             </div>
             <app-search></app-search>
         </div>
 
         <!-- Begin | Header Options -->
         <ul class="header-options d-flex align-items-center">
-            <app-notifications style="margin-right: 20px;" *ngIf="currentUser" [data]="notifications" [unseen]="unseenNotifications"></app-notifications>
+            <li>
+                <a href="javascript:;" class="language" (click)="openLanguagesModal()">
+                    <span>{{language.title | translate}}</span>
+                    <img [src]="language.image" alt="">
+                </a>
+            </li>
+            <app-notifications class="notification-panel" *ngIf="currentUser" [data]="notifications" [unseen]="unseenNotifications"></app-notifications>
             <li>
                 <app-profile [user]="currentUser"></app-profile>
             </li>

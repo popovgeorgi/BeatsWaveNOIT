@@ -5,13 +5,13 @@
     <li class="dropdown-item">
         <a class="dropdown-link" (click)="addFavorite()">
             <i class="la la-heart-o"></i>
-            <span>Favorite</span>
+            <span>{{'Favorite' | translate}}</span>
         </a>
     </li>
     <li *ngIf="song" class="dropdown-item">
         <a class="dropdown-link" [routerLink]="'/song/' + song.id + '/details'">
             <i class="la la-info-circle"></i>
-            <span>Song Info</span>
+            <span>{{'Song Info' | translate}}</span>
         </a>
     </li>
 </ul>

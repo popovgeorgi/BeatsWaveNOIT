@@ -13,7 +13,7 @@
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{artistDetails.userName}}</h5>
                     <div class="mt-4">
-                      <button type="button" class="btn btn-pill btn-air btn-bold btn-danger">({{followers}}) Followers</button>
+                      <button type="button" class="btn btn-pill btn-air btn-bold btn-danger">({{followers}}) {{'Followers' | translate}}</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6">
@@ -33,11 +33,11 @@
         <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="artistDetails" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="song-tab" data-toggle="tab" href="#song" role="tab"
-                   aria-controls="song" aria-selected="true">Top Songs</a>
+                   aria-controls="song" aria-selected="true">{{'Top Songs' | translate}}</a>
             </li>
             <li *ngIf="artistDetails && artistDetails.profileBiography" class="nav-item">
                 <a class="nav-link" id="bio-tab" data-toggle="tab" href="#bio" role="tab"
-                   aria-controls="bio" aria-selected="false">Biography</a>
+                   aria-controls="bio" aria-selected="false">{{'Biography' | translate}}</a>
             </li>
             <!-- <li class="nav-item">
               <a class="nav-link" id="comments-tab" data-toggle="tab" href="#comments" role="tab"
@@ -51,14 +51,14 @@
             <div class="tab-pane fade show active" id="song" role="tabpanel" aria-labelledby="song-tab">
                 <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
                 <div class="artist-not-having-beats" *ngIf="artistBeats == 0">
-                    <h1>{{artistDetails.userName}} has not uploaded any beats yet.</h1>
+                    <h1>{{artistDetails.userName}} {{'has not uploaded any beats yet.' | translate}}</h1>
                 </div>
                 <div *ngIf="artistBeats != 0" class="container-header">
-                    <span class="title">{{artistBeats}} Results</span>
+                    <span class="title">{{artistBeats}} {{'Results' | translate}}</span>
                     <select (change)="onSelect($event)" class="select ml-auto" name="sort-1" id="sort-1">
-                        <option>Sort by</option>
-                        <option value="0">Newest</option>
-                        <option value="1">Popular</option>
+                        <option>{{'Sort by' | translate}}</option>
+                        <option value="0">{{'Newest' | translate}}</option>
+                        <option value="1">{{'Popular' | translate}}</option>
                     </select>
                 </div>
                 <!-- End | Container header -->

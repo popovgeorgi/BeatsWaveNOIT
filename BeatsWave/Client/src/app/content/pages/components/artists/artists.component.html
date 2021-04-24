@@ -5,10 +5,10 @@
 <div class="main-container">
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header">
-        <span class="title">{{record}} Results</span>
+        <span class="title">{{record}} {{'Results' | translate}}</span>
         <select (change)="onSelect($event)" class="select ml-auto" name="sort" id="sort">
-          <option value="0">Newest</option>
-          <option value="1">Popular</option>
+          <option value="0">{{'Newest' | translate}}</option>
+          <option value="1">{{'Popular' | translate}}</option>
         </select>
     </div>
     <!-- End | Container header -->
@@ -26,12 +26,12 @@
     <div *ngIf="hasMoreArtistsToInclude" class="sidebar-footer mt-50px">
       <button type="button" class="btn btn-block btn-danger btn-air btn-bold"
               (click)="showMore()">
-          <span>Show more</span>
+          <span>{{'Show more' | translate}}</span>
       </button>
     </div>
     <div *ngIf="!hasMoreArtistsToInclude" class="sidebar-footer mt-50px">
       <div class="btn btn-block btn-danger btn-air btn-bold">
-          <span>There is no more to show :)</span>
+          <span>{{'There is no more to show :)' | translate}}</span>
       </div>
     </div>
     <!-- End | Section -->

@@ -43,6 +43,7 @@ import { SongEditComponent } from './songs/song-edit/song-edit.component';
 import { DefaultSimpleModalOptionConfig, defaultSimpleModalOptions } from 'ngx-simple-modal';
 import { SongBuyComponent } from './songs/song-buy/song-buy.component';
 import { UserPrivacyComponent } from './user/user-privacy/user-privacy.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -183,6 +184,7 @@ const routes: Routes = [
     SongBuyComponent
   ],
   imports: [
+    TranslateModule,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,

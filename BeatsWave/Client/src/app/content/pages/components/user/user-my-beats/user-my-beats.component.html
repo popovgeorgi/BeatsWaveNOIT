@@ -5,12 +5,11 @@
 <div class="main-container">
     <!-- Begin | Container header [[ Find at scss/base/core.scss ]] -->
     <div class="container-header">
-        <span class="title">{{beatsCount}} Results</span>
+        <span class="title">{{beatsCount}} {{'Results' | translate}}</span>
         <div class="ml-auto d-flex align-items-center">
-            <select class="select" name="sort" id="sort">
-                <option selected="">Popular</option>
-                <option value="0">A-Z</option>
-                <option value="1">Z-A</option>
+            <select (change)="onSelect($event)" class="select" name="sort" id="sort">
+                <option value="0">{{'Newest' | translate}}</option>
+                <option value="1">{{'Popular' | translate}}</option>
             </select>
             <a class="icon" (click)="gridView = !gridView">
                 <i class="ion-md-reorder" *ngIf="gridView; else gridViewButton"></i>
@@ -28,10 +27,10 @@
             <div class="txt-center">
               <img class="h-300" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/68d5a28b-6cc5-4134-a3a1-c918c313a2c7/d5y4fxb-0be06a3c-1ced-40d8-bb56-6feea8e2af79.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvNjhkNWEyOGItNmNjNS00MTM0LWEzYTEtYzkxOGMzMTNhMmM3XC9kNXk0ZnhiLTBiZTA2YTNjLTFjZWQtNDBkOC1iYjU2LTZmZWVhOGUyYWY3OS5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.7qPlko45B8J92cnTFhBnSBKJPgSv1ZHCuyVHQptKpBw" />
             </div>
-            <h1 class="txt-h">You do not have any beats</h1>
-            <p class="txt-p">What are you waiting for?</p>
+            <h1 class="txt-h">{{'You do not have any beats' | translate}}</h1>
+            <p class="txt-p">{{'What are you waiting for?' | translate}}</p>
             <div class="favourites-button-empty">
-              <button (click)="goToUpload()" class="btn btn-primary btn-air btn-empty">Upload</button>
+              <button (click)="goToUpload()" class="btn btn-primary btn-air btn-empty">{{'Upload' | translate}}</button>
             </div>
         </div>
         <div class="row custom-card-list">

@@ -8,24 +8,23 @@
             <div class="card">
                 <form [formGroup]="beatForm" (ngSubmit)="uploadBeat()">
                     <div class="card-header">
-                        <h6 class="card-title mb-0">Add Music</h6>
+                        <h6 class="card-title mb-0">{{'Add Music' | translate}}</h6>
                     </div>
                     <div class="card-body">
                         <ngx-spinner bdColor = "rgba(0,0,0,0.5)" name="beatUploader" size = "medium" color = "#753fdc" type = "line-scale" [fullScreen] = "false"><p style="color: white" > BeatsWave </p></ngx-spinner>
 
                         <div class="form-row form-group">
-                            <label for="songName" class="col-md-4 text-md-right col-form-label">Song Name</label>
+                            <label for="songName" class="col-md-4 text-md-right col-form-label">{{'Song Name' | translate}}</label>
                             <div class="col-md-7">
                                 <input [ngClass]="{'red-border-solid': name.errors?.required && name.touched}"  type="text" id="songName" class="form-control" formControlName="name">
                                 <div *ngIf="name.errors?.required && name.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                <span>This field is required</span>
+                                <span>{{'This field is required' | translate}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="songImage" class="col-md-4 text-md-right col-form-label">Song Cover
-                                Image</label>
+                            <label for="songImage" class="col-md-4 text-md-right col-form-label">{{'Song Cover Image' | translate}}</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
                                     <p-fileUpload [ngClass]="{'file-uploaded': isImageUploaded}" name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
@@ -35,7 +34,7 @@
                             </div>
                         </div>
                         <div class="form-row form-group mt-35px">
-                            <label for="songFile" class="col-md-4 text-md-right col-form-label">Song File</label>
+                            <label for="songFile" class="col-md-4 text-md-right col-form-label">{{'Song File' | translate}}</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
                                     <p-fileUpload [ngClass]="{'file-uploaded': isBeatUploaded}" name="file" [url]="uploadSaveBeatUrl" accept="audio/*" [auto]="true"
@@ -45,41 +44,41 @@
                             </div>
                         </div>
                         <div class="form-row form-group mt-35px">
-                            <label for="songPrice" class="col-md-4 text-md-right col-form-label">Song Price</label>
+                            <label for="songPrice" class="col-md-4 text-md-right col-form-label">{{'Song Price' | translate}}</label>
                             <div class="col-md-7">
                                 <input [ngClass]="{'red-border-solid': price.errors?.required && price.touched}" type="number" id="songPrice" class="form-control" formControlName="price">
                                 <div *ngIf="price.errors?.required && price.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                  <span>This field is required</span>
+                                  <span>{{'This field is required' | translate}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="genre" class="col-md-4 text-md-right col-form-label">Genre</label>
+                            <label for="genre" class="col-md-4 text-md-right col-form-label">{{'Genre' | translate}}</label>
                             <div class="col-md-7">
                               <select [ngClass]="{'red-border-solid': genre.errors?.required && genre.touched}" class="form-control" formControlName="genre">
-                                <option value="HipHop">Hip-Hop</option>
-                                <option value="Pop">Pop</option>
-                                <option value="RB">R&B</option>
-                                <option value="Rock">Rock</option>
-                                <option value="Electronic">Electronic</option>
-                                <option value="Jazz">Jazz</option>
-                                <option value="Reggaeton">Reggaeton</option>
+                                <option value="HipHop">{{'Hip-Hop' | translate}}</option>
+                                <option value="Pop">{{'Pop' | translate}}</option>
+                                <option value="RB">{{'R&B' | translate}}</option>
+                                <option value="Rock">{{'Rock' | translate}}</option>
+                                <option value="Electronic">{{'Electronic' | translate}}</option>
+                                <option value="Jazz">{{'Jazz' | translate}}</option>
+                                <option value="Reggaeton">{{'Reggaeton' | translate}}</option>
                               </select>
                             <div *ngIf="genre.errors?.required && genre.touched" class="invalid-feedback"
                             ngClass="d-block">
-                            <span>This field is required</span>
+                            <span>{{'This field is required' | translate}}</span>
                             </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="songPrice" class="col-md-4 text-md-right col-form-label">Bpm</label>
+                            <label for="songPrice" class="col-md-4 text-md-right col-form-label">{{'Bpm' | translate}}</label>
                             <div class="col-md-7">
                                 <input type="number" id="bpm" class="form-control" formControlName="bpm">
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="about" class="col-md-4 text-md-right col-form-label">Description</label>
+                            <label for="about" class="col-md-4 text-md-right col-form-label">{{'Description' | translate}}</label>
                             <div class="col-md-7">
                                 <textarea name="about" id="about" cols="30" rows="5" class="form-control"
                                     formControlName="description"></textarea>
@@ -90,7 +89,7 @@
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-7 btn-inline">
-                                <button type="submit" class="btn btn-brand btn-air" [disabled]="!beatForm.valid">Save Song</button>
+                                <button type="submit" class="btn btn-brand btn-air" [disabled]="!beatForm.valid">{{'Save Song' | translate}}</button>
                             </div>
                         </div>
                     </div>

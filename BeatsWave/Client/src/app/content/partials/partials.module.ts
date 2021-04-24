@@ -16,40 +16,42 @@ import { ThemeSettingsComponent } from './theme-settings/theme-settings.componen
 import { CountdownComponent } from './countdown/countdown.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-    declarations: [
-        PrimaryCardComponent,
-        SecondaryCardComponent,
-        EventCardComponent,
-        EventCountdownCardComponent,
-        TruncatePipe,
-        SongListViewComponent,
-        SongOptionsComponent,
-        SongHorizontalComponent,
-        ImageCardComponent,
-        CommentComponent,
-        ThemeSettingsComponent,
-        CountdownComponent
-    ],
-    exports: [
-        PrimaryCardComponent,
-        SecondaryCardComponent,
-        EventCardComponent,
-        EventCountdownCardComponent,
-        SongListViewComponent,
-        SongOptionsComponent,
-        SongHorizontalComponent,
-        ImageCardComponent,
-        CommentComponent,
-        ThemeSettingsComponent
-    ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        ReactiveFormsModule,
-        NgxSpinnerModule
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  declarations: [
+    PrimaryCardComponent,
+    SecondaryCardComponent,
+    EventCardComponent,
+    EventCountdownCardComponent,
+    TruncatePipe,
+    SongListViewComponent,
+    SongOptionsComponent,
+    SongHorizontalComponent,
+    ImageCardComponent,
+    CommentComponent,
+    ThemeSettingsComponent,
+    CountdownComponent
+  ],
+  exports: [
+    PrimaryCardComponent,
+    SecondaryCardComponent,
+    EventCardComponent,
+    EventCountdownCardComponent,
+    SongListViewComponent,
+    SongOptionsComponent,
+    SongHorizontalComponent,
+    ImageCardComponent,
+    CommentComponent,
+    ThemeSettingsComponent
+  ],
+  imports: [
+    TranslateModule,
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PartialsModule { }

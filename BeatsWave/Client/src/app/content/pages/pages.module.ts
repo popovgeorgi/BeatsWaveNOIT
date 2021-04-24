@@ -15,6 +15,7 @@ import { ComponentsModule } from './components/components.module';
 import { CoreModule } from '../../core/core.module';
 import { LandingPageComponent } from './snippets/landing-page/landing-page.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslateModule } from '@ngx-translate/core';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     suppressScrollX: true
@@ -27,6 +28,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LandingPageComponent
     ],
     imports: [
+        TranslateModule,
         CommonModule,
         PagesRoutingModule,
         PerfectScrollbarModule,

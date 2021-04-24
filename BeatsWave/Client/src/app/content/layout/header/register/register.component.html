@@ -7,67 +7,67 @@
         <img class="form-logo" src="../../../../../assets/images/forms/formLogo.svg" />
         <div class="modal-body">
             <form [formGroup]="registerForm" class="mx-4 pb-5" (ngSubmit)="submitRegister()">
-                <label for="userName">Username</label>
+                <label for="userName">{{'Username' | translate}}</label>
                 <div class="form-group">
                     <input [ngClass]="{'red-border-solid': userName.errors?.required && userName.touched}" type="text" formControlName="userName" id="userName" class="form-control"
                         placeholder="Username" required>
                     <div *ngIf="userName.errors?.required && userName.touched" class="invalid-feedback"
                         ngClass="d-block">
-                        <span>This field is required</span>
+                        <span>{{'This field is required' | translate}}</span>
                     </div>
                 </div>
-                <label for="email">Email</label>
+                <label for="email">{{'Email' | translate}}</label>
                 <div class="form-group">
                     <input [ngClass]="{'red-border-solid': email.errors && email.touched}" type="text" formControlName="email" id="email" class="form-control" placeholder="Email"
                         required email>
                     <div class="invalid-feedback" *ngIf="!email.valid && email.touched" ngClass="d-block">
-                        <span *ngIf="email.errors?.required">This field is required</span>
-                        <span *ngIf="email.errors?.email">This must be an email</span>
-                        <span *ngIf="email.errors?.emailIsForbidden">This email is already in use</span>
+                        <span *ngIf="email.errors?.required">{{'This field is required' | translate}}</span>
+                        <span *ngIf="email.errors?.email">{{'This must be an email' | translate}}</span>
+                        <span *ngIf="email.errors?.emailIsForbidden">{{'This email is already in use' | translate}}</span>
                     </div>
                 </div>
-                <label for="password">Password</label>
+                <label for="password">{{'Password' | translate}}</label>
                 <div class="form-group">
                     <input [ngClass]="{'red-border-solid': password.errors && password.touched}" type="password" formControlName="password" id="password" class="form-control"
                         placeholder="Password" required>
                     <div class="invalid-feedback" *ngIf="password.errors && password.touched"
                         ngClass="d-block">
-                        <span *ngIf="password.errors?.required">This field is required</span>
-                        <span *ngIf="password.errors?.minlength">This field must be at least 6 symbols</span>
+                        <span *ngIf="password.errors?.required">{{'This field is required' | translate}}</span>
+                        <span *ngIf="password.errors?.minlength">{{'This field must be at least 6 symbols' | translate}}</span>
                     </div>
                 </div>
-                <label for="confirmPassword">Confirm Password</label>
+                <label for="confirmPassword">{{'Confirm Password' | translate}}</label>
                 <div class="form-group">
                     <input [ngClass]="{'red-border-solid': confirmPassword.errors?.required && confirmPassword.touched}" type="password" formControlName="confirmPassword" id="confirmPassword" class="form-control"
                         placeholder="Confirm Password" required>
                     <div class="invalid-feedback" *ngIf="registerForm.hasError('notSame') && confirmPassword.touched"
                         ngClass="d-block">
-                        <span>Passwords do not match</span>
+                        <span>{{'Passwords do not match' | translate}}</span>
                     </div>
                     <div class="invalid-feedback" *ngIf="confirmPassword.errors?.required && confirmPassword.touched"
                         ngClass="d-block">
-                        <span>This field is required</span>
+                        <span>{{'This field is required' | translate}}</span>
                     </div>
                 </div>
                 <div class="form-group select-role">
                     <div class="custom-control custom-radio custom-control-inline">
                         <input value="Beatmaker" type="radio" id="customRadioInline1"
                             class="custom-control-input"  formControlName="role">
-                        <label class="custom-control-label" for="customRadioInline1">Beatmaker</label>
+                        <label class="custom-control-label" for="customRadioInline1">{{'Beatmaker' | translate}}</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                         <input value="Artist" type="radio" id="customRadioInline2"
                             class="custom-control-input"  formControlName="role">
-                        <label class="custom-control-label" for="customRadioInline2">Artist</label>
+                        <label class="custom-control-label" for="customRadioInline2">{{'Artist' | translate}}</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
                       <input value="Manager" type="radio" id="customRadioInline3"
                           class="custom-control-input"  formControlName="role">
-                      <label class="custom-control-label" for="customRadioInline3">Manager</label>
+                      <label class="custom-control-label" for="customRadioInline3">{{'Manager' | translate}}</label>
                     </div>
                 </div>
                 <button type="submit" [disabled]="!registerForm.valid"
-                    class="btn btn-block btn-bold btn-air btn-info load-page">Register</button>
+                    class="btn btn-block btn-bold btn-air btn-info load-page">{{'Register' | translate}}</button>
             </form>
         </div>
     </div>

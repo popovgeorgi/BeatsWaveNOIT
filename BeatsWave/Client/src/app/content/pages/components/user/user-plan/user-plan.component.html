@@ -9,30 +9,30 @@
                 <div class="col-xl-4 mb-4 mb-xl-0">
                     <div class="plan-info-card text-center px-sm-5 py-sm-4 p-3">
                         <h5 class="text-success">Basic</h5>
-                        <p>Your <span class="font-weight-bold text-success">Basic</span> subscription plan is going to expired within 10 days please select or change you plan.</p>
-                        <button *ngIf="userSubscription != 'Basic'" type="button" class="btn btn-pill btn-air btn-primary" (click)="onBasicClicked()">Select Now</button>
-                        <button *ngIf="userSubscription == 'Basic'" type="button" class="btn btn-pill btn-air btn-primary">You are Basic</button>
+                        <p><span class="font-weight-bold text-success">Basic</span> {{'subscription plan does not grant you any priviliges.' | translate}}</p>
+                        <button *ngIf="userSubscription != 'Basic'" type="button" class="btn btn-pill btn-air btn-primary" (click)="onBasicClicked()">{{'Select Now' | translate}}</button>
+                        <button *ngIf="userSubscription == 'Basic'" type="button" class="btn btn-pill btn-air btn-primary">{{'You are' | translate}} Basic</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6 mb-4 mb-md-0">
                     <div class="plan-card text-center px-sm-5 py-sm-4 p-3">
                         <h5 class="text-warning mb-4">Premium</h5>
                         <ul class="list-group list-group-flush mb-5">
-                            <li class="list-group-item">Have your profile listed on the feed</li>
-                            <li class="list-group-item">Have your music listed on the feed</li>
+                            <li class="list-group-item">{{'Have your profile listed on the feed' | translate}}</li>
+                            <li class="list-group-item">{{'Have your music listed on the feed' | translate}}</li>
                         </ul>
-                        <button *ngIf="userSubscription != 'Premium'" type="button" class="btn btn-pill btn-air btn-warning" (click)="onPremiumClicked()">Select Now</button>
-                        <button *ngIf="userSubscription == 'Premium'" type="button" class="btn btn-pill btn-air btn-warning">You are Premium</button>
+                        <button *ngIf="userSubscription != 'Premium'" type="button" class="btn btn-pill btn-air btn-warning" (click)="onPremiumClicked()">{{'Select Now' | translate}}</button>
+                        <button *ngIf="userSubscription == 'Premium'" type="button" class="btn btn-pill btn-air btn-warning">{{'You are' | translate}} Premium</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
                     <div class="plan-card text-center px-sm-5 py-sm-4 p-3">
                         <h5 class="text-success mb-4">Featured</h5>
                         <ul class="list-group list-group-flush mb-5">
-                            <li class="list-group-item">Have your profile listed on the feed</li>
+                            <li class="list-group-item">{{'Have your profile listed on the feed' | translate}}</li>
                         </ul>
-                        <button *ngIf="userSubscription != 'Featured'" type="button" class="btn btn-pill btn-air btn-success" (click)="onFeaturedClicked()">Select Now</button>
-                        <button *ngIf="userSubscription == 'Featured'" type="button" class="btn btn-pill btn-air btn-success">You are Featured</button>
+                        <button *ngIf="userSubscription != 'Featured'" type="button" class="btn btn-pill btn-air btn-success" (click)="onFeaturedClicked()">{{'Select Now' | translate}}</button>
+                        <button *ngIf="userSubscription == 'Featured'" type="button" class="btn btn-pill btn-air btn-success">{{'You are' | translate}} Featured</button>
                     </div>
                 </div>
             </div>

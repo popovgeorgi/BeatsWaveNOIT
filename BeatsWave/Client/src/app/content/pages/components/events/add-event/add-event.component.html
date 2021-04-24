@@ -7,24 +7,24 @@
         <div class="col-xl-8 col-md-10 mx-auto">
             <div class="card">
                 <div class="card-header">
-                    <h6 class="card-title mb-0">Add Event</h6>
+                    <h6 class="card-title mb-0">{{'Add Event' | translate}}</h6>
                 </div>
                 <div class="card-body">
                     <ngx-spinner bdColor = "rgba(0,0,0,0.5)" name="eventPhotoUploaded" size = "medium" color = "#753fdc" type = "line-scale" [fullScreen] = "false"><p style="color: white" > BeatsWave </p></ngx-spinner>
 
                     <form [formGroup]="eventForm" (ngSubmit)="uploadEvent()">
                         <div class="form-row form-group">
-                            <label for="eventName" class="col-md-4 text-md-right col-form-label">Event Name</label>
+                            <label for="eventName" class="col-md-4 text-md-right col-form-label">{{'Event Name' | translate}}</label>
                             <div class="col-md-7">
                                 <input [ngClass]="{'red-border-solid': name.errors?.required && name.touched}" type="text" id="eventName" class="form-control" formControlName="name">
                                 <div *ngIf="name.errors?.required && name.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                    <span>This field is required</span>
+                                    <span>{{'This field is required' | translate}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="eventImage" class="col-md-4 text-md-right col-form-label">Event Cover Image</label>
+                            <label for="eventImage" class="col-md-4 text-md-right col-form-label">{{'Event Cover Image' | translate}}</label>
                             <div class="col-md-7">
                                 <div class="custom-file">
                                   <p-fileUpload [ngClass]="{'file-uploaded': isImageUploaded}" name="file" [url]="uploadSaveImageUrl" accept="image/*" [auto]="true"
@@ -34,54 +34,54 @@
                             </div>
                         </div>
                         <div class="form-row form-group mt-35px">
-                            <label for="eventAddress" class="col-md-4 text-md-right col-form-label">Venue</label>
+                            <label for="eventAddress" class="col-md-4 text-md-right col-form-label">{{'Venue' | translate}}</label>
                             <div class="col-md-7">
                                 <textarea [ngClass]="{'red-border-solid': venue.errors?.required && venue.touched}" name="eventAddress" id="eventAddress" cols="10" rows="4" class="form-control" formControlName="venue"></textarea>
                                 <div *ngIf="venue.errors?.required && venue.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                    <span>This field is required</span>
+                                    <span>{{'This field is required' | translate}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="phoneNo" class="col-md-4 text-md-right col-form-label">Phone Number</label>
+                            <label for="phoneNo" class="col-md-4 text-md-right col-form-label">{{'Phone Number' | translate}}</label>
                             <div class="col-md-7">
                                 <input [ngClass]="{'red-border-solid': phoneNumber.errors?.required && phoneNumber.touched}" type="text" id="phoneNo" class="form-control" formControlName="phoneNumber">
                                 <div *ngIf="phoneNumber.errors?.required && phoneNumber.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                    <span>This field is required</span>
+                                    <span>{{'This field is required' | translate}}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="emailId" class="col-md-4 text-md-right col-form-label">Email</label>
+                            <label for="emailId" class="col-md-4 text-md-right col-form-label">{{'Email' | translate}}</label>
                             <div class="col-md-7">
                                 <input [ngClass]="{'red-border-solid': (email.errors?.required || email.errors?.email) && email.touched}" type="text" id="emailId" class="form-control" formControlName="email">
                                 <div *ngIf="(email.errors?.email || email.errors?.required) && email.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                    <span *ngIf="email.errors?.required">This field is required!</span>
-                                    <span *ngIf="email.errors?.email">This is not a valid email!</span>
+                                    <span *ngIf="email.errors?.required">{{'This field is required!' | translate}}</span>
+                                    <span *ngIf="email.errors?.email">{{'This is not a valid email!' | translate}}</span>
                               </div>
                             </div>
                         </div>
                         <div class="form-row form-group">
-                          <label for="emailId" class="col-md-4 text-md-right col-form-label">Conduct Date</label>
+                          <label for="emailId" class="col-md-4 text-md-right col-form-label">{{'Conduct Date' | translate}}</label>
                           <div class="col-md-7">
                               <input [ngClass]="{'red-border-solid': (conductDate.errors?.pattern || conductDate.errors?.required) && conductDate.touched}" placeholder="YYYY-MM-DD" type="text" id="conductDate" class="form-control" formControlName="conductDate">
                               <div *ngIf="(conductDate.errors?.pattern || conductDate.errors?.required) && conductDate.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                    <span *ngIf="conductDate.errors?.required">This field is required!</span>
-                                    <span *ngIf="conductDate.errors?.pattern">Enter your date in the correct format!</span>
+                                    <span *ngIf="conductDate.errors?.required">{{'This field is required!' | translate}}</span>
+                                    <span *ngIf="conductDate.errors?.pattern">{{'Enter your date in the correct format!' | translate}}</span>
                               </div>
                           </div>
                         </div>
                         <div class="form-row form-group">
-                            <label for="desc" class="col-md-4 text-md-right col-form-label">Description</label>
+                            <label for="desc" class="col-md-4 text-md-right col-form-label">{{'Description' | translate}}</label>
                             <div class="col-md-7">
                                 <textarea [ngClass]="{'red-border-solid': description.errors?.maxlength && description.touched}" name="eventAddress" id="desc" cols="10" rows="6" class="form-control" formControlName="description"></textarea>
                                 <div *ngIf="description.errors?.maxlength && description.touched" class="invalid-feedback"
                                 ngClass="d-block">
-                                    <span>This field must be less than 500 symbols!</span>
+                                    <span>{{'This field must be less than 500 symbols!' | translate}}</span>
                                 </div>
                             </div>
                         </div>
@@ -90,16 +90,16 @@
                             <div class="col-md-7">
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input (click)="onFreeEvent()" type="radio" id="free" name="eventType" class="custom-control-input">
-                                    <label class="custom-control-label" for="free">Free Event</label>
+                                    <label class="custom-control-label" for="free">{{'Free Event' | translate}}</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input (click)="onPaidEvent()" type="radio" id="paid" name="eventType" class="custom-control-input">
-                                    <label class="custom-control-label" for="paid">Paid Event</label>
+                                    <label class="custom-control-label" for="paid">{{'Paid Event' | translate}}</label>
                                 </div>
                             </div>
                         </div>
                         <div *ngIf="isEventPaid" class="form-row form-group">
-                            <label for="eventPrice" class="col-md-4 text-md-right col-form-label">Event Price</label>
+                            <label for="eventPrice" class="col-md-4 text-md-right col-form-label">{{'Event Price' | translate}}</label>
                             <div class="col-md-7">
                                 <input type="text" id="eventPrice" class="form-control" formControlName="price">
                             </div>
@@ -108,7 +108,7 @@
                           <div class="row">
                               <div class="col-md-4"></div>
                               <div class="col-md-7 btn-inline">
-                                  <button [disabled]="!eventForm.valid" type="submit" class="btn btn-brand btn-air">Save Event</button>
+                                  <button [disabled]="!eventForm.valid" type="submit" class="btn btn-brand btn-air">{{'Save Event' | translate}}</button>
                               </div>
                           </div>
                       </div>

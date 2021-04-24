@@ -2,7 +2,7 @@
     <div class="custom-card--img">
         <a href="javascript:;">
             <img [src]="item?.cover_url" alt="{{item?.name}}" [class]="imageBorderRadiusClass">
-            <span class="bg-blur">{{item?.name}}</span>
+            <span class="bg-blur">{{item?.name | translate}}</span>
         </a>
     </div>
 </div>

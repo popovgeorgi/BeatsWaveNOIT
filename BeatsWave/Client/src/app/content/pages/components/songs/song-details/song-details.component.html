@@ -10,11 +10,11 @@
             <div class="row pt-4">
                 <div class="col-xl-8 col-lg-6">
                     <h5>{{beatDetails.name}}</h5>
-                    <p class="btn btn-bold btn-pill btn-air btn-primary" (click)="onBeatmakerClicked(beatDetails.producerId)">prod. by {{beatDetails.producerUserName}}</p>
+                    <p class="btn btn-bold btn-pill btn-air btn-primary" (click)="onBeatmakerClicked(beatDetails.producerId)">{{'prod. by' | translate}} {{beatDetails.producerUserName}}</p>
                     <!-- <span class="badge badge-pill badge-warning mt-3">Premium</span> -->
                     <div class="mt-4">
                         <button type="button" class="btn btn-pill btn-air btn-bold btn-danger"
-                                (click)="addInPlayer()">Play</button>
+                                (click)="addInPlayer()">{{'Play' | translate}}</button>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6">
@@ -36,11 +36,11 @@
         <ul appLineTabs class="nav nav-tabs line-tabs line-tabs-primary text-uppercase mb-4" id="songDetails" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab"
-                   aria-controls="overview" aria-selected="true">Overview</a>
+                   aria-controls="overview" aria-selected="true">{{'Overview' | translate}}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="lyrics-tab" data-toggle="tab" href="#lyrics" role="tab"
-                   aria-controls="lyrics" aria-selected="false">Comments</a>
+                   aria-controls="lyrics" aria-selected="false">{{'Comments' | translate}}</a>
             </li>
         </ul>
         <!-- End | Line Tabs -->
@@ -48,10 +48,10 @@
         <div *ngIf="beatDetails" class="tab-content" id="songDetailsContent">
             <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item pl-0 border-0">Composed by: <span class="font-weight-bold">{{beatDetails.producerUserName}}</span></li>
-                    <li class="list-group-item pl-0 border-0">Price: <span class="font-weight-bold">{{beatDetails.price}}$</span></li>
-                    <li class="list-group-item pl-0 border-0" *ngIf="beatDetails.bpm">Bpm: <span class="font-weight-bold">{{beatDetails.bpm}}</span></li>
-                    <li class="list-group-item pl-0 border-0" *ngIf="beatDetails.description">Description: <span class="font-weight-bold">{{beatDetails.description}}</span></li>
+                    <li class="list-group-item pl-0 border-0">{{'Composed by' | translate}}: <span class="font-weight-bold">{{beatDetails.producerUserName}}</span></li>
+                    <li class="list-group-item pl-0 border-0">{{'Price' | translate}}: <span class="font-weight-bold">{{beatDetails.price}}$</span></li>
+                    <li class="list-group-item pl-0 border-0" *ngIf="beatDetails.bpm">{{'Bpm' | translate}}: <span class="font-weight-bold">{{beatDetails.bpm}}</span></li>
+                    <li class="list-group-item pl-0 border-0" *ngIf="beatDetails.description">{{'Description' | translate}}: <span class="font-weight-bold">{{beatDetails.description}}</span></li>
                 </ul>
             </div>
             <div class="tab-pane fade show" id="lyrics" role="tabpanel" aria-labelledby="lyrics-tab">
