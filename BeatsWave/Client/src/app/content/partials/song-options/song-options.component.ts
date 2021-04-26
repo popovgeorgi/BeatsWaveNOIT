@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Subscription } from 'rxjs';
 import { Beat } from 'src/app/core/models/Beat';
@@ -52,6 +53,11 @@ export class SongOptionsComponent implements OnInit, OnDestroy {
         });
       }
     })
+
+    // this is used as a prevention from logging unnecessary "You must be logged in" when the user logs out, bevause the subscription is active
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   ngOnDestroy() {
