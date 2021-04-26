@@ -20,15 +20,18 @@ export class NotificationHubService {
       .build();
 
     this.hubConnection.start().then(() => {
-      console.log('Connection started');
       this.registerNotificationEvents();
     })
-      .catch(err => console.log('Error while starting connection: ' + err));
+      .catch();
   }
 
   public registerNotificationEvents() {
     this.hubConnection.on("NewNotificationReceived", (notification: Notification) => {
       this.resultReceived.emit(notification);
     })
+  }
+
+  public stopConnection() {
+    this.hubConnection.stop();
   }
 }

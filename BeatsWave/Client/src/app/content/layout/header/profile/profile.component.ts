@@ -9,6 +9,7 @@ import { RegisterComponent } from '../register/register.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { SnotifyService, ToastDefaults } from 'ng-snotify';
 import { Router } from '@angular/router';
+import { NotificationHubService } from 'src/app/core/services/notification-hub.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +29,8 @@ export class ProfileComponent implements OnInit {
     private simpleModalService: SimpleModalService,
     private authService: AuthService,
     private snotifyService: SnotifyService,
-    private router: Router) {
+    private router: Router,
+    private notificationHubService: NotificationHubService) {
     this.snotifyService.config = ToastDefaults;
     this.userMenu = this.menuConfigService.userMenuItems;
   }
@@ -77,5 +79,6 @@ export class ProfileComponent implements OnInit {
     this.snotifyService.info('You successfully logged out!', '', {
       showProgressBar: false
     });
+    this.notificationHubService.stopConnection();
   }
 }
