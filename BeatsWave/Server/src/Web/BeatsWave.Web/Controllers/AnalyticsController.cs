@@ -87,5 +87,25 @@
 
             return await this.analyticsService.GetListenersByCountry(currentUser);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Beatmaker, Administrator")]
+        [Route(nameof(Referals))]
+
+        public async Task<ReferalsResponseModel> Referals()
+        {
+            var currentUserId = this.currentUser.GetId();
+
+            var plays = await this.analyticsService.GetTotalPlays(currentUserId);
+            var comments = await this.analyticsService.GetTotalComments(currentUserId);
+            var followers = await this.analyticsService.GetTotalFollowers(currentUserId);
+
+            return new ReferalsResponseModel
+            {
+                Plays = plays,
+                Comments = comments,
+                Followers = followers,
+            };
+        }
     }
 }

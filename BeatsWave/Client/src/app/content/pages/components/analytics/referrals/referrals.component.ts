@@ -1,46 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { ReferalsAnalytics } from 'src/app/core/models/analytics/ReferalsAnalytics';
+import { AnalyticsService } from 'src/app/core/services/analytics.service';
 
 @Component({
-    selector: 'app-referrals',
-    templateUrl: './referrals.component.html'
+  selector: 'app-referrals',
+  templateUrl: './referrals.component.html'
 })
 export class ReferralsComponent implements OnInit {
 
-    referrals = [];
+  @Output() isReady = new EventEmitter<boolean>();
+  private totalReferalsCount: number = 0;
+  referrals = [];
 
-    constructor() { }
+  constructor(private analyticsService: AnalyticsService) { }
 
-    ngOnInit() {
-        this.initReferrals();
-    }
+  ngOnInit() {
+    this.fetchData()
+      .pipe(
+        tap((res: ReferalsAnalytics) => {
+          this.totalReferalsCount = res.comments + res.followers + res.plays;
+          this.initReferrals(res);
+        })
+      )
+      .subscribe(() => { }, () => { }, () => {
+        this.isReady.emit(true);
+      })
+  }
 
-    initReferrals() {
-        this.referrals = [
-            {
-                name: 'Facebook',
-                data: 3421,
-                barColorClass: 'bg-info',
-                barWidth: 80
-            },
-            {
-                name: 'Instagram',
-                data: 2401,
-                barColorClass: 'bg-brand',
-                barWidth: 67
-            },
-            {
-                name: 'Twitter',
-                data: 975,
-                barColorClass: 'bg-primary',
-                barWidth: 31
-            },
-            {
-                name: 'Affiliates',
-                data: 1672,
-                barColorClass: 'bg-warning',
-                barWidth: 52
-            }
-        ];
-    }
+  private fetchData(): Observable<ReferalsAnalytics> {
+    return this.analyticsService.getReferals();
+  }
+
+  initReferrals(res: ReferalsAnalytics) {
+    this.referrals = [
+      {
+        name: 'Plays',
+        data: res.plays,
+        barColorClass: 'bg-info',
+        barWidth: (res.plays / this.totalReferalsCount) * 100
+      },
+      {
+        name: 'Comments',
+        data: res.comments,
+        barColorClass: 'bg-brand',
+        barWidth: (res.comments / (res.comments + res.followers)) * 100
+      },
+      {
+        name: 'Followers',
+        data: res.followers,
+        barColorClass: 'bg-primary',
+        barWidth: (res.followers / (res.comments + res.followers)) * 100
+      }
+    ];
+  }
 
 }

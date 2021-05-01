@@ -5,28 +5,12 @@
 <div class="main-container">
     <div class="section">
         <div class="mb-5">
-            <h5><ng-container *ngIf="currentUser">{{'Hi' | translate}} <span class="text-brand">{{currentUser.firstName}}</span>,</ng-container>
+            <h5><ng-container *ngIf="currentUser">{{'Hi' | translate}}<span class="text-brand">{{currentUser.firstName}}</span>,</ng-container>
               {{'Welcome to BeatsWave' | translate}}</h5>
             <p>{{'There you have a brief analytics section for your music.' | translate}}</p>
         </div>
 
         <div class="row">
-            <!-- <div class="col-xl-5">
-                <div class="card bg-info text-white">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <h6 class="text-white mb-0">Total Earnings</h6>
-                            <button type="button" class="btn btn-icon-only text-white ml-auto">
-                                <i class="ion-md-settings"></i>
-                            </button>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam.</p>
-                        <span class="display-4 d-block mb-3">${{totalEarnings}}</span>
-                        <button type="button" class="btn btn-pill btn-air btn-warning">Get Details</button>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="col-xl-12">
                 <div class="row h-100">
                     <div class="col-sm-4">
@@ -38,18 +22,17 @@
                     <div class="col-sm-4">
                         <app-purchases (isReady)="setLikes()"></app-purchases>
                     </div>
-                    <!-- <app-parent-analytics (isReady)="areAllReady()"></app-parent-analytics> -->
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <app-statistics (isReady)="setStatistics()"></app-statistics>
             </div>
-            <!-- <div class="col-md-4">
-                <app-referrals></app-referrals>
-            </div> -->
+            <div class="col-md-4">
+                <app-referrals (isReady)="setReferals()"></app-referrals>
+            </div>
         </div>
     </div>
 </div>

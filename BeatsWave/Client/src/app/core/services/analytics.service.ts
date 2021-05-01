@@ -6,6 +6,7 @@ import { BeatAnalytics } from '../models/analytics/BeatAnalytics';
 import { CountryAnalytics } from '../models/analytics/CountryAnalytics';
 import { LikeAnalytics } from '../models/analytics/LikeAnalytics';
 import { PurchasesAnalytics } from '../models/analytics/PurchasesAnalytics';
+import { ReferalsAnalytics } from '../models/analytics/ReferalsAnalytics';
 import { TotalEarningsAnalytics } from '../models/analytics/TotalEarningsAnalytics';
 import { UserAnalytics } from '../models/analytics/UserAnalytics';
 
@@ -50,5 +51,9 @@ export class AnalyticsService {
 
   getListenersByCountry(): Observable<Array<CountryAnalytics>> {
     return this.http.get<Array<CountryAnalytics>>(this.analyticsPath + '/ListenersByCountry');
+  }
+
+  getReferals(): Observable<ReferalsAnalytics> {
+    return this.http.get<ReferalsAnalytics>(this.analyticsPath + '/Referals');
   }
 }

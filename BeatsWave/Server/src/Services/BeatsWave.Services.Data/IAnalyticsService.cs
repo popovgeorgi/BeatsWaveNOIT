@@ -22,5 +22,11 @@
         Task<LikesByMonthsResponseModel> GetLikesPerMonthOfUser(string producerId);
 
         Task<IEnumerable<CountryListenerResponseModel>> GetListenersByCountry(string producerId);
+
+        Task<int> GetTotalPlays(string producerId);
+
+        Task<int> GetTotalComments(string producerId);
+
+        Task<int> GetTotalFollowers(string producerId);
     }
 }

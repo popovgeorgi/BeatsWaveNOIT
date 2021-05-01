@@ -16,17 +16,23 @@
         private readonly IDeletableEntityRepository<Beat> beatRepository;
         private readonly IRepository<Play> playsRepository;
         private readonly IDeletableEntityRepository<Like> likesRepository;
+        private readonly IDeletableEntityRepository<BeatComment> commentRepository;
+        private readonly IRepository<Follow> followRepository;
 
         public AnalyticsService(
             IDeletableEntityRepository<ApplicationUser> userRepository,
             IDeletableEntityRepository<Beat> beatRepository,
             IRepository<Play> playsRepository,
-            IDeletableEntityRepository<Like> likesRepository)
+            IDeletableEntityRepository<Like> likesRepository,
+            IDeletableEntityRepository<BeatComment> commentRepository,
+            IRepository<Follow> followRepository)
         {
             this.userRepository = userRepository;
             this.beatRepository = beatRepository;
             this.playsRepository = playsRepository;
             this.likesRepository = likesRepository;
+            this.commentRepository = commentRepository;
+            this.followRepository = followRepository;
         }
 
         public async Task<UsersAnalyticsResponseModel> GetUserCountByMonthInfo()
@@ -237,6 +243,36 @@
                 .ToList();
 
             return groupByCountry;
+        }
+
+        public async Task<int> GetTotalPlays(string producerId)
+        {
+            var plays = await this.playsRepository
+                .All()
+                .Where(p => p.Beat.ProducerId == producerId)
+                .CountAsync();
+
+            return plays;
+        }
+
+        public async Task<int> GetTotalComments(string producerId)
+        {
+            var comments = await this.commentRepository
+                .All()
+                .Where(c => c.Beat.ProducerId == producerId)
+                .CountAsync();
+
+            return comments;
+        }
+
+        public async Task<int> GetTotalFollowers(string producerId)
+        {
+            var followers = await this.followRepository
+                .All()
+                .Where(f => f.User.Id == producerId)
+                .CountAsync();
+
+            return followers;
         }
     }
 }

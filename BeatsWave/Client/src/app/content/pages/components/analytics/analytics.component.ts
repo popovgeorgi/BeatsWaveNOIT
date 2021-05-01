@@ -2,10 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { User } from 'src/app/core/models/User';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AnalyticsService } from 'src/app/core/services/analytics.service';
-import { TotalEarningsAnalytics } from 'src/app/core/models/analytics/TotalEarningsAnalytics';
 
 @Component({
   selector: 'app-analytics',
@@ -17,6 +15,7 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   public isLikesLoaded: boolean = false;
   public isUsersLoaded: boolean = false;
   public isSongsLoaded: boolean = false;
+  public isReferalsLoaded: boolean = false;
   public totalEarnings: number;
   private userSub: Subscription;
   public currentUser: User;
@@ -50,8 +49,13 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
     this.check();
   }
 
+  setReferals() {
+    this.isReferalsLoaded = true;
+    this.check();
+  }
+
   private check() {
-    if (this.isStatisticsLoaded && this.isLikesLoaded && this.isUsersLoaded && this.isSongsLoaded) {
+    if (this.isStatisticsLoaded && this.isLikesLoaded && this.isUsersLoaded && this.isSongsLoaded && this.isReferalsLoaded) {
       this.spinner.hide('routing');
     }
   }
