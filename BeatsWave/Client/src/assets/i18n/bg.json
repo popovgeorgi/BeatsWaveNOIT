@@ -34,8 +34,10 @@
   "Likes": "Харесвания",
   "User Statistics": "Потребителска статистика",
   "Top Countries": "Топ държави",
+  "Interactions": "Взаимодействие",
+  "Plays": "Слушания",
 
-  "BuLgaria": "България",
+  "Bulgaria": "България",
   "USA": "САЩ",
   "Israel": "Израел",
   "Germany": "Германия",
@@ -103,6 +105,7 @@
   "Back To Home": "Към заглавната страница",
   "Home for creativity and innovation": "Дом за креатовност и иновации",
 
+  "Tracks": "Бийтове",
   "Track": "Бийт",
   "Search...": "Търси...",
 
