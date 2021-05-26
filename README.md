@@ -2,6 +2,12 @@
 
 A musical web application designed to grow the music industry.
 
+## Awards
+This project has competed in several competitions:<br />
+#### :2nd_place_medal: place at the 19th National Olympiad in Information technology (https://edusoft.fmi.uni-sofia.bg)<br />
+#### :2nd_place_medal: place at SoftUniada (https://softuniada.softuni.bg/#softuniada2021)<br />
+#### :shield: Project defence (https://www.youtube.com/watch?v=Z6vOKyRuKqI&t=1266s) (21:09, Bulgarian)
+
 ## Build status
 
 [![Build Status](https://dev.azure.com/popovgeorgi002/BeatsWave/_apis/build/status/BeatsWave-CI?branchName=master)](https://dev.azure.com/popovgeorgi002/BeatsWave/_build/latest?definitionId=1&branchName=master)
